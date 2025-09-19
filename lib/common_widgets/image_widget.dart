@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class ImageWidget extends StatefulWidget {
   final String imageUrl;
   final double? height;
@@ -65,7 +64,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                   fit: widget.boxFit ?? BoxFit.fill,
                   height: widget.height,
                   width: widget.width,
-                  imageUrl:  widget.imageUrl,
+                  imageUrl: widget.imageUrl,
                   color: widget.imageColor,
                   placeholder: (context, url) => ContainerSkeleton(
                     height: widget.height ?? 16,
@@ -73,7 +72,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                     radius: widget.radius ?? 4,
                   ),
                   errorWidget: (context, url, error) => Image.asset(
-                    'assets/img/image_placeholder.jpg',
+                    'assets/images/image_placeholder.jpg',
                     height: widget.height,
                     width: widget.width,
                     fit: BoxFit.fitWidth,
@@ -113,7 +112,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                       width: widget.width,
                       color: widget.imageColor,
                       errorBuilder: (context, error, stackTrace) => Image.asset(
-                        'assets/img/image_placeholder.jpg',
+                        'assets/images/image_placeholder.jpg',
                         width: widget.width,
                         height: widget.height,
                         fit: BoxFit.fitWidth,

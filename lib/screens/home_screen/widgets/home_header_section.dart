@@ -1,5 +1,6 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class HomeHeaderSection extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BoloScreen()));
+                  MaterialPageRoute(builder: (context) => BoloGetStarted()));
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.orange,

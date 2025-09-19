@@ -31,10 +31,13 @@ class _BoloScreenState extends State<BoloScreen> {
                   decoration: BoxDecoration(color: AppColors.orange),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.arrow_circle_left_outlined,
-                        color: Colors.white,
-                        size: 36.sp,
+                      InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: Icon(
+                          Icons.arrow_circle_left_outlined,
+                          color: Colors.white,
+                          size: 36.sp,
+                        ),
                       ),
                       SizedBox(width: 24.w),
                       ImageWidget(
