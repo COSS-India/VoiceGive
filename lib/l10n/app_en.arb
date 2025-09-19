@@ -1,0 +1,23 @@
+{
+    "bhashadaan":"Bhashadaan",
+    "home":"Home",
+    "bolo":"Bolo",
+    "suno":"Suno",
+    "likho":"Likho",
+    "dekho":"Dekho",
+    "boloIndia":"Bolo India",
+    "sunoIndia":"Suno India",
+    "likhoIndia":"Likho India",
+    "dekhoIndia":"Dekho India",
+    "mStaticLabel":"Label",
+    "mStaticValidate":"Validate",
+    "mStaticSelectLanguage":"Select the language for contribution:",
+    "mStaticSearch":"Search",
+    "mStaticSubmit":"Submit",
+    "mStaticCancel":"Cancel",
+    "mStaticSkip":"Skip",
+    "mStaticNoSearchResultFound":"No results found",
+    "mStaticStartTyping":"Start typing here...",
+    "mStaticInputSubmitted":"Thanks for your contribution! we have received your input.",
+    "mStaticValidationSuccessMessage":"Thank you for validating the input."
+}
