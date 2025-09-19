@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/constants/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:record/record.dart';
 
 enum RecordingState { idle, recording, stopped }
 
@@ -17,6 +22,8 @@ class _RecordingButtonState extends State<RecordingButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   RecordingState _state = RecordingState.idle;
+  final AudioRecorder recorder = AudioRecorder();
+  String? recordedFilePath;
 
   @override
   void initState() {
@@ -27,44 +34,102 @@ class _RecordingButtonState extends State<RecordingButton>
     );
   }
 
-  void _toggleState() {
-    setState(() {
-      if (_state == RecordingState.idle || _state == RecordingState.stopped) {
-        _state = RecordingState.recording;
-        _controller.repeat();
-      } else if (_state == RecordingState.recording) {
-        _state = RecordingState.stopped;
-        _controller.stop();
-      }
-    });
-  }
-
   @override
   void dispose() {
     _controller.dispose();
+    _cleanupResources();
     super.dispose();
+  }
+
+  Future<void> _cleanupResources() async {
+    await _deleteRecording();
+    await recorder.dispose();
+  }
+
+  Future<void> _deleteRecording() async {
+    if (recordedFilePath == null) return;
+    try {
+      final file = File(recordedFilePath!);
+      if (await file.exists()) {
+        await file.delete();
+      }
+    } catch (e) {
+      debugPrint('Error deleting recording: $e');
+    } finally {
+      recordedFilePath = null;
+    }
+  }
+
+  Future<String> _generateTempFilePath() async {
+    final dir = await getTemporaryDirectory();
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    return '${dir.path}/session_record_$timestamp.m4a';
+  }
+
+  Future<bool> _hasRequiredPermissions() async {
+    final micPermission = await Helper.requestPermission(Permission.microphone);
+    final recordPermission = await recorder.hasPermission();
+    return micPermission && recordPermission;
+  }
+
+  Future<void> _startRecording() async {
+    if (!await _hasRequiredPermissions()) {
+      Helper.showSnackBarMessage(
+          // ignore: use_build_context_synchronously
+          context: context,
+          text: "Microphone permission not granted");
+      return;
+    }
+    try {
+      final tempPath = await _generateTempFilePath();
+      await recorder.start(
+        path: tempPath,
+        RecordConfig(
+          encoder: AudioEncoder.aacLc,
+          bitRate: 128000,
+          sampleRate: 44100,
+        ),
+      );
+      recordedFilePath = tempPath;
+      debugPrint('Recording started: $tempPath');
+    } catch (e) {
+      debugPrint('Error starting recording: $e');
+    }
+  }
+
+  Future<void> _stopRecording() async {
+    try {
+      final path = await recorder.stop();
+      if (path != null) {
+        recordedFilePath = path;
+        debugPrint('Recording saved: $path');
+      }
+    } catch (e) {
+      debugPrint('Error stopping recording: $e');
+    }
+  }
+
+  Future<void> _toggleState() async {
+    if (_state == RecordingState.idle || _state == RecordingState.stopped) {
+      await _deleteRecording();
+      setState(() => _state = RecordingState.recording);
+      _controller.repeat();
+      await _startRecording();
+    } else if (_state == RecordingState.recording) {
+      await _stopRecording();
+      setState(() => _state = RecordingState.stopped);
+      _controller.stop();
+    }
   }
 
   Widget _buildIcon() {
     switch (_state) {
       case RecordingState.idle:
-        return Icon(
-          Icons.mic,
-          size: 40.sp,
-          color: Colors.white,
-        );
+        return Icon(Icons.mic, size: 40.sp, color: Colors.white);
       case RecordingState.recording:
-        return Icon(
-          Icons.stop,
-          size: 40.sp,
-          color: Colors.white,
-        );
+        return Icon(Icons.stop, size: 40.sp, color: Colors.white);
       case RecordingState.stopped:
-        return Icon(
-          Icons.mic,
-          size: 40.sp,
-          color: Colors.white,
-        );
+        return Icon(Icons.mic, size: 40.sp, color: Colors.white);
     }
   }
 
@@ -86,11 +151,11 @@ class _RecordingButtonState extends State<RecordingButton>
         return Column(
           children: [
             CustomAudioPlayer(
-              filePath: "",
+              filePath: recordedFilePath ?? "",
               activeColor: AppColors.darkGreen,
             ),
             SizedBox(height: 24.w),
-            Text("Re Record",
+            Text("Re-record",
                 style: GoogleFonts.notoSans(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
