@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+
 class ImageWidget extends StatefulWidget {
   final String imageUrl;
   final double? height;
@@ -64,18 +65,18 @@ class _ImageWidgetState extends State<ImageWidget> {
                   fit: widget.boxFit ?? BoxFit.fill,
                   height: widget.height,
                   width: widget.width,
-                  imageUrl: widget.imageUrl,
+                  imageUrl:  widget.imageUrl,
                   color: widget.imageColor,
                   placeholder: (context, url) => ContainerSkeleton(
                     height: widget.height ?? 16,
                     width: widget.width ?? 16,
                     radius: widget.radius ?? 4,
                   ),
-                  errorWidget: (context, url, error) => Image.asset(
-                    'assets/images/image_placeholder.jpg',
+                  errorWidget: (context, url, error) => Container(
                     height: widget.height,
                     width: widget.width,
-                    fit: BoxFit.fitWidth,
+                    color: Colors.grey[300],
+                    child: Icon(Icons.error, color: Colors.grey[600]),
                   ),
                 ),
               )
@@ -111,11 +112,11 @@ class _ImageWidgetState extends State<ImageWidget> {
                       height: widget.height,
                       width: widget.width,
                       color: widget.imageColor,
-                      errorBuilder: (context, error, stackTrace) => Image.asset(
-                        'assets/images/image_placeholder.jpg',
-                        width: widget.width,
+                      errorBuilder: (context, error, stackTrace) => Container(
                         height: widget.height,
-                        fit: BoxFit.fitWidth,
+                        width: widget.width,
+                        color: Colors.grey[300],
+                        child: Icon(Icons.error, color: Colors.grey[600]),
                       ),
                     ),
                   ))

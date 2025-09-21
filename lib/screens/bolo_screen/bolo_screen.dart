@@ -17,6 +17,11 @@ class BoloScreen extends StatefulWidget {
 }
 
 class _BoloScreenState extends State<BoloScreen> {
+  String selectedLanguage = "Marathi";
+  int currentIndex = 5;
+  int totalItems = 5;
+  String recordedText = "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,13 +36,10 @@ class _BoloScreenState extends State<BoloScreen> {
                   decoration: BoxDecoration(color: AppColors.orange),
                   child: Row(
                     children: [
-                      InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Icon(
-                          Icons.arrow_circle_left_outlined,
-                          color: Colors.white,
-                          size: 36.sp,
-                        ),
+                      Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: Colors.white,
+                        size: 36.sp,
                       ),
                       SizedBox(width: 24.w),
                       ImageWidget(
@@ -75,7 +77,15 @@ class _BoloScreenState extends State<BoloScreen> {
                       SizedBox(height: 16.w),
                       LanguageSelection(),
                       SizedBox(height: 24.w),
-                      BoloContentSection(),
+                      BoloContentSection(
+                        selectedLanguage: selectedLanguage,
+                        currentIndex: currentIndex,
+                        totalItems: totalItems,
+                        recordedText: recordedText,
+                        onLanguageChanged: () {
+                          setState(() {});
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -1,18 +1,33 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
+import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BoloContentSection extends StatefulWidget {
-  const BoloContentSection({super.key});
+  final String selectedLanguage;
+  final int currentIndex;
+  final int totalItems;
+  final String recordedText;
+  final VoidCallback onLanguageChanged;
+
+  const BoloContentSection({
+    super.key,
+    required this.selectedLanguage,
+    required this.currentIndex,
+    required this.totalItems,
+    required this.recordedText,
+    required this.onLanguageChanged,
+  });
 
   @override
   State<BoloContentSection> createState() => _BoloContentSectionState();
 }
 
 class _BoloContentSectionState extends State<BoloContentSection> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +49,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             children: [
               Spacer(),
               Text(
-                "1/5",
+                "${widget.currentIndex}/${widget.totalItems}",
                 style: GoogleFonts.notoSans(
                     fontSize: 12.sp,
                     color: AppColors.darkGreen,
@@ -55,7 +70,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
             child: Text(
-              "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+              widget.recordedText,
               style: GoogleFonts.notoSans(
                   fontSize: 16.sp,
                   color: Colors.black,
@@ -99,7 +114,27 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           child: PrimaryButtonWidget(
             title: "Submit",
             textFontSize: 16.sp,
-            onTap: () {},
+            onTap: () {
+              print("Submit button tapped!");
+              print("Recorded text: ${widget.recordedText}");
+              print("Selected language: ${widget.selectedLanguage}");
+              
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ValidationScreen(
+                    recordedText: widget.recordedText,
+                    selectedLanguage: widget.selectedLanguage,
+                    currentIndex: widget.currentIndex,
+                    totalItems: widget.totalItems,
+                  ),
+                ),
+              ).then((_) {
+                print("ValidationScreen navigation completed");
+              }).catchError((error) {
+                print("ValidationScreen navigation error: $error");
+              });
+            },
             textColor: Colors.white,
             decoration: BoxDecoration(
               color: AppColors.orange,

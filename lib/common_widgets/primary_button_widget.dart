@@ -77,26 +77,29 @@ class PrimaryButtonWidget extends StatelessWidget {
   }
 
   Widget _buttonView() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (prefix != null)
-          Padding(
-            padding: EdgeInsets.only(right: 4.w),
-            child: prefix,
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (prefix != null)
+            Padding(
+              padding: EdgeInsets.only(right: 4.w),
+              child: prefix,
+            ),
+          Text(
+            title,
+            style: GoogleFonts.lato(
+              color: textColor ?? AppColors.grey40,
+              fontWeight: FontWeight.w700,
+              fontSize: textFontSize ?? 12.0.sp,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
           ),
-        Text(
-          title,
-          style: GoogleFonts.lato(
-            color: textColor ?? AppColors.grey40,
-            fontWeight: FontWeight.w700,
-            fontSize: textFontSize ?? 12.0.sp,
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
