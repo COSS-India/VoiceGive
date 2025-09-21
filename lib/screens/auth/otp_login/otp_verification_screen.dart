@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../../bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/otp_input_field.dart';
 import 'widgets/otp_timer.dart';
@@ -48,12 +49,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       // TODO: Implement OTP verification logic
       Future.delayed(const Duration(seconds: 2), () {
         _isLoading.value = false;
-        // TODO: Navigate to next screen or show success
-        // For now, just show a snackbar
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('OTP verified successfully!'),
-            backgroundColor: AppColors.lightGreen,
+        // Navigate to Bolo Get Started screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BoloGetStarted(),
           ),
         );
       });
