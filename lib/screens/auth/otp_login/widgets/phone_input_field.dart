@@ -33,14 +33,16 @@ class PhoneInputField extends StatelessWidget {
           children: [
             Container(
               height: 48.w,
+              width: 80.w,
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.darkBlue),
+                border: Border.all(color: AppColors.lightGrey),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: '+91',
+                  isExpanded: true,
                   items: const [
                     DropdownMenuItem(value: '+91', child: Text('+91')),
                   ],
@@ -50,46 +52,54 @@ class PhoneInputField extends StatelessWidget {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.greys87,
+                    size: 20.w,
+                  ),
                 ),
               ),
             ),
             SizedBox(width: 12.w),
             Expanded(
-              child: TextFormField(
-                controller: controller,
-                keyboardType: TextInputType.phone,
-                validator: validator,
-                decoration: InputDecoration(
-                  hintText: 'Enter mobile number',
-                  hintStyle: GoogleFonts.notoSans(
-                    color: AppColors.grey40,
+              child: SizedBox(
+                height: 48.w,
+                child: TextFormField(
+                  controller: controller,
+                  keyboardType: TextInputType.phone,
+                  validator: validator,
+                  decoration: InputDecoration(
+                    hintText: 'Enter mobile number',
+                    hintStyle: GoogleFonts.notoSans(
+                      color: AppColors.grey40,
+                      fontSize: 14.sp,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: AppColors.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: AppColors.lightGrey),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: AppColors.negativeLight),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: AppColors.negativeLight),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 12.w,
+                    ),
+                  ),
+                  style: GoogleFonts.notoSans(
+                    color: AppColors.greys87,
                     fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: AppColors.darkBlue),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: AppColors.darkBlue),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: AppColors.negativeLight),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: AppColors.negativeLight),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 12.w,
-                  ),
-                ),
-                style: GoogleFonts.notoSans(
-                  color: AppColors.greys87,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

@@ -12,23 +12,29 @@ class GradientHeader extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16).r,
       decoration: BoxDecoration(color: AppColors.orange),
-      child: Row(
+      child: Stack(
         children: [
-          InkWell(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
-              Icons.arrow_circle_left_outlined,
-              color: Colors.white,
-              size: 36.sp,
+          Center(
+            child: Text(
+              "Login",
+              style: GoogleFonts.notoSans(
+                  color: Colors.white,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.normal),
             ),
           ),
-          SizedBox(width: 24.w),
-          Text(
-            "Login",
-            style: GoogleFonts.notoSans(
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: InkWell(
+              onTap: () => Navigator.pop(context),
+              child: Icon(
+                Icons.arrow_circle_left_outlined,
                 color: Colors.white,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600),
+                size: 36.sp,
+              ),
+            ),
           ),
         ],
       ),
