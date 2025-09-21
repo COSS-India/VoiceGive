@@ -120,49 +120,54 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       errorText: _errorText,
                     ),
                     SizedBox(height: 40.h),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: _isOtpValid,
-                      builder: (context, isOtpValid, child) {
-                        return SizedBox(
-                          width: 280.w,
-                          child: ElevatedButton(
-                            onPressed: isOtpValid ? _verifyOtp : null,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: isOtpValid ? AppColors.orange : AppColors.lightGrey,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.r),
-                              ),
-                              padding: EdgeInsets.symmetric(vertical: 16.w),
-                            ),
-                            child: ValueListenableBuilder<bool>(
-                              valueListenable: _isLoading,
-                              builder: (context, isLoading, child) {
-                                if (isLoading) {
-                                  return SizedBox(
-                                    width: 20.w,
-                                    height: 20.w,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                    ),
-                                  );
-                                }
-                                return Text(
-                                  AppLocalizations.of(context)!.submitOtp,
-                                  style: GoogleFonts.notoSans(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        );
-                      },
-                    ),
                   ],
                 ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
+            child: Center(
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _isOtpValid,
+                builder: (context, isOtpValid, child) {
+                  return SizedBox(
+                    width: 280.w,
+                    child: ElevatedButton(
+                      onPressed: isOtpValid ? _verifyOtp : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isOtpValid ? AppColors.orange : AppColors.lightGrey,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
+                      ),
+                      child: ValueListenableBuilder<bool>(
+                        valueListenable: _isLoading,
+                        builder: (context, isLoading, child) {
+                          if (isLoading) {
+                            return SizedBox(
+                              width: 20.w,
+                              height: 20.w,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            );
+                          }
+                          return Text(
+                            AppLocalizations.of(context)!.submitOtp,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
