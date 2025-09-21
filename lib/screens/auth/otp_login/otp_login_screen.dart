@@ -8,6 +8,7 @@ import '../../../common_widgets/primary_button_widget.dart';
 import '../../../constants/app_colors.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/phone_input_field.dart';
+import 'otp_verification_screen.dart';
 
 class OtpLoginScreen extends StatefulWidget {
   const OtpLoginScreen({super.key});
@@ -57,7 +58,14 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
       // TODO: Implement OTP request logic
       Future.delayed(const Duration(seconds: 2), () {
         _isLoading.value = false;
-        // TODO: Navigate to OTP verification screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationScreen(
+              phoneNumber: _phoneController.text,
+            ),
+          ),
+        );
       });
     }
   }
