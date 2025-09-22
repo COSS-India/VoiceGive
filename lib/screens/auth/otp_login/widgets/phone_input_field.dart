@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../constants/app_colors.dart';
 
@@ -21,7 +20,7 @@ class PhoneInputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.enterMobileNumber,
+          "Enter your mobile number",
           style: GoogleFonts.notoSans(
             color: AppColors.greys87,
             fontSize: 14.sp,

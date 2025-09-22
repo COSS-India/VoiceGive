@@ -44,10 +44,10 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
 
   String? _validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.invalidPhoneNumber;
+      return "Invalid phone number";
     }
     if (value.length != 10) {
-      return AppLocalizations.of(context)!.invalidPhoneNumber;
+      return "Phone number must be 10 digits";
     }
     return null;
   }
@@ -151,7 +151,9 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                       child: ElevatedButton(
                         onPressed: isPhoneValid ? _requestOtp : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: isPhoneValid ? AppColors.orange : AppColors.lightGrey,
+                          backgroundColor: isPhoneValid
+                              ? AppColors.orange
+                              : AppColors.lightGrey,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.r),
                           ),
@@ -166,12 +168,13 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 height: 20.w,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
                                 ),
                               );
                             }
                             return Text(
-                              AppLocalizations.of(context)!.getOtp,
+                              "Get OTP",
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 16.sp,

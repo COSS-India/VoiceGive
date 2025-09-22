@@ -1,3 +1,5 @@
+import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
+import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
-import '../../bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/otp_input_field.dart';
 import 'widgets/otp_timer.dart';
@@ -93,7 +94,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       SizedBox(height: 40.h),
                       Text(
-                        AppLocalizations.of(context)!.otpVerification,
+                        "Otp Verification",
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -103,7 +104,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        "${AppLocalizations.of(context)!.otpSentToNumber} ${widget.phoneNumber}",
+                        "Enter the OTP from the sms we sent to +91 ${widget.phoneNumber}",
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,
@@ -137,7 +138,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       child: ElevatedButton(
                         onPressed: isOtpValid ? _verifyOtp : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: isOtpValid ? AppColors.orange : AppColors.lightGrey,
+                          backgroundColor: isOtpValid
+                              ? AppColors.orange
+                              : AppColors.lightGrey,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.r),
                           ),
@@ -152,12 +155,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                 height: 20.w,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
                                 ),
                               );
                             }
                             return Text(
-                              AppLocalizations.of(context)!.submitOtp,
+                              "Submit",
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 16.sp,

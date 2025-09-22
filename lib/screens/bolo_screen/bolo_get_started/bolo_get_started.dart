@@ -3,7 +3,7 @@ import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/widgets/get_started_item.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -117,7 +117,8 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                                   GetStartedItem(
                                     icon: data.instructions[i].icon,
                                     title: data.instructions[i].title,
-                                    description: data.instructions[i].description,
+                                    description:
+                                        data.instructions[i].description,
                                   ),
                                   if (i < data.instructions.length - 1)
                                     Divider(
