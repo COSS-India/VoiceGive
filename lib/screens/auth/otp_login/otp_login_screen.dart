@@ -76,116 +76,118 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       appBar: const CustomAppBar(),
-      body: Column(
-        children: [
-          const GradientHeader(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(24.w),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Verify your\nphone number",
-                        style: GoogleFonts.notoSans(
-                          color: AppColors.greys87,
-                          fontSize: 28.sp,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const GradientHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(24.w),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Verify your\nphone number",
+                          style: GoogleFonts.notoSans(
+                            color: AppColors.greys87,
+                            fontSize: 28.sp,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 16.w),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "We will send a ",
-                              style: GoogleFonts.notoSans(
-                                color: AppColors.greys60,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
+                        SizedBox(height: 16.w),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "We will send a ",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.greys60,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                            TextSpan(
-                              text: "One Time Password (OTP)",
-                              style: GoogleFonts.notoSans(
-                                color: AppColors.greys60,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w700,
+                              TextSpan(
+                                text: "One Time Password (OTP)",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.greys60,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                            TextSpan(
-                              text: " to this mobile number.",
-                              style: GoogleFonts.notoSans(
-                                color: AppColors.greys60,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
+                              TextSpan(
+                                text: " to this mobile number.",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.greys60,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 32.w),
-                      PhoneInputField(
-                        controller: _phoneController,
-                        validator: _validatePhoneNumber,
-                      ),
-                    ],
+                        SizedBox(height: 32.w),
+                        PhoneInputField(
+                          controller: _phoneController,
+                          validator: _validatePhoneNumber,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
-            child: Center(
-              child: ValueListenableBuilder<bool>(
-                valueListenable: _isPhoneValid,
-                builder: (context, isPhoneValid, child) {
-                  return SizedBox(
-                    width: 280.w,
-                    child: ElevatedButton(
-                      onPressed: isPhoneValid ? _requestOtp : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isPhoneValid ? AppColors.orange : AppColors.lightGrey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.r),
+            Padding(
+              padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
+              child: Center(
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _isPhoneValid,
+                  builder: (context, isPhoneValid, child) {
+                    return SizedBox(
+                      width: 280.w,
+                      child: ElevatedButton(
+                        onPressed: isPhoneValid ? _requestOtp : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isPhoneValid ? AppColors.orange : AppColors.lightGrey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 16.w),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 16.w),
-                      ),
-                      child: ValueListenableBuilder<bool>(
-                        valueListenable: _isLoading,
-                        builder: (context, isLoading, child) {
-                          if (isLoading) {
-                            return SizedBox(
-                              width: 20.w,
-                              height: 20.w,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        child: ValueListenableBuilder<bool>(
+                          valueListenable: _isLoading,
+                          builder: (context, isLoading, child) {
+                            if (isLoading) {
+                              return SizedBox(
+                                width: 20.w,
+                                height: 20.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              );
+                            }
+                            return Text(
+                              AppLocalizations.of(context)!.getOtp,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.normal,
                               ),
                             );
-                          }
-                          return Text(
-                            AppLocalizations.of(context)!.getOtp,
-                            style: GoogleFonts.notoSans(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          );
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

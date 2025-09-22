@@ -80,98 +80,100 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       appBar: const CustomAppBar(),
-      body: Column(
-        children: [
-          const GradientHeader(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(24.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 40.h),
-                    Text(
-                      AppLocalizations.of(context)!.otpVerification,
-                      style: GoogleFonts.notoSans(
-                        color: AppColors.greys87,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.w700,
-                        height: 1.2,
+      body: SafeArea(
+        child: Column(
+          children: [
+            const GradientHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(24.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 40.h),
+                      Text(
+                        AppLocalizations.of(context)!.otpVerification,
+                        style: GoogleFonts.notoSans(
+                          color: AppColors.greys87,
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16.h),
-                    Text(
-                      "${AppLocalizations.of(context)!.otpSentToNumber} ${widget.phoneNumber}",
-                      style: GoogleFonts.notoSans(
-                        color: AppColors.greys60,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(height: 16.h),
+                      Text(
+                        "${AppLocalizations.of(context)!.otpSentToNumber} ${widget.phoneNumber}",
+                        style: GoogleFonts.notoSans(
+                          color: AppColors.greys60,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 32.h),
-                    OtpTimer(
-                      onResend: _resendOtp,
-                    ),
-                    SizedBox(height: 24.h),
-                    OtpInputField(
-                      onChanged: _onOtpChanged,
-                      errorText: _errorText,
-                    ),
-                    SizedBox(height: 40.h),
-                  ],
+                      SizedBox(height: 32.h),
+                      OtpTimer(
+                        onResend: _resendOtp,
+                      ),
+                      SizedBox(height: 24.h),
+                      OtpInputField(
+                        onChanged: _onOtpChanged,
+                        errorText: _errorText,
+                      ),
+                      SizedBox(height: 40.h),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
-            child: Center(
-              child: ValueListenableBuilder<bool>(
-                valueListenable: _isOtpValid,
-                builder: (context, isOtpValid, child) {
-                  return SizedBox(
-                    width: 280.w,
-                    child: ElevatedButton(
-                      onPressed: isOtpValid ? _verifyOtp : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: isOtpValid ? AppColors.orange : AppColors.lightGrey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6.r),
+            Padding(
+              padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
+              child: Center(
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _isOtpValid,
+                  builder: (context, isOtpValid, child) {
+                    return SizedBox(
+                      width: 280.w,
+                      child: ElevatedButton(
+                        onPressed: isOtpValid ? _verifyOtp : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isOtpValid ? AppColors.orange : AppColors.lightGrey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.r),
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 16.w),
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 16.w),
-                      ),
-                      child: ValueListenableBuilder<bool>(
-                        valueListenable: _isLoading,
-                        builder: (context, isLoading, child) {
-                          if (isLoading) {
-                            return SizedBox(
-                              width: 20.w,
-                              height: 20.w,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        child: ValueListenableBuilder<bool>(
+                          valueListenable: _isLoading,
+                          builder: (context, isLoading, child) {
+                            if (isLoading) {
+                              return SizedBox(
+                                width: 20.w,
+                                height: 20.w,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              );
+                            }
+                            return Text(
+                              AppLocalizations.of(context)!.submitOtp,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.normal,
                               ),
                             );
-                          }
-                          return Text(
-                            AppLocalizations.of(context)!.submitOtp,
-                            style: GoogleFonts.notoSans(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          );
-                        },
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

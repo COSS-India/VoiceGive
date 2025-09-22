@@ -19,27 +19,29 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HomeHeaderSection(),
-            SizedBox(height: 16.w),
-            Padding(
-              padding: const EdgeInsets.all(16.0).r,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HomeAboutSection(),
-                  SizedBox(height: 24.w),
-                  HowItWorksSection(),
-                  SizedBox(height: 36.w),
-                ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HomeHeaderSection(),
+              SizedBox(height: 16.w),
+              Padding(
+                padding: const EdgeInsets.all(16.0).r,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeAboutSection(),
+                    SizedBox(height: 24.w),
+                    HowItWorksSection(),
+                    SizedBox(height: 36.w),
+                  ],
+                ),
               ),
-            ),
-            NeedMoreInfo(),
-          ],
+              NeedMoreInfo(),
+            ],
+          ),
         ),
       ),
     );
