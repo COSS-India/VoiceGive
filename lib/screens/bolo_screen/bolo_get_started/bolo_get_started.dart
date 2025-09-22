@@ -76,86 +76,88 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0).r,
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: getStartedData.length,
-                onPageChanged: (i) => setState(() => _currentPage = i),
-                itemBuilder: (context, index) {
-                  final data = getStartedData[index];
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text(
-                          data.title,
-                          style: GoogleFonts.notoSans(
-                            fontSize: 28.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.darkGreen,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0).r,
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: getStartedData.length,
+                  onPageChanged: (i) => setState(() => _currentPage = i),
+                  itemBuilder: (context, index) {
+                    final data = getStartedData[index];
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            data.title,
+                            style: GoogleFonts.notoSans(
+                              fontSize: 28.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.darkGreen,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 16.w),
-                        ImageWidget(
-                          imageUrl: data.illustrationImageUrl,
-                          height: 220.w,
-                          width: 220.w,
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 24.0).r,
-                          child: Column(
-                            children: [
-                              for (int i = 0;
-                                  i < data.instructions.length;
-                                  i++) ...[
-                                GetStartedItem(
-                                  icon: data.instructions[i].icon,
-                                  title: data.instructions[i].title,
-                                  description: data.instructions[i].description,
-                                ),
-                                if (i < data.instructions.length - 1)
-                                  Divider(
-                                    color: AppColors.grey08,
-                                    height: 30.w,
+                          SizedBox(height: 16.w),
+                          ImageWidget(
+                            imageUrl: data.illustrationImageUrl,
+                            height: 220.w,
+                            width: 220.w,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0).r,
+                            child: Column(
+                              children: [
+                                for (int i = 0;
+                                    i < data.instructions.length;
+                                    i++) ...[
+                                  GetStartedItem(
+                                    icon: data.instructions[i].icon,
+                                    title: data.instructions[i].title,
+                                    description: data.instructions[i].description,
                                   ),
+                                  if (i < data.instructions.length - 1)
+                                    Divider(
+                                      color: AppColors.grey08,
+                                      height: 30.w,
+                                    ),
+                                ],
                               ],
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(height: 16.w),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                getStartedData.length,
-                (i) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: EdgeInsets.symmetric(horizontal: 4.w),
-                  width: _currentPage == i ? 16.w : 8.w,
-                  height: 8.w,
-                  decoration: BoxDecoration(
-                    color: _currentPage == i
-                        ? AppColors.darkGreen
-                        : AppColors.grey16,
-                    borderRadius: BorderRadius.circular(8.w),
+              SizedBox(height: 16.w),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  getStartedData.length,
+                  (i) => AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: EdgeInsets.symmetric(horizontal: 4.w),
+                    width: _currentPage == i ? 16.w : 8.w,
+                    height: 8.w,
+                    decoration: BoxDecoration(
+                      color: _currentPage == i
+                          ? AppColors.darkGreen
+                          : AppColors.grey16,
+                      borderRadius: BorderRadius.circular(8.w),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 24.w),
-            actionButtons(),
-            SizedBox(height: 16.w),
-          ],
+              SizedBox(height: 24.w),
+              actionButtons(),
+              SizedBox(height: 16.w),
+            ],
+          ),
         ),
       ),
     );
