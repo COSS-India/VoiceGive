@@ -102,7 +102,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "We have sent a ",
+                              text: "We will send a ",
                               style: GoogleFonts.notoSans(
                                 color: AppColors.greys60,
                                 fontSize: 14.sp,

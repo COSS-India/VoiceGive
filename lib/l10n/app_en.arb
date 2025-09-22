@@ -22,7 +22,7 @@
     "mStaticValidationSuccessMessage":"Thank you for validating the input.",
     "login":"Login",
     "verifyPhoneNumber":"Verify your phone number",
-    "otpSentMessage":"We have sent a One Time Password(OTP) to this mobile number.",
+    "otpSentMessage":"We will send a One Time Password(OTP) to this mobile number.",
     "enterMobileNumber":"Enter mobile no.*",
     "getOtp":"Get OTP",
     "invalidPhoneNumber":"Please enter a valid phone number",
