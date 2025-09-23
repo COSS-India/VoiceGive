@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:bhashadaan/screens/replay_success_screen/replay_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,10 +33,25 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(),
-      body: SingleChildScrollView(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => PauseRecordingScreen(
+              recordedText: widget.recordedText,
+              selectedLanguage: widget.selectedLanguage,
+              currentIndex: widget.currentIndex,
+              totalItems: widget.totalItems,
+            ),
+          ),
+        );
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: CustomAppBar(),
+        body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -51,10 +67,25 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
                 decoration: BoxDecoration(color: AppColors.orange),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.arrow_circle_left_outlined,
-                      color: Colors.white,
-                      size: 36.sp,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => PauseRecordingScreen(
+                              recordedText: widget.recordedText,
+                              selectedLanguage: widget.selectedLanguage,
+                              currentIndex: widget.currentIndex,
+                              totalItems: widget.totalItems,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: Colors.white,
+                        size: 36.sp,
+                      ),
                     ),
                     SizedBox(width: 24.w),
                     ImageWidget(
@@ -104,6 +135,7 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );

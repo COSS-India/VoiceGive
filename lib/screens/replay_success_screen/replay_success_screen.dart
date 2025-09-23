@@ -3,6 +3,7 @@ import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
+import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,10 +66,25 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: CustomAppBar(),
-      body: Stack(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ReplayRecordingScreen(
+              recordedText: widget.recordedText,
+              selectedLanguage: widget.selectedLanguage,
+              currentIndex: widget.currentIndex,
+              totalItems: widget.totalItems,
+            ),
+          ),
+        );
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: CustomAppBar(),
+        body: Stack(
         children: [
           // Confetti Animation
           _buildConfetti(),
@@ -90,10 +106,25 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                     decoration: BoxDecoration(color: AppColors.orange),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.arrow_circle_left_outlined,
-                          color: Colors.white,
-                          size: 36.sp,
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ReplayRecordingScreen(
+                                  recordedText: widget.recordedText,
+                                  selectedLanguage: widget.selectedLanguage,
+                                  currentIndex: widget.currentIndex,
+                                  totalItems: widget.totalItems,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.arrow_circle_left_outlined,
+                            color: Colors.white,
+                            size: 36.sp,
+                          ),
                         ),
                         SizedBox(width: 24.w),
                         ImageWidget(
@@ -146,6 +177,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
             ),
           ),
         ],
+      ),
       ),
     );
   }

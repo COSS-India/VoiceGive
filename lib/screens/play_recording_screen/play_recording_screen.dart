@@ -3,6 +3,7 @@ import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
+import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,12 +29,29 @@ class PlayRecordingScreen extends StatefulWidget {
 class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
   bool isPlaying = false;
 
+  Future<bool> _navigateBackToValidation() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ValidationScreen(
+          recordedText: widget.recordedText,
+          selectedLanguage: widget.selectedLanguage,
+          currentIndex: widget.currentIndex,
+          totalItems: widget.totalItems,
+        ),
+      ),
+    );
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(),
-      body: SingleChildScrollView(
+    return WillPopScope(
+      onWillPop: _navigateBackToValidation,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: CustomAppBar(),
+        body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -49,10 +67,13 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
               decoration: BoxDecoration(color: AppColors.orange),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.arrow_circle_left_outlined,
-                    color: Colors.white,
-                    size: 36.sp,
+                  InkWell(
+                    onTap: _navigateBackToValidation,
+                    child: Icon(
+                      Icons.arrow_circle_left_outlined,
+                      color: Colors.white,
+                      size: 36.sp,
+                    ),
                   ),
                   SizedBox(width: 24.w),
                   ImageWidget(
@@ -103,6 +124,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           ],
         ),
         ),
+      ),
       ),
     );
   }
