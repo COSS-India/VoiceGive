@@ -111,7 +111,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
             
             // Scrollable Content - Only the green container
             Expanded(
-              child: SingleChildScrollView(
+              child: Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.w),
                 child: Container(
                   decoration: BoxDecoration(
@@ -125,72 +125,74 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                     ),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "By clicking \"I Agree\", you confirm that:",
-                        style: GoogleFonts.notoSans(
-                          color: Colors.black,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.all(16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "By clicking \"I Agree\", you confirm that:",
+                          style: GoogleFonts.notoSans(
+                            color: Colors.black,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 16.w),
-                
-                      // Numbered list
-                      _buildNumberedItem(
-                        "1.",
-                        "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildNumberedItem(
-                        "2.",
-                        "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildNumberedItem(
-                        "3.",
-                        "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildNumberedItem(
-                        "4.",
-                        "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildNumberedItem(
-                        "5.",
-                        "You have read, understood, and accepted the following governing documents on the BhashaDaan portal:",
-                      ),
-                      SizedBox(height: 16.w),
-                      
-                      // Checkboxes for documents
-                      _buildCheckboxItem(
-                        "Terms of Use/ Contribution Terms",
-                        _termsAccepted,
-                        (value) => setState(() => _termsAccepted = value!),
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildCheckboxItem(
-                        "Privacy Policy",
-                        _privacyAccepted,
-                        (value) => setState(() => _privacyAccepted = value!),
-                      ),
-                      SizedBox(height: 12.w),
-                      
-                      _buildCheckboxItem(
-                        "Copyright & Licensing Policy",
-                        _copyrightAccepted,
-                        (value) => setState(() => _copyrightAccepted = value!),
-                      ),
-                    ],
+                        SizedBox(height: 16.w),
+                  
+                        // Numbered list
+                        _buildNumberedItem(
+                          "1.",
+                          "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildNumberedItem(
+                          "2.",
+                          "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildNumberedItem(
+                          "3.",
+                          "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildNumberedItem(
+                          "4.",
+                          "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildNumberedItem(
+                          "5.",
+                          "You have read, understood, and accepted the following governing documents on the BhashaDaan portal:",
+                        ),
+                        SizedBox(height: 16.w),
+                        
+                        // Checkboxes for documents
+                        _buildCheckboxItem(
+                          "Terms of Use/ Contribution Terms",
+                          _termsAccepted,
+                          (value) => setState(() => _termsAccepted = value!),
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildCheckboxItem(
+                          "Privacy Policy",
+                          _privacyAccepted,
+                          (value) => setState(() => _privacyAccepted = value!),
+                        ),
+                        SizedBox(height: 12.w),
+                        
+                        _buildCheckboxItem(
+                          "Copyright & Licensing Policy",
+                          _copyrightAccepted,
+                          (value) => setState(() => _copyrightAccepted = value!),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

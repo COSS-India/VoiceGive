@@ -17,7 +17,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
   void _showConsentModal(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return InformedConsentModal(
           onApprove: () {
