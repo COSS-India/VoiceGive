@@ -1,9 +1,10 @@
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
+import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
@@ -50,11 +51,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       // TODO: Implement OTP verification logic
       Future.delayed(const Duration(seconds: 2), () {
         _isLoading.value = false;
-        // Navigate to Bolo Get Started screen
+        // Navigate to Profile Screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const BoloGetStarted(),
+            builder: (context) => ProfileScreen(
+              phoneNumber: widget.phoneNumber,
+            ),
           ),
         );
       });

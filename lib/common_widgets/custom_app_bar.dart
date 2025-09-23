@@ -9,13 +9,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
   @override
-  Size get preferredSize => Size.fromHeight(65.w);
+  Size get preferredSize => Size.fromHeight(58.h);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight: 65.w,
+      toolbarHeight: 58.h,
       backgroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
