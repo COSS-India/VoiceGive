@@ -15,11 +15,11 @@ class GetStartedModel {
 class GetStartedInstruction {
   final String title;
   final String description;
-  final IconData icon;
+  final String iconPath;
 
   GetStartedInstruction({
     required this.title,
     required this.description,
-    required this.icon,
+    required this.iconPath,
   });
 }

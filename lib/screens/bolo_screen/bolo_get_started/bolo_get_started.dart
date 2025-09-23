@@ -29,19 +29,19 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
           title: "Please Test Your Speaker",
           description:
               "Play the sample audio and confirm you can hear it clearly before starting the task",
-          icon: Icons.headphones,
+          iconPath: "assets/icons/play_icon.png",
         ),
         GetStartedInstruction(
           title: "Please Test Your Microphone",
           description:
               "Speak a few words to check if your voice is being recorded properly and without distortion",
-          icon: Icons.mic,
+          iconPath: "assets/icons/mic_icon.png",
         ),
         GetStartedInstruction(
           title: "No background noise",
           description:
               "Choose a quiet environment. Avoid background sounds like fans, traffic, or other voices while recording.",
-          icon: Icons.volume_off,
+          iconPath: "assets/icons/sound_off_icon.png",
         ),
       ],
     ),
@@ -53,19 +53,19 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
           title: "Record exactly as shown",
           description:
               "Speak clearly, exactly following the text displayed, so your contribution is accurate and usable",
-          icon: Icons.record_voice_over,
+          iconPath: "assets/icons/record_icon.png",
         ),
         GetStartedInstruction(
-          title: "Don’t record Punctuations",
+          title: "Don't record Punctuations",
           description:
               "Read only the words shown on screen. Do not say commas, full stops, or other punctuation marks.",
-          icon: Icons.text_fields,
+          iconPath: "assets/icons/punctuation_icon.png",
         ),
         GetStartedInstruction(
           title: "Tap record to start",
           description:
               "Press the record button once you are ready, and speak clearly and naturally.",
-          icon: Icons.mic_none,
+          iconPath: "assets/icons/mic_icon.png",
         ),
       ],
     ),
@@ -115,7 +115,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                                     i < data.instructions.length;
                                     i++) ...[
                                   GetStartedItem(
-                                    icon: data.instructions[i].icon,
+                                    iconPath: data.instructions[i].iconPath,
                                     title: data.instructions[i].title,
                                     description:
                                         data.instructions[i].description,

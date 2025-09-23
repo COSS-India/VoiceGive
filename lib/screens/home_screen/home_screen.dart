@@ -1,6 +1,7 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/screens/home_screen/widgets/home_about_section.dart';
 import 'package:bhashadaan/screens/home_screen/widgets/home_header_section.dart';
+import 'package:bhashadaan/screens/home_screen/widgets/home_footer_section.dart';
 import 'package:bhashadaan/screens/home_screen/widgets/how_it_works_section.dart';
 import 'package:bhashadaan/screens/home_screen/widgets/need_more_info.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     NeedMoreInfo(),
+                    HomeFooterSection(),
                   ],
                 ),
               ),
