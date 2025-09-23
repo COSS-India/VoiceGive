@@ -222,7 +222,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "I approve",
+                              "I agree",
                               style: GoogleFonts.notoSans(
                                 color: _allAccepted ? Colors.white : AppColors.grey84,
                                 fontSize: 14.sp,
