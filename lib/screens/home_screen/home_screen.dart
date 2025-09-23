@@ -20,28 +20,34 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HomeHeaderSection(),
-              SizedBox(height: 16.w),
-              Padding(
-                padding: const EdgeInsets.all(16.0).r,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    HomeAboutSection(),
-                    SizedBox(height: 24.w),
-                    HowItWorksSection(),
-                    SizedBox(height: 36.w),
+                    HomeHeaderSection(),
+                    SizedBox(height: 16.w),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0).r,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          HomeAboutSection(),
+                          SizedBox(height: 24.w),
+                          HowItWorksSection(),
+                          SizedBox(height: 36.w),
+                        ],
+                      ),
+                    ),
+                    NeedMoreInfo(),
                   ],
                 ),
               ),
-              NeedMoreInfo(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

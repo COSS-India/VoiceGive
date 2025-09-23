@@ -40,28 +40,16 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // if (!_isLottieLoaded)
-          //   Container(
-          //     color: Colors.white,
-          //   ),
-          Center(
-            child: Lottie.asset(
-              'assets/animations/bhashadaan_splash_screen.json',
-              controller: _controller,
-              fit: BoxFit.fill,
-              onLoaded: (composition) {
-                // setState(() {
-                //   _isLottieLoaded = true;
-                // });
-                _controller.duration = composition.duration;
-                _controller.forward();
-              },
-            ),
-          ),
-        ],
+      body: Lottie.asset(
+        'assets/animations/bhashadaan_splash_screen.json',
+        controller: _controller,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+        onLoaded: (composition) {
+          _controller.duration = composition.duration;
+          _controller.forward();
+        },
       ),
     );
   }

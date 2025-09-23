@@ -1,13 +1,40 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
+import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_login_screen.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeHeaderSection extends StatelessWidget {
+class HomeHeaderSection extends StatefulWidget {
   const HomeHeaderSection({super.key});
+
+  @override
+  State<HomeHeaderSection> createState() => _HomeHeaderSectionState();
+}
+
+class _HomeHeaderSectionState extends State<HomeHeaderSection> {
+  void _showConsentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return InformedConsentModal(
+          onApprove: () {
+            Navigator.of(context).pop(); // Close the modal
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OtpLoginScreen()),
+            );
+          },
+          onDeny: () {
+            Navigator.of(context).pop(); // Close the modal
+            // Stay on the current page (home screen)
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +80,7 @@ class HomeHeaderSection extends StatelessWidget {
           SizedBox(height: 12.w),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OtpLoginScreen()));
+              _showConsentModal(context);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.orange,
