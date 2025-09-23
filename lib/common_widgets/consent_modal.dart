@@ -177,14 +177,14 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                           _termsAccepted,
                           (value) => setState(() => _termsAccepted = value!),
                         ),
-                        SizedBox(height: 12.w),
+                        SizedBox(height: 8.w),
                         
                         _buildCheckboxItem(
                           "Privacy Policy",
                           _privacyAccepted,
                           (value) => setState(() => _privacyAccepted = value!),
                         ),
-                        SizedBox(height: 12.w),
+                        SizedBox(height: 8.w),
                         
                         _buildCheckboxItem(
                           "Copyright & Licensing Policy",
