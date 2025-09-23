@@ -219,6 +219,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thank you for validating the input.'**
   String get mStaticValidationSuccessMessage;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @verifyPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your phone number'**
+  String get verifyPhoneNumber;
+
+  /// No description provided for @otpSentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We will send a One Time Password(OTP) to this mobile number.'**
+  String get otpSentMessage;
+
+  /// No description provided for @enterMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter mobile no.*'**
+  String get enterMobileNumber;
+
+  /// No description provided for @getOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Get OTP'**
+  String get getOtp;
+
+  /// No description provided for @invalidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number'**
+  String get invalidPhoneNumber;
+
+  /// No description provided for @otpVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP Verification'**
+  String get otpVerification;
+
+  /// No description provided for @otpSentToNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the OTP from the sms we sent to +91'**
+  String get otpSentToNumber;
+
+  /// No description provided for @resendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'I didn\'t receive any OTP. RESEND'**
+  String get resendOtp;
+
+  /// No description provided for @submitOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitOtp;
+
+  /// No description provided for @otpExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP has expired. Please request a new one.'**
+  String get otpExpired;
+
+  /// No description provided for @invalidOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid OTP'**
+  String get invalidOtp;
 }
 
 class _AppLocalizationsDelegate

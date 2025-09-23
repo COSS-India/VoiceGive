@@ -54,7 +54,7 @@ class ItemsList extends StatelessWidget {
               title: Text(filtered[index]),
               onTap: () {
                 onItemSelected(filtered[index]);
-                Navigator.pop(context);
+                // Do not pop here; parent handles closing to avoid popping main route
               },
             );
           },
