@@ -40,7 +40,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
           children: [
             // Header
             Container(
-              padding: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 12.w),
+              padding: EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 20.w),
               child: Row(
                 children: [
                   GestureDetector(
