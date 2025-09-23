@@ -65,10 +65,15 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context);
+        return false;
+      },
+      child: Scaffold(
+        appBar: const CustomAppBar(),
+        backgroundColor: Colors.white,
+        body: SafeArea(
         child: Column(
           children: [
             Container(
@@ -127,8 +132,12 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         ),
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            labelText: 'Country',
-                            labelStyle: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
+                            label: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(text: '*', style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp)),
+                                TextSpan(text: 'Country', style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
+                              ]),
+                            ),
                             border: _outline(AppColors.darkGrey),
                             enabledBorder: _outline(AppColors.darkGrey),
                             focusedBorder: _outline(AppColors.darkGrey),
@@ -151,8 +160,12 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         ),
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            labelText: 'State',
-                            labelStyle: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
+                            label: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(text: '*', style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp)),
+                                TextSpan(text: 'State', style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
+                              ]),
+                            ),
                             border: _outline(AppColors.darkGrey),
                             enabledBorder: _outline(AppColors.darkGrey),
                             focusedBorder: _outline(AppColors.darkGrey),
@@ -271,6 +284,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );
