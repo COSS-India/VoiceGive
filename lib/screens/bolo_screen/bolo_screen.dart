@@ -5,24 +5,28 @@ import 'package:bhashadaan/screens/bolo_screen/widgets/actions_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_content_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/language_selection.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
+import 'package:bhashadaan/services/api_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BoloScreen extends StatefulWidget {
-  const BoloScreen({super.key});
+  final String? initialText;
+  final int? initialSentenceId;
+
+  const BoloScreen({super.key, this.initialText, this.initialSentenceId});
 
   @override
   State<BoloScreen> createState() => _BoloScreenState();
 }
 
 class _BoloScreenState extends State<BoloScreen> {
-  String selectedLanguage = "Marathi";
-  int currentIndex = 5;
+  String selectedLanguage = "English";
+  int currentIndex = 1;
   int totalItems = 5;
-  String recordedText =
-      "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.";
+  String recordedText = "";
+  int? sentenceId;
 
   Future<bool> _navigateBackToGetStarted() async {
     Navigator.pushReplacement(
@@ -96,7 +100,8 @@ class _BoloScreenState extends State<BoloScreen> {
                       selectedLanguage: selectedLanguage,
                       currentIndex: currentIndex,
                       totalItems: totalItems,
-                      recordedText: recordedText,
+                      recordedText: recordedText.isNotEmpty ? recordedText : '...',
+                      sentenceId: sentenceId ?? 0,
                       onLanguageChanged: () {
                         setState(() {});
                       },
@@ -108,5 +113,39 @@ class _BoloScreenState extends State<BoloScreen> {
           )),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // If data was passed from Get Started, use it; else fetch
+    if (widget.initialText != null && widget.initialText!.isNotEmpty && widget.initialSentenceId != null) {
+      recordedText = widget.initialText!;
+      sentenceId = widget.initialSentenceId;
+      setState(() {});
+    } else {
+      _fetchInitialSentenceFromMediaText();
+    }
+  }
+
+  Future<void> _fetchInitialSentenceFromMediaText() async {
+    try {
+      final json = await ApiService.fetchOneSentenceFromMediaText(
+        language: selectedLanguage,
+        userName: 'Supriya',
+        userNum: 5742,
+      );
+      // From contributions: text is under 'senetence' or from media: 'media_data'. Handle both.
+      final List<dynamic> data = (json['data'] as List<dynamic>? ) ?? [];
+      if (data.isNotEmpty) {
+        final first = data.first as Map<String, dynamic>;
+        setState(() {
+          recordedText = (first['senetence'] as String?) ?? (first['media_data'] as String?) ?? '';
+          sentenceId = (first['dataset_row_id'] as num?)?.toInt() ?? (first['sentenceId'] as num?)?.toInt();
+        });
+      }
+    } catch (e) {
+      // Silent fail; leave placeholder text
+    }
   }
 }

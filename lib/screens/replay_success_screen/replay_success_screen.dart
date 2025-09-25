@@ -4,6 +4,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
 import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
+import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,8 @@ class ReplaySuccessScreen extends StatefulWidget {
   final String selectedLanguage;
   final int currentIndex;
   final int totalItems;
+  final int? sentenceId;
+  final String? audioUrl;
 
   const ReplaySuccessScreen({
     super.key,
@@ -21,6 +24,8 @@ class ReplaySuccessScreen extends StatefulWidget {
     required this.selectedLanguage,
     required this.currentIndex,
     required this.totalItems,
+    this.sentenceId,
+    this.audioUrl,
   });
 
   @override
@@ -116,6 +121,8 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                                   selectedLanguage: widget.selectedLanguage,
                                   currentIndex: widget.currentIndex,
                                   totalItems: widget.totalItems,
+                                  sentenceId: widget.sentenceId,
+                                  audioUrl: widget.audioUrl,
                                 ),
                               ),
                             );
@@ -454,7 +461,32 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           child: PrimaryButtonWidget(
             title: "Correct",
             textFontSize: 16.sp,
-            onTap: () {
+            onTap: () async {
+              if (widget.sentenceId != null) {
+                try {
+                  final res = await ApiService.validateAccept(
+                    validateId: 9760326, // TEMP hardcoded validateId for accept
+                    device: 'Linux null',
+                    browser: 'Chrome 140.0.0.0',
+                    userName: 'Supriya',
+                    fromLanguage: widget.selectedLanguage,
+                    sentenceId: 2664743, // per requirement for accept
+                    state: 'Karnataka',
+                    country: 'India',
+                    latitude: 12.9753,
+                    longitude: 77.591,
+                    type: 'text',
+                    userNum: 5742,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Correct' : 'Accept failed: ${res.statusCode}')),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error: $e')),
+                  );
+                }
+              }
               // Navigate to Congratulations Screen
               Navigator.push(
                 context,
