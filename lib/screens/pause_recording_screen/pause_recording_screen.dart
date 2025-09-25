@@ -4,6 +4,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
 import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
+import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +14,9 @@ class PauseRecordingScreen extends StatefulWidget {
   final String selectedLanguage;
   final int currentIndex;
   final int totalItems;
+  final int? sentenceId;
+  final String? audioUrl;
+  final int? contributionId;
   
   const PauseRecordingScreen({
     super.key,
@@ -20,6 +24,9 @@ class PauseRecordingScreen extends StatefulWidget {
     required this.selectedLanguage,
     required this.currentIndex,
     required this.totalItems,
+    this.sentenceId,
+    this.audioUrl,
+    this.contributionId,
   });
 
   @override
@@ -40,6 +47,9 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           selectedLanguage: widget.selectedLanguage,
           currentIndex: widget.currentIndex,
           totalItems: widget.totalItems,
+          sentenceId: widget.sentenceId,
+          audioUrl: widget.audioUrl,
+          contributionId: widget.contributionId,
         ),
       ),
     );
@@ -363,11 +373,36 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           child: PrimaryButtonWidget(
             title: "Incorrect",
             textFontSize: 16.sp,
-            onTap: () {
+            onTap: () async {
               setState(() {
                 isIncorrect = true;
                 isCorrect = false;
               });
+              if (widget.sentenceId != null) {
+                try {
+                  final res = await ApiService.validateReject(
+                    validateId: widget.contributionId ?? 0,
+                    device: 'Linux null',
+                    browser: 'Chrome 140.0.0.0',
+                    userName: 'Supriya',
+                    fromLanguage: widget.selectedLanguage,
+                    sentenceId: widget.sentenceId ?? 0,
+                    state: 'Karnataka',
+                    country: 'India',
+                    latitude: 12.9753,
+                    longitude: 77.591,
+                    type: 'text',
+                    userNum: 5742,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Incorrect' : 'Reject failed: ${res.statusCode}')),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error: $e')),
+                  );
+                }
+              }
               _showValidationResult("Incorrect");
             },
             textColor: isIncorrect ? Colors.white : AppColors.orange,
@@ -388,12 +423,36 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           child: PrimaryButtonWidget(
             title: "Correct",
             textFontSize: 16.sp,
-            onTap: () {
+            onTap: () async {
               setState(() {
                 isCorrect = true;
                 isIncorrect = false;
               });
-              // Navigate to Replay Recording Screen
+              if (widget.sentenceId != null) {
+                try {
+                  final res = await ApiService.validateAccept(
+                    validateId: widget.contributionId ?? 0,
+                    device: 'Linux null',
+                    browser: 'Chrome 140.0.0.0',
+                    userName: 'Supriya',
+                    fromLanguage: widget.selectedLanguage,
+                    sentenceId: widget.sentenceId ?? 0,
+                    state: 'Karnataka',
+                    country: 'India',
+                    latitude: 12.9753,
+                    longitude: 77.591,
+                    type: 'text',
+                    userNum: 5742,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Correct' : 'Accept failed: ${res.statusCode}')),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error: $e')),
+                  );
+                }
+              }
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -402,6 +461,9 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                     selectedLanguage: widget.selectedLanguage,
                     currentIndex: widget.currentIndex,
                     totalItems: widget.totalItems,
+                    sentenceId: widget.sentenceId,
+                    audioUrl: widget.audioUrl,
+                    contributionId: widget.contributionId,
                   ),
                 ),
               );

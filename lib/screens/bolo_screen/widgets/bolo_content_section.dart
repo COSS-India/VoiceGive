@@ -1,6 +1,7 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
+import 'package:bhashadaan/services/api_service.dart';
 import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ class BoloContentSection extends StatefulWidget {
   final int currentIndex;
   final int totalItems;
   final String recordedText;
+  final int sentenceId;
   final VoidCallback onLanguageChanged;
 
   const BoloContentSection({
@@ -19,6 +21,7 @@ class BoloContentSection extends StatefulWidget {
     required this.currentIndex,
     required this.totalItems,
     required this.recordedText,
+    required this.sentenceId,
     required this.onLanguageChanged,
   });
 
@@ -97,7 +100,48 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           child: PrimaryButtonWidget(
             title: "Skip",
             textFontSize: 16.sp,
-            onTap: () {},
+            onTap: () async {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Skipping current sentence...')),
+              );
+
+              try {
+                final response = await ApiService.skip(
+                  device: 'Linux null',
+                  browser: 'Chrome 140.0.0.0',
+                  userName: 'Supriya',
+                  language: widget.selectedLanguage,
+                  sentenceId: widget.sentenceId,
+                  stateRegion: 'Karnataka',
+                  userNum: 5742,
+                  country: 'India',
+                  latitude: 12.9753,
+                  longitude: 77.591,
+                  type: 'text',
+                );
+
+                if (!mounted) return;
+
+                if (response.statusCode >= 200 && response.statusCode < 300) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Skipped successfully')),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Skip failed: ${response.statusCode}')),
+                  );
+                }
+              } catch (e) {
+                if (!mounted) return;
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: $e')),
+                );
+              }
+            },
             textColor: AppColors.orange,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -126,6 +170,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
                     selectedLanguage: widget.selectedLanguage,
                     currentIndex: widget.currentIndex,
                     totalItems: widget.totalItems,
+                    sentenceId: widget.sentenceId,
                   ),
                 ),
               ).then((_) {

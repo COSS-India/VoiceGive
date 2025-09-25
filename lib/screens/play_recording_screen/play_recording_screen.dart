@@ -4,6 +4,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
+import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +14,9 @@ class PlayRecordingScreen extends StatefulWidget {
   final String selectedLanguage;
   final int currentIndex;
   final int totalItems;
+  final int? sentenceId;
+  final String? audioUrl;
+  final int? contributionId;
   
   const PlayRecordingScreen({
     super.key,
@@ -20,6 +24,9 @@ class PlayRecordingScreen extends StatefulWidget {
     required this.selectedLanguage,
     required this.currentIndex,
     required this.totalItems,
+    this.sentenceId,
+    this.audioUrl,
+    this.contributionId,
   });
 
   @override
@@ -38,6 +45,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           selectedLanguage: widget.selectedLanguage,
           currentIndex: widget.currentIndex,
           totalItems: widget.totalItems,
+          sentenceId: widget.sentenceId,
         ),
       ),
     );
@@ -309,7 +317,9 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Column(
       children: [
         Text(
-          "Play Recording",
+          widget.audioUrl != null && widget.audioUrl!.isNotEmpty
+              ? "Play Contribution"
+              : "Play Recording",
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -328,6 +338,9 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                   selectedLanguage: widget.selectedLanguage,
                   currentIndex: widget.currentIndex,
                   totalItems: widget.totalItems,
+                  sentenceId: widget.sentenceId,
+                  audioUrl: widget.audioUrl,
+                  contributionId: widget.contributionId,
                 ),
               ),
             );
@@ -369,7 +382,32 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: "Incorrect",
             textFontSize: 16.sp,
-            onTap: null, // Disabled
+            onTap: () async {
+              if (widget.contributionId == null) return;
+              try {
+                final res = await ApiService.validateReject(
+                  validateId: widget.contributionId!,
+                  device: 'Linux null',
+                  browser: 'Chrome 140.0.0.0',
+                  userName: 'Supriya',
+                  fromLanguage: widget.selectedLanguage,
+                  sentenceId: widget.sentenceId ?? 0,
+                  state: 'Karnataka',
+                  country: 'India',
+                  latitude: 12.9753,
+                  longitude: 77.591,
+                  type: 'text',
+                  userNum: 5742,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Incorrect' : 'Reject failed: ${res.statusCode}')),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: $e')),
+                );
+              }
+            },
             textColor: AppColors.grey84,
             decoration: BoxDecoration(
               color: Colors.grey[200],
@@ -388,7 +426,32 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: "Correct",
             textFontSize: 16.sp,
-            onTap: null, // Disabled
+            onTap: () async {
+              if (widget.contributionId == null) return;
+              try {
+                final res = await ApiService.validateAccept(
+                  validateId: widget.contributionId!,
+                  device: 'Linux null',
+                  browser: 'Chrome 140.0.0.0',
+                  userName: 'Supriya',
+                  fromLanguage: widget.selectedLanguage,
+                  sentenceId: widget.sentenceId ?? 0,
+                  state: 'Karnataka',
+                  country: 'India',
+                  latitude: 12.9753,
+                  longitude: 77.591,
+                  type: 'text',
+                  userNum: 5742,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Correct' : 'Accept failed: ${res.statusCode}')),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: $e')),
+                );
+              }
+            },
             textColor: AppColors.grey84,
             decoration: BoxDecoration(
               color: Colors.grey[200],
