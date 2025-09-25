@@ -2,8 +2,11 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/constants/helper.dart';
+import 'package:bhashadaan/models/profile_model.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
 import 'package:bhashadaan/screens/profile_screen/other_information_screen.dart';
+import 'package:bhashadaan/services/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +33,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   String? _selectedAgeGroup;
   String? _selectedGender;
+  
+  // API state management
+  bool _isLoading = false;
+  bool _isUpdating = false;
+  ProfileData? _profileData;
+  String? _errorMessage;
 
   final List<String> _ageGroups = const [
     'Under 18 years', '18-24 years', '25-34 years', '35-44 years', '45-54 years', '55-64 years', '65+ years',
@@ -40,6 +49,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _fetchProfileData();
+  }
+
+  @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
@@ -47,6 +62,112 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _ageController.dispose();
     _genderController.dispose();
     super.dispose();
+  }
+
+  /// Fetch user profile data from API
+  Future<void> _fetchProfileData() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final response = await ProfileService.fetchProfile();
+      setState(() {
+        _profileData = response.data;
+        _populateFormFields();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+        _isLoading = false;
+      });
+      Helper.showSnackBarMessage(
+        context: context,
+        text: 'Failed to load profile: ${e.toString()}',
+        bgColor: AppColors.negativeLight,
+      );
+    }
+  }
+
+  /// Populate form fields with fetched data
+  void _populateFormFields() {
+    if (_profileData != null) {
+      _firstNameController.text = _profileData!.firstName;
+      _lastNameController.text = _profileData!.lastName;
+      _emailController.text = _profileData!.email;
+      
+      // Convert age to age group
+      _selectedAgeGroup = ProfileService.convertAgeToAgeGroup(_profileData!.age);
+      _ageController.text = _selectedAgeGroup ?? '';
+      
+      // Set gender
+      _selectedGender = _profileData!.gender;
+      _genderController.text = _selectedGender ?? '';
+    }
+  }
+
+  /// Update user profile data
+  Future<void> _updateProfile() async {
+    if (!_formKey.currentState!.validate()) return;
+    
+    if (_ageController.text.isEmpty || _genderController.text.isEmpty) {
+      Helper.showSnackBarMessage(
+        context: context,
+        text: 'Please select age group and gender',
+        bgColor: AppColors.negativeLight,
+      );
+      return;
+    }
+
+    setState(() {
+      _isUpdating = true;
+    });
+
+    try {
+      final request = UpdateProfileRequest(
+        profilePhoto: null, // No profile photo for now
+        firstName: _firstNameController.text.trim(),
+        age: ProfileService.convertAgeGroupToAge(_selectedAgeGroup!),
+        gender: _selectedGender!,
+        mobileNo: widget.phoneNumber,
+        country: _profileData?.country ?? 95,
+        district: _profileData?.district ?? 606,
+        preferredLanguage: _profileData?.preferredLanguage ?? 'Malayalam',
+        userNum: 5877, // Hardcoded for now
+        email: _emailController.text.trim(),
+      );
+
+      final response = await ProfileService.updateProfile(request);
+      
+      setState(() {
+        _profileData = response.result;
+        _isUpdating = false;
+      });
+
+      Helper.showSnackBarMessage(
+        context: context,
+        text: 'Profile updated successfully!',
+        bgColor: AppColors.lightGreen,
+      );
+
+      // Navigate to next screen after successful update
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => const OtherInformationScreen(),
+        ),
+      );
+    } catch (e) {
+      setState(() {
+        _isUpdating = false;
+      });
+      Helper.showSnackBarMessage(
+        context: context,
+        text: 'Failed to update profile: ${e.toString()}',
+        bgColor: AppColors.negativeLight,
+      );
+    }
   }
 
   Future<void> _pickFromList({
@@ -132,14 +253,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(24.w),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : _errorMessage != null
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.error_outline,
+                                  size: 64.w,
+                                  color: AppColors.negativeLight,
+                                ),
+                                SizedBox(height: 16.h),
+                                Text(
+                                  'Failed to load profile',
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.greys87,
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                Text(
+                                  _errorMessage!,
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 14.sp,
+                                    color: AppColors.greys60,
+                                  ),
+                                ),
+                                SizedBox(height: 24.h),
+                                ElevatedButton(
+                                  onPressed: _fetchProfileData,
+                                  child: Text('Retry'),
+                                ),
+                              ],
+                            ),
+                          )
+                        : SingleChildScrollView(
+                            child: Padding(
+                              padding: EdgeInsets.all(24.w),
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                           SizedBox(height: 16.h),
                           Text(
                             'Personal Information',
@@ -350,30 +511,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: PrimaryButtonWidget(
-                              title: 'Save & Continue',
+                              title: _isUpdating ? 'Updating...' : 'Save & Continue',
                               textColor: Colors.white,
                               decoration: BoxDecoration(
-                                color: AppColors.orange,
+                                color: _isUpdating ? AppColors.greys60 : AppColors.orange,
                                 borderRadius: BorderRadius.circular(6.r),
                               ),
                               verticalPadding: 14.w,
-                              onTap: () {
-                                final valid = _formKey.currentState?.validate() ?? false;
-                                final selectionsValid = _ageController.text.isNotEmpty && _genderController.text.isNotEmpty;
-                                setState(() {});
-                                if (valid && selectionsValid) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) => const OtherInformationScreen(),
-                                    ),
-                                  );
-                                } else if (!selectionsValid) {
-                                  // Do not change border color; just show inline message
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Please select age group and gender')),
-                                  );
-                                }
-                              },
+                              onTap: _isUpdating ? null : _updateProfile,
                             ),
                           ),
                         ],
