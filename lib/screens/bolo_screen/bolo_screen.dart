@@ -4,9 +4,8 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/actions_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_content_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/language_selection.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
+import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:bhashadaan/services/api_service.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,10 +27,10 @@ class _BoloScreenState extends State<BoloScreen> {
   String recordedText = "";
   int? sentenceId;
 
-  Future<bool> _navigateBackToGetStarted() async {
+  Future<bool> _navigateBackToHome() async {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const BoloGetStarted()),
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
     );
     return false;
   }
@@ -39,7 +38,7 @@ class _BoloScreenState extends State<BoloScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _navigateBackToGetStarted,
+      onWillPop: _navigateBackToHome,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
@@ -53,7 +52,7 @@ class _BoloScreenState extends State<BoloScreen> {
                 child: Row(
                   children: [
                     InkWell(
-                      onTap: _navigateBackToGetStarted,
+                      onTap: _navigateBackToHome,
                       child: Icon(
                         Icons.arrow_circle_left_outlined,
                         color: Colors.white,

@@ -5,7 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../constants/app_colors.dart';
 
 class GradientHeader extends StatelessWidget {
-  const GradientHeader({super.key});
+  final String title;
+  
+  const GradientHeader({
+    super.key,
+    this.title = "Login",
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class GradientHeader extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              "Login",
+              title,
               style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 20.sp,

@@ -3,15 +3,16 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
+import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:bhashadaan/screens/profile_screen/other_information_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String phoneNumber;
+  final String? phoneNumber;
 
-  const ProfileScreen({super.key, required this.phoneNumber});
+  const ProfileScreen({super.key, this.phoneNumber});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -80,12 +81,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
 
   Future<bool> _navigateBackToOtp() async {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => OtpVerificationScreen(phoneNumber: widget.phoneNumber),
-      ),
-    );
+    if (widget.phoneNumber != null && !widget.phoneNumber!.contains('@')) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => OtpVerificationScreen(phoneNumber: widget.phoneNumber!),
+        ),
+      );
+    } else {
+      // If no phone number or email, go to home screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        ),
+      );
+    }
     return false;
   }
 
@@ -316,18 +327,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           SizedBox(height: 16.h),
-                          // Phone number (read-only)
-                          TextFormField(
-                            initialValue: '+91 ${widget.phoneNumber}',
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              enabled: false,
-                              enabledBorder: _outline(AppColors.darkGrey),
-                              disabledBorder: _outline(AppColors.darkGrey),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                          // Phone number (read-only) - only show if phone number is provided and not an email
+                          if (widget.phoneNumber != null && !widget.phoneNumber!.contains('@'))
+                            TextFormField(
+                              initialValue: '+91 ${widget.phoneNumber}',
+                              readOnly: true,
+                              decoration: InputDecoration(
+                                enabled: false,
+                                enabledBorder: _outline(AppColors.darkGrey),
+                                disabledBorder: _outline(AppColors.darkGrey),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                              ),
+                              style: GoogleFonts.notoSans(color: AppColors.darkGreen, fontSize: 14.sp, fontWeight: FontWeight.w600),
                             ),
-                            style: GoogleFonts.notoSans(color: AppColors.darkGreen, fontSize: 14.sp, fontWeight: FontWeight.w600),
-                          ),
                           SizedBox(height: 16.h),
                           // Email
                           TextFormField(
