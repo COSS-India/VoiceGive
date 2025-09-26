@@ -62,6 +62,7 @@ class AppConfig {
 
   /// Get environment-specific API endpoints
   Map<String, String> get apiEndpoints => {
+    'login': '$apiBaseUrl/login-user',
     'skip': '$apiBaseUrl/skip',
     'mediaText': '$apiBaseUrl/media/text',
     'validateAccept': '$apiBaseUrl/validate',

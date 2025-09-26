@@ -2,9 +2,23 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
+import 'auth_manager.dart';
 
 class ApiService {
   static AppConfig get _config => AppConfig.instance;
+
+  /// Get headers with dynamic authentication token
+  static Map<String, String> _getHeadersWithAuth() {
+    final headers = Map<String, String>.from(_config.defaultHeaders);
+    
+    // Get token from AuthManager
+    final authHeader = AuthManager.instance.authorizationHeader;
+    if (authHeader != null) {
+      headers['authorization'] = authHeader;
+    }
+    
+    return headers;
+  }
 
   static Future<http.Response> skip({
     required String device,
@@ -35,7 +49,7 @@ class ApiService {
       'type': type,
     };
 
-    final headers = _config.defaultHeaders;
+    final headers = _getHeadersWithAuth();
 
     return await http.post(
       uri,
@@ -82,7 +96,7 @@ class ApiService {
       'platformId': platformId,
     };
 
-    final headers = _config.defaultHeaders;
+    final headers = _getHeadersWithAuth();
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -136,7 +150,7 @@ class ApiService {
       'userNum': userNum,
     };
 
-    final headers = _config.defaultHeaders;
+    final headers = _getHeadersWithAuth();
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -171,7 +185,7 @@ class ApiService {
       'userNum': userNum,
     };
 
-    final headers = _config.defaultHeaders;
+    final headers = _getHeadersWithAuth();
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -186,7 +200,7 @@ class ApiService {
     final uri = Uri.parse(
         '${_config.apiEndpoints['contributions']}/$userNum?from=$fromLanguage&to=$toLanguage&username=$userName&platformId=$platformId');
 
-    final headers = _config.defaultHeaders;
+    final headers = _getHeadersWithAuth();
 
     final response = await http.get(uri, headers: headers);
     if (response.statusCode < 200 || response.statusCode >= 300) {
