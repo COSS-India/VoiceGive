@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
 import '../../bolo_screen/bolo_screen.dart';
+import '../../home_screen/home_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';
 import 'widgets/custom_text_field.dart';
@@ -25,13 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier<bool>(false);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   
-  String _captchaText = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _generateCaptcha();
-  }
+  String _captchaId = '';
 
   @override
   void dispose() {
@@ -43,18 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _generateCaptcha() {
+  void _onCaptchaIdChanged(String captchaId) {
     setState(() {
-      _captchaText = _generateRandomString(4);
-      _captchaController.clear();
+      _captchaId = captchaId;
     });
-  }
-
-  String _generateRandomString(int length) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    return String.fromCharCodes(
-      Iterable.generate(length, (_) => chars.codeUnitAt(DateTime.now().millisecondsSinceEpoch % chars.length)),
-    );
   }
 
 
@@ -82,8 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (value == null || value.isEmpty) {
       return "Please enter CAPTCHA";
     }
-    if (value.toUpperCase() != _captchaText.toUpperCase()) {
-      return "Invalid CAPTCHA";
+    if (_captchaId.isEmpty) {
+      return "CAPTCHA not loaded";
     }
     return null;
   }
@@ -122,12 +109,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Future<bool> _navigateBackToHome() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true,
-      appBar: const CustomAppBar(),
+    return WillPopScope(
+      onWillPop: _navigateBackToHome,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: const CustomAppBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -142,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Login into your\nBhasha Daan Account",
+                          "Login into your\nBhashaDaan Account",
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -218,9 +215,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         
                         // CAPTCHA Section
                         CaptchaWidget(
-                          captchaText: _captchaText,
                           controller: _captchaController,
-                          onRefresh: _generateCaptcha,
+                          onCaptchaIdChanged: _onCaptchaIdChanged,
                           validator: _validateCaptcha,
                         ),
                         SizedBox(height: 20.h),
@@ -314,6 +310,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
