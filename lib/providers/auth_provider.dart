@@ -97,7 +97,24 @@ class AuthProvider extends ChangeNotifier {
       }
     } catch (e) {
       _status = AuthStatus.error;
-      _errorMessage = e.toString();
+      // Extract clean error message from AuthException
+      if (e is AuthException) {
+        // AuthException format: "Status: 500 - Actual error message"
+        final message = e.message;
+        if (message.startsWith('Status: ')) {
+          // Extract everything after "Status: XXX - "
+          final parts = message.split(' - ');
+          if (parts.length > 1) {
+            _errorMessage = parts.sublist(1).join(' - ');
+          } else {
+            _errorMessage = message;
+          }
+        } else {
+          _errorMessage = message;
+        }
+      } else {
+        _errorMessage = e.toString();
+      }
       notifyListeners();
       return false;
     }

@@ -13,6 +13,7 @@ import 'widgets/custom_text_field.dart';
 import '../signup/signup_screen.dart';
 import '../../../models/auth/login_request.dart';
 import '../../../providers/auth_provider.dart';
+import '../../../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -133,9 +134,28 @@ class _LoginScreenState extends State<LoginScreen> {
           _captchaController.clear();
           // Always refresh captcha on network/API errors
           _refreshCaptcha();
+          
+          // Extract clean error message
+          String errorMessage = 'Login failed';
+          if (e is AuthException) {
+            final message = e.message;
+            if (message.startsWith('Status: ')) {
+              final parts = message.split(' - ');
+              if (parts.length > 1) {
+                errorMessage = parts.sublist(1).join(' - ');
+              } else {
+                errorMessage = message;
+              }
+            } else {
+              errorMessage = message;
+            }
+          } else {
+            errorMessage = 'Network error. Please check your connection.';
+          }
+          
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Login error: $e'),
+              content: Text(errorMessage),
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
             ),
