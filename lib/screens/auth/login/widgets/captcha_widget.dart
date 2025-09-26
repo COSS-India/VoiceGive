@@ -4,18 +4,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/app_colors.dart';
-import '../../../../services/api_service.dart';
+import '../../../../services/auth_service.dart';
 
 class CaptchaWidget extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final Function(String) onCaptchaIdChanged;
+  final Function(VoidCallback)? onRefreshCallbackRegistered;
 
   const CaptchaWidget({
     super.key,
     required this.controller,
     required this.onCaptchaIdChanged,
     this.validator,
+    this.onRefreshCallbackRegistered,
   });
 
   @override
@@ -26,11 +28,14 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
   String? _captchaSvg;
   String? _captchaId;
   bool _isLoading = false;
+  bool _isRefreshing = false;
 
   @override
   void initState() {
     super.initState();
     _loadCaptcha();
+    // Register the refresh callback with the parent
+    widget.onRefreshCallbackRegistered?.call(refreshCaptcha);
   }
 
   Future<void> _loadCaptcha() async {
@@ -39,7 +44,10 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
     });
 
     try {
-      final response = await ApiService.getSecureCaptcha();
+      print('🔄 Loading captcha...');
+      final response = await AuthService.getSecureCaptcha();
+      print('📥 Captcha response: $response');
+      
       if (response['message'] == 'Successful' && response['data'] != null) {
         setState(() {
           _captchaSvg = response['data']['secureCapSvg'];
@@ -47,6 +55,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
           _isLoading = false;
         });
         widget.onCaptchaIdChanged(_captchaId ?? '');
+        print('✅ Captcha loaded successfully. ID: $_captchaId');
       } else {
         setState(() {
           _isLoading = false;
@@ -57,8 +66,21 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
       setState(() {
         _isLoading = false;
       });
+      print('❌ Captcha loading error: $e');
       _showError('Error loading captcha. Please try again.');
     }
+  }
+
+  /// Public method to refresh captcha (can be called from parent)
+  Future<void> refreshCaptcha() async {
+    print('🔄 Manually refreshing captcha...');
+    setState(() {
+      _isRefreshing = true;
+    });
+    await _loadCaptcha();
+    setState(() {
+      _isRefreshing = false;
+    });
   }
 
   void _showError(String message) {
@@ -88,15 +110,32 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
                 borderRadius: BorderRadius.circular(6.r),
                 color: AppColors.lightGrey.withOpacity(0.3),
               ),
-              child: _isLoading
+              child: _isLoading || _isRefreshing
                   ? Center(
-                      child: SizedBox(
-                        width: 20.w,
-                        height: 20.w,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkBlue),
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 20.w,
+                            height: 20.w,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                _isRefreshing ? AppColors.orange : AppColors.darkBlue
+                              ),
+                            ),
+                          ),
+                          if (_isRefreshing) ...[
+                            SizedBox(height: 4.h),
+                            Text(
+                              'Refreshing...',
+                              style: GoogleFonts.notoSans(
+                                fontSize: 10.sp,
+                                color: AppColors.orange,
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     )
                   : _captchaSvg != null

@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/auth/login/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,27 +13,6 @@ class HomeHeaderSection extends StatefulWidget {
 }
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
-  void _showConsentModal(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return InformedConsentModal(
-          onApprove: () {
-            Navigator.of(context).pop(); // Close the modal
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
-          },
-          onDeny: () {
-            Navigator.of(context).pop(); // Close the modal
-            // Stay on the current page (home screen)
-          },
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +58,10 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           SizedBox(height: 12.w),
           ElevatedButton(
             onPressed: () {
-              _showConsentModal(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.orange,

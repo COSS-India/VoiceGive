@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
@@ -10,6 +11,9 @@ import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';
 import 'widgets/custom_text_field.dart';
 import '../signup/signup_screen.dart';
+import '../../../models/auth/login_request.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final ValueNotifier<bool> _isLoading = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier<bool>(false);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  VoidCallback? _refreshCaptchaCallback;
   
   String _captchaId = '';
 
@@ -75,21 +80,96 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  void _login() {
+  Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       _isLoading.value = true;
-      // TODO: Implement login logic
-      Future.delayed(const Duration(seconds: 2), () {
+      
+      try {
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
+        
+        final loginRequest = LoginRequest(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+          secureId: _captchaId,
+          captchaText: _captchaController.text.trim(),
+        );
+
+        print('🔐 Attempting login with email: ${loginRequest.email}');
+        print('🔐 Captcha ID: ${loginRequest.secureId}');
+        print('🔐 Captcha Text: ${loginRequest.captchaText}');
+        
+        final success = await authProvider.login(loginRequest);
+        
         if (mounted) {
           _isLoading.value = false;
-        // Navigate to Bolo screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const BoloScreen()),
-        );
+          
+          if (success) {
+            print('✅ Login successful!');
+            // Navigate to Bolo screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const BoloScreen()),
+            );
+          } else {
+            print('❌ Login failed: ${authProvider.errorMessage}');
+            // Clear captcha input on failure
+            _captchaController.clear();
+            // Always refresh captcha on any API error (non-2xx status codes)
+            _refreshCaptcha();
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(authProvider.errorMessage ?? 'Login failed'),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
         }
-      });
+      } catch (e) {
+        if (mounted) {
+          _isLoading.value = false;
+          print('❌ Login error: $e');
+          // Clear captcha input on error
+          _captchaController.clear();
+          // Always refresh captcha on network/API errors
+          _refreshCaptcha();
+          
+          // Extract clean error message
+          String errorMessage = 'Login failed';
+          if (e is AuthException) {
+            final message = e.message;
+            if (message.startsWith('Status: ')) {
+              final parts = message.split(' - ');
+              if (parts.length > 1) {
+                errorMessage = parts.sublist(1).join(' - ');
+              } else {
+                errorMessage = message;
+              }
+            } else {
+              errorMessage = message;
+            }
+          } else {
+            errorMessage = 'Network error. Please check your connection.';
+          }
+          
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      }
     }
+  }
+
+  /// Refresh captcha when there's an API error
+  void _refreshCaptcha() {
+    print('🔄 Refreshing captcha due to API error...');
+    // Use the callback to refresh captcha
+    _refreshCaptchaCallback?.call();
   }
 
   void _navigateToSignup() {
@@ -218,6 +298,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _captchaController,
                           onCaptchaIdChanged: _onCaptchaIdChanged,
                           validator: _validateCaptcha,
+                          onRefreshCallbackRegistered: (callback) {
+                            _refreshCaptchaCallback = callback;
+                          },
                         ),
                         SizedBox(height: 20.h),
                         
