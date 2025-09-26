@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../../home_screen/home_screen.dart';
 import '../../profile_screen/profile_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import '../login/widgets/custom_text_field.dart';
@@ -122,12 +123,22 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  Future<bool> _navigateBackToHome() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true,
-      appBar: const CustomAppBar(),
+    return WillPopScope(
+      onWillPop: _navigateBackToHome,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: const CustomAppBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -170,7 +181,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         
                         // Title
                         Text(
-                          "Create a Bhasha Daan Account",
+                          "Create a BhashaDaan Account",
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -391,6 +402,6 @@ class _SignupScreenState extends State<SignupScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

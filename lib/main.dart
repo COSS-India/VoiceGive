@@ -4,8 +4,17 @@ import 'package:bhashadaan/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bhashadaan/config/app_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize environment configuration
+  await AppConfig.initialize();
+  
+  // Validate configuration
+  AppConfig.instance.validateConfig();
+  
   runApp(const MyApp());
 }
 

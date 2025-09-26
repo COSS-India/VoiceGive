@@ -1,13 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import '../config/app_config.dart';
 
 class ApiService {
-  static const String _baseUrl = 'https://api-servic3.bhashini.co.in';
-
-  // TODO: Replace this with a secure token source. Hardcoding is temporary.
-  static const String _bearerToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU3NDIsInVzZXJOYW1lIjoiIFN1cHJpeWEiLCJpYXQiOjE3NTg3ODU1MjQsImV4cCI6MTc1ODg3MTkyNH0.PHORNzKilYNuyLVQbLnkwwH6iTYs0_W1EGIwjWXk5o4';
+  static AppConfig get _config => AppConfig.instance;
 
   static Future<http.Response> skip({
     required String device,
@@ -22,7 +19,7 @@ class ApiService {
     required double longitude,
     required String type,
   }) async {
-    final uri = Uri.parse('$_baseUrl/api/skip');
+    final uri = Uri.parse(_config.apiEndpoints['skip']!);
 
     final Map<String, dynamic> payload = {
       'device': device,
@@ -38,15 +35,7 @@ class ApiService {
       'type': type,
     };
 
-    final headers = <String, String>{
-      'accept': '*/*',
-      'accept-language': 'en-US,en;q=0.9',
-      'content-type': 'application/json',
-      'authorization': 'Bearer $_bearerToken',
-      'origin': 'https://bhashini.gov.in',
-      'referer': 'https://bhashini.gov.in/',
-      'Cookie': 'SERVERID=GEN3',
-    };
+    final headers = _config.defaultHeaders;
 
     return await http.post(
       uri,
@@ -84,7 +73,7 @@ class ApiService {
     required int userNum,
     required int platformId,
   }) async {
-    final uri = Uri.parse('$_baseUrl/api/media/text');
+    final uri = Uri.parse(_config.apiEndpoints['mediaText']!);
 
     final payload = {
       'language': language,
@@ -93,15 +82,7 @@ class ApiService {
       'platformId': platformId,
     };
 
-    final headers = <String, String>{
-      'accept': '*/*',
-      'accept-language': 'en-US,en;q=0.9',
-      'content-type': 'application/json',
-      'authorization': 'Bearer $_bearerToken',
-      'origin': 'https://bhashini.gov.in',
-      'referer': 'https://bhashini.gov.in/',
-      'Cookie': 'SERVERID=GEN3',
-    };
+    final headers = _config.defaultHeaders;
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -139,7 +120,7 @@ class ApiService {
     required String type,
     required int userNum,
   }) async {
-    final uri = Uri.parse('$_baseUrl/api/validate/$validateId/accept');
+    final uri = Uri.parse('${_config.apiEndpoints['validateAccept']}/$validateId/accept');
 
     final payload = {
       'device': device,
@@ -155,15 +136,7 @@ class ApiService {
       'userNum': userNum,
     };
 
-    final headers = <String, String>{
-      'accept': '*/*',
-      'accept-language': 'en-US,en;q=0.9',
-      'content-type': 'application/json',
-      'authorization': 'Bearer $_bearerToken',
-      'origin': 'https://bhashini.gov.in',
-      'referer': 'https://bhashini.gov.in/',
-      'Cookie': 'SERVERID=GEN3',
-    };
+    final headers = _config.defaultHeaders;
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -182,7 +155,7 @@ class ApiService {
     required String type,
     required int userNum,
   }) async {
-    final uri = Uri.parse('$_baseUrl/api/validate/$validateId/reject');
+    final uri = Uri.parse('${_config.apiEndpoints['validateReject']}/$validateId/reject');
 
     final payload = {
       'device': device,
@@ -198,15 +171,7 @@ class ApiService {
       'userNum': userNum,
     };
 
-    final headers = <String, String>{
-      'accept': '*/*',
-      'accept-language': 'en-US,en;q=0.9',
-      'content-type': 'application/json',
-      'authorization': 'Bearer $_bearerToken',
-      'origin': 'https://bhashini.gov.in',
-      'referer': 'https://bhashini.gov.in/',
-      'Cookie': 'SERVERID=GEN3',
-    };
+    final headers = _config.defaultHeaders;
 
     return await http.post(uri, headers: headers, body: jsonEncode(payload));
   }
@@ -219,16 +184,9 @@ class ApiService {
     int platformId = 1,
   }) async {
     final uri = Uri.parse(
-        '$_baseUrl/api/contributions/text/$userNum?from=$fromLanguage&to=$toLanguage&username=$userName&platformId=$platformId');
+        '${_config.apiEndpoints['contributions']}/$userNum?from=$fromLanguage&to=$toLanguage&username=$userName&platformId=$platformId');
 
-    final headers = <String, String>{
-      'accept': '*/*',
-      'accept-language': 'en-US,en;q=0.9',
-      'authorization': 'Bearer $_bearerToken',
-      'origin': 'https://bhashini.gov.in',
-      'referer': 'https://bhashini.gov.in/',
-      'Cookie': 'SERVERID=GEN3',
-    };
+    final headers = _config.defaultHeaders;
 
     final response = await http.get(uri, headers: headers);
     if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -236,6 +194,41 @@ class ApiService {
     }
     return jsonDecode(response.body) as Map<String, dynamic>;
   }
+
+  static Future<Map<String, dynamic>> getSecureCaptcha() async {
+    final uri = Uri.parse(_config.apiEndpoints['captcha']!);
+
+    // Try with minimal headers first to avoid CORS issues
+    final headers = _config.minimalHeaders;
+
+    try {
+      final response = await http.get(uri, headers: headers);
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw Exception('Captcha API failed: ${response.statusCode} ${response.body}');
+      }
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } catch (e) {
+      // If still fails, try with more headers
+      final fullHeaders = _config.defaultHeaders;
+      
+      try {
+        final response = await http.get(uri, headers: fullHeaders);
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          throw Exception('Captcha API failed: ${response.statusCode} ${response.body}');
+        }
+        return jsonDecode(response.body) as Map<String, dynamic>;
+      } catch (e2) {
+        // Final fallback - try with no headers at all
+        try {
+          final response = await http.get(uri);
+          if (response.statusCode < 200 || response.statusCode >= 300) {
+            throw Exception('Captcha API failed: ${response.statusCode} ${response.body}');
+          }
+          return jsonDecode(response.body) as Map<String, dynamic>;
+        } catch (e3) {
+          rethrow;
+        }
+      }
+    }
+  }
 }
-
-
