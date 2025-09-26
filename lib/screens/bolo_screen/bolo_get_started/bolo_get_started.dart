@@ -183,7 +183,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BoloScreen(),
+                          builder: (context) => const BoloScreen(),
                         ));
                   },
                 ),
@@ -243,10 +243,9 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BoloScreen(),
-                        ));
+                      context,
+                      MaterialPageRoute(builder: (context) => const BoloScreen()),
+                    );
                   },
                 ),
               ),
