@@ -153,7 +153,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                               ),
                             ),
                             Text(
-                              "Enrich your language by donating your voice. ",
+                              AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 10.sp,
@@ -529,7 +529,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
             ),
           ),
           content: Text(
-            AppLocalizations.of(context)!.youMarkedRecordingAs.replaceAll('{result}', result),
+            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),

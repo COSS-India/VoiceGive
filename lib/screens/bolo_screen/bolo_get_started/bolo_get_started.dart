@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
@@ -20,56 +21,66 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<GetStartedModel> getStartedData = [
-    GetStartedModel(
-      title: "Check Your Setup",
-      illustrationImageUrl: "assets/images/bolo_illustration1.png",
-      instructions: [
-        GetStartedInstruction(
-          title: "Please Test Your Speaker",
-          description:
-              "Play the sample audio and confirm you can hear it clearly before starting the task",
-          iconPath: "assets/icons/play_icon.png",
-        ),
-        GetStartedInstruction(
-          title: "Please Test Your Microphone",
-          description:
-              "Speak a few words to check if your voice is being recorded properly and without distortion",
-          iconPath: "assets/icons/mic_icon.png",
-        ),
-        GetStartedInstruction(
-          title: "No background noise",
-          description:
-              "Choose a quiet environment. Avoid background sounds like fans, traffic, or other voices while recording.",
-          iconPath: "assets/icons/sound_off_icon.png",
-        ),
-      ],
-    ),
-    GetStartedModel(
-      title: "Speak Naturally",
-      illustrationImageUrl: "assets/images/bolo_illustration2.png",
-      instructions: [
-        GetStartedInstruction(
-          title: "Record exactly as shown",
-          description:
-              "Speak clearly, exactly following the text displayed, so your contribution is accurate and usable",
-          iconPath: "assets/icons/record_icon.png",
-        ),
-        GetStartedInstruction(
-          title: "Don't record Punctuations",
-          description:
-              "Read only the words shown on screen. Do not say commas, full stops, or other punctuation marks.",
-          iconPath: "assets/icons/punctuation_icon.png",
-        ),
-        GetStartedInstruction(
-          title: "Tap record to start",
-          description:
-              "Press the record button once you are ready, and speak clearly and naturally.",
-          iconPath: "assets/icons/mic_icon.png",
-        ),
-      ],
-    ),
-  ];
+  List<GetStartedModel> getStartedData = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initializeGetStartedData();
+  }
+
+  void _initializeGetStartedData() {
+    final l10n = AppLocalizations.of(context)!;
+    getStartedData = [
+      GetStartedModel(
+        title: l10n.checkYourSetup,
+        illustrationImageUrl: "assets/images/bolo_illustration1.png",
+        instructions: [
+          GetStartedInstruction(
+            title: l10n.pleaseTestYourSpeaker,
+            description: l10n.pleaseTestYourSpeakerDescription,
+            iconPath: "assets/icons/play_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.pleaseTestYourMicrophone,
+            description: l10n.pleaseTestYourMicrophoneDescription,
+            iconPath: "assets/icons/mic_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.noBackgroundNoise,
+            description: l10n.noBackgroundNoiseDescription,
+            iconPath: "assets/icons/sound_off_icon.png",
+          ),
+        ],
+      ),
+      GetStartedModel(
+        title: l10n.speakNaturally,
+        illustrationImageUrl: "assets/images/bolo_illustration2.png",
+        instructions: [
+          GetStartedInstruction(
+            title: l10n.recordExactlyAsShown,
+            description: l10n.recordExactlyAsShownDescription,
+            iconPath: "assets/icons/record_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.dontRecordPunctuations,
+            description: l10n.dontRecordPunctuationsDescription,
+            iconPath: "assets/icons/punctuation_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.tapRecordToStart,
+            description: l10n.tapRecordToStartDescription,
+            iconPath: "assets/icons/mic_icon.png",
+          ),
+        ],
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +188,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Skip",
+                  title: AppLocalizations.of(context)!.skip,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     Navigator.pushReplacement(
@@ -197,7 +208,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Next",
+                  title: AppLocalizations.of(context)!.next,
                   textColor: Colors.white,
                   onTap: () {
                     _pageController.nextPage(
@@ -220,7 +231,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Previous",
+                  title: AppLocalizations.of(context)!.previous,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     _pageController.previousPage(
@@ -239,7 +250,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Finish",
+                  title: AppLocalizations.of(context)!.finish,
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.pushReplacement(

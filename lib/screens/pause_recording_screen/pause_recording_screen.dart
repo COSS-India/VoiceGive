@@ -497,7 +497,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
             ),
           ),
           content: Text(
-            AppLocalizations.of(context)!.youMarkedRecordingAs.replaceAll('{result}', result),
+            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),

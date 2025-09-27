@@ -88,7 +88,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "BOLO India",
+                        AppLocalizations.of(context)!.boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -96,7 +96,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                         ),
                       ),
                       Text(
-                        "Enrich your language by donating your voice. ",
+                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -201,7 +201,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Row(
       children: [
         Text(
-          "Select the language for contribution",
+          AppLocalizations.of(context)!.selectLanguageForContribution,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: Colors.black,
@@ -404,7 +404,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Column(
       children: [
         Text(
-          "Re Record",
+          AppLocalizations.of(context)!.reRecord,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,

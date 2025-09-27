@@ -99,7 +99,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Skip",
+            title: AppLocalizations.of(context)!.skip,
             textFontSize: 16.sp,
             onTap: () async {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();

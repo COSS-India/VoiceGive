@@ -25,7 +25,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dekho => 'Dekho';
 
   @override
-  String get boloIndia => 'Bolo India';
+  String get boloIndia => 'BOLO India';
 
   @override
   String get sunoIndia => 'Suno India';
@@ -154,7 +154,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpSentSuccessfully => 'OTP sent successfully';
 
   @override
-  String otpSentToEmail(Object email) => 'OTP sent successfully to $email';
+  String otpSentToEmail(Object email) {
+    return 'OTP sent successfully to $email';
+  }
 
   @override
   String get quickTips => 'Quick Tips';
@@ -231,7 +233,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get validationSuccessMessage => 'Thank you for validating the input.';
 
-  // New strings implementation
   @override
   String get completeYourProfile => 'Complete your profile';
 
@@ -320,7 +321,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationResult => 'Validation Result';
 
   @override
-  String get youMarkedRecordingAs => 'You marked this recording as \'{result}\'. Thank you for your validation!';
+  String youMarkedRecordingAs(Object result) {
+    return 'You marked this recording as \'$result\'. Thank you for your validation!';
+  }
 
   @override
   String get continueButton => 'Continue';
@@ -396,6 +399,168 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get karnataka => 'Karnataka';
+
+  @override
+  String get whatIsAgriDaan => 'What is AgriDaan?';
+
+  @override
+  String get agriDaanDescription => 'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.';
+
+  @override
+  String get empowerIndiasLinguisticDiversity => 'Empower India\'s \nLinguistic Diversity';
+
+  @override
+  String get joinTheMovementDescription => 'Join the movement to enhance language understanding and accessibility for all 22 official languages in India';
+
+  @override
+  String get letsGetStarted => 'Let\'s Get Started';
+
+  @override
+  String get digitalIndiaBhashiniDivision => 'Digital India Bhashini Division';
+
+  @override
+  String get electronicsNiketanAddress => 'Electronics Niketan, 6-CGO Complex, New Delhi - 110003';
+
+  @override
+  String get poweredBy => 'Powered by';
+
+  @override
+  String get digitalIndiaCorporation => 'Digital India Corporation(DIC)';
+
+  @override
+  String get ministryOfElectronicsIt => 'Ministry of Electronics & IT (MeitY)';
+
+  @override
+  String get governmentOfIndia => 'Government of India®';
+
+  @override
+  String get copyrightNotice => '© 2025 - Copyright All rights reserved.';
+
+  @override
+  String get needMoreInfo => 'Need More Info?';
+
+  @override
+  String get writeYourConcern => 'Write your concern to us and we will get back to you.';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get enterOtpFromSms => 'Enter the OTP from the sms we sent to +91';
+
+  @override
+  String get contribute => 'Contribute';
+
+  @override
+  String get speakClearlyAndRecord => 'Speak clearly and record the displayed sentence';
+
+  @override
+  String get listenAndValidate => 'Listen to recordings and validate their accuracy';
+
+  @override
+  String get earnCertificate => 'Earn Certificate';
+
+  @override
+  String get earnCertificateDescription => 'Earn a certificate for your contributions';
+
+  @override
+  String get checkYourSetup => 'Check Your Setup';
+
+  @override
+  String get pleaseTestYourSpeaker => 'Please Test Your Speaker';
+
+  @override
+  String get pleaseTestYourMicrophone => 'Please Test Your Microphone';
+
+  @override
+  String get noBackgroundNoise => 'No background noise';
+
+  @override
+  String get speakNaturally => 'Speak Naturally';
+
+  @override
+  String get recordExactlyAsShown => 'Record exactly as shown';
+
+  @override
+  String get dontRecordPunctuations => 'Don\'t record Punctuations';
+
+  @override
+  String get tapRecordToStart => 'Tap record to start';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get finish => 'Finish';
+
+  @override
+  String get pleaseTestYourSpeakerDescription => 'Make sure your speakers are working properly';
+
+  @override
+  String get pleaseTestYourMicrophoneDescription => 'Ensure your microphone is functioning correctly';
+
+  @override
+  String get noBackgroundNoiseDescription => 'Find a quiet environment for better recording quality';
+
+  @override
+  String get recordExactlyAsShownDescription => 'Read the text exactly as it appears on screen';
+
+  @override
+  String get dontRecordPunctuationsDescription => 'Skip punctuation marks while recording';
+
+  @override
+  String get tapRecordToStartDescription => 'Press the record button to begin speaking';
+
+  @override
+  String get tamil => 'Tamil';
+
+  @override
+  String get malayalam => 'Malayalam';
+
+  @override
+  String get bengali => 'Bengali';
+
+  @override
+  String get punjabi => 'Punjabi';
+
+  @override
+  String get odia => 'Odia';
+
+  @override
+  String get assamese => 'Assamese';
+
+  @override
+  String get startRecording => 'Start Recording';
+
+  @override
+  String get stopRecording => 'Stop Recording';
+
+  @override
+  String get reRecord => 'Re-record';
+
+  @override
+  String get playContribution => 'Play Contribution';
+
+  @override
+  String get playRecording => 'Play Recording';
+
+  @override
+  String get selectLanguageForContribution => 'Select the language for contribution';
+
+  @override
+  String get enrichYourLanguageByDonatingVoice => 'Enrich your language by donating your voice.';
+
+  @override
+  String get downloadCertificate => 'Download Certificate';
+
+  @override
+  String get validateMore => 'Validate More';
+
+  @override
+  String get downloadPdf => 'Download PDF';
 
   @override
   String get gender => 'Gender';

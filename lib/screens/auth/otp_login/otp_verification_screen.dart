@@ -107,7 +107,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        "Enter the OTP from the sms we sent to +91 ${widget.phoneNumber}",
+                        "${AppLocalizations.of(context)!.enterOtpFromSms} ${widget.phoneNumber}",
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,

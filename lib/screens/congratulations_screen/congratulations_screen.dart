@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -484,7 +485,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
       width: double.infinity,
       height: 48.w,
       child: PrimaryButtonWidget(
-        title: "Download Certificate",
+        title: AppLocalizations.of(context)!.downloadCertificate,
         textFontSize: 16.sp,
         onTap: () {
           // Download certificate as PDF
@@ -546,7 +547,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           child: SizedBox(
             height: 40.w,
             child: PrimaryButtonWidget(
-              title: "Validate More",
+              title: AppLocalizations.of(context)!.validateMore,
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate back to validation
@@ -566,7 +567,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           child: SizedBox(
             height: 40.w,
             child: PrimaryButtonWidget(
-              title: "Contribute More",
+              title: AppLocalizations.of(context)!.contributeMore,
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate back to home
@@ -654,7 +655,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     width: double.infinity,
                     height: 48.w,
                     child: PrimaryButtonWidget(
-                      title: "Download PDF",
+                      title: AppLocalizations.of(context)!.downloadPdf,
                       textFontSize: 16.sp,
                       onTap: () {
                         Navigator.of(context).pop();

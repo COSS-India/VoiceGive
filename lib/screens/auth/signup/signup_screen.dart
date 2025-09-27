@@ -161,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Already have an account?",
+                              AppLocalizations.of(context)!.alreadyHaveAccount,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.greys60,
                                 fontSize: 14.sp,
@@ -198,7 +198,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "Fill in your ",
+                                text: AppLocalizations.of(context)!.fillInYour,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -206,7 +206,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: "personal details",
+                                text: AppLocalizations.of(context)!.personalDetails,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -214,7 +214,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: " to create your account.",
+                                text: AppLocalizations.of(context)!.toCreateYourAccount,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,

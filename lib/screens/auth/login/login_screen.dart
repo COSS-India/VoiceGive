@@ -220,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Login into your\nBhashaDaan Account",
+                          AppLocalizations.of(context)!.loginIntoYourBhashaDaanAccount,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "Enter your ",
+                                text: AppLocalizations.of(context)!.enterYour,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -241,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: "email and password",
+                                text: AppLocalizations.of(context)!.emailAndPassword,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -249,7 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: " to access your account.",
+                                text: AppLocalizations.of(context)!.toAccessYourAccount,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -323,7 +323,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               children: [
                                 Text(
-                                  "Doesn't have an account? ",
+                                  AppLocalizations.of(context)!.doesntHaveAccount,
                                   style: GoogleFonts.notoSans(
                                     color: AppColors.greys60,
                                     fontSize: 14.sp,
