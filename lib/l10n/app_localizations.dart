@@ -1246,6 +1246,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OTP sent successfully!'**
   String get otpSentSuccessfullyMessage;
+
+  /// No description provided for @loginIntoYourBhashaDaanAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Login into your\nBhashaDaan Account'**
+  String get loginIntoYourBhashaDaanAccount;
+
+  /// No description provided for @enterYour.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your '**
+  String get enterYour;
+
+  /// No description provided for @emailAndPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'email and password '**
+  String get emailAndPassword;
+
+  /// No description provided for @toAccessYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'to access your account'**
+  String get toAccessYourAccount;
+
+  /// No description provided for @doesntHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don't have an account? '**
+  String get doesntHaveAccount;
+
+  /// No description provided for @toCreateYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'to create your account'**
+  String get toCreateYourAccount;
+
+  /// No description provided for @personalDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'personal details '**
+  String get personalDetails;
+
+  /// No description provided for @fillInYour.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill in your '**
+  String get fillInYour;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

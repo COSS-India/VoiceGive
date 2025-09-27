@@ -578,4 +578,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneNumberMustBe10Digits => 'Phone number must be 10 digits';
   @override
   String get otpSentSuccessfullyMessage => 'OTP sent successfully!';
+  @override
+  String get loginIntoYourBhashaDaanAccount => 'Login into your\nBhashaDaan Account';
+  @override
+  String get enterYour => 'Enter your ';
+  @override
+  String get emailAndPassword => 'email and password ';
+  @override
+  String get toAccessYourAccount => 'to access your account';
+  @override
+  String get doesntHaveAccount => 'Don\'t have an account? ';
+  @override
+  String get toCreateYourAccount => 'to create your account';
+  @override
+  String get personalDetails => 'personal details ';
+  @override
+  String get fillInYour => 'Fill in your ';
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
 }

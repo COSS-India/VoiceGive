@@ -399,4 +399,22 @@ class AppLocalizationsMl extends AppLocalizations {
   String get phoneNumberMustBe10Digits => "ഫോൺ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം";
   @override
   String get otpSentSuccessfullyMessage => "OTP വിജയകരമായി അയച്ചു!";
+  @override
+  String get loginIntoYourBhashaDaanAccount => "നിങ്ങളുടെ\nഭാഷാദാന അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്യുക";
+  @override
+  String get enterYour => "നിങ്ങളുടെ ";
+  @override
+  String get emailAndPassword => "ഇമെയിൽ, പാസ്‌വേഡ് ";
+  @override
+  String get toAccessYourAccount => "അക്കൗണ്ടിലേക്ക് പ്രവേശിക്കാൻ നൽകുക";
+  @override
+  String get doesntHaveAccount => "അക്കൗണ്ട് ഇല്ലേ? ";
+  @override
+  String get toCreateYourAccount => "അക്കൗണ്ട് സൃഷ്ടിക്കാൻ നൽകുക";
+  @override
+  String get personalDetails => "വ്യക്തിഗത വിവരങ്ങൾ ";
+  @override
+  String get fillInYour => "നിങ്ങളുടെ ";
+  @override
+  String get alreadyHaveAccount => "ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ?";
 }
