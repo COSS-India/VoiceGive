@@ -9,6 +9,7 @@ import '../../profile_screen/profile_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import '../login/widgets/custom_text_field.dart';
 import '../login/login_screen.dart';
+import 'email_otp_verification_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -77,11 +78,13 @@ class _SignupScreenState extends State<SignupScreen> {
       Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
           _isLoading.value = false;
-        // Navigate to complete profile screen
+        // Navigate to OTP verification screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProfileScreen(),
+            builder: (context) => EmailOtpVerificationScreen(
+              email: _emailController.text,
+            ),
           ),
         );
         }
