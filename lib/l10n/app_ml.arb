@@ -200,5 +200,10 @@
     "toThisMobileNumber":" ഈ മൊബൈൽ നമ്പറിലേക്ക് അയയ്ക്കും.",
     "invalidPhoneNumberMessage":"സാധുവായ ഫോൺ നമ്പർ അല്ല",
     "phoneNumberMustBe10Digits":"ഫോൺ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം",
-    "otpSentSuccessfullyMessage":"OTP വിജയകരമായി അയച്ചു!"
+    "otpSentSuccessfullyMessage":"OTP വിജയകരമായി അയച്ചു!",
+    "loginIntoYourBhashaDaanAccount":"നിങ്ങളുടെ\nഭാഷാദാന അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്യുക",
+    "enterYour":"നിങ്ങളുടെ ",
+    "emailAndPassword":"ഇമെയിൽ, പാസ്‌വേഡ് ",
+    "toAccessYourAccount":"അക്കൗണ്ടിലേക്ക് പ്രവേശിക്കാൻ നൽകുക",
+    "doesntHaveAccount":"അക്കൗണ്ട് ഇല്ലേ? "
 }

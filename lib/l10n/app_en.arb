@@ -200,5 +200,10 @@
     "toThisMobileNumber":" to this mobile number.",
     "invalidPhoneNumberMessage":"Invalid phone number",
     "phoneNumberMustBe10Digits":"Phone number must be 10 digits",
-    "otpSentSuccessfullyMessage":"OTP sent successfully!"
+    "otpSentSuccessfullyMessage":"OTP sent successfully!",
+    "loginIntoYourBhashaDaanAccount":"Login into your\nBhashaDaan Account",
+    "enterYour":"Enter your ",
+    "emailAndPassword":"email and password ",
+    "toAccessYourAccount":"to access your account",
+    "doesntHaveAccount":"Don't have an account? "
 }
