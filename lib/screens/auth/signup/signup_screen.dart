@@ -171,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             GestureDetector(
                               onTap: _navigateToLogin,
                               child: Text(
-                                "Sign In",
+                                AppLocalizations.of(context)!.signIn,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.darkBlue,
                                   fontSize: 14.sp,
@@ -185,7 +185,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         
                         // Title
                         Text(
-                          "Create a BhashaDaan Account",
+                          AppLocalizations.of(context)!.createBhashaDaanAccount,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -337,7 +337,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           child: GestureDetector(
                                             onTap: _openPrivacyPolicy,
                                             child: Text(
-                                              'Privacy Policy',
+                                              AppLocalizations.of(context)!.privacyPolicyComingSoon,
                                               style: GoogleFonts.notoSans(
                                                 color: AppColors.darkBlue,
                                                 fontSize: 14.sp,
@@ -390,7 +390,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               )
                             : Text(
-                                'Create Account',
+                                AppLocalizations.of(context)!.signUp,
                                 style: GoogleFonts.notoSans(
                                   color: Colors.white,
                                   fontSize: 16.sp,

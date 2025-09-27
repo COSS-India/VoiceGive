@@ -97,7 +97,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       SizedBox(height: 40.h),
                       Text(
-                        "Otp Verification",
+                        AppLocalizations.of(context)!.otpVerification,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -164,7 +164,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               );
                             }
                             return Text(
-                              "Submit",
+                              AppLocalizations.of(context)!.submit,
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 16.sp,

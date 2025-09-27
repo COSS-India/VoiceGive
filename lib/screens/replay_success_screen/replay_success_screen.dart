@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
 import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
 import 'package:bhashadaan/services/api_service.dart';
@@ -144,7 +145,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "BOLO India",
+                              AppLocalizations.of(context)!.boloIndia,
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 20.sp,
@@ -214,17 +215,17 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
         children: [
           _actionButton(
             onTap: () {},
-            title: "Quick Tips",
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: "Report",
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: "Test Speakers",
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -273,7 +274,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
     return Row(
       children: [
         Text(
-          "Select the language for validation",
+          AppLocalizations.of(context)!.selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -389,7 +390,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
     return Column(
       children: [
         Text(
-          "Replay Recording",
+          AppLocalizations.of(context)!.replayRecording,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -437,11 +438,11 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Incorrect",
+            title: AppLocalizations.of(context)!.incorrect,
             textFontSize: 16.sp,
             onTap: () {
               // Show validation result
-              _showValidationResult("Incorrect");
+              _showValidationResult(AppLocalizations.of(context)!.incorrect);
             },
             textColor: AppColors.orange,
             decoration: BoxDecoration(
@@ -459,7 +460,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Correct",
+            title: AppLocalizations.of(context)!.correct,
             textFontSize: 16.sp,
             onTap: () async {
               if (widget.sentenceId != null) {
@@ -479,11 +480,11 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                     userNum: 5742,
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Correct' : 'Accept failed: ${res.statusCode}')),
+                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? AppLocalizations.of(context)!.markedCorrect : '${AppLocalizations.of(context)!.acceptFailed}: ${res.statusCode}')),
                   );
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Error: $e')),
+                    SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')),
                   );
                 }
               }
@@ -521,14 +522,14 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            "Validation Result",
+            AppLocalizations.of(context)!.validationResult,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           content: Text(
-            "You marked this recording as '$result'. Thank you for your validation!",
+            AppLocalizations.of(context)!.youMarkedRecordingAs.replaceAll('{result}', result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),
@@ -540,7 +541,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
               child: Text(
-                "Continue",
+                AppLocalizations.of(context)!.continueButton,
                 style: GoogleFonts.notoSans(
                   color: AppColors.orange,
                   fontWeight: FontWeight.w600,

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../profile_screen/profile_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';
@@ -129,7 +130,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
       body: SafeArea(
         child: Column(
           children: [
-            const GradientHeader(title: "Sign Up"),
+            GradientHeader(title: AppLocalizations.of(context)!.signUp),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -138,7 +139,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Verify OTP",
+                        AppLocalizations.of(context)!.verifyOtp,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -148,7 +149,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        "An OTP has been sent to your mail",
+                        AppLocalizations.of(context)!.otpSentToMail,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,

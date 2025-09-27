@@ -73,10 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validateCaptcha(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter CAPTCHA";
+      return AppLocalizations.of(context)!.pleaseEnterCaptcha;
     }
     if (_captchaId.isEmpty) {
-      return "CAPTCHA not loaded";
+      return AppLocalizations.of(context)!.captchaNotLoaded;
     }
     return null;
   }
@@ -312,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: _forgotPassword,
                               child: Text(
-                                'Forgot Password',
+                                AppLocalizations.of(context)!.forgotPassword,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.darkBlue,
                                   fontSize: 14.sp,

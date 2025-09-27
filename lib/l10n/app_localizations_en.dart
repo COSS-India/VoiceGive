@@ -154,9 +154,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpSentSuccessfully => 'OTP sent successfully';
 
   @override
-  String otpSentToEmail(Object email) {
-    return 'OTP sent successfully to $email';
-  }
+  String otpSentToEmail(Object email) => 'OTP sent successfully to $email';
 
   @override
   String get quickTips => 'Quick Tips';
@@ -232,4 +230,173 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get validationSuccessMessage => 'Thank you for validating the input.';
+
+  // New strings implementation
+  @override
+  String get completeYourProfile => 'Complete your profile';
+
+  @override
+  String get personalInformation => 'Personal Information';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get chooseYourAgeGroup => 'Choose your age group';
+
+  @override
+  String get emailId => 'Email ID';
+
+  @override
+  String get saveAndContinue => 'Save & Continue';
+
+  @override
+  String get firstNameRequired => 'First name is required';
+
+  @override
+  String get lastNameRequired => 'Last name is required';
+
+  @override
+  String get under18Years => 'Under 18 years';
+
+  @override
+  String get age18To24 => '18-24 years';
+
+  @override
+  String get age25To34 => '25-34 years';
+
+  @override
+  String get age35To44 => '35-44 years';
+
+  @override
+  String get age45To54 => '45-54 years';
+
+  @override
+  String get age55To64 => '55-64 years';
+
+  @override
+  String get age65Plus => '65+ years';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get nonBinary => 'Non-binary';
+
+  @override
+  String get preferNotToSay => 'Prefer not to say';
+
+  @override
+  String get enrichYourLanguage => 'Enrich your language by donating your voice.';
+
+  @override
+  String get selectLanguageForValidation => 'Select the language for validation';
+
+  @override
+  String get pauseRecording => 'Pause Recording';
+
+  @override
+  String get replayRecording => 'Replay Recording';
+
+  @override
+  String get markedIncorrect => 'Marked Incorrect';
+
+  @override
+  String get markedCorrect => 'Marked Correct';
+
+  @override
+  String get rejectFailed => 'Reject failed';
+
+  @override
+  String get acceptFailed => 'Accept failed';
+
+  @override
+  String get validationResult => 'Validation Result';
+
+  @override
+  String get youMarkedRecordingAs => 'You marked this recording as \'{result}\'. Thank you for your validation!';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get pleaseEnterCaptcha => 'Please enter CAPTCHA';
+
+  @override
+  String get captchaNotLoaded => 'CAPTCHA not loaded';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get createBhashaDaanAccount => 'Create a BhashaDaan Account';
+
+  @override
+  String get verifyOtp => 'Verify OTP';
+
+  @override
+  String get otpSentToMail => 'An OTP has been sent to your mail';
+
+  @override
+  String get namasteContributor => 'Namaste Contributor/Validator';
+
+  @override
+  String get consentMessage => 'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.';
+
+  @override
+  String get iAgree => 'I agree';
+
+  @override
+  String get india => 'India';
+
+  @override
+  String get maharashtra => 'Maharashtra';
+
+  @override
+  String get pune => 'Pune';
+
+  @override
+  String get mumbai => 'Mumbai';
+
+  @override
+  String get nashik => 'Nashik';
+
+  @override
+  String get nagpur => 'Nagpur';
+
+  @override
+  String get thane => 'Thane';
+
+  @override
+  String get aurangabad => 'Aurangabad';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get marathi => 'Marathi';
+
+  @override
+  String get gujarati => 'Gujarati';
+
+  @override
+  String get kannada => 'Kannada';
+
+  @override
+  String get telugu => 'Telugu';
+
+  @override
+  String get karnataka => 'Karnataka';
+
+  @override
+  String get gender => 'Gender';
 }

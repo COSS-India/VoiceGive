@@ -45,12 +45,12 @@ import 'app_localizations_en.dart';
 ///
 /// iOS applications define key application metadata, including supported
 /// locales, in an Info.plist file that is built into the application bundle.
-/// To configure the locales supported by your app, you’ll need to edit this
+/// To configure the locales supported by your app, you'll need to edit this
 /// file.
 ///
-/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// First, open your project's ios/Runner.xcworkspace Xcode workspace file.
 /// Then, in the Project Navigator, open the Info.plist file under the Runner
-/// project’s Runner folder.
+/// project's Runner folder.
 ///
 /// Next, select the Information Property List item, select Add Item from the
 /// Editor menu, then select Localizations from the pop-up menu.
@@ -542,6 +542,64 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thank you for validating the input.'**
   String get validationSuccessMessage;
+
+  // New strings added for localization
+  String get completeYourProfile;
+  String get personalInformation;
+  String get firstName;
+  String get lastName;
+  String get chooseYourAgeGroup;
+  String get emailId;
+  String get saveAndContinue;
+  String get firstNameRequired;
+  String get lastNameRequired;
+  String get under18Years;
+  String get age18To24;
+  String get age25To34;
+  String get age35To44;
+  String get age45To54;
+  String get age55To64;
+  String get age65Plus;
+  String get male;
+  String get female;
+  String get nonBinary;
+  String get preferNotToSay;
+  String get enrichYourLanguage;
+  String get selectLanguageForValidation;
+  String get pauseRecording;
+  String get replayRecording;
+  String get markedIncorrect;
+  String get markedCorrect;
+  String get rejectFailed;
+  String get acceptFailed;
+  String get validationResult;
+  String get youMarkedRecordingAs;
+  String get continueButton;
+  String get pleaseEnterCaptcha;
+  String get captchaNotLoaded;
+  String get signIn;
+  String get createBhashaDaanAccount;
+  String get verifyOtp;
+  String get otpSentToMail;
+  String get namasteContributor;
+  String get consentMessage;
+  String get iAgree;
+  String get india;
+  String get maharashtra;
+  String get pune;
+  String get mumbai;
+  String get nashik;
+  String get nagpur;
+  String get thane;
+  String get aurangabad;
+  String get english;
+  String get hindi;
+  String get marathi;
+  String get gujarati;
+  String get kannada;
+  String get telugu;
+  String get karnataka;
+  String get gender;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -560,7 +618,6 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {

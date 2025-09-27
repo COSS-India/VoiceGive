@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +16,8 @@ class OtherInformationScreen extends StatefulWidget {
 }
 
 class _OtherInformationScreenState extends State<OtherInformationScreen> {
-  String _country = 'India';
-  String _state = 'Maharashtra';
+  String _country = '';
+  String _state = '';
   String? _district;
   String? _preferredLanguage;
   final GlobalKey _districtFieldKey = GlobalKey();
@@ -24,14 +25,39 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _languageController = TextEditingController();
 
-  final List<String> _countries = const ['India'];
-  final List<String> _states = const ['Maharashtra'];
-  final List<String> _districts = const [
-    'Pune', 'Mumbai', 'Nashik', 'Nagpur', 'Thane', 'Aurangabad',
-  ];
-  final List<String> _languages = const [
-    'English', 'Hindi', 'Marathi', 'Gujarati', 'Kannada', 'Telugu',
-  ];
+  List<String> _countries = [];
+  List<String> _states = [];
+  List<String> _districts = [];
+  List<String> _languages = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _initializeLocalizedStrings() {
+    final l10n = AppLocalizations.of(context)!;
+    _countries = [l10n.india];
+    _states = [l10n.maharashtra];
+    _districts = [
+      l10n.pune,
+      l10n.mumbai,
+      l10n.nashik,
+      l10n.nagpur,
+      l10n.thane,
+      l10n.aurangabad,
+    ];
+    _languages = [
+      l10n.english,
+      l10n.hindi,
+      l10n.marathi,
+      l10n.gujarati,
+      l10n.kannada,
+      l10n.telugu,
+    ];
+    _country = _countries.first;
+    _state = _states.first;
+  }
 
   Future<void> _pickFromList({
     required List<String> items,
@@ -65,6 +91,11 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize localized strings if not already done
+    if (_countries.isEmpty) {
+      _initializeLocalizedStrings();
+    }
+    
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
