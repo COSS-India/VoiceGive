@@ -6,6 +6,7 @@ import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 class BoloContentSection extends StatefulWidget {
   final String selectedLanguage;
@@ -103,7 +104,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             onTap: () async {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Skipping current sentence...')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.skippingCurrentSentence)),
               );
 
               try {
@@ -126,19 +127,19 @@ class _BoloContentSectionState extends State<BoloContentSection> {
                 if (response.statusCode >= 200 && response.statusCode < 300) {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Skipped successfully')),
+                    SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
                   );
                 } else {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Skip failed: ${response.statusCode}')),
+                    SnackBar(content: Text('${AppLocalizations.of(context)!.skipFailed}: ${response.statusCode}')),
                   );
                 }
               } catch (e) {
                 if (!mounted) return;
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error: $e')),
+                  SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')),
                 );
               }
             },
@@ -155,7 +156,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Submit",
+            title: AppLocalizations.of(context)!.submit,
             textFontSize: 16.sp,
             onTap: () {
               print("Submit button tapped!");

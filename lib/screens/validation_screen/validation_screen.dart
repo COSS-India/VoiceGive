@@ -8,6 +8,7 @@ import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 class ValidationScreen extends StatefulWidget {
   final String recordedText;
@@ -141,17 +142,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: "Quick Tips",
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: "Report",
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: "Test Speakers",
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -452,7 +453,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 150.w, // Increased width to accommodate larger font
           child: PrimaryButtonWidget(
-            title: "Contribute More",
+            title: AppLocalizations.of(context)!.contributeMore,
             textFontSize: 12.sp, // Increased font size
             onTap: () {
               // Navigate back to recording screen
@@ -471,7 +472,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Validate",
+            title: AppLocalizations.of(context)!.validate,
             textFontSize: 16.sp,
             onTap: () async {
               try {

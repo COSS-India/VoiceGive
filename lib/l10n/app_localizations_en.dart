@@ -1,5 +1,3 @@
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -66,12 +64,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mStaticStartTyping => 'Start typing here...';
 
   @override
-  String get mStaticInputSubmitted =>
-      'Thanks for your contribution! we have received your input.';
+  String get mStaticInputSubmitted => 'Thanks for your contribution! we have received your input.';
 
   @override
-  String get mStaticValidationSuccessMessage =>
-      'Thank you for validating the input.';
+  String get mStaticValidationSuccessMessage => 'Thank you for validating the input.';
 
   @override
   String get login => 'Login';
@@ -80,8 +76,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifyPhoneNumber => 'Verify your phone number';
 
   @override
-  String get otpSentMessage =>
-      'We will send a One Time Password(OTP) to this mobile number.';
+  String get otpSentMessage => 'We will send a One Time Password(OTP) to this mobile number.';
 
   @override
   String get enterMobileNumber => 'Enter mobile no.*';
@@ -109,4 +104,132 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidOtp => 'Please enter a valid OTP';
+
+  @override
+  String get signUp => 'Sign Up';
+
+  @override
+  String get forgotPassword => 'Forgot password functionality coming soon!';
+
+  @override
+  String get loginFailed => 'Login failed';
+
+  @override
+  String get networkError => 'Network error. Please check your connection.';
+
+  @override
+  String get failedToLoadCaptcha => 'Failed to load captcha';
+
+  @override
+  String get pleaseWaitForCaptcha => 'Please wait for captcha to load';
+
+  @override
+  String get refreshCaptcha => 'Refresh Captcha';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get passwordMinLength => 'Password must be at least 8 characters';
+
+  @override
+  String get passwordComplexity => 'Password must contain uppercase, lowercase and number';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get invalidEmail => 'Please enter a valid email';
+
+  @override
+  String get acceptTermsAndConditions => 'Please accept the Terms & Conditions and Privacy Policy';
+
+  @override
+  String get termsAndConditionsComingSoon => 'Terms & Conditions page coming soon!';
+
+  @override
+  String get privacyPolicyComingSoon => 'Privacy Policy page coming soon!';
+
+  @override
+  String get otpSentSuccessfully => 'OTP sent successfully';
+
+  @override
+  String otpSentToEmail(Object email) {
+    return 'OTP sent successfully to $email';
+  }
+
+  @override
+  String get quickTips => 'Quick Tips';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get testSpeakers => 'Test Speakers';
+
+  @override
+  String get contributeMore => 'Contribute More';
+
+  @override
+  String get validate => 'Validate';
+
+  @override
+  String get incorrect => 'Incorrect';
+
+  @override
+  String get correct => 'Correct';
+
+  @override
+  String get skippingCurrentSentence => 'Skipping current sentence...';
+
+  @override
+  String get skippedSuccessfully => 'Skipped successfully';
+
+  @override
+  String get skipFailed => 'Skip failed';
+
+  @override
+  String get noValidationItemsAvailable => 'No validation items available';
+
+  @override
+  String get failedToFetchValidationItems => 'Failed to fetch validation items';
+
+  @override
+  String get pleaseSelectAgeGroupAndGender => 'Please select age group and gender';
+
+  @override
+  String get enterMobileNumberHint => 'Enter mobile number';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get submit => 'Submit';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get label => 'Label';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get selectLanguage => 'Select the language for contribution:';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get startTyping => 'Start typing here...';
+
+  @override
+  String get inputSubmitted => 'Thanks for your contribution! we have received your input.';
+
+  @override
+  String get validationSuccessMessage => 'Thank you for validating the input.';
 }
