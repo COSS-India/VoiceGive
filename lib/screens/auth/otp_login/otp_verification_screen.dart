@@ -72,7 +72,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     // TODO: Implement resend OTP logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('OTP sent successfully!'),
+        content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
         backgroundColor: AppColors.lightGreen,
       ),
     );

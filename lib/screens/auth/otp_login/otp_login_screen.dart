@@ -44,10 +44,10 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
 
   String? _validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return "Invalid phone number";
+      return AppLocalizations.of(context)!.invalidPhoneNumberMessage;
     }
     if (value.length != 10) {
-      return "Phone number must be 10 digits";
+      return AppLocalizations.of(context)!.phoneNumberMustBe10Digits;
     }
     return null;
   }
@@ -90,7 +90,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Verify your\nphone number",
+                          AppLocalizations.of(context)!.verifyYourPhoneNumber,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -103,7 +103,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "We will send a ",
+                                text: AppLocalizations.of(context)!.weWillSendA,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -111,7 +111,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: "One Time Password (OTP)",
+                                text: AppLocalizations.of(context)!.oneTimePasswordOtp,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -119,7 +119,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: " to this mobile number.",
+                                text: AppLocalizations.of(context)!.toThisMobileNumber,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,

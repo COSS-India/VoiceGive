@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_ml.dart';
 
 // ignore_for_file: type=lint
 
@@ -90,7 +91,8 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en')
+    Locale('en'),
+    Locale('ml')
   ];
 
   /// No description provided for @bhashadaan.
@@ -1202,6 +1204,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gender'**
   String get gender;
+
+  /// No description provided for @verifyYourPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your\nphone number'**
+  String get verifyYourPhoneNumber;
+
+  /// No description provided for @weWillSendA.
+  ///
+  /// In en, this message translates to:
+  /// **'We will send a '**
+  String get weWillSendA;
+
+  /// No description provided for @oneTimePasswordOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'One Time Password (OTP)'**
+  String get oneTimePasswordOtp;
+
+  /// No description provided for @toThisMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **' to this mobile number.'**
+  String get toThisMobileNumber;
+
+  /// No description provided for @invalidPhoneNumberMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone number'**
+  String get invalidPhoneNumberMessage;
+
+  /// No description provided for @phoneNumberMustBe10Digits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must be 10 digits'**
+  String get phoneNumberMustBe10Digits;
+
+  /// No description provided for @otpSentSuccessfullyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully!'**
+  String get otpSentSuccessfullyMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -1213,7 +1257,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ml'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1225,6 +1269,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en': return AppLocalizationsEn();
+    case 'ml': return AppLocalizationsMl();
   }
 
   throw FlutterError(

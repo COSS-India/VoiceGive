@@ -564,4 +564,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gender => 'Gender';
+  @override
+  String get verifyYourPhoneNumber => 'Verify your\nphone number';
+  @override
+  String get weWillSendA => 'We will send a ';
+  @override
+  String get oneTimePasswordOtp => 'One Time Password (OTP)';
+  @override
+  String get toThisMobileNumber => ' to this mobile number.';
+  @override
+  String get invalidPhoneNumberMessage => 'Invalid phone number';
+  @override
+  String get phoneNumberMustBe10Digits => 'Phone number must be 10 digits';
+  @override
+  String get otpSentSuccessfullyMessage => 'OTP sent successfully!';
 }
