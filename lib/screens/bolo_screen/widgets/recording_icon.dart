@@ -13,7 +13,16 @@ import 'package:record/record.dart';
 enum RecordingState { idle, recording, stopped }
 
 class RecordingButton extends StatefulWidget {
-  const RecordingButton({super.key});
+  final String language;
+  final String text;
+  final int sentenceId;
+
+  const RecordingButton({
+    super.key,
+    required this.language,
+    required this.text,
+    required this.sentenceId,
+  });
 
   @override
   _RecordingButtonState createState() => _RecordingButtonState();
@@ -43,28 +52,13 @@ class _RecordingButtonState extends State<RecordingButton>
   }
 
   Future<void> _cleanupResources() async {
-    await _deleteRecording();
     await recorder.dispose();
   }
 
-  Future<void> _deleteRecording() async {
-    if (recordedFilePath == null) return;
-    try {
-      final file = File(recordedFilePath!);
-      if (await file.exists()) {
-        await file.delete();
-      }
-    } catch (e) {
-      debugPrint('Error deleting recording: $e');
-    } finally {
-      recordedFilePath = null;
-    }
-  }
-
   Future<String> _generateTempFilePath() async {
-    final dir = await getTemporaryDirectory();
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    return '${dir.path}/session_record_$timestamp.m4a';
+    // For web platform, use a simple filename with WAV extension
+    return 'recording_$timestamp.wav';
   }
 
   Future<bool> _hasRequiredPermissions() async {
@@ -76,25 +70,27 @@ class _RecordingButtonState extends State<RecordingButton>
   Future<void> _startRecording() async {
     if (!await _hasRequiredPermissions()) {
       Helper.showSnackBarMessage(
-          // ignore: use_build_context_synchronously
           context: context,
           text: "Microphone permission not granted");
       return;
     }
+    
     try {
       final tempPath = await _generateTempFilePath();
+      debugPrint('Starting recording with path: $tempPath');
       await recorder.start(
         path: tempPath,
         RecordConfig(
-          encoder: AudioEncoder.aacLc,
-          bitRate: 128000,
-          sampleRate: 44100,
+          encoder: AudioEncoder.wav, // Use WAV encoder for web compatibility
         ),
       );
       recordedFilePath = tempPath;
-      debugPrint('Recording started: $tempPath');
+      debugPrint('Recording started successfully');
     } catch (e) {
       debugPrint('Error starting recording: $e');
+      Helper.showSnackBarMessage(
+          context: context,
+          text: "Failed to start recording: $e");
     }
   }
 
@@ -103,23 +99,31 @@ class _RecordingButtonState extends State<RecordingButton>
       final path = await recorder.stop();
       if (path != null) {
         recordedFilePath = path;
-        debugPrint('Recording saved: $path');
+        debugPrint('Recording stopped and saved to: $path');
+      } else {
+        debugPrint('Recording stopped but no file path returned');
       }
     } catch (e) {
       debugPrint('Error stopping recording: $e');
+      Helper.showSnackBarMessage(
+          context: context,
+          text: "Failed to stop recording: $e");
     }
   }
 
   Future<void> _toggleState() async {
     if (_state == RecordingState.idle || _state == RecordingState.stopped) {
-      await _deleteRecording();
-      setState(() => _state = RecordingState.recording);
-      _controller.repeat();
       await _startRecording();
+      if (mounted) {
+        setState(() => _state = RecordingState.recording);
+        _controller.repeat();
+      }
     } else if (_state == RecordingState.recording) {
       await _stopRecording();
-      setState(() => _state = RecordingState.stopped);
-      _controller.stop();
+      if (mounted) {
+        setState(() => _state = RecordingState.stopped);
+        _controller.stop();
+      }
     }
   }
 
@@ -151,11 +155,23 @@ class _RecordingButtonState extends State<RecordingButton>
       case RecordingState.stopped:
         return Column(
           children: [
-            CustomAudioPlayer(
-              filePath: recordedFilePath ?? "",
-              activeColor: AppColors.darkGreen,
-            ),
-            SizedBox(height: 24.w),
+            if (recordedFilePath != null) ...[
+              SizedBox(height: 8.w),
+              CustomAudioPlayer(
+                filePath: recordedFilePath!,
+                activeColor: AppColors.darkGreen,
+              ),
+            ] else ...[
+              Text(
+                "No recording available",
+                style: GoogleFonts.notoSans(
+                  fontSize: 12.sp,
+                  color: Colors.red,
+                ),
+              ),
+              SizedBox(height: 8.w),
+            ],
+            SizedBox(height: 16.w),
             Text(AppLocalizations.of(context)!.reRecord,
                 style: GoogleFonts.notoSans(
                     fontSize: 20.sp,

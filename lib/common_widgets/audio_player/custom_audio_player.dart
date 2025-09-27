@@ -45,8 +45,14 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
     _player = AudioPlayer();
 
     try {
-      // Set the audio file
-      await _player.setFilePath(widget.filePath);
+      // Handle different file path types (blob URLs for web, file paths for mobile)
+      if (widget.filePath.startsWith('blob:')) {
+        // For web blob URLs
+        await _player.setUrl(widget.filePath);
+      } else {
+        // For mobile file paths
+        await _player.setFilePath(widget.filePath);
+      }
 
       // Get duration after file is loaded
       setState(() {

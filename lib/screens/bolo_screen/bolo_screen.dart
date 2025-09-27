@@ -5,7 +5,6 @@ import 'package:bhashadaan/screens/bolo_screen/widgets/actions_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_content_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/language_selection.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
-import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -117,34 +116,10 @@ class _BoloScreenState extends State<BoloScreen> {
   @override
   void initState() {
     super.initState();
-    // If data was passed from Get Started, use it; else fetch
-    if (widget.initialText != null && widget.initialText!.isNotEmpty && widget.initialSentenceId != null) {
-      recordedText = widget.initialText!;
-      sentenceId = widget.initialSentenceId;
-      setState(() {});
-    } else {
-      _fetchInitialSentenceFromMediaText();
-    }
+    // Use default text instead of fetching from API
+    recordedText = "Welcome to Bhashadaan! Please record your voice to contribute to the language dataset.";
+    sentenceId = 1;
+    setState(() {});
   }
 
-  Future<void> _fetchInitialSentenceFromMediaText() async {
-    try {
-      final json = await ApiService.fetchOneSentenceFromMediaText(
-        language: selectedLanguage,
-        userName: 'Supriya',
-        userNum: 5742,
-      );
-      // From contributions: text is under 'senetence' or from media: 'media_data'. Handle both.
-      final List<dynamic> data = (json['data'] as List<dynamic>? ) ?? [];
-      if (data.isNotEmpty) {
-        final first = data.first as Map<String, dynamic>;
-        setState(() {
-          recordedText = (first['senetence'] as String?) ?? (first['media_data'] as String?) ?? '';
-          sentenceId = (first['dataset_row_id'] as num?)?.toInt() ?? (first['sentenceId'] as num?)?.toInt();
-        });
-      }
-    } catch (e) {
-      // Silent fail; leave placeholder text
-    }
-  }
 }

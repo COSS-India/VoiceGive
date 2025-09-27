@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -64,10 +66,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mStaticStartTyping => 'Start typing here...';
 
   @override
-  String get mStaticInputSubmitted => 'Thanks for your contribution! we have received your input.';
+  String get mStaticInputSubmitted =>
+      'Thanks for your contribution! we have received your input.';
 
   @override
-  String get mStaticValidationSuccessMessage => 'Thank you for validating the input.';
+  String get mStaticValidationSuccessMessage =>
+      'Thank you for validating the input.';
 
   @override
   String get login => 'Login';
@@ -76,7 +80,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifyPhoneNumber => 'Verify your phone number';
 
   @override
-  String get otpSentMessage => 'We will send a One Time Password(OTP) to this mobile number.';
+  String get otpSentMessage =>
+      'We will send a One Time Password(OTP) to this mobile number.';
 
   @override
   String get enterMobileNumber => 'Enter mobile no.*';
@@ -133,7 +138,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordMinLength => 'Password must be at least 8 characters';
 
   @override
-  String get passwordComplexity => 'Password must contain uppercase, lowercase and number';
+  String get passwordComplexity =>
+      'Password must contain uppercase, lowercase and number';
 
   @override
   String get emailRequired => 'Email is required';
@@ -142,10 +148,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidEmail => 'Please enter a valid email';
 
   @override
-  String get acceptTermsAndConditions => 'Please accept the Terms & Conditions and Privacy Policy';
+  String get acceptTermsAndConditions =>
+      'Please accept the Terms & Conditions and Privacy Policy';
 
   @override
-  String get termsAndConditionsComingSoon => 'Terms & Conditions page coming soon!';
+  String get termsAndConditionsComingSoon =>
+      'Terms & Conditions page coming soon!';
 
   @override
   String get privacyPolicyComingSoon => 'Privacy Policy page coming soon!';
@@ -195,7 +203,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failedToFetchValidationItems => 'Failed to fetch validation items';
 
   @override
-  String get pleaseSelectAgeGroupAndGender => 'Please select age group and gender';
+  String get pleaseSelectAgeGroupAndGender =>
+      'Please select age group and gender';
 
   @override
   String get enterMobileNumberHint => 'Enter mobile number';
@@ -228,7 +237,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get startTyping => 'Start typing here...';
 
   @override
-  String get inputSubmitted => 'Thanks for your contribution! we have received your input.';
+  String get inputSubmitted =>
+      'Thanks for your contribution! we have received your input.';
 
   @override
   String get validationSuccessMessage => 'Thank you for validating the input.';
@@ -294,10 +304,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get preferNotToSay => 'Prefer not to say';
 
   @override
-  String get enrichYourLanguage => 'Enrich your language by donating your voice.';
+  String get enrichYourLanguage =>
+      'Enrich your language by donating your voice.';
 
   @override
-  String get selectLanguageForValidation => 'Select the language for validation';
+  String get selectLanguageForValidation =>
+      'Select the language for validation';
 
   @override
   String get pauseRecording => 'Pause Recording';
@@ -350,7 +362,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get namasteContributor => 'Namaste Contributor/Validator';
 
   @override
-  String get consentMessage => 'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.';
+  String get consentMessage =>
+      'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.';
 
   @override
   String get iAgree => 'I agree';
@@ -404,13 +417,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whatIsAgriDaan => 'What is AgriDaan?';
 
   @override
-  String get agriDaanDescription => 'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.';
+  String get agriDaanDescription =>
+      'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.';
 
   @override
-  String get empowerIndiasLinguisticDiversity => 'Empower India\'s \nLinguistic Diversity';
+  String get empowerIndiasLinguisticDiversity =>
+      'Empower India\'s \nLinguistic Diversity';
 
   @override
-  String get joinTheMovementDescription => 'Join the movement to enhance language understanding and accessibility for all 22 official languages in India';
+  String get joinTheMovementDescription =>
+      'Join the movement to enhance language understanding and accessibility for all 22 official languages in India';
 
   @override
   String get letsGetStarted => 'Let\'s Get Started';
@@ -419,7 +435,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get digitalIndiaBhashiniDivision => 'Digital India Bhashini Division';
 
   @override
-  String get electronicsNiketanAddress => 'Electronics Niketan, 6-CGO Complex, New Delhi - 110003';
+  String get electronicsNiketanAddress =>
+      'Electronics Niketan, 6-CGO Complex, New Delhi - 110003';
 
   @override
   String get poweredBy => 'Powered by';
@@ -440,7 +457,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get needMoreInfo => 'Need More Info?';
 
   @override
-  String get writeYourConcern => 'Write your concern to us and we will get back to you.';
+  String get writeYourConcern =>
+      'Write your concern to us and we will get back to you.';
 
   @override
   String get contactUs => 'Contact Us';
@@ -452,16 +470,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contribute => 'Contribute';
 
   @override
-  String get speakClearlyAndRecord => 'Speak clearly and record the displayed sentence';
+  String get speakClearlyAndRecord =>
+      'Speak clearly and record the displayed sentence';
 
   @override
-  String get listenAndValidate => 'Listen to recordings and validate their accuracy';
+  String get listenAndValidate =>
+      'Listen to recordings and validate their accuracy';
 
   @override
   String get earnCertificate => 'Earn Certificate';
 
   @override
-  String get earnCertificateDescription => 'Earn a certificate for your contributions';
+  String get earnCertificateDescription =>
+      'Earn a certificate for your contributions';
 
   @override
   String get checkYourSetup => 'Check Your Setup';
@@ -497,22 +518,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finish => 'Finish';
 
   @override
-  String get pleaseTestYourSpeakerDescription => 'Make sure your speakers are working properly';
+  String get pleaseTestYourSpeakerDescription =>
+      'Make sure your speakers are working properly';
 
   @override
-  String get pleaseTestYourMicrophoneDescription => 'Ensure your microphone is functioning correctly';
+  String get pleaseTestYourMicrophoneDescription =>
+      'Ensure your microphone is functioning correctly';
 
   @override
-  String get noBackgroundNoiseDescription => 'Find a quiet environment for better recording quality';
+  String get noBackgroundNoiseDescription =>
+      'Find a quiet environment for better recording quality';
 
   @override
-  String get recordExactlyAsShownDescription => 'Read the text exactly as it appears on screen';
+  String get recordExactlyAsShownDescription =>
+      'Read the text exactly as it appears on screen';
 
   @override
-  String get dontRecordPunctuationsDescription => 'Skip punctuation marks while recording';
+  String get dontRecordPunctuationsDescription =>
+      'Skip punctuation marks while recording';
 
   @override
-  String get tapRecordToStartDescription => 'Press the record button to begin speaking';
+  String get tapRecordToStartDescription =>
+      'Press the record button to begin speaking';
 
   @override
   String get tamil => 'Tamil';
@@ -548,10 +575,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playRecording => 'Play Recording';
 
   @override
-  String get selectLanguageForContribution => 'Select the language for contribution';
+  String get selectLanguageForContribution =>
+      'Select the language for contribution';
 
   @override
-  String get enrichYourLanguageByDonatingVoice => 'Enrich your language by donating your voice.';
+  String get enrichYourLanguageByDonatingVoice =>
+      'Enrich your language by donating your voice.';
 
   @override
   String get downloadCertificate => 'Download Certificate';
@@ -564,36 +593,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gender => 'Gender';
-  @override
-  String get verifyYourPhoneNumber => 'Verify your\nphone number';
-  @override
-  String get weWillSendA => 'We will send a ';
-  @override
-  String get oneTimePasswordOtp => 'One Time Password (OTP)';
-  @override
-  String get toThisMobileNumber => ' to this mobile number.';
-  @override
-  String get invalidPhoneNumberMessage => 'Invalid phone number';
-  @override
-  String get phoneNumberMustBe10Digits => 'Phone number must be 10 digits';
-  @override
-  String get otpSentSuccessfullyMessage => 'OTP sent successfully!';
-  @override
-  String get loginIntoYourBhashaDaanAccount => 'Login into your\nBhashaDaan Account';
-  @override
-  String get enterYour => 'Enter your ';
-  @override
-  String get emailAndPassword => 'email and password ';
-  @override
-  String get toAccessYourAccount => 'to access your account';
-  @override
-  String get doesntHaveAccount => 'Don\'t have an account? ';
-  @override
-  String get toCreateYourAccount => 'to create your account';
-  @override
-  String get personalDetails => 'personal details ';
-  @override
-  String get fillInYour => 'Fill in your ';
+
   @override
   String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get fillInYour => 'Fill in your ';
+
+  @override
+  String get personalDetails => 'personal details ';
+
+  @override
+  String get toCreateYourAccount => 'to create your account';
+
+  @override
+  String get verifyYourPhoneNumber => 'Verify your\nphone number';
+
+  @override
+  String get weWillSendA => 'We will send a ';
+
+  @override
+  String get oneTimePasswordOtp => 'One Time Password (OTP)';
+
+  @override
+  String get toThisMobileNumber => ' to this mobile number.';
+
+  @override
+  String get invalidPhoneNumberMessage => 'Invalid phone number';
+
+  @override
+  String get phoneNumberMustBe10Digits => 'Phone number must be 10 digits';
+
+  @override
+  String get otpSentSuccessfullyMessage => 'OTP sent successfully!';
+
+  @override
+  String get loginIntoYourBhashaDaanAccount =>
+      'Login into your\nBhashaDaan Account';
+
+  @override
+  String get enterYour => 'Enter your ';
+
+  @override
+  String get emailAndPassword => 'email and password ';
+
+  @override
+  String get toAccessYourAccount => 'to access your account';
+
+  @override
+  String get doesntHaveAccount => 'Don\'t have an account? ';
 }

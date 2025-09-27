@@ -5,7 +5,6 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:bhashadaan/screens/replay_success_screen/replay_success_screen.dart';
-import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -384,36 +383,11 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.incorrect,
             textFontSize: 16.sp,
-            onTap: () async {
+            onTap: () {
               setState(() {
                 isIncorrect = true;
                 isCorrect = false;
               });
-              if (widget.sentenceId != null) {
-                try {
-                  final res = await ApiService.validateReject(
-                    validateId: (widget.contributionId ?? 0),
-                    device: 'Linux null',
-                    browser: 'Chrome 140.0.0.0',
-                    userName: 'Supriya',
-                    fromLanguage: widget.selectedLanguage,
-                    sentenceId: (widget.sentenceId ?? 0),
-                    state: 'Karnataka',
-                    country: 'India',
-                    latitude: 12.9753,
-                    longitude: 77.591,
-                    type: 'text',
-                    userNum: 5742,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? AppLocalizations.of(context)!.markedIncorrect : '${AppLocalizations.of(context)!.rejectFailed}: ${res.statusCode}')),
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')),
-                  );
-                }
-              }
               _showValidationResult(AppLocalizations.of(context)!.incorrect);
             },
             textColor: isIncorrect ? Colors.white : AppColors.orange,
@@ -434,36 +408,11 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.correct,
             textFontSize: 16.sp,
-            onTap: () async {
+            onTap: () {
               setState(() {
                 isCorrect = true;
                 isIncorrect = false;
               });
-              if (widget.sentenceId != null) {
-                try {
-                  final res = await ApiService.validateAccept(
-                    validateId: (widget.contributionId ?? 0),
-                    device: 'Linux null',
-                    browser: 'Chrome 140.0.0.0',
-                    userName: 'Supriya',
-                    fromLanguage: widget.selectedLanguage,
-                    sentenceId: (widget.sentenceId ?? 0),
-                    state: 'Karnataka',
-                    country: 'India',
-                    latitude: 12.9753,
-                    longitude: 77.591,
-                    type: 'text',
-                    userNum: 5742,
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? AppLocalizations.of(context)!.markedCorrect : '${AppLocalizations.of(context)!.acceptFailed}: ${res.statusCode}')),
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')),
-                  );
-                }
-              }
               Navigator.push(
                 context,
                 MaterialPageRoute(
