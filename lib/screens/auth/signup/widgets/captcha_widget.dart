@@ -8,12 +8,14 @@ class CaptchaWidget extends StatefulWidget {
   final String captchaText;
   final VoidCallback onRefresh;
   final ValueChanged<String> onChanged;
+  final String? Function(String?)? validator;
 
   const CaptchaWidget({
     super.key,
     required this.captchaText,
     required this.onRefresh,
     required this.onChanged,
+    this.validator,
   });
 
   @override
@@ -34,28 +36,16 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "CAPTCHA",
-          style: GoogleFonts.notoSans(
-            color: AppColors.greys87,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        SizedBox(height: 8.h),
         Row(
           children: [
             // CAPTCHA Image Container
             Container(
               width: 120.w,
-              height: 40.h,
+              height: 48.h,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.lightGrey,
-                  width: 1,
-                ),
+                border: Border.all(color: AppColors.lightGrey),
                 borderRadius: BorderRadius.circular(6.r),
-                color: Colors.white,
+                color: AppColors.lightGrey.withOpacity(0.3),
               ),
               child: Center(
                 child: Text(
@@ -75,15 +65,15 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
             GestureDetector(
               onTap: widget.onRefresh,
               child: Container(
-                width: 40.w,
-                height: 40.h,
+                width: 48.w,
+                height: 48.h,
                 decoration: BoxDecoration(
-                  color: AppColors.lightGrey,
+                  border: Border.all(color: AppColors.lightGrey),
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Icon(
                   Icons.refresh,
-                  color: AppColors.greys60,
+                  color: AppColors.grey40,
                   size: 20.sp,
                 ),
               ),
@@ -92,35 +82,43 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
             
             // CAPTCHA Input Field
             Expanded(
-              child: Container(
-                height: 40.h,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.lightGrey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(6.r),
-                  color: Colors.white,
-                ),
+              child: SizedBox(
+                height: 48.h,
                 child: TextFormField(
                   controller: _controller,
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
-                  style: GoogleFonts.notoSans(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.greys87,
-                  ),
+                  validator: widget.validator,
                   decoration: InputDecoration(
-                    hintText: "*Enter CAPTCHA",
-                    hintStyle: GoogleFonts.notoSans(
-                      color: AppColors.greys60,
+                    labelText: '*Enter CAPTCHA',
+                    labelStyle: GoogleFonts.notoSans(
+                      color: AppColors.greys87,
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
-                    isDense: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.r),
+                      borderSide: BorderSide(color: AppColors.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.r),
+                      borderSide: BorderSide(color: AppColors.darkBlue),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.r),
+                      borderSide: BorderSide(color: AppColors.negativeLight),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.r),
+                      borderSide: BorderSide(color: AppColors.negativeLight),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 12.h,
+                    ),
+                  ),
+                  style: GoogleFonts.notoSans(
+                    color: AppColors.greys87,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
                   ),
                   onChanged: (value) {
                     widget.onChanged(value);

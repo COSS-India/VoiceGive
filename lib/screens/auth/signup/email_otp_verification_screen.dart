@@ -27,7 +27,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
   final ValueNotifier<bool> _isOtpValid = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isCaptchaValid = ValueNotifier<bool>(false);
   final TextEditingController _captchaController = TextEditingController();
-  String? _errorText;
+  String? _otpErrorText;
   String _captchaText = '';
   String _otp = '';
 
@@ -59,7 +59,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
   void _onOtpChanged(String otp) {
     setState(() {
       _otp = otp;
-      _errorText = null;
+      _otpErrorText = null;
     });
     _isOtpValid.value = otp.length == 6;
     _checkFormValidity();
@@ -73,6 +73,16 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
   void _checkFormValidity() {
     // This will be called when either OTP or CAPTCHA changes
     // The verify button will be enabled when both are valid
+  }
+
+  String? _validateCaptcha(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter the CAPTCHA';
+    }
+    if (value.toLowerCase() != _captchaText.toLowerCase()) {
+      return 'Please enter the correct CAPTCHA';
+    }
+    return null;
   }
 
   void _verifyOtp() {
@@ -94,9 +104,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
     } else {
       setState(() {
         if (_otp.length != 6) {
-          _errorText = 'Please enter a valid 6-digit OTP';
-        } else if (_captchaController.text.toLowerCase() != _captchaText.toLowerCase()) {
-          _errorText = 'Please enter the correct CAPTCHA';
+          _otpErrorText = 'Please enter a valid 6-digit OTP';
         }
       });
     }
@@ -153,7 +161,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                       // OTP Input Field
                       EmailOtpInputField(
                         onChanged: _onOtpChanged,
-                        errorText: _errorText,
+                        errorText: _otpErrorText,
                       ),
                       
                       SizedBox(height: 16.h),
@@ -170,6 +178,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                         captchaText: _captchaText,
                         onRefresh: _generateCaptcha,
                         onChanged: _onCaptchaChanged,
+                        validator: _validateCaptcha,
                       ),
                       
                       SizedBox(height: 40.h),
