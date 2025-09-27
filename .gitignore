@@ -65,6 +65,7 @@ ios/build/ios/XCBuildData/PIFCache/
 .env.staging.local
 .env.development.local
 
+# Keep .env files for configuration but exclude sensitive local overrides
 .env
 .env.production
 .env.staging

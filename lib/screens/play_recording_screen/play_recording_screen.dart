@@ -5,7 +5,6 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
-import 'package:bhashadaan/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -383,31 +382,11 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.incorrect,
             textFontSize: 16.sp,
-            onTap: () async {
-              if (widget.contributionId == null) return;
-              try {
-                final res = await ApiService.validateReject(
-                  validateId: widget.contributionId!,
-                  device: 'Linux null',
-                  browser: 'Chrome 140.0.0.0',
-                  userName: 'Supriya',
-                  fromLanguage: widget.selectedLanguage,
-                  sentenceId: widget.sentenceId ?? 0,
-                  state: 'Karnataka',
-                  country: 'India',
-                  latitude: 12.9753,
-                  longitude: 77.591,
-                  type: 'text',
-                  userNum: 5742,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Incorrect' : 'Reject failed: ${res.statusCode}')),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error: $e')),
-                );
-              }
+            onTap: () {
+              // Handle incorrect validation without API call
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Marked Incorrect')),
+              );
             },
             textColor: AppColors.grey84,
             decoration: BoxDecoration(
@@ -427,31 +406,11 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.correct,
             textFontSize: 16.sp,
-            onTap: () async {
-              if (widget.contributionId == null) return;
-              try {
-                final res = await ApiService.validateAccept(
-                  validateId: widget.contributionId!,
-                  device: 'Linux null',
-                  browser: 'Chrome 140.0.0.0',
-                  userName: 'Supriya',
-                  fromLanguage: widget.selectedLanguage,
-                  sentenceId: widget.sentenceId ?? 0,
-                  state: 'Karnataka',
-                  country: 'India',
-                  latitude: 12.9753,
-                  longitude: 77.591,
-                  type: 'text',
-                  userNum: 5742,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(res.statusCode >= 200 && res.statusCode < 300 ? 'Marked Correct' : 'Accept failed: ${res.statusCode}')),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error: $e')),
-                );
-              }
+            onTap: () {
+              // Handle correct validation without API call
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Marked Correct')),
+              );
             },
             textColor: AppColors.grey84,
             decoration: BoxDecoration(

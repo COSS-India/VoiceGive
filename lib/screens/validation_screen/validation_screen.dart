@@ -2,8 +2,8 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
-import 'package:bhashadaan/services/api_service.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -456,8 +456,13 @@ class _ValidationScreenState extends State<ValidationScreen> {
             title: AppLocalizations.of(context)!.contributeMore,
             textFontSize: 12.sp, // Increased font size
             onTap: () {
-              // Navigate back to recording screen
-              Navigator.pop(context);
+              // Navigate to Bolo screen for new recording
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BoloScreen(),
+                ),
+              );
             },
             textColor: AppColors.orange,
             decoration: BoxDecoration(
@@ -474,59 +479,22 @@ class _ValidationScreenState extends State<ValidationScreen> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.validate,
             textFontSize: 16.sp,
-            onTap: () async {
-              try {
-                final json = await ApiService.getContributionsText(
-                  userNum: 5742,
-                  fromLanguage: widget.selectedLanguage,
-                  userName: 'Supriya',
-                  platformId: 1,
-                );
-                final List<dynamic> data = (json['data'] as List<dynamic>? ) ?? [];
-                if (data.isNotEmpty) {
-                  final first = data.first as Map<String, dynamic>;
-                  final String text =
-                      (first['senetnce'] as String?) ??
-                      (first['senetence'] as String?) ??
-                      (first['sentence'] as String?) ??
-                      (first['media_data'] as String?) ??
-                      '';
-                  final String? audio =
-                      (first['contribution'] as String?) ??
-                      (first['Contribution'] as String?);
-                  final int? contributionId =
-                      (first['contributeID'] as num?)?.toInt() ??
-                      (first['contribution_id'] as num?)?.toInt();
-                  final int? datasetRowId =
-                      (first['dataset_row_id'] as num?)?.toInt() ??
-                      (first['sentenceId'] as num?)?.toInt();
-                  if (!mounted) return;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PlayRecordingScreen(
-                        recordedText: text.isNotEmpty ? text : widget.recordedText,
-                        selectedLanguage: widget.selectedLanguage,
-                        currentIndex: widget.currentIndex,
-                        totalItems: widget.totalItems,
-                        sentenceId: datasetRowId ?? widget.sentenceId,
-                        audioUrl: audio,
-                        contributionId: contributionId,
-                      ),
-                    ),
-                  );
-                } else {
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('No validation items available')), 
-                  );
-                }
-              } catch (e) {
-                if (!mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Failed to fetch validation items: $e')),
-                );
-              }
+            onTap: () {
+              // Navigate to PlayRecordingScreen without API call
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlayRecordingScreen(
+                    recordedText: widget.recordedText,
+                    selectedLanguage: widget.selectedLanguage,
+                    currentIndex: widget.currentIndex,
+                    totalItems: widget.totalItems,
+                    sentenceId: widget.sentenceId,
+                    audioUrl: null,
+                    contributionId: null,
+                  ),
+                ),
+              );
             },
             textColor: Colors.white,
             decoration: BoxDecoration(

@@ -1,7 +1,6 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
-import 'package:bhashadaan/services/api_service.dart';
 import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +81,11 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             ),
           ),
           SizedBox(height: 50.w),
-          RecordingButton(),
+          RecordingButton(
+            language: widget.selectedLanguage,
+            text: widget.recordedText,
+            sentenceId: widget.sentenceId,
+          ),
           SizedBox(height: 50.w),
           actionButtons(),
           SizedBox(height: 50.w),
@@ -101,47 +104,12 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           child: PrimaryButtonWidget(
             title: AppLocalizations.of(context)!.skip,
             textFontSize: 16.sp,
-            onTap: () async {
+            onTap: () {
+              // Handle skip without API call
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.skippingCurrentSentence)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
               );
-
-              try {
-                final response = await ApiService.skip(
-                  device: 'Linux null',
-                  browser: 'Chrome 140.0.0.0',
-                  userName: 'Supriya',
-                  language: widget.selectedLanguage,
-                  sentenceId: widget.sentenceId,
-                  stateRegion: 'Karnataka',
-                  userNum: 5742,
-                  country: 'India',
-                  latitude: 12.9753,
-                  longitude: 77.591,
-                  type: 'text',
-                );
-
-                if (!mounted) return;
-
-                if (response.statusCode >= 200 && response.statusCode < 300) {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${AppLocalizations.of(context)!.skipFailed}: ${response.statusCode}')),
-                  );
-                }
-              } catch (e) {
-                if (!mounted) return;
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('${AppLocalizations.of(context)!.error}: $e')),
-                );
-              }
             },
             textColor: AppColors.orange,
             decoration: BoxDecoration(
