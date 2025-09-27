@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_colors.dart';
+import '../l10n/app_localizations.dart';
 
 class InformedConsentModal extends StatefulWidget {
   final VoidCallback onApprove;
@@ -78,7 +79,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                   Row(
                     children: [
                       Text(
-                        "Namaste Contributor/Validator",
+                        AppLocalizations.of(context)!.namasteContributor,
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
@@ -96,7 +97,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                   
                   // Introduction paragraph
                   Text(
-                    "Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.",
+                    AppLocalizations.of(context)!.consentMessage,
                     style: GoogleFonts.notoSans(
                       color: Colors.black,
                       fontSize: 14.sp,
@@ -222,7 +223,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "I agree",
+                              AppLocalizations.of(context)!.iAgree,
                               style: GoogleFonts.notoSans(
                                 color: _allAccepted ? Colors.white : AppColors.grey84,
                                 fontSize: 14.sp,

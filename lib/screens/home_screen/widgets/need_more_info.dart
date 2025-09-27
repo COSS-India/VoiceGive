@@ -1,4 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,7 @@ class NeedMoreInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Need More Info?',
+            AppLocalizations.of(context)!.needMoreInfo,
             style: GoogleFonts.notoSans(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class NeedMoreInfo extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Write your concern to us and we will get back to you.',
+            AppLocalizations.of(context)!.writeYourConcern,
             style: GoogleFonts.notoSans(fontSize: 14.sp, color: Colors.white),
           ),
           SizedBox(height: 16.w),
@@ -46,7 +47,7 @@ class NeedMoreInfo extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Contact Us",
+                    AppLocalizations.of(context)!.contactUs,
                     style: GoogleFonts.notoSans(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,

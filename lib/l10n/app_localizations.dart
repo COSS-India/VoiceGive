@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_ml.dart';
 
 // ignore_for_file: type=lint
 
@@ -17,7 +18,7 @@ import 'app_localizations_en.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_localizations.dart';
+/// import 'gen_l10n/app_localizations.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -61,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,8 +82,7 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -92,7 +90,10 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('ml')
+  ];
 
   /// No description provided for @bhashadaan.
   ///
@@ -133,7 +134,7 @@ abstract class AppLocalizations {
   /// No description provided for @boloIndia.
   ///
   /// In en, this message translates to:
-  /// **'Bolo India'**
+  /// **'BOLO India'**
   String get boloIndia;
 
   /// No description provided for @sunoIndia.
@@ -291,10 +292,963 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a valid OTP'**
   String get invalidOtp;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password functionality coming soon!'**
+  String get forgotPassword;
+
+  /// No description provided for @loginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get loginFailed;
+
+  /// No description provided for @networkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your connection.'**
+  String get networkError;
+
+  /// No description provided for @failedToLoadCaptcha.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load captcha'**
+  String get failedToLoadCaptcha;
+
+  /// No description provided for @pleaseWaitForCaptcha.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for captcha to load'**
+  String get pleaseWaitForCaptcha;
+
+  /// No description provided for @refreshCaptcha.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh Captcha'**
+  String get refreshCaptcha;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get passwordMinLength;
+
+  /// No description provided for @passwordComplexity.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain uppercase, lowercase and number'**
+  String get passwordComplexity;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get invalidEmail;
+
+  /// No description provided for @acceptTermsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Please accept the Terms & Conditions and Privacy Policy'**
+  String get acceptTermsAndConditions;
+
+  /// No description provided for @termsAndConditionsComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions page coming soon!'**
+  String get termsAndConditionsComingSoon;
+
+  /// No description provided for @privacyPolicyComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy page coming soon!'**
+  String get privacyPolicyComingSoon;
+
+  /// No description provided for @otpSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully'**
+  String get otpSentSuccessfully;
+
+  /// No description provided for @otpSentToEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully to {email}'**
+  String otpSentToEmail(Object email);
+
+  /// No description provided for @quickTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Tips'**
+  String get quickTips;
+
+  /// No description provided for @report.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get report;
+
+  /// No description provided for @testSpeakers.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Speakers'**
+  String get testSpeakers;
+
+  /// No description provided for @contributeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribute More'**
+  String get contributeMore;
+
+  /// No description provided for @validate.
+  ///
+  /// In en, this message translates to:
+  /// **'Validate'**
+  String get validate;
+
+  /// No description provided for @incorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect'**
+  String get incorrect;
+
+  /// No description provided for @correct.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get correct;
+
+  /// No description provided for @skippingCurrentSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipping current sentence...'**
+  String get skippingCurrentSentence;
+
+  /// No description provided for @skippedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Skipped successfully'**
+  String get skippedSuccessfully;
+
+  /// No description provided for @skipFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip failed'**
+  String get skipFailed;
+
+  /// No description provided for @noValidationItemsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No validation items available'**
+  String get noValidationItemsAvailable;
+
+  /// No description provided for @failedToFetchValidationItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to fetch validation items'**
+  String get failedToFetchValidationItems;
+
+  /// No description provided for @pleaseSelectAgeGroupAndGender.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select age group and gender'**
+  String get pleaseSelectAgeGroupAndGender;
+
+  /// No description provided for @enterMobileNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter mobile number'**
+  String get enterMobileNumberHint;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @label.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get label;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the language for contribution:'**
+  String get selectLanguage;
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @startTyping.
+  ///
+  /// In en, this message translates to:
+  /// **'Start typing here...'**
+  String get startTyping;
+
+  /// No description provided for @inputSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks for your contribution! we have received your input.'**
+  String get inputSubmitted;
+
+  /// No description provided for @validationSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for validating the input.'**
+  String get validationSuccessMessage;
+
+  /// No description provided for @completeYourProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile'**
+  String get completeYourProfile;
+
+  /// No description provided for @personalInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get personalInformation;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @chooseYourAgeGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your age group'**
+  String get chooseYourAgeGroup;
+
+  /// No description provided for @emailId.
+  ///
+  /// In en, this message translates to:
+  /// **'Email ID'**
+  String get emailId;
+
+  /// No description provided for @saveAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Continue'**
+  String get saveAndContinue;
+
+  /// No description provided for @firstNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'First name is required'**
+  String get firstNameRequired;
+
+  /// No description provided for @lastNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Last name is required'**
+  String get lastNameRequired;
+
+  /// No description provided for @under18Years.
+  ///
+  /// In en, this message translates to:
+  /// **'Under 18 years'**
+  String get under18Years;
+
+  /// No description provided for @age18To24.
+  ///
+  /// In en, this message translates to:
+  /// **'18-24 years'**
+  String get age18To24;
+
+  /// No description provided for @age25To34.
+  ///
+  /// In en, this message translates to:
+  /// **'25-34 years'**
+  String get age25To34;
+
+  /// No description provided for @age35To44.
+  ///
+  /// In en, this message translates to:
+  /// **'35-44 years'**
+  String get age35To44;
+
+  /// No description provided for @age45To54.
+  ///
+  /// In en, this message translates to:
+  /// **'45-54 years'**
+  String get age45To54;
+
+  /// No description provided for @age55To64.
+  ///
+  /// In en, this message translates to:
+  /// **'55-64 years'**
+  String get age55To64;
+
+  /// No description provided for @age65Plus.
+  ///
+  /// In en, this message translates to:
+  /// **'65+ years'**
+  String get age65Plus;
+
+  /// No description provided for @male.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// No description provided for @female.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// No description provided for @nonBinary.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-binary'**
+  String get nonBinary;
+
+  /// No description provided for @preferNotToSay.
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer not to say'**
+  String get preferNotToSay;
+
+  /// No description provided for @enrichYourLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enrich your language by donating your voice.'**
+  String get enrichYourLanguage;
+
+  /// No description provided for @selectLanguageForValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the language for validation'**
+  String get selectLanguageForValidation;
+
+  /// No description provided for @pauseRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause Recording'**
+  String get pauseRecording;
+
+  /// No description provided for @replayRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay Recording'**
+  String get replayRecording;
+
+  /// No description provided for @markedIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked Incorrect'**
+  String get markedIncorrect;
+
+  /// No description provided for @markedCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked Correct'**
+  String get markedCorrect;
+
+  /// No description provided for @rejectFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject failed'**
+  String get rejectFailed;
+
+  /// No description provided for @acceptFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept failed'**
+  String get acceptFailed;
+
+  /// No description provided for @validationResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Validation Result'**
+  String get validationResult;
+
+  /// No description provided for @youMarkedRecordingAs.
+  ///
+  /// In en, this message translates to:
+  /// **'You marked this recording as \'{result}\'. Thank you for your validation!'**
+  String youMarkedRecordingAs(Object result);
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @pleaseEnterCaptcha.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter CAPTCHA'**
+  String get pleaseEnterCaptcha;
+
+  /// No description provided for @captchaNotLoaded.
+  ///
+  /// In en, this message translates to:
+  /// **'CAPTCHA not loaded'**
+  String get captchaNotLoaded;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @createBhashaDaanAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a BhashaDaan Account'**
+  String get createBhashaDaanAccount;
+
+  /// No description provided for @verifyOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify OTP'**
+  String get verifyOtp;
+
+  /// No description provided for @otpSentToMail.
+  ///
+  /// In en, this message translates to:
+  /// **'An OTP has been sent to your mail'**
+  String get otpSentToMail;
+
+  /// No description provided for @namasteContributor.
+  ///
+  /// In en, this message translates to:
+  /// **'Namaste Contributor/Validator'**
+  String get namasteContributor;
+
+  /// No description provided for @consentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.'**
+  String get consentMessage;
+
+  /// No description provided for @iAgree.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree'**
+  String get iAgree;
+
+  /// No description provided for @india.
+  ///
+  /// In en, this message translates to:
+  /// **'India'**
+  String get india;
+
+  /// No description provided for @maharashtra.
+  ///
+  /// In en, this message translates to:
+  /// **'Maharashtra'**
+  String get maharashtra;
+
+  /// No description provided for @pune.
+  ///
+  /// In en, this message translates to:
+  /// **'Pune'**
+  String get pune;
+
+  /// No description provided for @mumbai.
+  ///
+  /// In en, this message translates to:
+  /// **'Mumbai'**
+  String get mumbai;
+
+  /// No description provided for @nashik.
+  ///
+  /// In en, this message translates to:
+  /// **'Nashik'**
+  String get nashik;
+
+  /// No description provided for @nagpur.
+  ///
+  /// In en, this message translates to:
+  /// **'Nagpur'**
+  String get nagpur;
+
+  /// No description provided for @thane.
+  ///
+  /// In en, this message translates to:
+  /// **'Thane'**
+  String get thane;
+
+  /// No description provided for @aurangabad.
+  ///
+  /// In en, this message translates to:
+  /// **'Aurangabad'**
+  String get aurangabad;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @hindi.
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi'**
+  String get hindi;
+
+  /// No description provided for @marathi.
+  ///
+  /// In en, this message translates to:
+  /// **'Marathi'**
+  String get marathi;
+
+  /// No description provided for @gujarati.
+  ///
+  /// In en, this message translates to:
+  /// **'Gujarati'**
+  String get gujarati;
+
+  /// No description provided for @kannada.
+  ///
+  /// In en, this message translates to:
+  /// **'Kannada'**
+  String get kannada;
+
+  /// No description provided for @telugu.
+  ///
+  /// In en, this message translates to:
+  /// **'Telugu'**
+  String get telugu;
+
+  /// No description provided for @karnataka.
+  ///
+  /// In en, this message translates to:
+  /// **'Karnataka'**
+  String get karnataka;
+
+  /// No description provided for @whatIsAgriDaan.
+  ///
+  /// In en, this message translates to:
+  /// **'What is AgriDaan?'**
+  String get whatIsAgriDaan;
+
+  /// No description provided for @agriDaanDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.'**
+  String get agriDaanDescription;
+
+  /// No description provided for @empowerIndiasLinguisticDiversity.
+  ///
+  /// In en, this message translates to:
+  /// **'Empower India\'s \nLinguistic Diversity'**
+  String get empowerIndiasLinguisticDiversity;
+
+  /// No description provided for @joinTheMovementDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the movement to enhance language understanding and accessibility for all 22 official languages in India'**
+  String get joinTheMovementDescription;
+
+  /// No description provided for @letsGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s Get Started'**
+  String get letsGetStarted;
+
+  /// No description provided for @digitalIndiaBhashiniDivision.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital India Bhashini Division'**
+  String get digitalIndiaBhashiniDivision;
+
+  /// No description provided for @electronicsNiketanAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronics Niketan, 6-CGO Complex, New Delhi - 110003'**
+  String get electronicsNiketanAddress;
+
+  /// No description provided for @poweredBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Powered by'**
+  String get poweredBy;
+
+  /// No description provided for @digitalIndiaCorporation.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital India Corporation(DIC)'**
+  String get digitalIndiaCorporation;
+
+  /// No description provided for @ministryOfElectronicsIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Ministry of Electronics & IT (MeitY)'**
+  String get ministryOfElectronicsIt;
+
+  /// No description provided for @governmentOfIndia.
+  ///
+  /// In en, this message translates to:
+  /// **'Government of India®'**
+  String get governmentOfIndia;
+
+  /// No description provided for @copyrightNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'© 2025 - Copyright All rights reserved.'**
+  String get copyrightNotice;
+
+  /// No description provided for @needMoreInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Need More Info?'**
+  String get needMoreInfo;
+
+  /// No description provided for @writeYourConcern.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your concern to us and we will get back to you.'**
+  String get writeYourConcern;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contactUs;
+
+  /// No description provided for @enterOtpFromSms.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the OTP from the sms we sent to +91'**
+  String get enterOtpFromSms;
+
+  /// No description provided for @contribute.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribute'**
+  String get contribute;
+
+  /// No description provided for @speakClearlyAndRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak clearly and record the displayed sentence'**
+  String get speakClearlyAndRecord;
+
+  /// No description provided for @listenAndValidate.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to recordings and validate their accuracy'**
+  String get listenAndValidate;
+
+  /// No description provided for @earnCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn Certificate'**
+  String get earnCertificate;
+
+  /// No description provided for @earnCertificateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn a certificate for your contributions'**
+  String get earnCertificateDescription;
+
+  /// No description provided for @checkYourSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Your Setup'**
+  String get checkYourSetup;
+
+  /// No description provided for @pleaseTestYourSpeaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Test Your Speaker'**
+  String get pleaseTestYourSpeaker;
+
+  /// No description provided for @pleaseTestYourMicrophone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Test Your Microphone'**
+  String get pleaseTestYourMicrophone;
+
+  /// No description provided for @noBackgroundNoise.
+  ///
+  /// In en, this message translates to:
+  /// **'No background noise'**
+  String get noBackgroundNoise;
+
+  /// No description provided for @speakNaturally.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak Naturally'**
+  String get speakNaturally;
+
+  /// No description provided for @recordExactlyAsShown.
+  ///
+  /// In en, this message translates to:
+  /// **'Record exactly as shown'**
+  String get recordExactlyAsShown;
+
+  /// No description provided for @dontRecordPunctuations.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t record Punctuations'**
+  String get dontRecordPunctuations;
+
+  /// No description provided for @tapRecordToStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap record to start'**
+  String get tapRecordToStart;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
+
+  /// No description provided for @pleaseTestYourSpeakerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure your speakers are working properly'**
+  String get pleaseTestYourSpeakerDescription;
+
+  /// No description provided for @pleaseTestYourMicrophoneDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure your microphone is functioning correctly'**
+  String get pleaseTestYourMicrophoneDescription;
+
+  /// No description provided for @noBackgroundNoiseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Find a quiet environment for better recording quality'**
+  String get noBackgroundNoiseDescription;
+
+  /// No description provided for @recordExactlyAsShownDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the text exactly as it appears on screen'**
+  String get recordExactlyAsShownDescription;
+
+  /// No description provided for @dontRecordPunctuationsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip punctuation marks while recording'**
+  String get dontRecordPunctuationsDescription;
+
+  /// No description provided for @tapRecordToStartDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Press the record button to begin speaking'**
+  String get tapRecordToStartDescription;
+
+  /// No description provided for @tamil.
+  ///
+  /// In en, this message translates to:
+  /// **'Tamil'**
+  String get tamil;
+
+  /// No description provided for @malayalam.
+  ///
+  /// In en, this message translates to:
+  /// **'Malayalam'**
+  String get malayalam;
+
+  /// No description provided for @bengali.
+  ///
+  /// In en, this message translates to:
+  /// **'Bengali'**
+  String get bengali;
+
+  /// No description provided for @punjabi.
+  ///
+  /// In en, this message translates to:
+  /// **'Punjabi'**
+  String get punjabi;
+
+  /// No description provided for @odia.
+  ///
+  /// In en, this message translates to:
+  /// **'Odia'**
+  String get odia;
+
+  /// No description provided for @assamese.
+  ///
+  /// In en, this message translates to:
+  /// **'Assamese'**
+  String get assamese;
+
+  /// No description provided for @startRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Recording'**
+  String get startRecording;
+
+  /// No description provided for @stopRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Recording'**
+  String get stopRecording;
+
+  /// No description provided for @reRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-record'**
+  String get reRecord;
+
+  /// No description provided for @playContribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Contribution'**
+  String get playContribution;
+
+  /// No description provided for @playRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Recording'**
+  String get playRecording;
+
+  /// No description provided for @selectLanguageForContribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the language for contribution'**
+  String get selectLanguageForContribution;
+
+  /// No description provided for @enrichYourLanguageByDonatingVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Enrich your language by donating your voice.'**
+  String get enrichYourLanguageByDonatingVoice;
+
+  /// No description provided for @downloadCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Download Certificate'**
+  String get downloadCertificate;
+
+  /// No description provided for @validateMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Validate More'**
+  String get validateMore;
+
+  /// No description provided for @downloadPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Download PDF'**
+  String get downloadPdf;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @verifyYourPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your\nphone number'**
+  String get verifyYourPhoneNumber;
+
+  /// No description provided for @weWillSendA.
+  ///
+  /// In en, this message translates to:
+  /// **'We will send a '**
+  String get weWillSendA;
+
+  /// No description provided for @oneTimePasswordOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'One Time Password (OTP)'**
+  String get oneTimePasswordOtp;
+
+  /// No description provided for @toThisMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **' to this mobile number.'**
+  String get toThisMobileNumber;
+
+  /// No description provided for @invalidPhoneNumberMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone number'**
+  String get invalidPhoneNumberMessage;
+
+  /// No description provided for @phoneNumberMustBe10Digits.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must be 10 digits'**
+  String get phoneNumberMustBe10Digits;
+
+  /// No description provided for @otpSentSuccessfullyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully!'**
+  String get otpSentSuccessfullyMessage;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -303,23 +1257,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ml'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
+    case 'en': return AppLocalizationsEn();
+    case 'ml': return AppLocalizationsMl();
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }

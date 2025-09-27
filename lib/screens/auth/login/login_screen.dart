@@ -14,6 +14,7 @@ import '../signup/signup_screen.dart';
 import '../../../models/auth/login_request.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../services/auth_service.dart';
+import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,30 +53,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return "Email is required";
+      return AppLocalizations.of(context)!.emailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return "Please enter a valid email";
+      return AppLocalizations.of(context)!.invalidEmail;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return "Password is required";
+      return AppLocalizations.of(context)!.passwordRequired;
     }
     if (value.length < 6) {
-      return "Password must be at least 6 characters";
+      return AppLocalizations.of(context)!.passwordMinLength;
     }
     return null;
   }
 
   String? _validateCaptcha(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter CAPTCHA";
+      return AppLocalizations.of(context)!.pleaseEnterCaptcha;
     }
     if (_captchaId.isEmpty) {
-      return "CAPTCHA not loaded";
+      return AppLocalizations.of(context)!.captchaNotLoaded;
     }
     return null;
   }
@@ -136,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _refreshCaptcha();
           
           // Extract clean error message
-          String errorMessage = 'Login failed';
+          String errorMessage = AppLocalizations.of(context)!.loginFailed;
           if (e is AuthException) {
             final message = e.message;
             if (message.startsWith('Status: ')) {
@@ -150,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
               errorMessage = message;
             }
           } else {
-            errorMessage = 'Network error. Please check your connection.';
+            errorMessage = AppLocalizations.of(context)!.networkError;
           }
           
           ScaffoldMessenger.of(context).showSnackBar(
@@ -183,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // TODO: Implement forgot password logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Forgot password functionality coming soon!'),
+        content: Text(AppLocalizations.of(context)!.forgotPassword),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -219,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Login into your\nBhashaDaan Account",
+                          AppLocalizations.of(context)!.loginIntoYourBhashaDaanAccount,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -232,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "Enter your ",
+                                text: AppLocalizations.of(context)!.enterYour,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -240,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: "email and password",
+                                text: AppLocalizations.of(context)!.emailAndPassword,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -248,7 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: " to access your account.",
+                                text: AppLocalizations.of(context)!.toAccessYourAccount,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -311,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: _forgotPassword,
                               child: Text(
-                                'Forgot Password',
+                                AppLocalizations.of(context)!.forgotPassword,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.darkBlue,
                                   fontSize: 14.sp,
@@ -322,7 +323,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               children: [
                                 Text(
-                                  "Doesn't have an account? ",
+                                  AppLocalizations.of(context)!.doesntHaveAccount,
                                   style: GoogleFonts.notoSans(
                                     color: AppColors.greys60,
                                     fontSize: 14.sp,
@@ -332,7 +333,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: _navigateToSignup,
                                   child: Text(
-                                    'Sign Up',
+                                    AppLocalizations.of(context)!.signUp,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,
@@ -377,7 +378,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               )
                             : Text(
-                                'LOGIN',
+                                AppLocalizations.of(context)!.login.toUpperCase(),
                                 style: GoogleFonts.notoSans(
                                   color: Colors.white,
                                   fontSize: 16.sp,

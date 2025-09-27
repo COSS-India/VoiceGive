@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:bhashadaan/services/api_service.dart';
@@ -94,7 +95,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "BOLO India",
+                        AppLocalizations.of(context)!.boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -102,7 +103,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                         ),
                       ),
                       Text(
-                        "Enrich your language by donating your voice. ",
+                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -150,17 +151,17 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: "Quick Tips",
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: "Report",
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: "Test Speakers",
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -209,7 +210,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Row(
       children: [
         Text(
-          "Select the language for validation",
+          AppLocalizations.of(context)!.selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -318,8 +319,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
       children: [
         Text(
           widget.audioUrl != null && widget.audioUrl!.isNotEmpty
-              ? "Play Contribution"
-              : "Play Recording",
+              ? AppLocalizations.of(context)!.playContribution
+              : AppLocalizations.of(context)!.playRecording,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -380,7 +381,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Incorrect",
+            title: AppLocalizations.of(context)!.incorrect,
             textFontSize: 16.sp,
             onTap: () async {
               if (widget.contributionId == null) return;
@@ -424,7 +425,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Correct",
+            title: AppLocalizations.of(context)!.correct,
             textFontSize: 16.sp,
             onTap: () async {
               if (widget.contributionId == null) return;

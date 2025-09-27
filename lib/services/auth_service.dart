@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
 import '../models/auth/login_request.dart';
 import '../models/auth/login_response.dart';
+import 'password_encryption_service.dart';
 
 /// Authentication service for handling login and user authentication
 class AuthService {
@@ -17,15 +18,26 @@ class AuthService {
       'accept': 'application/json',
     };
 
+    // Encrypt the password before sending to API
+    final encryptedPassword = PasswordEncryptionService.encryptPassword(request.password);
+    
+    // Create a new request with encrypted password
+    final encryptedRequest = LoginRequest(
+      email: request.email,
+      password: encryptedPassword,
+      secureId: request.secureId,
+      captchaText: request.captchaText,
+    );
+
     print('🌐 Making login API call to: $uri');
     print('📤 Request headers: $headers');
-    print('📤 Request body: ${jsonEncode(request.toJson())}');
+    print('📤 Request body: ${jsonEncode(encryptedRequest.toJson())}');
 
     try {
       final response = await http.post(
         uri,
         headers: headers,
-        body: jsonEncode(request.toJson()),
+        body: jsonEncode(encryptedRequest.toJson()),
       );
 
       print('📥 Response status: ${response.statusCode}');

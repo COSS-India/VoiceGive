@@ -1,5 +1,6 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +37,7 @@ class HomeFooterSection extends StatelessWidget {
             children: [
               // Main heading
               Text(
-                'Digital India Bhashini Division',
+                AppLocalizations.of(context)!.digitalIndiaBhashiniDivision,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 20.sp,
@@ -46,7 +47,7 @@ class HomeFooterSection extends StatelessWidget {
               SizedBox(height: 12.w),
               // Address
               Text(
-                'Electronics Niketan, 6-CGO Complex, New Delhi - 110003',
+                AppLocalizations.of(context)!.electronicsNiketanAddress,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 14.sp,
@@ -58,7 +59,7 @@ class HomeFooterSection extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Powered by',
+                    AppLocalizations.of(context)!.poweredBy,
                     style: GoogleFonts.notoSans(
                       color: Colors.white,
                       fontSize: 14.sp,
@@ -76,7 +77,7 @@ class HomeFooterSection extends StatelessWidget {
               SizedBox(height: 16.w),
               // Additional information
               Text(
-                'Digital India Corporation(DIC)',
+                AppLocalizations.of(context)!.digitalIndiaCorporation,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -85,7 +86,7 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 4.w),
               Text(
-                'Ministry of Electronics & IT (MeitY)',
+                AppLocalizations.of(context)!.ministryOfElectronicsIt,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -94,7 +95,7 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 4.w),
               Text(
-                'Government of India®',
+                AppLocalizations.of(context)!.governmentOfIndia,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -112,7 +113,7 @@ class HomeFooterSection extends StatelessWidget {
               // Copyright notice
               Center(
                 child: Text(
-                  '© 2025 - Copyright All rights reserved.',
+                  AppLocalizations.of(context)!.copyrightNotice,
                   style: GoogleFonts.notoSans(
                     color: Colors.white,
                     fontSize: 12.sp,

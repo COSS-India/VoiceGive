@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -136,13 +137,13 @@ class _RecordingButtonState extends State<RecordingButton>
   Widget _buildText() {
     switch (_state) {
       case RecordingState.idle:
-        return Text("Start Recording",
+        return Text(AppLocalizations.of(context)!.startRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.darkGreen));
       case RecordingState.recording:
-        return Text("Stop Recording",
+        return Text(AppLocalizations.of(context)!.stopRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
@@ -155,7 +156,7 @@ class _RecordingButtonState extends State<RecordingButton>
               activeColor: AppColors.darkGreen,
             ),
             SizedBox(height: 24.w),
-            Text("Re-record",
+            Text(AppLocalizations.of(context)!.reRecord,
                 style: GoogleFonts.notoSans(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,

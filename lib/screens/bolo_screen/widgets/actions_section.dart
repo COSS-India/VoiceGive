@@ -1,4 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,12 +20,12 @@ class ActionsSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           actionButton(
-              onTap: () {}, title: "Quick Tips", icon: Icons.lightbulb_outline),
+              onTap: () {}, title: AppLocalizations.of(context)!.quickTips, icon: Icons.lightbulb_outline),
           actionButton(
-              onTap: () {}, title: "Report", icon: Icons.report_outlined),
+              onTap: () {}, title: AppLocalizations.of(context)!.report, icon: Icons.report_outlined),
           actionButton(
               onTap: () {},
-              title: "Test Speakers",
+              title: AppLocalizations.of(context)!.testSpeakers,
               icon: Icons.volume_up_outlined),
         ],
       ),

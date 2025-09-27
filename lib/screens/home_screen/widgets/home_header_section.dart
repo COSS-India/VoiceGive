@@ -1,6 +1,7 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/auth/login/login_screen.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:bhashadaan/screens/auth/otp_login/otp_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "Empower India's \nLinguistic Diversity",
+                AppLocalizations.of(context)!.empowerIndiasLinguisticDiversity,
                 style: GoogleFonts.notoSans(
                     color: AppColors.darkBlue,
                     fontSize: 20.sp,
@@ -49,7 +50,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           ),
           SizedBox(height: 12.w),
           Text(
-            "Join the movement to enhance language understanding and accessiblity for all 22 official languages in India",
+            AppLocalizations.of(context)!.joinTheMovementDescription,
             style: GoogleFonts.notoSans(
                 color: Colors.black,
                 fontSize: 14.sp,
@@ -60,7 +61,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
+                MaterialPageRoute(builder: (context) => const OtpLoginScreen()),
               );
             },
             style: ElevatedButton.styleFrom(
@@ -70,7 +71,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
               ),
             ),
             child: Text(
-              "Let’s Get Started",
+              AppLocalizations.of(context)!.letsGetStarted,
               style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 16.sp,

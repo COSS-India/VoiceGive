@@ -8,6 +8,7 @@ import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 class ValidationScreen extends StatefulWidget {
   final String recordedText;
@@ -87,7 +88,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "BOLO India",
+                        AppLocalizations.of(context)!.boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -95,7 +96,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                         ),
                       ),
                       Text(
-                        "Enrich your language by donating your voice. ",
+                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -141,17 +142,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: "Quick Tips",
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: "Report",
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: "Test Speakers",
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -200,7 +201,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Row(
       children: [
         Text(
-          "Select the language for contribution",
+          AppLocalizations.of(context)!.selectLanguageForContribution,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: Colors.black,
@@ -403,7 +404,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Column(
       children: [
         Text(
-          "Re Record",
+          AppLocalizations.of(context)!.reRecord,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -452,7 +453,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 150.w, // Increased width to accommodate larger font
           child: PrimaryButtonWidget(
-            title: "Contribute More",
+            title: AppLocalizations.of(context)!.contributeMore,
             textFontSize: 12.sp, // Increased font size
             onTap: () {
               // Navigate back to recording screen
@@ -471,7 +472,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Validate",
+            title: AppLocalizations.of(context)!.validate,
             textFontSize: 16.sp,
             onTap: () async {
               try {

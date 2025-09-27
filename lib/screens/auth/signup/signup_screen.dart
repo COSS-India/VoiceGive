@@ -9,6 +9,8 @@ import '../../profile_screen/profile_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import '../login/widgets/custom_text_field.dart';
 import '../login/login_screen.dart';
+import 'email_otp_verification_screen.dart';
+import '../../../l10n/app_localizations.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -39,33 +41,33 @@ class _SignupScreenState extends State<SignupScreen> {
 
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return "Name is required";
+      return AppLocalizations.of(context)!.emailRequired; // Using emailRequired as generic required field
     }
     if (value.length < 2) {
-      return "Name must be at least 2 characters";
+      return 'Name must be at least 2 characters';
     }
     return null;
   }
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return "Email is required";
+      return AppLocalizations.of(context)!.emailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return "Please enter a valid email";
+      return AppLocalizations.of(context)!.invalidEmail;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return "Password is required";
+      return AppLocalizations.of(context)!.passwordRequired;
     }
     if (value.length < 8) {
-      return "Password must be at least 8 characters";
+      return AppLocalizations.of(context)!.passwordMinLength;
     }
     if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)').hasMatch(value)) {
-      return "Password must contain uppercase, lowercase and number";
+      return AppLocalizations.of(context)!.passwordComplexity;
     }
     return null;
   }
@@ -77,11 +79,13 @@ class _SignupScreenState extends State<SignupScreen> {
       Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
           _isLoading.value = false;
-        // Navigate to complete profile screen
+        // Navigate to OTP verification screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProfileScreen(),
+            builder: (context) => EmailOtpVerificationScreen(
+              email: _emailController.text,
+            ),
           ),
         );
         }
@@ -89,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
     } else if (!_isTermsAccepted.value) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please accept the Terms & Conditions and Privacy Policy'),
+          content: Text(AppLocalizations.of(context)!.acceptTermsAndConditions),
           backgroundColor: AppColors.negativeLight,
         ),
       );
@@ -107,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // TODO: Implement terms and conditions page
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Terms & Conditions page coming soon!'),
+        content: Text(AppLocalizations.of(context)!.termsAndConditionsComingSoon),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -117,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // TODO: Implement privacy policy page
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Privacy Policy page coming soon!'),
+        content: Text(AppLocalizations.of(context)!.privacyPolicyComingSoon),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -142,7 +146,7 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const GradientHeader(title: "Sign Up"),
+            GradientHeader(title: AppLocalizations.of(context)!.signUp),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -157,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Already have an account?",
+                              AppLocalizations.of(context)!.alreadyHaveAccount,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.greys60,
                                 fontSize: 14.sp,
@@ -167,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             GestureDetector(
                               onTap: _navigateToLogin,
                               child: Text(
-                                "Sign In",
+                                AppLocalizations.of(context)!.signIn,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.darkBlue,
                                   fontSize: 14.sp,
@@ -181,7 +185,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         
                         // Title
                         Text(
-                          "Create a BhashaDaan Account",
+                          AppLocalizations.of(context)!.createBhashaDaanAccount,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -194,7 +198,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "Fill in your ",
+                                text: AppLocalizations.of(context)!.fillInYour,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -202,7 +206,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: "personal details",
+                                text: AppLocalizations.of(context)!.personalDetails,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -210,7 +214,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: " to create your account.",
+                                text: AppLocalizations.of(context)!.toCreateYourAccount,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -333,7 +337,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           child: GestureDetector(
                                             onTap: _openPrivacyPolicy,
                                             child: Text(
-                                              'Privacy Policy',
+                                              AppLocalizations.of(context)!.privacyPolicyComingSoon,
                                               style: GoogleFonts.notoSans(
                                                 color: AppColors.darkBlue,
                                                 fontSize: 14.sp,
@@ -386,7 +390,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               )
                             : Text(
-                                'Create Account',
+                                AppLocalizations.of(context)!.signUp,
                                 style: GoogleFonts.notoSans(
                                   color: Colors.white,
                                   fontSize: 16.sp,
