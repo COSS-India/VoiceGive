@@ -1,6 +1,6 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/auth/login/login_screen.dart';
+import 'package:bhashadaan/screens/auth/otp_login/otp_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +60,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
+                MaterialPageRoute(builder: (context) => const OtpLoginScreen()),
               );
             },
             style: ElevatedButton.styleFrom(
