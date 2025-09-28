@@ -15,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize environment configuration
-  await AppConfig.initialize();
+  await AppConfig.initialize(environment: Environment.development);
 
   // Validate configuration
   AppConfig.instance.validateConfig();
