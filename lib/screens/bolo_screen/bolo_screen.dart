@@ -20,7 +20,7 @@ class BoloScreen extends StatefulWidget {
 }
 
 class _BoloScreenState extends State<BoloScreen> {
-  String selectedLanguage = "English";
+  String selectedLanguage = "Marathi";
   int currentIndex = 1;
   int totalItems = 5;
   String recordedText = "";
@@ -117,7 +117,7 @@ class _BoloScreenState extends State<BoloScreen> {
   void initState() {
     super.initState();
     // Use default text instead of fetching from API
-    recordedText = "Welcome to Bhashadaan! Please record your voice to contribute to the language dataset.";
+    recordedText = "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.";
     sentenceId = 1;
     setState(() {});
   }

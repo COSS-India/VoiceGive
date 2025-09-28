@@ -63,16 +63,8 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
-        body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - 
-                      MediaQuery.of(context).padding.top - 
-                      kToolbarHeight,
-          ),
-          child: Column(
-            children: [
+        body: Column(
+          children: [
             // Header Section - Same as Bolo Screen
             Container(
               padding: EdgeInsets.all(16).r,
@@ -120,23 +112,24 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
             ),
             
             // Content Section
-            Padding(
-              padding: const EdgeInsets.all(12.0).r,
-              child: Column(
-                children: [
-                  _buildActionButtons(),
-                  SizedBox(height: 24.w),
-                  _buildLanguageSelection(),
-                  SizedBox(height: 40.w),
-                  _buildPauseRecordingContent(),
-                  SizedBox(height: 40.w),
-                ],
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(16.0).r,
+                child: Column(
+                  children: [
+                    _buildActionButtons(),
+                    SizedBox(height: 24.w),
+                    _buildLanguageSelection(),
+                    SizedBox(height: 24.w),
+                    _buildPauseRecordingContent(),
+                    SizedBox(height: 16.w),
+                  ],
+                ),
               ),
             ),
           ],
-      ),
         ),
-      ),
       ),
     );
   }
@@ -252,20 +245,25 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
 
   Widget _buildPauseRecordingContent() {
     return Container(
-      padding: EdgeInsets.all(16).r,
+      width: double.infinity,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.45,
+      ),
+      padding: EdgeInsets.all(20).r,
       decoration: BoxDecoration(
         color: AppColors.lightGreen3,
-        borderRadius: BorderRadius.circular(12).r,
+        borderRadius: BorderRadius.circular(16).r,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 2),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Progress Indicator and Counter
           Row(
@@ -273,10 +271,10 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
               // Progress Bar
               Expanded(
                 child: Container(
-                  height: 4.w,
+                  height: 5.w,
                   decoration: BoxDecoration(
                     color: AppColors.darkGreen,
-                    borderRadius: BorderRadius.circular(2).r,
+                    borderRadius: BorderRadius.circular(3).r,
                   ),
                 ),
               ),
@@ -304,11 +302,11 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 24.w),
+          SizedBox(height: 28.w),
           
           // Pause Recording Section
           _buildPauseRecordingSection(),
-          SizedBox(height: 32.w),
+          SizedBox(height: 28.w),
           
           // Validation Buttons
           _buildValidationButtons(),
@@ -318,48 +316,62 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
   }
 
   Widget _buildPauseRecordingSection() {
-    return Column(
-      children: [
-        Text(
-          AppLocalizations.of(context)!.pauseRecording,
-          style: GoogleFonts.notoSans(
-            fontSize: 16.sp,
-            color: AppColors.darkGreen,
-            fontWeight: FontWeight.w600,
-          ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 16.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColors.lightGreen3.withOpacity(0.4),
+            AppColors.lightGreen3.withOpacity(0.2),
+          ],
         ),
-        SizedBox(height: 20.w),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              isPlaying = !isPlaying;
-            });
-            // Handle pause/play logic here
-          },
-          child: Container(
-            height: 70.w,
-            width: 70.w,
-            decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16).r,
+      ),
+      child: Column(
+        children: [
+          Text(
+            AppLocalizations.of(context)!.pauseRecording,
+            style: GoogleFonts.notoSans(
+              fontSize: 18.sp,
               color: AppColors.darkGreen,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
-                  spreadRadius: 4,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(
-              isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-              size: 28.sp,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 24.w),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isPlaying = !isPlaying;
+              });
+              // Handle pause/play logic here
+            },
+            child: Container(
+              height: 100.w,
+              width: 100.w,
+              decoration: BoxDecoration(
+                color: AppColors.darkGreen,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.darkGreen.withOpacity(0.4),
+                    spreadRadius: 4,
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Icon(
+                isPlaying ? Icons.pause : Icons.play_arrow,
+                color: Colors.white,
+                size: 40.sp,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -367,65 +379,67 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.incorrect,
-            textFontSize: 16.sp,
-            onTap: () {
-              setState(() {
-                isIncorrect = true;
-                isCorrect = false;
-              });
-              _showValidationResult(AppLocalizations.of(context)!.incorrect);
-            },
-            textColor: isIncorrect ? Colors.white : AppColors.orange,
-            decoration: BoxDecoration(
-              color: isIncorrect ? AppColors.orange : Colors.white,
-              border: Border.all(
-                color: AppColors.orange,
-                width: 1.5,
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context)!.incorrect,
+              textFontSize: 16.sp,
+              onTap: () {
+                setState(() {
+                  isIncorrect = true;
+                  isCorrect = false;
+                });
+                _showValidationResult(AppLocalizations.of(context)!.incorrect);
+              },
+              textColor: isIncorrect ? Colors.white : AppColors.orange,
+              decoration: BoxDecoration(
+                color: isIncorrect ? AppColors.orange : Colors.white,
+                border: Border.all(
+                  color: AppColors.orange,
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),
-        SizedBox(width: 24.w),
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.correct,
-            textFontSize: 16.sp,
-            onTap: () {
-              setState(() {
-                isCorrect = true;
-                isIncorrect = false;
-              });
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ReplayRecordingScreen(
-                    recordedText: widget.recordedText,
-                    selectedLanguage: widget.selectedLanguage,
-                    currentIndex: widget.currentIndex,
-                    totalItems: widget.totalItems,
-                    sentenceId: widget.sentenceId,
-                    audioUrl: widget.audioUrl,
-                    contributionId: widget.contributionId,
+        SizedBox(width: 16.w),
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context)!.correct,
+              textFontSize: 16.sp,
+              onTap: () {
+                setState(() {
+                  isCorrect = true;
+                  isIncorrect = false;
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReplayRecordingScreen(
+                      recordedText: widget.recordedText,
+                      selectedLanguage: widget.selectedLanguage,
+                      currentIndex: widget.currentIndex,
+                      totalItems: widget.totalItems,
+                      sentenceId: widget.sentenceId,
+                      audioUrl: widget.audioUrl,
+                      contributionId: widget.contributionId,
+                    ),
                   ),
+                );
+              },
+              textColor: isCorrect ? Colors.white : Colors.white,
+              decoration: BoxDecoration(
+                color: isCorrect ? AppColors.orange : AppColors.orange,
+                border: Border.all(
+                  color: AppColors.orange,
+                  width: 1.5,
                 ),
-              );
-            },
-            textColor: isCorrect ? Colors.white : Colors.white,
-            decoration: BoxDecoration(
-              color: isCorrect ? AppColors.orange : AppColors.orange,
-              border: Border.all(
-                color: AppColors.orange,
-                width: 1.5,
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),
