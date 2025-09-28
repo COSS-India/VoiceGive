@@ -112,24 +112,30 @@ class _RecordingButtonState extends State<RecordingButton>
         recordedFilePath = path;
         debugPrint('Recording stopped and saved to: $path');
         
-        // Verify the file exists and has content
-        final file = File(path);
-        if (await file.exists()) {
-          final fileSize = await file.length();
-          debugPrint('Recorded file size: $fileSize bytes');
-          if (fileSize == 0) {
-            debugPrint('Warning: Recorded file is empty');
+        if (kIsWeb) {
+          // For web, we get a blob URL - no need to verify file existence
+          // The blob URL is valid and contains the recorded audio
+          debugPrint('Web recording completed with blob URL');
+        } else {
+          // For mobile platforms, verify the file exists and has content
+          final file = File(path);
+          if (await file.exists()) {
+            final fileSize = await file.length();
+            debugPrint('Recorded file size: $fileSize bytes');
+            if (fileSize == 0) {
+              debugPrint('Warning: Recorded file is empty');
+              Helper.showSnackBarMessage(
+                  context: context,
+                  text: "Recording failed - empty file");
+              recordedFilePath = null;
+            }
+          } else {
+            debugPrint('Error: Recorded file does not exist');
             Helper.showSnackBarMessage(
                 context: context,
-                text: "Recording failed - empty file");
+                text: "Recording failed - file not found");
             recordedFilePath = null;
           }
-        } else {
-          debugPrint('Error: Recorded file does not exist');
-          Helper.showSnackBarMessage(
-              context: context,
-              text: "Recording failed - file not found");
-          recordedFilePath = null;
         }
       } else {
         debugPrint('Recording stopped but no file path returned');
@@ -177,13 +183,13 @@ class _RecordingButtonState extends State<RecordingButton>
   Widget _buildText() {
     switch (_state) {
       case RecordingState.idle:
-        return Text(AppLocalizations.of(context)!.startRecording,
+        return Text(AppLocalizations.of(context).startRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.darkGreen));
       case RecordingState.recording:
-        return Text(AppLocalizations.of(context)!.stopRecording,
+        return Text(AppLocalizations.of(context).stopRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
@@ -208,7 +214,7 @@ class _RecordingButtonState extends State<RecordingButton>
               SizedBox(height: 8.w),
             ],
             SizedBox(height: 16.w),
-            Text(AppLocalizations.of(context)!.reRecord,
+            Text(AppLocalizations.of(context).reRecord,
                 style: GoogleFonts.notoSans(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,

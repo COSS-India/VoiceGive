@@ -39,7 +39,6 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                       AppLocalizations.of(context)!.kannada,
                       AppLocalizations.of(context)!.tamil,
                       AppLocalizations.of(context)!.telugu,
-                      AppLocalizations.of(context)!.malayalam,
                       AppLocalizations.of(context)!.bengali,
                       AppLocalizations.of(context)!.marathi,
                       AppLocalizations.of(context)!.gujarati,

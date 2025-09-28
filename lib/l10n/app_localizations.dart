@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_localizations_en.dart';
-import 'app_localizations_ml.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -23,19 +22,15 @@ class AppLocalizations {
 
   static const List<Locale> supportedLocales = [
     Locale('en'),
-    Locale('ml'),
   ];
 
   AppLocalizationsEn get en => AppLocalizationsEn(locale.languageCode);
-  AppLocalizationsMl get ml => AppLocalizationsMl(locale.languageCode);
 
   // Fallback to English if locale not found
   dynamic get _localizedValues {
     switch (locale.languageCode) {
       case 'en':
         return en;
-      case 'ml':
-        return ml;
       default:
         return en;
     }
@@ -270,7 +265,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'ml'].contains(locale.languageCode);
+    return ['en'].contains(locale.languageCode);
   }
 
   @override
