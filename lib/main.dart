@@ -2,6 +2,7 @@ import 'package:bhashadaan/constants/app_constants.dart';
 import 'package:bhashadaan/l10n/l10n.dart';
 import 'package:bhashadaan/constants/app_theme.dart';
 import 'package:bhashadaan/screens/splash_screen/splash_screen.dart';
+import 'package:bhashadaan/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: L10n.supportedLocale,
               locale: const Locale('en'),
               home: CustomSplashScreen(),
+              onGenerateRoute: Routes.generateRoute,
             ),
           );
         });
