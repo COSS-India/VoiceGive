@@ -58,94 +58,87 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.top -
-                  kToolbarHeight,
-            ),
-            child: Column(
-              children: [
-                // Header Section - Same as Bolo Screen
-                Container(
-                  padding: EdgeInsets.all(16).r,
-                  decoration: BoxDecoration(color: AppColors.orange),
-                  child: Row(
+        body: Column(
+          children: [
+            // Header Section - Same as Bolo Screen
+            Container(
+              padding: EdgeInsets.all(16).r,
+              decoration: BoxDecoration(color: AppColors.orange),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PauseRecordingScreen(
+                            recordedText: widget.recordedText,
+                            selectedLanguage: widget.selectedLanguage,
+                            currentIndex: widget.currentIndex,
+                            totalItems: widget.totalItems,
+                            sentenceId: widget.sentenceId,
+                            audioUrl: widget.audioUrl,
+                            contributionId: widget.contributionId,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Icon(
+                      Icons.arrow_circle_left_outlined,
+                      color: Colors.white,
+                      size: 36.sp,
+                    ),
+                  ),
+                  SizedBox(width: 24.w),
+                  ImageWidget(
+                    height: 40.w,
+                    width: 40.w,
+                    imageUrl: "assets/images/bolo_icon_white.svg",
+                  ),
+                  SizedBox(width: 8.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => PauseRecordingScreen(
-                                recordedText: widget.recordedText,
-                                selectedLanguage: widget.selectedLanguage,
-                                currentIndex: widget.currentIndex,
-                                totalItems: widget.totalItems,
-                                sentenceId: widget.sentenceId,
-                                audioUrl: widget.audioUrl,
-                                contributionId: widget.contributionId,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_circle_left_outlined,
+                      Text(
+                        AppLocalizations.of(context).boloIndia,
+                        style: GoogleFonts.notoSans(
                           color: Colors.white,
-                          size: 36.sp,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(width: 24.w),
-                      ImageWidget(
-                        height: 40.w,
-                        width: 40.w,
-                        imageUrl: "assets/images/bolo_icon_white.svg",
-                      ),
-                      SizedBox(width: 8.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context).boloIndia,
-                            style: GoogleFonts.notoSans(
-                              color: Colors.white,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            AppLocalizations.of(context).enrichYourLanguage,
-                            style: GoogleFonts.notoSans(
-                              color: Colors.white,
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        AppLocalizations.of(context).enrichYourLanguage,
+                        style: GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
-                ),
-
-                // Content Section
-                Padding(
-                  padding: const EdgeInsets.all(12.0).r,
-                  child: Column(
-                    children: [
-                      _buildActionButtons(),
-                      SizedBox(height: 24.w),
-                      _buildLanguageSelection(),
-                      SizedBox(height: 40.w),
-                      _buildReplayRecordingContent(),
-                      SizedBox(height: 40.w),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+
+            // Content Section
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(16.0).r,
+                child: Column(
+                  children: [
+                    _buildActionButtons(),
+                    SizedBox(height: 24.w),
+                    _buildLanguageSelection(),
+                    SizedBox(height: 24.w),
+                    _buildReplayRecordingContent(),
+                    SizedBox(height: 16.w),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -262,20 +255,25 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
 
   Widget _buildReplayRecordingContent() {
     return Container(
-      padding: EdgeInsets.all(16).r,
+      width: double.infinity,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.45,
+      ),
+      padding: EdgeInsets.all(20).r,
       decoration: BoxDecoration(
         color: AppColors.lightGreen3,
-        borderRadius: BorderRadius.circular(12).r,
+        borderRadius: BorderRadius.circular(16).r,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withValues(alpha: 0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 2),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Progress Indicator and Counter
           Row(
@@ -283,10 +281,10 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
               // Progress Bar
               Expanded(
                 child: Container(
-                  height: 4.w,
+                  height: 5.w,
                   decoration: BoxDecoration(
                     color: AppColors.darkGreen,
-                    borderRadius: BorderRadius.circular(2).r,
+                    borderRadius: BorderRadius.circular(3).r,
                   ),
                 ),
               ),
@@ -314,11 +312,11 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 24.w),
+          SizedBox(height: 28.w),
 
           // Replay Recording Section
           _buildReplayRecordingSection(),
-          SizedBox(height: 32.w),
+          SizedBox(height: 28.w),
 
           // Validation Buttons
           _buildValidationButtons(),
@@ -328,48 +326,62 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
   }
 
   Widget _buildReplayRecordingSection() {
-    return Column(
-      children: [
-        Text(
-          AppLocalizations.of(context).replayRecording,
-          style: GoogleFonts.notoSans(
-            fontSize: 16.sp,
-            color: AppColors.darkGreen,
-            fontWeight: FontWeight.w600,
-          ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 16.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColors.lightGreen3.withValues(alpha: 0.4),
+            AppColors.lightGreen3.withValues(alpha: 0.2),
+          ],
         ),
-        SizedBox(height: 20.w),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              isPlaying = !isPlaying;
-            });
-            // Handle play/pause logic here
-          },
-          child: Container(
-            height: 70.w,
-            width: 70.w,
-            decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16).r,
+      ),
+      child: Column(
+        children: [
+          Text(
+            AppLocalizations.of(context).replayRecording,
+            style: GoogleFonts.notoSans(
+              fontSize: 18.sp,
               color: AppColors.darkGreen,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.darkGreen.withValues(alpha: 0.3),
-                  spreadRadius: 4,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(
-              isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-              size: 28.sp,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 24.w),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isPlaying = !isPlaying;
+              });
+              // Handle play/pause logic here
+            },
+            child: Container(
+              height: 100.w,
+              width: 100.w,
+              decoration: BoxDecoration(
+                color: AppColors.darkGreen,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.darkGreen.withValues(alpha: 0.4),
+                    spreadRadius: 4,
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Icon(
+                isPlaying ? Icons.pause : Icons.play_arrow,
+                color: Colors.white,
+                size: 40.sp,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -377,64 +389,66 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context).incorrect,
-            textFontSize: 16.sp,
-            onTap: () {
-              setState(() {
-                isIncorrect = true;
-                isCorrect = false;
-              });
-              _showValidationResult(AppLocalizations.of(context).incorrect);
-            },
-            textColor: isIncorrect ? Colors.white : AppColors.orange,
-            decoration: BoxDecoration(
-              color: isIncorrect ? AppColors.orange : Colors.white,
-              border: Border.all(
-                color: AppColors.orange,
-                width: 1.5,
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context).incorrect,
+              textFontSize: 16.sp,
+              onTap: () {
+                setState(() {
+                  isIncorrect = true;
+                  isCorrect = false;
+                });
+                _showValidationResult(AppLocalizations.of(context).incorrect);
+              },
+              textColor: isIncorrect ? Colors.white : AppColors.orange,
+              decoration: BoxDecoration(
+                color: isIncorrect ? AppColors.orange : Colors.white,
+                border: Border.all(
+                  color: AppColors.orange,
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),
-        SizedBox(width: 24.w),
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context).correct,
-            textFontSize: 16.sp,
-            onTap: () {
-              setState(() {
-                isCorrect = true;
-                isIncorrect = false;
-              });
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ReplaySuccessScreen(
-                    recordedText: widget.recordedText,
-                    selectedLanguage: widget.selectedLanguage,
-                    currentIndex: widget.currentIndex,
-                    totalItems: widget.totalItems,
-                    sentenceId: widget.sentenceId,
-                    audioUrl: widget.audioUrl,
+        SizedBox(width: 16.w),
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context).correct,
+              textFontSize: 16.sp,
+              onTap: () {
+                setState(() {
+                  isCorrect = true;
+                  isIncorrect = false;
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReplaySuccessScreen(
+                      recordedText: widget.recordedText,
+                      selectedLanguage: widget.selectedLanguage,
+                      currentIndex: widget.currentIndex,
+                      totalItems: widget.totalItems,
+                      sentenceId: widget.sentenceId,
+                      audioUrl: widget.audioUrl,
+                    ),
                   ),
+                );
+              },
+              textColor: isCorrect ? Colors.white : Colors.white,
+              decoration: BoxDecoration(
+                color: isCorrect ? AppColors.orange : AppColors.orange,
+                border: Border.all(
+                  color: AppColors.orange,
+                  width: 1.5,
                 ),
-              );
-            },
-            textColor: isCorrect ? Colors.white : Colors.white,
-            decoration: BoxDecoration(
-              color: isCorrect ? AppColors.orange : AppColors.orange,
-              border: Border.all(
-                color: AppColors.orange,
-                width: 1.5,
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),

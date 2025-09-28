@@ -55,17 +55,15 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
     if (_formKey.currentState!.validate()) {
       _isLoading.value = true;
       // TODO: Implement OTP request logic
-      Future.delayed(const Duration(seconds: 2), () {
-        _isLoading.value = false;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OtpVerificationScreen(
-              phoneNumber: _phoneController.text,
-            ),
+      _isLoading.value = false;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OtpVerificationScreen(
+            phoneNumber: _phoneController.text,
           ),
-        );
-      });
+        ),
+      );
     }
   }
 

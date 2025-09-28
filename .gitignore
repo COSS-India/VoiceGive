@@ -1,3 +1,11 @@
+# =============================================================================
+# IMPORTANT SECURITY NOTICE:
+# DO NOT COMMIT .env FILES TO GIT!
+# .env files contain sensitive configuration data (API keys, secrets, etc.)
+# and should NEVER be pushed to version control.
+# Only commit .env.example files as templates for other developers.
+# =============================================================================
+
 # Miscellaneous
 *.class
 *.log
@@ -59,13 +67,18 @@ ios/build/ios/XCBuildData/PIFCache/
 *.jks
 
 # Environment files (exclude sensitive data but keep templates)
+.env
+.env.development
+.env.staging
+.env.production
+.env.example
 .env.local
 .env.production.local
 .env.staging.local
 .env.development.local
 
+# IMPORTANT: Do NOT include .env files when pushing to git!
+# .env files contain sensitive configuration data and should not be committed to version control.
+# .env.example files are also ignored to prevent accidental commits of example configurations.
 # Keep .env files for configuration but exclude sensitive local overrides
-.env
-.env.production
-.env.staging
-.env.development
+# .env files are now tracked for configuration but sensitive data should be in .env.local files

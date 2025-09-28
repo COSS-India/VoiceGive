@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
@@ -7,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:path_provider/path_provider.dart';
 
 enum RecordingState { idle, recording, stopped }
 
@@ -55,8 +59,15 @@ class _RecordingButtonState extends State<RecordingButton>
 
   Future<String> _generateTempFilePath() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    // For web platform, use a simple filename with WAV extension
-    return 'recording_$timestamp.wav';
+
+    if (kIsWeb) {
+      // For web platform, use a simple filename with WAV extension
+      return 'recording_$timestamp.wav';
+    } else {
+      // For mobile platforms, get proper directory and create full path
+      final directory = await getTemporaryDirectory();
+      return '${directory.path}/recording_$timestamp.wav';
+    }
   }
 
   Future<bool> _hasRequiredPermissions() async {
@@ -78,7 +89,10 @@ class _RecordingButtonState extends State<RecordingButton>
       await recorder.start(
         path: tempPath,
         RecordConfig(
-          encoder: AudioEncoder.wav, // Use WAV encoder for web compatibility
+          encoder: AudioEncoder.wav, // Use WAV encoder for compatibility
+          sampleRate: 44100, // Standard sample rate
+          bitRate: 128000, // 128 kbps bit rate
+          numChannels: 1, // Mono recording
         ),
       );
       recordedFilePath = tempPath;
@@ -93,16 +107,44 @@ class _RecordingButtonState extends State<RecordingButton>
   Future<void> _stopRecording() async {
     try {
       final path = await recorder.stop();
-      if (path != null) {
+      if (path != null && path.isNotEmpty) {
         recordedFilePath = path;
         debugPrint('Recording stopped and saved to: $path');
+
+        if (kIsWeb) {
+          // For web, we get a blob URL - no need to verify file existence
+          // The blob URL is valid and contains the recorded audio
+          debugPrint('Web recording completed with blob URL');
+        } else {
+          // For mobile platforms, verify the file exists and has content
+          final file = File(path);
+          if (await file.exists()) {
+            final fileSize = await file.length();
+            debugPrint('Recorded file size: $fileSize bytes');
+            if (fileSize == 0) {
+              debugPrint('Warning: Recorded file is empty');
+              Helper.showSnackBarMessage(
+                  context: context, text: "Recording failed - empty file");
+              recordedFilePath = null;
+            }
+          } else {
+            debugPrint('Error: Recorded file does not exist');
+            Helper.showSnackBarMessage(
+                context: context, text: "Recording failed - file not found");
+            recordedFilePath = null;
+          }
+        }
       } else {
         debugPrint('Recording stopped but no file path returned');
+        Helper.showSnackBarMessage(
+            context: context, text: "Recording failed - no file path returned");
+        recordedFilePath = null;
       }
     } catch (e) {
       debugPrint('Error stopping recording: $e');
       Helper.showSnackBarMessage(
           context: context, text: "Failed to stop recording: $e");
+      recordedFilePath = null;
     }
   }
 
