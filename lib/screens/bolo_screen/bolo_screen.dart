@@ -17,6 +17,15 @@ class BoloScreen extends StatefulWidget {
 
   @override
   State<BoloScreen> createState() => _BoloScreenState();
+
+  static fromRoute(RouteSettings routeSettings) {
+    final args = routeSettings.arguments as Map<String, dynamic>?;
+
+    return BoloScreen(
+      initialText: args != null ? args['initialText'] as String? : null,
+      initialSentenceId: args != null ? args['initialSentenceId'] as int? : null,
+    );
+  }
 }
 
 class _BoloScreenState extends State<BoloScreen> {
@@ -119,7 +128,5 @@ class _BoloScreenState extends State<BoloScreen> {
     // Use default text instead of fetching from API
     recordedText = "Welcome to Bhashadaan! Please record your voice to contribute to the language dataset.";
     sentenceId = 1;
-    setState(() {});
   }
-
 }

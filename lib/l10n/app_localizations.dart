@@ -355,6 +355,10 @@ abstract class AppLocalizations {
   String get ofAppreciation;
   String get proudlyPresentedTo;
   String get viewProfile;
+  String get errorTitle;
+  String get errorSubtitle;
+  String get errorDesc;
+  String get errorButton;
 }
 
 class _AppLocalizationsDelegate
