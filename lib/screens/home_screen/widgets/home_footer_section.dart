@@ -102,14 +102,14 @@ class HomeFooterSection extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              SizedBox(height: 16.w),
+              SizedBox(height: 40.w),
               // Separator line
               Container(
-                height: 1.w,
+                height: 2.w,
                 width: double.infinity,
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white,
               ),
-              SizedBox(height: 16.w),
+              SizedBox(height: 20.w),
               // Copyright notice
               Center(
                 child: Text(
