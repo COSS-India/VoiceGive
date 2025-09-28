@@ -16,8 +16,8 @@ class AppLocalizations {
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = [
     delegate,
     GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
   ];
 
   static const List<Locale> supportedLocales = [
@@ -260,7 +260,8 @@ class AppLocalizations {
   String get viewProfile => _localizedValues.viewProfile;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
