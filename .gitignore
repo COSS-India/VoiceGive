@@ -35,7 +35,6 @@ pubspec.lock
 android/app/src/main/res/build/ios/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols

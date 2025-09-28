@@ -1,8 +1,14 @@
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
-import 'app_localizations.dart';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// AppLocalizationsGenerator
+// **************************************************************************
 
 // ignore_for_file: type=lint
+// coverage:ignore-file
+
+
+import 'app_localizations.dart';
 
 /// The translations for Malayalam (`ml`).
 class AppLocalizationsMl extends AppLocalizations {
@@ -66,12 +72,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get mStaticStartTyping => 'ഇവിടെ ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക...';
 
   @override
-  String get mStaticInputSubmitted =>
-      'നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി! നിങ്ങളുടെ ഇൻപുട്ട് ഞങ്ങൾക്ക് ലഭിച്ചിരിക്കുന്നു.';
+  String get mStaticInputSubmitted => 'നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി! നിങ്ങളുടെ ഇൻപുട്ട് ഞങ്ങൾക്ക് ലഭിച്ചിരിക്കുന്നു.';
 
   @override
-  String get mStaticValidationSuccessMessage =>
-      'ഇൻപുട്ട് സാധൂകരിച്ചതിന് നന്ദി.';
+  String get mStaticValidationSuccessMessage => 'ഇൻപുട്ട് സാധൂകരിച്ചതിന് നന്ദി.';
 
   @override
   String get login => 'ലോഗിൻ';
@@ -80,8 +84,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get verifyPhoneNumber => 'നിങ്ങളുടെ ഫോൺ നമ്പർ സ്ഥിരീകരിക്കുക';
 
   @override
-  String get otpSentMessage =>
-      'ഈ മൊബൈൽ നമ്പറിലേക്ക് ഞങ്ങൾ ഒരു വൺ ടൈം പാസ്‌വേഡ് (OTP) അയയ്ക്കും.';
+  String get otpSentMessage => 'ഈ മൊബൈൽ നമ്പറിലേക്ക് ഞങ്ങൾ ഒരു വൺ ടൈം പാസ്‌വേഡ് (OTP) അയയ്ക്കും.';
 
   @override
   String get enterMobileNumber => 'മൊബൈൽ നമ്പർ നൽകുക*';
@@ -105,8 +108,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get submitOtp => 'സമർപ്പിക്കുക';
 
   @override
-  String get otpExpired =>
-      'OTP കാലാവധി കഴിഞ്ഞു. ദയവായി പുതിയത് അഭ്യർത്ഥിക്കുക.';
+  String get otpExpired => 'OTP കാലാവധി കഴിഞ്ഞു. ദയവായി പുതിയത് അഭ്യർത്ഥിക്കുക.';
 
   @override
   String get invalidOtp => 'സാധുവായ OTP നൽകുക';
@@ -121,8 +123,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get loginFailed => 'ലോഗിൻ പരാജയപ്പെട്ടു';
 
   @override
-  String get networkError =>
-      'നെറ്റ്‌വർക്ക് പിശക്. ദയവായി നിങ്ങളുടെ കണക്ഷൻ പരിശോധിക്കുക.';
+  String get networkError => 'നെറ്റ്‌വർക്ക് പിശക്. ദയവായി നിങ്ങളുടെ കണക്ഷൻ പരിശോധിക്കുക.';
 
   @override
   String get failedToLoadCaptcha => 'Captcha ലോഡ് ചെയ്യാൻ പരാജയപ്പെട്ടു';
@@ -140,8 +141,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get passwordMinLength => 'പാസ്‌വേഡ് കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ ആയിരിക്കണം';
 
   @override
-  String get passwordComplexity =>
-      'പാസ്‌വേഡിൽ വലിയക്ഷരം, ചെറിയക്ഷരം, സംഖ്യ എന്നിവ അടങ്ങിയിരിക്കണം';
+  String get passwordComplexity => 'പാസ്‌വേഡിൽ വലിയക്ഷരം, ചെറിയക്ഷരം, സംഖ്യ എന്നിവ അടങ്ങിയിരിക്കണം';
 
   @override
   String get emailRequired => 'ഇമെയിൽ ആവശ്യമാണ്';
@@ -150,8 +150,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get invalidEmail => 'സാധുവായ ഇമെയിൽ നൽകുക';
 
   @override
-  String get acceptTermsAndConditions =>
-      'ദയവായി നിബന്ധനകളും സ്വകാര്യതാ നയവും സ്വീകരിക്കുക';
+  String get acceptTermsAndConditions => 'ദയവായി നിബന്ധനകളും സ്വകാര്യതാ നയവും സ്വീകരിക്കുക';
 
   @override
   String get termsAndConditionsComingSoon => 'നിബന്ധനകൾ പേജ് ഉടൻ വരുന്നു!';
@@ -163,9 +162,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get otpSentSuccessfully => 'OTP വിജയകരമായി അയച്ചു';
 
   @override
-  String otpSentToEmail(Object email) {
-    return '$email ലേക്ക് OTP വിജയകരമായി അയച്ചു';
-  }
+  String otpSentToEmail(String email) => 'OTP വിജയകരമായി അയച്ചു $email';
 
   @override
   String get quickTips => 'ദ്രുത നുറുങ്ങുകൾ';
@@ -201,12 +198,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get noValidationItemsAvailable => 'സാധൂകരണ ഇനങ്ങൾ ലഭ്യമല്ല';
 
   @override
-  String get failedToFetchValidationItems =>
-      'സാധൂകരണ ഇനങ്ങൾ വീണ്ടെടുക്കാൻ പരാജയപ്പെട്ടു';
+  String get failedToFetchValidationItems => 'സാധൂകരണ ഇനങ്ങൾ വീണ്ടെടുക്കാൻ പരാജയപ്പെട്ടു';
 
   @override
-  String get pleaseSelectAgeGroupAndGender =>
-      'ദയവായി പ്രായവും ലിംഗവും തിരഞ്ഞെടുക്കുക';
+  String get pleaseSelectAgeGroupAndGender => 'ദയവായി പ്രായവും ലിംഗവും തിരഞ്ഞെടുക്കുക';
 
   @override
   String get enterMobileNumberHint => 'മൊബൈൽ നമ്പർ നൽകുക';
@@ -239,8 +234,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get startTyping => 'ഇവിടെ ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക...';
 
   @override
-  String get inputSubmitted =>
-      'നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി! നിങ്ങളുടെ ഇൻപുട്ട് ഞങ്ങൾക്ക് ലഭിച്ചിരിക്കുന്നു.';
+  String get inputSubmitted => 'നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി! നിങ്ങളുടെ ഇൻപുട്ട് ഞങ്ങൾക്ക് ലഭിച്ചിരിക്കുന്നു.';
 
   @override
   String get validationSuccessMessage => 'ഇൻപുട്ട് സാധൂകരിച്ചതിന് നന്ദി.';
@@ -306,12 +300,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get preferNotToSay => 'പറയാൻ താൽപര്യമില്ല';
 
   @override
-  String get enrichYourLanguage =>
-      'നിങ്ങളുടെ ശബ്ദം സംഭാവന ചെയ്ത് നിങ്ങളുടെ ഭാഷ സമ്പുഷ്ടമാക്കുക.';
+  String get enrichYourLanguage => 'നിങ്ങളുടെ ശബ്ദം സംഭാവന ചെയ്ത് നിങ്ങളുടെ ഭാഷ സമ്പുഷ്ടമാക്കുക.';
 
   @override
-  String get selectLanguageForValidation =>
-      'സാധൂകരണത്തിനായി ഭാഷ തിരഞ്ഞെടുക്കുക';
+  String get selectLanguageForValidation => 'സാധൂകരണത്തിനായി ഭാഷ തിരഞ്ഞെടുക്കുക';
 
   @override
   String get pauseRecording => 'റെക്കോർഡിംഗ് താൽക്കാലികമായി നിർത്തുക';
@@ -335,9 +327,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get validationResult => 'സാധൂകരണ ഫലം';
 
   @override
-  String youMarkedRecordingAs(Object result) {
-    return 'നിങ്ങൾ ഈ റെക്കോർഡിംഗ് \'$result\' എന്ന് അടയാളപ്പെടുത്തി. നിങ്ങളുടെ സാധൂകരണത്തിന് നന്ദി!';
-  }
+  String youMarkedRecordingAs(String result) => 'നിങ്ങൾ ഈ റെക്കോർഡിംഗ് \'$result\' എന്ന് അടയാളപ്പെടുത്തി. നിങ്ങളുടെ സാധൂകരണത്തിന് നന്ദി!';
 
   @override
   String get continueButton => 'തുടരുക';
@@ -364,8 +354,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get namasteContributor => 'നമസ്കാരം സംഭാവനക്കാരാ/സാധൂകരണക്കാരാ';
 
   @override
-  String get consentMessage =>
-      'അഗ്രിദാനിൽ സംഭാവനയോ സാധൂകരണമോ ആരംഭിക്കുന്നതിന് മുമ്പ്, ദയവായി ഞങ്ങളുടെ സ്വകാര്യതാ നയവും ഉപയോഗ നിബന്ധനകളും അവലോകനം ചെയ്യുക. തുടരാൻ നിങ്ങളുടെ സമ്മതം ഞങ്ങൾ അഭ്യർത്ഥിക്കുന്നു.';
+  String get consentMessage => 'അഗ്രിദാനിൽ സംഭാവനയോ സാധൂകരണമോ ആരംഭിക്കുന്നതിന് മുമ്പ്, ദയവായി ഞങ്ങളുടെ സ്വകാര്യതാ നയവും ഉപയോഗ നിബന്ധനകളും അവലോകനം ചെയ്യുക. തുടരാൻ നിങ്ങളുടെ സമ്മതം ഞങ്ങൾ അഭ്യർത്ഥിക്കുന്നു.';
 
   @override
   String get iAgree => 'ഞാൻ സമ്മതിക്കുന്നു';
@@ -419,16 +408,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get whatIsAgriDaan => 'അഗ്രിദാന് എന്താണ്?';
 
   @override
-  String get agriDaanDescription =>
-      'അഗ്രിദാന് എന്നത് പ്രോജക്റ്റ് ഭാഷിണിയുടെ ഭാഗമായി ഇന്ത്യയിലുടനീളം നിരവധി പൗരന്മാരിൽ നിന്ന് കാർഷിക-ബന്ധമായ അറിവ് ക്രൗഡ്‌സോഴ്സ് ചെയ്യാനുള്ള ഒരു പ്രവർത്തനമാണ്. ഇന്ത്യയുടെ വൈവിധ്യമാർന്ന കാർഷിക പൈതൃകം ഡിജിറ്റലായി സമ്പുഷ്ടമാക്കാനും സംരക്ഷിക്കാനും സഹായിക്കുന്ന ഒരു തുറന്ന കാർഷിക ഡാറ്റാ ശേഖരം നിർമ്മിക്കാൻ പ്രാദേശിക പദങ്ങൾ, പരിശീലനങ്ങൾ, ഉൾക്കാഴ്ചകൾ സംഭാവന ചെയ്യാൻ ആളുകളെ ക്ഷണിക്കുന്നു.';
+  String get agriDaanDescription => 'അഗ്രിദാന് എന്നത് പ്രോജക്റ്റ് ഭാഷിണിയുടെ ഭാഗമായി ഇന്ത്യയിലുടനീളം നിരവധി പൗരന്മാരിൽ നിന്ന് കാർഷിക-ബന്ധമായ അറിവ് ക്രൗഡ്‌സോഴ്സ് ചെയ്യാനുള്ള ഒരു പ്രവർത്തനമാണ്. ഇന്ത്യയുടെ വൈവിധ്യമാർന്ന കാർഷിക പൈതൃകം ഡിജിറ്റലായി സമ്പുഷ്ടമാക്കാനും സംരക്ഷിക്കാനും സഹായിക്കുന്ന ഒരു തുറന്ന കാർഷിക ഡാറ്റാ ശേഖരം നിർമ്മിക്കാൻ പ്രാദേശിക പദങ്ങൾ, പരിശീലനങ്ങൾ, ഉൾക്കാഴ്ചകൾ സംഭാവന ചെയ്യാൻ ആളുകളെ ക്ഷണിക്കുന്നു.';
 
   @override
-  String get empowerIndiasLinguisticDiversity =>
-      'ഇന്ത്യയുടെ \nഭാഷാവൈവിധ്യം ശക്തിപ്പെടുത്തുക';
+  String get empowerIndiasLinguisticDiversity => 'ഇന്ത്യയുടെ \nഭാഷാവൈവിധ്യം ശക്തിപ്പെടുത്തുക';
 
   @override
-  String get joinTheMovementDescription =>
-      'ഇന്ത്യയിലെ 22 ഔദ്യോഗിക ഭാഷകളുടെ ഭാഷാ ധാരണയും പ്രാപ്യതയും മെച്ചപ്പെടുത്താനുള്ള പ്രസ്ഥാനത്തിൽ ചേരുക';
+  String get joinTheMovementDescription => 'ഇന്ത്യയിലെ 22 ഔദ്യോഗിക ഭാഷകളുടെ ഭാഷാ ധാരണയും പ്രാപ്യതയും മെച്ചപ്പെടുത്താനുള്ള പ്രസ്ഥാനത്തിൽ ചേരുക';
 
   @override
   String get letsGetStarted => 'നമുക്ക് ആരംഭിക്കാം';
@@ -437,8 +423,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get digitalIndiaBhashiniDivision => 'ഡിജിറ്റൽ ഇന്ത്യ ഭാഷിണി ഡിവിഷൻ';
 
   @override
-  String get electronicsNiketanAddress =>
-      'ഇലക്ട്രോണിക്സ് നികേതൻ, 6-CGO കോംപ്ലക്സ്, ന്യൂ ഡൽഹി - 110003';
+  String get electronicsNiketanAddress => 'ഇലക്ട്രോണിക്സ് നികേതൻ, 6-CGO കോംപ്ലക്സ്, ന്യൂ ഡൽഹി - 110003';
 
   @override
   String get poweredBy => 'പവർഡ് ബൈ';
@@ -447,22 +432,19 @@ class AppLocalizationsMl extends AppLocalizations {
   String get digitalIndiaCorporation => 'ഡിജിറ്റൽ ഇന്ത്യ കോർപ്പറേഷൻ (DIC)';
 
   @override
-  String get ministryOfElectronicsIt =>
-      'ഇലക്ട്രോണിക്സ് & IT മന്ത്രാലയം (MeitY)';
+  String get ministryOfElectronicsIt => 'ഇലക്ട്രോണിക്സ് & IT മന്ത്രാലയം (MeitY)';
 
   @override
   String get governmentOfIndia => 'ഇന്ത്യാ സർക്കാർ®';
 
   @override
-  String get copyrightNotice =>
-      '© 2025 - കോപ്പിറൈറ്റ് എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.';
+  String get copyrightNotice => '© 2025 - കോപ്പിറൈറ്റ് എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം.';
 
   @override
   String get needMoreInfo => 'കൂടുതൽ വിവരങ്ങൾ വേണോ?';
 
   @override
-  String get writeYourConcern =>
-      'നിങ്ങളുടെ ആശങ്ക ഞങ്ങൾക്ക് എഴുതുക, ഞങ്ങൾ നിങ്ങളുടെ അടുത്തേക്ക് മടങ്ങിവരും.';
+  String get writeYourConcern => 'നിങ്ങളുടെ ആശങ്ക ഞങ്ങൾക്ക് എഴുതുക, ഞങ്ങൾ നിങ്ങളുടെ അടുത്തേക്ക് മടങ്ങിവരും.';
 
   @override
   String get contactUs => 'ഞങ്ങളുമായി ബന്ധപ്പെടുക';
@@ -474,19 +456,16 @@ class AppLocalizationsMl extends AppLocalizations {
   String get contribute => 'സംഭാവന നൽകുക';
 
   @override
-  String get speakClearlyAndRecord =>
-      'വ്യക്തമായി സംസാരിച്ച് പ്രദർശിപ്പിച്ച വാക്യം റെക്കോർഡ് ചെയ്യുക';
+  String get speakClearlyAndRecord => 'വ്യക്തമായി സംസാരിച്ച് പ്രദർശിപ്പിച്ച വാക്യം റെക്കോർഡ് ചെയ്യുക';
 
   @override
-  String get listenAndValidate =>
-      'റെക്കോർഡിംഗുകൾ കേൾക്കുകയും അവയുടെ കൃത്യത സാധൂകരിക്കുകയും ചെയ്യുക';
+  String get listenAndValidate => 'റെക്കോർഡിംഗുകൾ കേൾക്കുകയും അവയുടെ കൃത്യത സാധൂകരിക്കുകയും ചെയ്യുക';
 
   @override
   String get earnCertificate => 'സർട്ടിഫിക്കറ്റ് നേടുക';
 
   @override
-  String get earnCertificateDescription =>
-      'നിങ്ങളുടെ സംഭാവനകൾക്ക് സർട്ടിഫിക്കറ്റ് നേടുക';
+  String get earnCertificateDescription => 'നിങ്ങളുടെ സംഭാവനകൾക്ക് സർട്ടിഫിക്കറ്റ് നേടുക';
 
   @override
   String get checkYourSetup => 'നിങ്ങളുടെ സെറ്റപ്പ് പരിശോധിക്കുക';
@@ -495,8 +474,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get pleaseTestYourSpeaker => 'ദയവായി നിങ്ങളുടെ സ്പീക്കർ പരിശോധിക്കുക';
 
   @override
-  String get pleaseTestYourMicrophone =>
-      'ദയവായി നിങ്ങളുടെ മൈക്രോഫോൺ പരിശോധിക്കുക';
+  String get pleaseTestYourMicrophone => 'ദയവായി നിങ്ങളുടെ മൈക്രോഫോൺ പരിശോധിക്കുക';
 
   @override
   String get noBackgroundNoise => 'പശ്ചാത്തല ശബ്ദമില്ല';
@@ -505,12 +483,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get speakNaturally => 'സ്വാഭാവികമായി സംസാരിക്കുക';
 
   @override
-  String get recordExactlyAsShown =>
-      'സ്ക്രീനിൽ കാണിച്ചിരിക്കുന്നതുപോലെ തന്നെ റെക്കോർഡ് ചെയ്യുക';
+  String get recordExactlyAsShown => 'സ്ക്രീനിൽ കാണിച്ചിരിക്കുന്നതുപോലെ തന്നെ റെക്കോർഡ് ചെയ്യുക';
 
   @override
-  String get dontRecordPunctuations =>
-      'റെക്കോർഡിംഗ് ചെയ്യുമ്പോൾ വിരാമചിഹ്നങ്ങൾ ഒഴിവാക്കുക';
+  String get dontRecordPunctuations => 'റെക്കോർഡിംഗ് ചെയ്യുമ്പോൾ വിരാമചിഹ്നങ്ങൾ ഒഴിവാക്കുക';
 
   @override
   String get tapRecordToStart => 'ആരംഭിക്കാൻ റെക്കോർഡ് ടാപ്പ് ചെയ്യുക';
@@ -525,28 +501,22 @@ class AppLocalizationsMl extends AppLocalizations {
   String get finish => 'പൂർത്തിയാക്കുക';
 
   @override
-  String get pleaseTestYourSpeakerDescription =>
-      'നിങ്ങളുടെ സ്പീക്കറുകൾ ശരിയായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക';
+  String get pleaseTestYourSpeakerDescription => 'നിങ്ങളുടെ സ്പീക്കറുകൾ ശരിയായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക';
 
   @override
-  String get pleaseTestYourMicrophoneDescription =>
-      'നിങ്ങളുടെ മൈക്രോഫോൺ ശരിയായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക';
+  String get pleaseTestYourMicrophoneDescription => 'നിങ്ങളുടെ മൈക്രോഫോൺ ശരിയായി പ്രവർത്തിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക';
 
   @override
-  String get noBackgroundNoiseDescription =>
-      'മെച്ചപ്പെട്ട റെക്കോർഡിംഗ് ഗുണനിലവാരത്തിനായി ശാന്തമായ പരിസ്ഥിതി കണ്ടെത്തുക';
+  String get noBackgroundNoiseDescription => 'മെച്ചപ്പെട്ട റെക്കോർഡിംഗ് ഗുണനിലവാരത്തിനായി ശാന്തമായ പരിസ്ഥിതി കണ്ടെത്തുക';
 
   @override
-  String get recordExactlyAsShownDescription =>
-      'സ്ക്രീനിൽ കാണിച്ചിരിക്കുന്ന ടെക്സ്റ്റ് കൃത്യമായി വായിക്കുക';
+  String get recordExactlyAsShownDescription => 'സ്ക്രീനിൽ കാണിച്ചിരിക്കുന്ന ടെക്സ്റ്റ് കൃത്യമായി വായിക്കുക';
 
   @override
-  String get dontRecordPunctuationsDescription =>
-      'റെക്കോർഡിംഗ് ചെയ്യുമ്പോൾ വിരാമചിഹ്നങ്ങൾ ഒഴിവാക്കുക';
+  String get dontRecordPunctuationsDescription => 'റെക്കോർഡിംഗ് ചെയ്യുമ്പോൾ വിരാമചിഹ്നങ്ങൾ ഒഴിവാക്കുക';
 
   @override
-  String get tapRecordToStartDescription =>
-      'സംസാരിക്കാൻ തുടങ്ങാൻ റെക്കോർഡ് ബട്ടൺ അമർത്തുക';
+  String get tapRecordToStartDescription => 'സംസാരിക്കാൻ തുടങ്ങാൻ റെക്കോർഡ് ബട്ടൺ അമർത്തുക';
 
   @override
   String get tamil => 'തമിഴ്';
@@ -582,12 +552,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get playRecording => 'റെക്കോർഡിംഗ് പ്ലേ ചെയ്യുക';
 
   @override
-  String get selectLanguageForContribution =>
-      'സംഭാവനയ്ക്കായി ഭാഷ തിരഞ്ഞെടുക്കുക';
+  String get selectLanguageForContribution => 'സംഭാവനയ്ക്കായി ഭാഷ തിരഞ്ഞെടുക്കുക';
 
   @override
-  String get enrichYourLanguageByDonatingVoice =>
-      'നിങ്ങളുടെ ശബ്ദം സംഭാവന ചെയ്ത് നിങ്ങളുടെ ഭാഷ സമ്പുഷ്ടമാക്കുക.';
+  String get enrichYourLanguageByDonatingVoice => 'നിങ്ങളുടെ ശബ്ദം സംഭാവന ചെയ്ത് നിങ്ങളുടെ ഭാഷ സമ്പുഷ്ടമാക്കുക.';
 
   @override
   String get downloadCertificate => 'സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യുക';
@@ -635,8 +603,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get otpSentSuccessfullyMessage => 'OTP വിജയകരമായി അയച്ചു!';
 
   @override
-  String get loginIntoYourBhashaDaanAccount =>
-      'നിങ്ങളുടെ\nഭാഷാദാന അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്യുക';
+  String get loginIntoYourBhashaDaanAccount => 'നിങ്ങളുടെ\nഭാഷാദാന അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്യുക';
 
   @override
   String get enterYour => 'നിങ്ങളുടെ ';
@@ -649,4 +616,66 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get doesntHaveAccount => 'അക്കൗണ്ട് ഇല്ലേ? ';
+
+  @override
+  String get howItWorks => 'ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു';
+
+  @override
+  String get enterYourMobileNumber => 'നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക';
+
+  @override
+  String get otherInformation => 'മറ്റ് വിവരങ്ങൾ';
+
+  @override
+  String get country => 'രാജ്യം';
+
+  @override
+  String get state => 'സംസ്ഥാനം';
+
+  @override
+  String get district => 'ജില്ല';
+
+  @override
+  String get preferredLanguage => 'ഇഷ്ടപ്പെട്ട ഭാഷ';
+
+  @override
+  String get thisFieldIsRequiredToContinue => 'തുടരാൻ ഈ ഫീൽഡ് ആവശ്യമാണ്.';
+
+  @override
+  String get tapToPreviewYourCertificate => 'നിങ്ങളുടെ സർട്ടിഫിക്കറ്റ് പ്രിവ്യൂ ചെയ്യാൻ ടാപ്പ് ചെയ്യുക';
+
+  @override
+  String get certificatePreview => 'സർട്ടിഫിക്കറ്റ് പ്രിവ്യൂ';
+
+  @override
+  String get pdfPrintReadyIncludesNameAchievement => 'PDF (പ്രിന്റ്-റെഡി, നിങ്ങളുടെ പേരും നേട്ടവും ഉൾപ്പെടുത്തിയിരിക്കുന്നു)';
+
+  @override
+
+  @override
+  String get ministryOfElectronicsItHindi => 'इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय';
+
+  @override
+  String get ministryOfElectronicsItEnglish => 'MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY';
+
+  @override
+  String get digitalIndia => 'Digital India';
+
+  @override
+  String get bhashiniHindi => 'भाषिणी';
+
+  @override
+  String get bhashiniEnglish => 'BHASHINI';
+
+  @override
+  String get certificate => 'CERTIFICATE';
+
+  @override
+  String get ofAppreciation => 'OF APPRECIATION';
+
+  @override
+  String get proudlyPresentedTo => 'PROUDLY PRESENTED TO';
+
+  @override
+  String get viewProfile => 'പ്രൊഫൈൽ കാണുക';
 }

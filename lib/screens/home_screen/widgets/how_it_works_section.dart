@@ -13,7 +13,7 @@ class HowItWorksSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "How it Works",
+          AppLocalizations.of(context)!.howItWorks,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
