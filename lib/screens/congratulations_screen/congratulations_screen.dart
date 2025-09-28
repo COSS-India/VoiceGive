@@ -71,78 +71,82 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
       child: Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            // Header Section
-            Container(
-              padding: EdgeInsets.all(16).r,
-              decoration: BoxDecoration(color: AppColors.orange),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: _navigateBackToHome,
-                    child: Icon(
-                      Icons.arrow_circle_left_outlined,
-                      color: Colors.white,
-                      size: 36.sp,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              // Header Section
+              Container(
+                padding: EdgeInsets.all(16).r,
+                decoration: BoxDecoration(color: AppColors.orange),
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: _navigateBackToHome,
+                      child: Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: Colors.white,
+                        size: 36.sp,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 24.w),
-                  ImageWidget(
-                    height: 40.w,
-                    width: 40.w,
-                    imageUrl: "assets/images/bolo_icon_white.svg",
-                  ),
-                  SizedBox(width: 8.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "BOLO India",
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
+                    SizedBox(width: 24.w),
+                    ImageWidget(
+                      height: 40.w,
+                      width: 40.w,
+                      imageUrl: "assets/images/bolo_icon_white.svg",
+                    ),
+                    SizedBox(width: 8.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "BOLO India",
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Enrich your language by donating your voice.",
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
+                        Text(
+                          "Enrich your language by donating your voice.",
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // Content Section
-            Padding(
-              padding: const EdgeInsets.all(16.0).r,
-              child: Column(
-                children: [
-                  // Congratulations Section
-                  _buildCongratulationsSection(),
-                  SizedBox(height: 32.w),
-                  // Certificate Preview
-                  _buildCertificatePreview(),
-                  SizedBox(height: 24.w),
-                  // Download Certificate Button
-                  _buildDownloadButton(),
-                  SizedBox(height: 16.w),
-                  // Certificate Details
-                  _buildCertificateDetails(),
-                  SizedBox(height: 32.w),
-                  // Action Buttons
-                  _buildActionButtons(),
-                ],
+              // Content Section
+              Padding(
+                padding: const EdgeInsets.all(16.0).r,
+                child: Column(
+                  children: [
+                    // Congratulations Section
+                    _buildCongratulationsSection(),
+                    SizedBox(height: 32.w),
+                    // Certificate Preview
+                    _buildCertificatePreview(),
+                    SizedBox(height: 24.w),
+                    // Download Certificate Button
+                    _buildDownloadButton(),
+                    SizedBox(height: 16.w),
+                    // Certificate Details
+                    _buildCertificateDetails(),
+                    SizedBox(height: 32.w),
+                    // Action Buttons
+                    _buildActionButtons(),
+                    // Add extra bottom padding to ensure buttons are above navigation bar
+                    SizedBox(height: MediaQuery.of(context).padding.bottom + 20.w),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       ),
