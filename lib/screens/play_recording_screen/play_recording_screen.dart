@@ -255,7 +255,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         borderRadius: BorderRadius.circular(12).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha: 0.3),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -355,7 +355,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
               border: Border.all(color: Colors.white, width: 3),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
+                  color: AppColors.darkGreen.withValues(alpha: 0.3),
                   spreadRadius: 4,
                   blurRadius: 8,
                   offset: const Offset(0, 2),
@@ -393,7 +393,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             decoration: BoxDecoration(
               color: Colors.grey[200],
               border: Border.all(
-                color: AppColors.grey84.withOpacity(0.5),
+                color: AppColors.grey84.withValues(alpha: 0.5),
                 width: 1.5,
               ),
               borderRadius: BorderRadius.all(Radius.circular(6.0).r),
@@ -417,7 +417,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             decoration: BoxDecoration(
               color: Colors.grey[200],
               border: Border.all(
-                color: AppColors.grey84.withOpacity(0.5),
+                color: AppColors.grey84.withValues(alpha: 0.5),
                 width: 1.5,
               ),
               borderRadius: BorderRadius.all(Radius.circular(6.0).r),

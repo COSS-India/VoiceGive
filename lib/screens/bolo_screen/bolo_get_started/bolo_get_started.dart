@@ -35,7 +35,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   }
 
   void _initializeGetStartedData() {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     getStartedData = [
       GetStartedModel(
         title: l10n.checkYourSetup,

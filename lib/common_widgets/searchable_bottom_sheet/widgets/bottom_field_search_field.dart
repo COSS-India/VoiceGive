@@ -8,7 +8,7 @@ class BottomSheetSearchField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final BuildContext parentContext;
 
-  const BottomSheetSearchField({
+  const BottomSheetSearchField({super.key, 
     required this.controller,
     required this.onChanged,
     required this.parentContext,

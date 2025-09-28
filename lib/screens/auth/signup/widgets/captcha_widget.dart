@@ -45,7 +45,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.lightGrey),
                 borderRadius: BorderRadius.circular(6.r),
-                color: AppColors.lightGrey.withOpacity(0.3),
+                color: AppColors.lightGrey.withValues(alpha: 0.3),
               ),
               child: Center(
                 child: Text(
@@ -60,7 +60,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
               ),
             ),
             SizedBox(width: 12.w),
-            
+
             // Refresh Button
             GestureDetector(
               onTap: widget.onRefresh,
@@ -79,7 +79,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
               ),
             ),
             SizedBox(width: 12.w),
-            
+
             // CAPTCHA Input Field
             Expanded(
               child: SizedBox(

@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
@@ -210,7 +208,7 @@ class _RecordingButtonState extends State<RecordingButton>
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColors.lightGreen
-                                    .withOpacity(opacity * 0.3),
+                                    .withValues(alpha: opacity * 0.3),
                               ),
                             ),
                           );

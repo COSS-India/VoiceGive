@@ -94,9 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
           captchaText: _captchaController.text.trim(),
         );
 
-        print('🔐 Attempting login with email: ${loginRequest.email}');
-        print('🔐 Captcha ID: ${loginRequest.secureId}');
-        print('🔐 Captcha Text: ${loginRequest.captchaText}');
+        debugPrint('🔐 Attempting login with email: ${loginRequest.email}');
+        debugPrint('🔐 Captcha ID: ${loginRequest.secureId}');
+        debugPrint('🔐 Captcha Text: ${loginRequest.captchaText}');
 
         final success = await authProvider.login(loginRequest);
 
@@ -104,14 +104,14 @@ class _LoginScreenState extends State<LoginScreen> {
           _isLoading.value = false;
 
           if (success) {
-            print('✅ Login successful!');
+            debugPrint('✅ Login successful!');
             // Navigate to Bolo screen
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const BoloScreen()),
             );
           } else {
-            print('❌ Login failed: ${authProvider.errorMessage}');
+            debugPrint('❌ Login failed: ${authProvider.errorMessage}');
             // Clear captcha input on failure
             _captchaController.clear();
             // Always refresh captcha on any API error (non-2xx status codes)
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
       } catch (e) {
         if (mounted) {
           _isLoading.value = false;
-          print('❌ Login error: $e');
+          debugPrint('❌ Login error: $e');
           // Clear captcha input on error
           _captchaController.clear();
           // Always refresh captcha on network/API errors
@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   /// Refresh captcha when there's an API error
   void _refreshCaptcha() {
-    print('🔄 Refreshing captcha due to API error...');
+    debugPrint('🔄 Refreshing captcha due to API error...');
     // Use the callback to refresh captcha
     _refreshCaptchaCallback?.call();
   }

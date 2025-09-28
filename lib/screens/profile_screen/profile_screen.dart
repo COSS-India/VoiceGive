@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     _ageGroups = [
       l10n.under18Years,
       l10n.age18To24,

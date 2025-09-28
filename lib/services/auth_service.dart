@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
 import '../models/auth/login_request.dart';
@@ -29,9 +30,9 @@ class AuthService {
       captchaText: request.captchaText,
     );
 
-    print('🌐 Making login API call to: $uri');
-    print('📤 Request headers: $headers');
-    print('📤 Request body: ${jsonEncode(encryptedRequest.toJson())}');
+    debugPrint('🌐 Making login API call to: $uri');
+    debugPrint('📤 Request headers: $headers');
+    debugPrint('📤 Request body: ${jsonEncode(encryptedRequest.toJson())}');
 
     try {
       final response = await http.post(
@@ -40,8 +41,8 @@ class AuthService {
         body: jsonEncode(encryptedRequest.toJson()),
       );
 
-      print('📥 Response status: ${response.statusCode}');
-      print('📥 Response body: ${response.body}');
+      debugPrint('📥 Response status: ${response.statusCode}');
+      debugPrint('📥 Response body: ${response.body}');
 
       final responseData = jsonDecode(response.body) as Map<String, dynamic>;
       
@@ -54,7 +55,7 @@ class AuthService {
 
       return LoginResponse.fromJson(responseData);
     } catch (e) {
-      print('❌ Login API error: $e');
+      debugPrint('❌ Login API error: $e');
       if (e is AuthException) {
         rethrow;
       }
@@ -67,17 +68,17 @@ class AuthService {
   static Future<Map<String, dynamic>> getSecureCaptcha() async {
     final uri = Uri.parse(_config.apiEndpoints['captcha']!);
 
-    print('🔄 Making captcha API call to: $uri');
+    debugPrint('🔄 Making captcha API call to: $uri');
 
     // Try with minimal headers first to avoid CORS issues
     final headers = _config.minimalHeaders;
 
     try {
-      print('📤 Trying captcha with minimal headers: $headers');
+      debugPrint('📤 Trying captcha with minimal headers: $headers');
       final response = await http.get(uri, headers: headers);
-      print('📥 Captcha response status: ${response.statusCode}');
-      print('📥 Captcha response body: ${response.body}');
-      
+      debugPrint('📥 Captcha response status: ${response.statusCode}');
+      debugPrint('📥 Captcha response body: ${response.body}');
+
       if (response.statusCode < 200 || response.statusCode >= 300) {
         throw AuthException(
           'Captcha API failed: ${response.statusCode} ${response.body}',
@@ -86,16 +87,16 @@ class AuthService {
       }
       return jsonDecode(response.body) as Map<String, dynamic>;
     } catch (e) {
-      print('❌ Captcha API error with minimal headers: $e');
+      debugPrint('❌ Captcha API error with minimal headers: $e');
       // If still fails, try with more headers
       final fullHeaders = _config.defaultHeaders;
       
       try {
-        print('📤 Trying captcha with full headers: $fullHeaders');
+        debugPrint('📤 Trying captcha with full headers: $fullHeaders');
         final response = await http.get(uri, headers: fullHeaders);
-        print('📥 Captcha response status: ${response.statusCode}');
-        print('📥 Captcha response body: ${response.body}');
-        
+        debugPrint('📥 Captcha response status: ${response.statusCode}');
+        debugPrint('📥 Captcha response body: ${response.body}');
+
         if (response.statusCode < 200 || response.statusCode >= 300) {
           throw AuthException(
             'Captcha API failed: ${response.statusCode} ${response.body}',
@@ -104,14 +105,14 @@ class AuthService {
         }
         return jsonDecode(response.body) as Map<String, dynamic>;
       } catch (e2) {
-        print('❌ Captcha API error with full headers: $e2');
+        debugPrint('❌ Captcha API error with full headers: $e2');
         // Final fallback - try with no headers at all
         try {
-          print('📤 Trying captcha with no headers');
+          debugPrint('📤 Trying captcha with no headers');
           final response = await http.get(uri);
-          print('📥 Captcha response status: ${response.statusCode}');
-          print('📥 Captcha response body: ${response.body}');
-          
+          debugPrint('📥 Captcha response status: ${response.statusCode}');
+          debugPrint('📥 Captcha response body: ${response.body}');
+
           if (response.statusCode < 200 || response.statusCode >= 300) {
             throw AuthException(
               'Captcha API failed: ${response.statusCode} ${response.body}',
@@ -120,7 +121,7 @@ class AuthService {
           }
           return jsonDecode(response.body) as Map<String, dynamic>;
         } catch (e3) {
-          print('❌ Captcha API error with no headers: $e3');
+          debugPrint('❌ Captcha API error with no headers: $e3');
           throw AuthException('Failed to get captcha: $e3', 0);
         }
       }

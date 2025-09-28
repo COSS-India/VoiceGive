@@ -11,6 +11,7 @@ class ItemsList extends StatelessWidget {
   final Function(String) onItemSelected;
 
   const ItemsList({
+    super.key, 
     required this.filteredItems,
     required this.isLoading,
     required this.scrollController,

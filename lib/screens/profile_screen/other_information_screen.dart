@@ -36,7 +36,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     _countries = [l10n.india];
     _states = [l10n.maharashtra];
     _districts = [

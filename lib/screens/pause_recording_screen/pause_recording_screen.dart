@@ -258,7 +258,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
         borderRadius: BorderRadius.circular(12).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha: 0.3),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -345,7 +345,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
               border: Border.all(color: Colors.white, width: 3),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
+                  color: AppColors.darkGreen.withValues(alpha: 0.3),
                   spreadRadius: 4,
                   blurRadius: 8,
                   offset: const Offset(0, 2),

@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,7 +106,7 @@ class HomeFooterSection extends StatelessWidget {
               Container(
                 height: 1.w,
                 width: double.infinity,
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
               ),
               SizedBox(height: 16.w),
               // Copyright notice

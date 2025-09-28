@@ -44,10 +44,10 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
     });
 
     try {
-      print('🔄 Loading captcha...');
+      debugPrint('🔄 Loading captcha...');
       final response = await AuthService.getSecureCaptcha();
-      print('📥 Captcha response: $response');
-      
+      debugPrint('📥 Captcha response: $response');
+
       if (response['message'] == 'Successful' && response['data'] != null) {
         setState(() {
           _captchaSvg = response['data']['secureCapSvg'];
@@ -55,7 +55,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
           _isLoading = false;
         });
         widget.onCaptchaIdChanged(_captchaId ?? '');
-        print('✅ Captcha loaded successfully. ID: $_captchaId');
+        debugPrint('✅ Captcha loaded successfully. ID: $_captchaId');
       } else {
         setState(() {
           _isLoading = false;
@@ -66,14 +66,14 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
       setState(() {
         _isLoading = false;
       });
-      print('❌ Captcha loading error: $e');
+      debugPrint('❌ Captcha loading error: $e');
       _showError('Error loading captcha. Please try again.');
     }
   }
 
   /// Public method to refresh captcha (can be called from parent)
   Future<void> refreshCaptcha() async {
-    print('🔄 Manually refreshing captcha...');
+    debugPrint('🔄 Manually refreshing captcha...');
     setState(() {
       _isRefreshing = true;
     });
@@ -108,7 +108,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.lightGrey),
                 borderRadius: BorderRadius.circular(6.r),
-                color: AppColors.lightGrey.withOpacity(0.3),
+                color: AppColors.lightGrey.withValues(alpha: 0.3),
               ),
               child: _isLoading || _isRefreshing
                   ? Center(
@@ -121,8 +121,9 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                _isRefreshing ? AppColors.orange : AppColors.darkBlue
-                              ),
+                                  _isRefreshing
+                                      ? AppColors.orange
+                                      : AppColors.darkBlue),
                             ),
                           ),
                           if (_isRefreshing) ...[
@@ -157,7 +158,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
                         ),
             ),
             SizedBox(width: 12.w),
-            
+
             // Refresh Button
             GestureDetector(
               onTap: _loadCaptcha,
@@ -176,7 +177,7 @@ class _CaptchaWidgetState extends State<CaptchaWidget> {
               ),
             ),
             SizedBox(width: 12.w),
-            
+
             // CAPTCHA Input Field
             Expanded(
               child: SizedBox(

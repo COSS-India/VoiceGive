@@ -7,7 +7,6 @@ import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:math';
 import 'dart:ui';
 
 class CongratulationsScreen extends StatefulWidget {
@@ -165,7 +164,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.darkGreen.withOpacity(0.3),
+                      color: AppColors.darkGreen.withValues(alpha: 0.3),
                       spreadRadius: 4,
                       blurRadius: 8,
                       offset: const Offset(0, 4),
@@ -251,7 +250,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           border: Border.all(color: Colors.grey.shade300, width: 1),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               spreadRadius: 2,
               blurRadius: 8,
               offset: const Offset(0, 2),
@@ -299,7 +298,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(8).r,
                         border:
                             Border.all(color: AppColors.darkGreen, width: 2),
@@ -512,7 +511,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [
             BoxShadow(
-              color: AppColors.darkGreen.withOpacity(0.3),
+              color: AppColors.darkGreen.withValues(alpha: 0.3),
               spreadRadius: 2,
               blurRadius: 8,
               offset: const Offset(0, 2),
@@ -615,7 +614,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               borderRadius: BorderRadius.circular(12).r,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   spreadRadius: 5,
                   blurRadius: 15,
                   offset: const Offset(0, 5),

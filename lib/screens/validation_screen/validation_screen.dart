@@ -53,7 +53,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("ValidationScreen build called with text: ${widget.recordedText}");
+    debugPrint(
+        "ValidationScreen build called with text: ${widget.recordedText}");
     return WillPopScope(
       onWillPop: _navigateBackToReRecord,
       child: Scaffold(
@@ -247,7 +248,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
         borderRadius: BorderRadius.circular(8).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withValues(alpha: 0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),
@@ -428,7 +429,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
+                  color: AppColors.darkGreen.withValues(alpha: 0.3),
                   spreadRadius: 4,
                   blurRadius: 8,
                   offset: const Offset(0, 2),
