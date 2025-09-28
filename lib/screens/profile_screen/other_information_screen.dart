@@ -109,30 +109,30 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 14.w, horizontal: 16.w),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [AppColors.orange, AppColors.saffron],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
+              padding: EdgeInsets.all(16).r,
+              decoration: BoxDecoration(color: AppColors.orange),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+                      child: Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: Colors.white,
+                        size: 36.sp,
+                      ),
                     ),
                   ),
                   Text(
                     AppLocalizations.of(context)!.completeYourProfile,
                     style: GoogleFonts.notoSans(
                       color: Colors.white,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ],
