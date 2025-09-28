@@ -27,15 +27,15 @@ class HowItWorksSection extends StatelessWidget {
             cardWidget(
                 title: AppLocalizations.of(context)!.contribute,
                 description: AppLocalizations.of(context)!.speakClearlyAndRecord,
-                icon: Icons.touch_app_outlined),
+                iconPath: 'assets/icons/contribute_icon.png'),
             cardWidget(
                 title: AppLocalizations.of(context)!.validate,
                 description: AppLocalizations.of(context)!.listenAndValidate,
-                icon: Icons.check_circle_outline),
+                iconPath: 'assets/icons/validate_icon.png'),
             cardWidget(
                 title: AppLocalizations.of(context)!.earnCertificate,
                 description: AppLocalizations.of(context)!.earnCertificateDescription,
-                icon: Icons.badge_sharp)
+                iconPath: 'assets/icons/certificate_icon.png')
           ],
         ),
       ],
@@ -45,7 +45,7 @@ class HowItWorksSection extends StatelessWidget {
   Widget cardWidget(
       {required String title,
       required String description,
-      required IconData icon}) {
+      required String iconPath}) {
     return Container(
       width: 120.w,
       height: 156.w,
@@ -61,10 +61,10 @@ class HowItWorksSection extends StatelessWidget {
           CircleAvatar(
               radius: 30.r,
               backgroundColor: AppColors.darkGreen,
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 30.sp,
+              child: Image.asset(
+                iconPath,
+                width: 50.w,
+                height: 50.w,
               )),
           SizedBox(height: 4.w),
           Text(
