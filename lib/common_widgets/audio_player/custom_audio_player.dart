@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:bhashadaan/common_widgets/audio_player/widgets/audio_player_skeleton.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class CustomAudioPlayer extends StatefulWidget {
   final String filePath;
@@ -45,18 +47,36 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
     _player = AudioPlayer();
 
     try {
+      debugPrint('Initializing audio player with file: ${widget.filePath}');
+      
       // Handle different file path types (blob URLs for web, file paths for mobile)
-      if (widget.filePath.startsWith('blob:')) {
+      if (kIsWeb || widget.filePath.startsWith('blob:')) {
         // For web blob URLs
         await _player.setUrl(widget.filePath);
       } else {
-        // For mobile file paths
-        await _player.setFilePath(widget.filePath);
+        // For mobile file paths - verify file exists first
+        final file = File(widget.filePath);
+        if (await file.exists()) {
+          final fileSize = await file.length();
+          debugPrint('Audio file exists, size: $fileSize bytes');
+          if (fileSize == 0) {
+            throw Exception('Audio file is empty');
+          }
+          await _player.setFilePath(widget.filePath);
+        } else {
+          throw Exception('Audio file does not exist: ${widget.filePath}');
+        }
       }
 
+      // Wait a bit for the file to be fully loaded
+      await Future.delayed(const Duration(milliseconds: 100));
+
       // Get duration after file is loaded
+      final duration = _player.duration;
+      debugPrint('Audio duration: $duration');
+      
       setState(() {
-        _duration = _player.duration ?? Duration.zero;
+        _duration = duration ?? Duration.zero;
         _isLoading = false;
       });
 
@@ -70,6 +90,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
       // Listen to duration changes
       _player.durationStream.listen((dur) {
         if (mounted) {
+          debugPrint('Duration updated: $dur');
           setState(() => _duration = dur ?? Duration.zero);
         }
       });
@@ -77,6 +98,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
       // Listen to player state changes
       _player.playerStateStream.listen((state) {
         if (mounted) {
+          debugPrint('Player state: ${state.processingState}, playing: ${state.playing}');
           if (state.processingState == ProcessingState.completed) {
             setState(() {
               _isPlaying = false;

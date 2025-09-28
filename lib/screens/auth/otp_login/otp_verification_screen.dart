@@ -49,18 +49,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     if (_otp.length == 6) {
       _isLoading.value = true;
       // TODO: Implement OTP verification logic
-      Future.delayed(const Duration(seconds: 2), () {
-        _isLoading.value = false;
-        // Navigate to Profile Screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProfileScreen(
-              phoneNumber: widget.phoneNumber,
-            ),
+      _isLoading.value = false;
+      // Navigate to Profile Screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileScreen(
+            phoneNumber: widget.phoneNumber,
           ),
-        );
-      });
+        ),
+      );
     } else {
       setState(() {
         _errorText = AppLocalizations.of(context)!.invalidOtp;

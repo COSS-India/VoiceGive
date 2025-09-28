@@ -1,3 +1,4 @@
+import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
@@ -14,6 +15,27 @@ class HomeHeaderSection extends StatefulWidget {
 }
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
+
+  void _showConsentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return InformedConsentModal(
+          onApprove: () {
+            Navigator.of(context).pop(); // Close the modal
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const OtpLoginScreen()),
+            );
+          },
+          onDeny: () {
+            Navigator.of(context).pop(); // Close the modal
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +81,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           SizedBox(height: 12.w),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const OtpLoginScreen()),
-              );
+              _showConsentModal(context);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.orange,
