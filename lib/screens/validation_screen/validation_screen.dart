@@ -16,7 +16,7 @@ class ValidationScreen extends StatefulWidget {
   final int currentIndex;
   final int totalItems;
   final int? sentenceId;
-  
+
   const ValidationScreen({
     super.key,
     required this.recordedText,
@@ -53,77 +53,79 @@ class _ValidationScreenState extends State<ValidationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("ValidationScreen build called with text: ${widget.recordedText}");
+    debugPrint(
+        "ValidationScreen build called with text: ${widget.recordedText}");
     return WillPopScope(
       onWillPop: _navigateBackToReRecord,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            // Header Section - Same as Bolo Screen
-            Container(
-              padding: EdgeInsets.all(16).r,
-              decoration: BoxDecoration(color: AppColors.orange),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: _navigateBackToReRecord,
-                    child: Icon(
-                      Icons.arrow_circle_left_outlined,
-                      color: Colors.white,
-                      size: 36.sp,
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              // Header Section - Same as Bolo Screen
+              Container(
+                padding: EdgeInsets.all(16).r,
+                decoration: BoxDecoration(color: AppColors.orange),
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: _navigateBackToReRecord,
+                      child: Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: Colors.white,
+                        size: 36.sp,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 24.w),
-                  ImageWidget(
-                    height: 40.w,
-                    width: 40.w,
-                    imageUrl: "assets/images/bolo_icon_white.svg",
-                  ),
-                  SizedBox(width: 8.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.boloIndia,
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
+                    SizedBox(width: 24.w),
+                    ImageWidget(
+                      height: 40.w,
+                      width: 40.w,
+                      imageUrl: "assets/images/bolo_icon_white.svg",
+                    ),
+                    SizedBox(width: 8.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).boloIndia,
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
+                        Text(
+                          AppLocalizations.of(context)
+                              .enrichYourLanguageByDonatingVoice,
+                          style: GoogleFonts.notoSans(
+                            color: Colors.white,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            
-            // Content Section - Same padding as Bolo Screen
-            Padding(
-              padding: const EdgeInsets.all(12.0).r,
-              child: Column(
-                children: [
-                  _buildActionButtons(),
-                  SizedBox(height: 16.w),
-                  _buildLanguageSelection(),
-                  SizedBox(height: 24.w),
-                  _buildValidationContent(),
-                ],
+
+              // Content Section - Same padding as Bolo Screen
+              Padding(
+                padding: const EdgeInsets.all(12.0).r,
+                child: Column(
+                  children: [
+                    _buildActionButtons(),
+                    SizedBox(height: 16.w),
+                    _buildLanguageSelection(),
+                    SizedBox(height: 24.w),
+                    _buildValidationContent(),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
         ),
       ),
     );
@@ -142,17 +144,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -201,7 +203,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForContribution,
+          AppLocalizations.of(context).selectLanguageForContribution,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: Colors.black,
@@ -246,7 +248,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
         borderRadius: BorderRadius.circular(8).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withValues(alpha: 0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),
@@ -279,7 +281,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
             ),
           ),
           SizedBox(height: 24.w),
-          
+
           // Recorded Text - Same padding as Bolo Screen
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
@@ -294,15 +296,15 @@ class _ValidationScreenState extends State<ValidationScreen> {
             ),
           ),
           SizedBox(height: 50.w),
-          
+
           // Audio Player
           _buildAudioPlayer(),
           SizedBox(height: 30.w),
-          
+
           // Re-Record Section
           _buildReRecordSection(),
           SizedBox(height: 50.w),
-          
+
           // Action Buttons
           _buildBottomButtons(),
         ],
@@ -355,7 +357,8 @@ class _ValidationScreenState extends State<ValidationScreen> {
                   ),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
-                    widthFactor: currentPosition.inSeconds / totalDuration.inSeconds,
+                    widthFactor:
+                        currentPosition.inSeconds / totalDuration.inSeconds,
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppColors.darkGreen,
@@ -399,12 +402,11 @@ class _ValidationScreenState extends State<ValidationScreen> {
     );
   }
 
-
   Widget _buildReRecordSection() {
     return Column(
       children: [
         Text(
-          AppLocalizations.of(context)!.reRecord,
+          AppLocalizations.of(context).reRecord,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -427,7 +429,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
+                  color: AppColors.darkGreen.withValues(alpha: 0.3),
                   spreadRadius: 4,
                   blurRadius: 8,
                   offset: const Offset(0, 2),
@@ -453,7 +455,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 150.w, // Increased width to accommodate larger font
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.contributeMore,
+            title: AppLocalizations.of(context).contributeMore,
             textFontSize: 12.sp, // Increased font size
             onTap: () {
               // Navigate to Bolo screen for new recording
@@ -477,7 +479,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.validate,
+            title: AppLocalizations.of(context).validate,
             textFontSize: 16.sp,
             onTap: () {
               // Navigate to PlayRecordingScreen without API call
@@ -508,7 +510,6 @@ class _ValidationScreenState extends State<ValidationScreen> {
     );
   }
 
-
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
@@ -516,4 +517,3 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return "$twoDigitMinutes:$twoDigitSeconds";
   }
 }
-  

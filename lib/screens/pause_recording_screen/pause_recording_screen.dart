@@ -17,7 +17,7 @@ class PauseRecordingScreen extends StatefulWidget {
   final int? sentenceId;
   final String? audioUrl;
   final int? contributionId;
-  
+
   const PauseRecordingScreen({
     super.key,
     required this.recordedText,
@@ -89,16 +89,16 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        Text(
-                          AppLocalizations.of(context)!.boloIndia,
+                      Text(
+                        AppLocalizations.of(context).boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                        Text(
-                          AppLocalizations.of(context)!.enrichYourLanguage,
+                      Text(
+                        AppLocalizations.of(context).enrichYourLanguage,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -110,7 +110,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                 ],
               ),
             ),
-            
+
             // Content Section
             Expanded(
               child: SingleChildScrollView(
@@ -147,17 +147,17 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -206,7 +206,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForValidation,
+          AppLocalizations.of(context).selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -255,7 +255,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
         borderRadius: BorderRadius.circular(16).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha: 0.3),
             spreadRadius: 3,
             blurRadius: 8,
             offset: const Offset(0, 3),
@@ -290,7 +290,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
             ],
           ),
           SizedBox(height: 24.w),
-          
+
           // Recorded Text
           Text(
             widget.recordedText,
@@ -303,11 +303,11 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 28.w),
-          
+
           // Pause Recording Section
           _buildPauseRecordingSection(),
           SizedBox(height: 28.w),
-          
+
           // Validation Buttons
           _buildValidationButtons(),
         ],
@@ -323,8 +323,8 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.lightGreen3.withOpacity(0.4),
-            AppColors.lightGreen3.withOpacity(0.2),
+            AppColors.lightGreen3.withValues(alpha: 0.4),
+            AppColors.lightGreen3.withValues(alpha: 0.2),
           ],
         ),
         borderRadius: BorderRadius.circular(16).r,
@@ -332,7 +332,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
       child: Column(
         children: [
           Text(
-            AppLocalizations.of(context)!.pauseRecording,
+            AppLocalizations.of(context).pauseRecording,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               color: AppColors.darkGreen,
@@ -356,7 +356,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                 border: Border.all(color: Colors.white, width: 4),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.darkGreen.withOpacity(0.4),
+                    color: AppColors.darkGreen.withValues(alpha: 0.4),
                     spreadRadius: 4,
                     blurRadius: 8,
                     offset: const Offset(0, 3),
@@ -383,14 +383,14 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.incorrect,
+              title: AppLocalizations.of(context).incorrect,
               textFontSize: 16.sp,
               onTap: () {
                 setState(() {
                   isIncorrect = true;
                   isCorrect = false;
                 });
-                _showValidationResult(AppLocalizations.of(context)!.incorrect);
+                _showValidationResult(AppLocalizations.of(context).incorrect);
               },
               textColor: isIncorrect ? Colors.white : AppColors.orange,
               decoration: BoxDecoration(
@@ -409,7 +409,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.correct,
+              title: AppLocalizations.of(context).correct,
               textFontSize: 16.sp,
               onTap: () {
                 setState(() {
@@ -453,14 +453,14 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(context)!.validationResult,
+            AppLocalizations.of(context).validationResult,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           content: Text(
-            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
+            AppLocalizations.of(context).youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),
@@ -472,7 +472,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                 Navigator.of(context).pop(); // Go back to home
               },
               child: Text(
-                AppLocalizations.of(context)!.continueButton,
+                AppLocalizations.of(context).continueButton,
                 style: GoogleFonts.notoSans(
                   color: AppColors.orange,
                   fontWeight: FontWeight.w600,

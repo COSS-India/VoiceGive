@@ -23,7 +23,8 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
   bool _privacyAccepted = false;
   bool _copyrightAccepted = false;
 
-  bool get _allAccepted => _termsAccepted && _privacyAccepted && _copyrightAccepted;
+  bool get _allAccepted =>
+      _termsAccepted && _privacyAccepted && _copyrightAccepted;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                 ],
               ),
             ),
-            
+
             // Fixed Content
             Padding(
               padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.w),
@@ -79,7 +80,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                   Row(
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.namasteContributor,
+                        AppLocalizations.of(context).namasteContributor,
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
@@ -94,10 +95,10 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                     ],
                   ),
                   SizedBox(height: 12.w),
-                  
+
                   // Introduction paragraph
                   Text(
-                    AppLocalizations.of(context)!.consentMessage,
+                    AppLocalizations.of(context).consentMessage,
                     style: GoogleFonts.notoSans(
                       color: Colors.black,
                       fontSize: 14.sp,
@@ -109,7 +110,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                 ],
               ),
             ),
-            
+
             // Scrollable Content - Only the green container
             Expanded(
               child: Padding(
@@ -140,38 +141,38 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                           ),
                         ),
                         SizedBox(height: 16.w),
-                  
+
                         // Numbered list
                         _buildNumberedItem(
                           "1.",
                           "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
                         ),
                         SizedBox(height: 12.w),
-                        
+
                         _buildNumberedItem(
                           "2.",
                           "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
                         ),
                         SizedBox(height: 12.w),
-                        
+
                         _buildNumberedItem(
                           "3.",
                           "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
                         ),
                         SizedBox(height: 12.w),
-                        
+
                         _buildNumberedItem(
                           "4.",
                           "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
                         ),
                         SizedBox(height: 12.w),
-                        
+
                         _buildNumberedItem(
                           "5.",
                           "You have read, understood, and accepted the following governing documents on the BhashaDaan portal:",
                         ),
                         SizedBox(height: 16.w),
-                        
+
                         // Checkboxes for documents
                         _buildCheckboxItem(
                           "Terms of Use/ Contribution Terms",
@@ -179,18 +180,19 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                           (value) => setState(() => _termsAccepted = value!),
                         ),
                         SizedBox(height: 8.w),
-                        
+
                         _buildCheckboxItem(
                           "Privacy Policy",
                           _privacyAccepted,
                           (value) => setState(() => _privacyAccepted = value!),
                         ),
                         SizedBox(height: 8.w),
-                        
+
                         _buildCheckboxItem(
                           "Copyright & Licensing Policy",
                           _copyrightAccepted,
-                          (value) => setState(() => _copyrightAccepted = value!),
+                          (value) =>
+                              setState(() => _copyrightAccepted = value!),
                         ),
                       ],
                     ),
@@ -198,7 +200,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                 ),
               ),
             ),
-            
+
             // Action buttons
             Container(
               padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.w),
@@ -210,7 +212,9 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 14.w),
                         decoration: BoxDecoration(
-                          color: _allAccepted ? AppColors.orange : AppColors.lightGrey,
+                          color: _allAccepted
+                              ? AppColors.orange
+                              : AppColors.lightGrey,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Row(
@@ -218,14 +222,18 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                           children: [
                             Icon(
                               Icons.check,
-                              color: _allAccepted ? Colors.white : AppColors.grey84,
+                              color: _allAccepted
+                                  ? Colors.white
+                                  : AppColors.grey84,
                               size: 18.w,
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              AppLocalizations.of(context)!.iAgree,
+                              AppLocalizations.of(context).iAgree,
                               style: GoogleFonts.notoSans(
-                                color: _allAccepted ? Colors.white : AppColors.grey84,
+                                color: _allAccepted
+                                    ? Colors.white
+                                    : AppColors.grey84,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -305,7 +313,8 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
     );
   }
 
-  Widget _buildCheckboxItem(String text, bool value, ValueChanged<bool?> onChanged) {
+  Widget _buildCheckboxItem(
+      String text, bool value, ValueChanged<bool?> onChanged) {
     return Row(
       children: [
         Checkbox(

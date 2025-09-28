@@ -17,7 +17,7 @@ class PlayRecordingScreen extends StatefulWidget {
   final int? sentenceId;
   final String? audioUrl;
   final int? contributionId;
-  
+
   const PlayRecordingScreen({
     super.key,
     required this.recordedText,
@@ -86,7 +86,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.boloIndia,
+                        AppLocalizations.of(context).boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -94,7 +94,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
+                        AppLocalizations.of(context)
+                            .enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
@@ -106,7 +107,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                 ],
               ),
             ),
-            
+
             // Content Section
             Expanded(
               child: SingleChildScrollView(
@@ -143,17 +144,17 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -202,7 +203,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForValidation,
+          AppLocalizations.of(context).selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -251,7 +252,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         borderRadius: BorderRadius.circular(16).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.grey.withValues(alpha: 0.3),
             spreadRadius: 3,
             blurRadius: 8,
             offset: const Offset(0, 3),
@@ -286,7 +287,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             ],
           ),
           SizedBox(height: 24.w),
-          
+
           // Recorded Text
           Text(
             widget.recordedText,
@@ -299,11 +300,11 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 28.w),
-          
+
           // Play Recording Section
           _buildPlayRecordingSection(),
           SizedBox(height: 28.w),
-          
+
           // Validation Buttons (Disabled)
           _buildValidationButtons(),
         ],
@@ -319,8 +320,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.lightGreen3.withOpacity(0.4),
-            AppColors.lightGreen3.withOpacity(0.2),
+            AppColors.lightGreen3.withValues(alpha: 0.4),
+            AppColors.lightGreen3.withValues(alpha: 0.2),
           ],
         ),
         borderRadius: BorderRadius.circular(16).r,
@@ -329,8 +330,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           Text(
             widget.audioUrl != null && widget.audioUrl!.isNotEmpty
-                ? AppLocalizations.of(context)!.playContribution
-                : AppLocalizations.of(context)!.playRecording,
+                ? AppLocalizations.of(context).playContribution
+                : AppLocalizations.of(context).playRecording,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               color: AppColors.darkGreen,
@@ -365,7 +366,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                 border: Border.all(color: Colors.white, width: 4),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.darkGreen.withOpacity(0.4),
+                    color: AppColors.darkGreen.withValues(alpha: 0.4),
                     spreadRadius: 4,
                     blurRadius: 8,
                     offset: const Offset(0, 3),
@@ -394,14 +395,14 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.incorrect,
+              title: AppLocalizations.of(context).incorrect,
               textFontSize: 16.sp,
               onTap: null, // Disabled button
               textColor: AppColors.grey84,
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 border: Border.all(
-                  color: AppColors.grey84.withOpacity(0.5),
+                  color: AppColors.grey84.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(8.0).r),
@@ -414,14 +415,14 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.correct,
+              title: AppLocalizations.of(context).correct,
               textFontSize: 16.sp,
               onTap: null, // Disabled button
               textColor: AppColors.grey84,
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 border: Border.all(
-                  color: AppColors.grey84.withOpacity(0.5),
+                  color: AppColors.grey84.withValues(alpha: 0.5),
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(8.0).r),
@@ -432,6 +433,4 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
       ],
     );
   }
-
 }
-        

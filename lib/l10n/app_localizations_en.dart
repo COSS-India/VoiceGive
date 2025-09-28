@@ -224,4 +224,8 @@ class AppLocalizationsEn {
   String get ofAppreciation => 'OF APPRECIATION';
   String get proudlyPresentedTo => 'PROUDLY PRESENTED TO';
   String get viewProfile => 'View Profile';
+  String get errorTitle => 'OOPS!';
+  String get errorSubtitle => 'There’s a connection error right now';
+  String get errorDesc =>'We are sorry for the inconvenience \n    Please come back after a while.';
+  String get errorButton => 'GO BACK';
 }

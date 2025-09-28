@@ -238,7 +238,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
           border: Border.all(color: AppColors.darkGreen),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -252,7 +252,9 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
             _formatTime(_position),
             style: TextStyle(
               fontSize: 12,
-              color: _hasEnded ? sliderColor.withOpacity(0.7) : Colors.black87,
+              color: _hasEnded
+                  ? sliderColor.withValues(alpha: 0.7)
+                  : Colors.black87,
               fontWeight: _hasEnded ? FontWeight.w600 : FontWeight.normal,
             ),
           ),
@@ -265,7 +267,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
                   activeTrackColor: sliderColor,
                   inactiveTrackColor: sliderBgColor,
                   thumbColor: sliderColor,
-                  overlayColor: sliderColor.withOpacity(0.2),
+                  overlayColor: sliderColor.withValues(alpha: 0.2),
                   thumbShape:
                       const RoundSliderThumbShape(enabledThumbRadius: 6),
                 ),
@@ -300,7 +302,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
               margin: const EdgeInsets.only(left: 8),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: sliderColor.withOpacity(0.1),
+                color: sliderColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(

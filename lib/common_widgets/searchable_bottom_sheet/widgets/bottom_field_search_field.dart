@@ -8,7 +8,7 @@ class BottomSheetSearchField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final BuildContext parentContext;
 
-  const BottomSheetSearchField({
+  const BottomSheetSearchField({super.key, 
     required this.controller,
     required this.onChanged,
     required this.parentContext,
@@ -19,7 +19,7 @@ class BottomSheetSearchField extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(parentContext)!.mStaticSearch,
+        hintText: AppLocalizations.of(parentContext).mStaticSearch,
         hintStyle: Theme.of(context).textTheme.labelLarge,
         prefixIcon: Icon(Icons.search, color: AppColors.darkBlue),
         enabledBorder: OutlineInputBorder(

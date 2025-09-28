@@ -87,11 +87,11 @@ class _OtpInputFieldState extends State<OtpInputField> {
               height: 40.w,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: widget.errorText != null 
-                    ? AppColors.negativeLight 
-                    : _focusNodes[index].hasFocus 
-                      ? AppColors.lightGreen 
-                      : AppColors.lightGrey,
+                  color: widget.errorText != null
+                      ? AppColors.negativeLight
+                      : _focusNodes[index].hasFocus
+                          ? AppColors.lightGreen
+                          : AppColors.lightGrey,
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(6.r),
@@ -107,10 +107,9 @@ class _OtpInputFieldState extends State<OtpInputField> {
                   keyboardType: TextInputType.number,
                   maxLength: 1,
                   style: GoogleFonts.notoSans(
-                    fontSize: 18.sp,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.w600,
                     color: AppColors.greys87,
-                    height: 1.0,
                   ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -124,7 +123,8 @@ class _OtpInputFieldState extends State<OtpInputField> {
                   onChanged: (value) => _onTextChanged(value, index),
                   onTap: () {
                     if (_controllers[index].text.isEmpty) {
-                      _controllers[index].selection = TextSelection.fromPosition(
+                      _controllers[index].selection =
+                          TextSelection.fromPosition(
                         TextPosition(offset: _controllers[index].text.length),
                       );
                     }

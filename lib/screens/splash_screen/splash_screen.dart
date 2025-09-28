@@ -1,6 +1,7 @@
-import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../constants/app_routes.dart';
 
 class CustomSplashScreen extends StatefulWidget {
   const CustomSplashScreen({super.key});
@@ -12,7 +13,6 @@ class CustomSplashScreen extends StatefulWidget {
 class _CustomSplashScreenState extends State<CustomSplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  // bool _isLottieLoaded = false;
 
   @override
   void initState() {
@@ -22,8 +22,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        Navigator.of(context).pushReplacementNamed(
+          AppRoutes.home,
         );
       }
     });

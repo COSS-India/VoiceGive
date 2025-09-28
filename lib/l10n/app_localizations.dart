@@ -258,6 +258,10 @@ class AppLocalizations {
   String get ofAppreciation => _localizedValues.ofAppreciation;
   String get proudlyPresentedTo => _localizedValues.proudlyPresentedTo;
   String get viewProfile => _localizedValues.viewProfile;
+  String get errorTitle => _localizedValues.errorTitle;
+  String get errorSubtitle => _localizedValues.errorSubtitle;
+  String get errorDesc => _localizedValues.errorDesc;
+  String get errorButton => _localizedValues.errorButton;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class GetStartedModel {
   final String title;
   final String illustrationImageUrl;

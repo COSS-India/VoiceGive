@@ -39,7 +39,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -102,13 +102,15 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.skip,
+            title: AppLocalizations.of(context).skip,
             textFontSize: 16.sp,
             onTap: () {
               // Handle skip without API call
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
+                SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context).skippedSuccessfully)),
               );
             },
             textColor: AppColors.orange,
@@ -124,12 +126,12 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.submit,
+            title: AppLocalizations.of(context).submit,
             textFontSize: 16.sp,
             onTap: () {
-              print("Submit button tapped!");
-              print("Recorded text: ${widget.recordedText}");
-              print("Selected language: ${widget.selectedLanguage}");
+              debugPrint("Submit button tapped!");
+              debugPrint("Recorded text: ${widget.recordedText}");
+              debugPrint("Selected language: ${widget.selectedLanguage}");
 
               Navigator.push(
                 context,
@@ -143,9 +145,9 @@ class _BoloContentSectionState extends State<BoloContentSection> {
                   ),
                 ),
               ).then((_) {
-                print("ValidationScreen navigation completed");
+                debugPrint("ValidationScreen navigation completed");
               }).catchError((error) {
-                print("ValidationScreen navigation error: $error");
+                debugPrint("ValidationScreen navigation error: $error");
               });
             },
             textColor: Colors.white,

@@ -35,7 +35,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   }
 
   void _initializeGetStartedData() {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     getStartedData = [
       GetStartedModel(
         title: l10n.checkYourSetup,
@@ -188,7 +188,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context)!.skip,
+                  title: AppLocalizations.of(context).skip,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     Navigator.pushReplacement(
@@ -208,7 +208,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context)!.next,
+                  title: AppLocalizations.of(context).next,
                   textColor: Colors.white,
                   onTap: () {
                     _pageController.nextPage(
@@ -231,7 +231,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context)!.previous,
+                  title: AppLocalizations.of(context).previous,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     _pageController.previousPage(
@@ -250,12 +250,13 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context)!.finish,
+                  title: AppLocalizations.of(context).finish,
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const BoloScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const BoloScreen()),
                     );
                   },
                 ),

@@ -5,4 +5,5 @@ class AppRoutes {
   static const String otpLogin = '/otp-login';
   static const String login = '/login';
   static const String signup = '/signup';
+  static const String otpVerification = '/otp-verification';
 }

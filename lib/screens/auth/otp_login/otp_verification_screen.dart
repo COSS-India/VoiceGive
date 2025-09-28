@@ -1,5 +1,3 @@
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
-import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,7 +59,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       );
     } else {
       setState(() {
-        _errorText = AppLocalizations.of(context)!.invalidOtp;
+        _errorText = AppLocalizations.of(context).invalidOtp;
       });
     }
   }
@@ -70,7 +68,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     // TODO: Implement resend OTP logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
+        content: Text(AppLocalizations.of(context).otpSentSuccessfullyMessage),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -95,7 +93,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       SizedBox(height: 40.h),
                       Text(
-                        AppLocalizations.of(context)!.otpVerification,
+                        AppLocalizations.of(context).otpVerification,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -105,7 +103,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        "${AppLocalizations.of(context)!.enterOtpFromSms} ${widget.phoneNumber}",
+                        "${AppLocalizations.of(context).enterOtpFromSms} ${widget.phoneNumber}",
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,
@@ -162,7 +160,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               );
                             }
                             return Text(
-                              AppLocalizations.of(context)!.submit,
+                              AppLocalizations.of(context).submit,
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 16.sp,

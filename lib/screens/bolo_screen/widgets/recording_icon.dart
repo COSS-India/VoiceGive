@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:path_provider/path_provider.dart';
 
 enum RecordingState { idle, recording, stopped }
 
@@ -58,7 +59,7 @@ class _RecordingButtonState extends State<RecordingButton>
 
   Future<String> _generateTempFilePath() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    
+
     if (kIsWeb) {
       // For web platform, use a simple filename with WAV extension
       return 'recording_$timestamp.wav';
@@ -78,11 +79,10 @@ class _RecordingButtonState extends State<RecordingButton>
   Future<void> _startRecording() async {
     if (!await _hasRequiredPermissions()) {
       Helper.showSnackBarMessage(
-          context: context,
-          text: "Microphone permission not granted");
+          context: context, text: "Microphone permission not granted");
       return;
     }
-    
+
     try {
       final tempPath = await _generateTempFilePath();
       debugPrint('Starting recording with path: $tempPath');
@@ -100,8 +100,7 @@ class _RecordingButtonState extends State<RecordingButton>
     } catch (e) {
       debugPrint('Error starting recording: $e');
       Helper.showSnackBarMessage(
-          context: context,
-          text: "Failed to start recording: $e");
+          context: context, text: "Failed to start recording: $e");
     }
   }
 
@@ -111,7 +110,7 @@ class _RecordingButtonState extends State<RecordingButton>
       if (path != null && path.isNotEmpty) {
         recordedFilePath = path;
         debugPrint('Recording stopped and saved to: $path');
-        
+
         if (kIsWeb) {
           // For web, we get a blob URL - no need to verify file existence
           // The blob URL is valid and contains the recorded audio
@@ -125,30 +124,26 @@ class _RecordingButtonState extends State<RecordingButton>
             if (fileSize == 0) {
               debugPrint('Warning: Recorded file is empty');
               Helper.showSnackBarMessage(
-                  context: context,
-                  text: "Recording failed - empty file");
+                  context: context, text: "Recording failed - empty file");
               recordedFilePath = null;
             }
           } else {
             debugPrint('Error: Recorded file does not exist');
             Helper.showSnackBarMessage(
-                context: context,
-                text: "Recording failed - file not found");
+                context: context, text: "Recording failed - file not found");
             recordedFilePath = null;
           }
         }
       } else {
         debugPrint('Recording stopped but no file path returned');
         Helper.showSnackBarMessage(
-            context: context,
-            text: "Recording failed - no file path returned");
+            context: context, text: "Recording failed - no file path returned");
         recordedFilePath = null;
       }
     } catch (e) {
       debugPrint('Error stopping recording: $e');
       Helper.showSnackBarMessage(
-          context: context,
-          text: "Failed to stop recording: $e");
+          context: context, text: "Failed to stop recording: $e");
       recordedFilePath = null;
     }
   }
@@ -255,7 +250,7 @@ class _RecordingButtonState extends State<RecordingButton>
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColors.lightGreen
-                                    .withOpacity(opacity * 0.3),
+                                    .withValues(alpha: opacity * 0.3),
                               ),
                             ),
                           );

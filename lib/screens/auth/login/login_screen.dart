@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier<bool>(false);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   VoidCallback? _refreshCaptchaCallback;
-  
+
   String _captchaId = '';
 
   @override
@@ -50,33 +50,32 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.emailRequired;
+      return AppLocalizations.of(context).emailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return AppLocalizations.of(context)!.invalidEmail;
+      return AppLocalizations.of(context).invalidEmail;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.passwordRequired;
+      return AppLocalizations.of(context).passwordRequired;
     }
     if (value.length < 6) {
-      return AppLocalizations.of(context)!.passwordMinLength;
+      return AppLocalizations.of(context).passwordMinLength;
     }
     return null;
   }
 
   String? _validateCaptcha(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.pleaseEnterCaptcha;
+      return AppLocalizations.of(context).pleaseEnterCaptcha;
     }
     if (_captchaId.isEmpty) {
-      return AppLocalizations.of(context)!.captchaNotLoaded;
+      return AppLocalizations.of(context).captchaNotLoaded;
     }
     return null;
   }
@@ -84,10 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       _isLoading.value = true;
-      
+
       try {
         final authProvider = Provider.of<AuthProvider>(context, listen: false);
-        
+
         final loginRequest = LoginRequest(
           email: _emailController.text.trim(),
           password: _passwordController.text,
@@ -95,24 +94,24 @@ class _LoginScreenState extends State<LoginScreen> {
           captchaText: _captchaController.text.trim(),
         );
 
-        print('🔐 Attempting login with email: ${loginRequest.email}');
-        print('🔐 Captcha ID: ${loginRequest.secureId}');
-        print('🔐 Captcha Text: ${loginRequest.captchaText}');
-        
+        debugPrint('🔐 Attempting login with email: ${loginRequest.email}');
+        debugPrint('🔐 Captcha ID: ${loginRequest.secureId}');
+        debugPrint('🔐 Captcha Text: ${loginRequest.captchaText}');
+
         final success = await authProvider.login(loginRequest);
-        
+
         if (mounted) {
           _isLoading.value = false;
-          
+
           if (success) {
-            print('✅ Login successful!');
+            debugPrint('✅ Login successful!');
             // Navigate to Bolo screen
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const BoloScreen()),
             );
           } else {
-            print('❌ Login failed: ${authProvider.errorMessage}');
+            debugPrint('❌ Login failed: ${authProvider.errorMessage}');
             // Clear captcha input on failure
             _captchaController.clear();
             // Always refresh captcha on any API error (non-2xx status codes)
@@ -130,14 +129,14 @@ class _LoginScreenState extends State<LoginScreen> {
       } catch (e) {
         if (mounted) {
           _isLoading.value = false;
-          print('❌ Login error: $e');
+          debugPrint('❌ Login error: $e');
           // Clear captcha input on error
           _captchaController.clear();
           // Always refresh captcha on network/API errors
           _refreshCaptcha();
-          
+
           // Extract clean error message
-          String errorMessage = AppLocalizations.of(context)!.loginFailed;
+          String errorMessage = AppLocalizations.of(context).loginFailed;
           if (e is AuthException) {
             final message = e.message;
             if (message.startsWith('Status: ')) {
@@ -151,9 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
               errorMessage = message;
             }
           } else {
-            errorMessage = AppLocalizations.of(context)!.networkError;
+            errorMessage = AppLocalizations.of(context).networkError;
           }
-          
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(errorMessage),
@@ -168,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   /// Refresh captcha when there's an API error
   void _refreshCaptcha() {
-    print('🔄 Refreshing captcha due to API error...');
+    debugPrint('🔄 Refreshing captcha due to API error...');
     // Use the callback to refresh captcha
     _refreshCaptchaCallback?.call();
   }
@@ -184,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // TODO: Implement forgot password logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!.forgotPassword),
+        content: Text(AppLocalizations.of(context).forgotPassword),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -201,139 +200,125 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _navigateBackToHome,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        resizeToAvoidBottomInset: true,
-        appBar: const CustomAppBar(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const GradientHeader(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(24.w),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.loginIntoYourBhashaDaanAccount,
-                          style: GoogleFonts.notoSans(
-                            color: AppColors.greys87,
-                            fontSize: 28.sp,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2,
-                          ),
-                        ),
-                        SizedBox(height: 16.w),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: AppLocalizations.of(context)!.enterYour,
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              TextSpan(
-                                text: AppLocalizations.of(context)!.emailAndPassword,
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              TextSpan(
-                                text: AppLocalizations.of(context)!.toAccessYourAccount,
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 32.w),
-                        
-                        // Email Field
-                        CustomTextField(
-                          controller: _emailController,
-                          label: '*Email ID',
-                          keyboardType: TextInputType.emailAddress,
-                          validator: _validateEmail,
-                        ),
-                        SizedBox(height: 20.h),
-                        
-                        // Password Field
-                        ValueListenableBuilder<bool>(
-                          valueListenable: _isPasswordVisible,
-                          builder: (context, isPasswordVisible, child) {
-                            return CustomTextField(
-                              controller: _passwordController,
-                              label: '*Password',
-                              obscureText: !isPasswordVisible,
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  _isPasswordVisible.value = !isPasswordVisible;
-                                },
-                                child: Icon(
-                                  isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                                  color: AppColors.grey40,
-                                  size: 20.sp,
-                                ),
-                              ),
-                              validator: _validatePassword,
-                            );
-                          },
-                        ),
-                        SizedBox(height: 20.h),
-                        
-                        // CAPTCHA Section
-                        CaptchaWidget(
-                          controller: _captchaController,
-                          onCaptchaIdChanged: _onCaptchaIdChanged,
-                          validator: _validateCaptcha,
-                          onRefreshCallbackRegistered: (callback) {
-                            _refreshCaptchaCallback = callback;
-                          },
-                        ),
-                        SizedBox(height: 20.h),
-                        
-                        // Forgot Password and Sign Up Links
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        onWillPop: _navigateBackToHome,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: true,
+          appBar: const CustomAppBar(),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const GradientHeader(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(24.w),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: _forgotPassword,
-                              child: Text(
-                                AppLocalizations.of(context)!.forgotPassword,
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.darkBlue,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            Text(
+                              AppLocalizations.of(context)
+                                  .loginIntoYourBhashaDaanAccount,
+                              style: GoogleFonts.notoSans(
+                                color: AppColors.greys87,
+                                fontSize: 28.sp,
+                                fontWeight: FontWeight.w700,
+                                height: 1.2,
                               ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!.doesntHaveAccount,
-                                  style: GoogleFonts.notoSans(
-                                    color: AppColors.greys60,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
+                            SizedBox(height: 16.w),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        AppLocalizations.of(context).enterYour,
+                                    style: GoogleFonts.notoSans(
+                                      color: AppColors.greys60,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context)
+                                        .emailAndPassword,
+                                    style: GoogleFonts.notoSans(
+                                      color: AppColors.greys60,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: AppLocalizations.of(context)
+                                        .toAccessYourAccount,
+                                    style: GoogleFonts.notoSans(
+                                      color: AppColors.greys60,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 32.w),
+
+                            // Email Field
+                            CustomTextField(
+                              controller: _emailController,
+                              label: '*Email ID',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: _validateEmail,
+                            ),
+                            SizedBox(height: 20.h),
+
+                            // Password Field
+                            ValueListenableBuilder<bool>(
+                              valueListenable: _isPasswordVisible,
+                              builder: (context, isPasswordVisible, child) {
+                                return CustomTextField(
+                                  controller: _passwordController,
+                                  label: '*Password',
+                                  obscureText: !isPasswordVisible,
+                                  suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      _isPasswordVisible.value =
+                                          !isPasswordVisible;
+                                    },
+                                    child: Icon(
+                                      isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: AppColors.grey40,
+                                      size: 20.sp,
+                                    ),
+                                  ),
+                                  validator: _validatePassword,
+                                );
+                              },
+                            ),
+                            SizedBox(height: 20.h),
+
+                            // CAPTCHA Section
+                            CaptchaWidget(
+                              controller: _captchaController,
+                              onCaptchaIdChanged: _onCaptchaIdChanged,
+                              validator: _validateCaptcha,
+                              onRefreshCallbackRegistered: (callback) {
+                                _refreshCaptchaCallback = callback;
+                              },
+                            ),
+                            SizedBox(height: 20.h),
+
+                            // Forgot Password and Sign Up Links
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
                                 GestureDetector(
-                                  onTap: _navigateToSignup,
+                                  onTap: _forgotPassword,
                                   child: Text(
-                                    AppLocalizations.of(context)!.signUp,
+                                    AppLocalizations.of(context).forgotPassword,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,
@@ -341,59 +326,84 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)
+                                          .doesntHaveAccount,
+                                      style: GoogleFonts.notoSans(
+                                        color: AppColors.greys60,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: _navigateToSignup,
+                                      child: Text(
+                                        AppLocalizations.of(context).signUp,
+                                        style: GoogleFonts.notoSans(
+                                          color: AppColors.darkBlue,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
-              child: Center(
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: _isLoading,
-                  builder: (context, isLoading, child) {
-                    return SizedBox(
-                      width: 280.w,
-                      child: ElevatedButton(
-                        onPressed: isLoading ? null : _login,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.orange,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.r),
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 16.w),
-                        ),
-                        child: isLoading
-                            ? SizedBox(
-                                width: 20.w,
-                                height: 20.w,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                ),
-                              )
-                            : Text(
-                                AppLocalizations.of(context)!.login.toUpperCase(),
-                                style: GoogleFonts.notoSans(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 40.w),
+                  child: Center(
+                    child: ValueListenableBuilder<bool>(
+                      valueListenable: _isLoading,
+                      builder: (context, isLoading, child) {
+                        return SizedBox(
+                          width: 280.w,
+                          child: ElevatedButton(
+                            onPressed: isLoading ? null : _login,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orange,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.r),
                               ),
-                      ),
-                    );
-                  },
+                              padding: EdgeInsets.symmetric(vertical: 16.w),
+                            ),
+                            child: isLoading
+                                ? SizedBox(
+                                    width: 20.w,
+                                    height: 20.w,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    ),
+                                  )
+                                : Text(
+                                    AppLocalizations.of(context)
+                                        .login
+                                        .toUpperCase(),
+                                    style: GoogleFonts.notoSans(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }

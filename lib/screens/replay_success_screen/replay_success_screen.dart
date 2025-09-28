@@ -90,94 +90,95 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
         backgroundColor: Colors.grey[100],
         appBar: CustomAppBar(),
         body: Stack(
-        children: [
-          // Confetti Animation
-          _buildConfetti(),
+          children: [
+            // Confetti Animation
+            _buildConfetti(),
 
-          // Main Content
-          Column(
-            children: [
-              // Header Section - Same as other screens
-              Container(
-                padding: EdgeInsets.all(16).r,
-                decoration: BoxDecoration(color: AppColors.orange),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ReplayRecordingScreen(
-                              recordedText: widget.recordedText,
-                              selectedLanguage: widget.selectedLanguage,
-                              currentIndex: widget.currentIndex,
-                              totalItems: widget.totalItems,
-                              sentenceId: widget.sentenceId,
-                              audioUrl: widget.audioUrl,
+            // Main Content
+            Column(
+              children: [
+                // Header Section - Same as other screens
+                Container(
+                  padding: EdgeInsets.all(16).r,
+                  decoration: BoxDecoration(color: AppColors.orange),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ReplayRecordingScreen(
+                                recordedText: widget.recordedText,
+                                selectedLanguage: widget.selectedLanguage,
+                                currentIndex: widget.currentIndex,
+                                totalItems: widget.totalItems,
+                                sentenceId: widget.sentenceId,
+                                audioUrl: widget.audioUrl,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.arrow_circle_left_outlined,
+                          color: Colors.white,
+                          size: 36.sp,
+                        ),
+                      ),
+                      SizedBox(width: 24.w),
+                      ImageWidget(
+                        height: 40.w,
+                        width: 40.w,
+                        imageUrl: "assets/images/bolo_icon_white.svg",
+                      ),
+                      SizedBox(width: 8.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).boloIndia,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.arrow_circle_left_outlined,
-                        color: Colors.white,
-                        size: 36.sp,
+                          Text(
+                            AppLocalizations.of(context)
+                                .enrichYourLanguageByDonatingVoice,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 24.w),
-                    ImageWidget(
-                      height: 40.w,
-                      width: 40.w,
-                      imageUrl: "assets/images/bolo_icon_white.svg",
-                    ),
-                    SizedBox(width: 8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.boloIndia,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Content Section
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(16.0).r,
-                  child: Column(
-                    children: [
-                      _buildTopActionButtons(),
-                      SizedBox(height: 24.w),
-                      _buildLanguageSelection(),
-                      SizedBox(height: 24.w),
-                      _buildSuccessContent(),
-                      SizedBox(height: 16.w),
                     ],
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
-      ),
+
+                // Content Section
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.all(16.0).r,
+                    child: Column(
+                      children: [
+                        _buildTopActionButtons(),
+                        SizedBox(height: 24.w),
+                        _buildLanguageSelection(),
+                        SizedBox(height: 24.w),
+                        _buildSuccessContent(),
+                        SizedBox(height: 16.w),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -207,17 +208,17 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -266,7 +267,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForValidation,
+          AppLocalizations.of(context).selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -320,7 +321,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
               borderRadius: BorderRadius.circular(16).r,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withValues(alpha: 0.3),
                   spreadRadius: 3,
                   blurRadius: 8,
                   offset: const Offset(0, 3),
@@ -391,8 +392,8 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.lightGreen3.withOpacity(0.4),
-            AppColors.lightGreen3.withOpacity(0.2),
+            AppColors.lightGreen3.withValues(alpha: 0.4),
+            AppColors.lightGreen3.withValues(alpha: 0.2),
           ],
         ),
         borderRadius: BorderRadius.circular(16).r,
@@ -400,7 +401,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
       child: Column(
         children: [
           Text(
-            AppLocalizations.of(context)!.replayRecording,
+            AppLocalizations.of(context).replayRecording,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               color: AppColors.darkGreen,
@@ -422,7 +423,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 border: Border.all(color: Colors.white, width: 4),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.darkGreen.withOpacity(0.4),
+                    color: AppColors.darkGreen.withValues(alpha: 0.4),
                     spreadRadius: 4,
                     blurRadius: 8,
                     offset: const Offset(0, 3),
@@ -449,11 +450,11 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.incorrect,
+              title: AppLocalizations.of(context).incorrect,
               textFontSize: 16.sp,
               onTap: () {
                 // Show validation result
-                _showValidationResult(AppLocalizations.of(context)!.incorrect);
+                _showValidationResult(AppLocalizations.of(context).incorrect);
               },
               textColor: AppColors.orange,
               decoration: BoxDecoration(
@@ -472,7 +473,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context)!.correct,
+              title: AppLocalizations.of(context).correct,
               textFontSize: 16.sp,
               onTap: () {
                 // Navigate to Congratulations Screen
@@ -510,14 +511,14 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(context)!.validationResult,
+            AppLocalizations.of(context).validationResult,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           content: Text(
-            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
+            AppLocalizations.of(context).youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),
@@ -529,7 +530,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
               child: Text(
-                AppLocalizations.of(context)!.continueButton,
+                AppLocalizations.of(context).continueButton,
                 style: GoogleFonts.notoSans(
                   color: AppColors.orange,
                   fontWeight: FontWeight.w600,

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
-import '../../../common_widgets/primary_button_widget.dart';
 import '../../../constants/app_colors.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/phone_input_field.dart';
@@ -44,10 +43,10 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
 
   String? _validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.invalidPhoneNumberMessage;
+      return AppLocalizations.of(context).invalidPhoneNumberMessage;
     }
     if (value.length != 10) {
-      return AppLocalizations.of(context)!.phoneNumberMustBe10Digits;
+      return AppLocalizations.of(context).phoneNumberMustBe10Digits;
     }
     return null;
   }
@@ -88,7 +87,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.verifyYourPhoneNumber,
+                          AppLocalizations.of(context).verifyYourPhoneNumber,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 28.sp,
@@ -101,7 +100,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: AppLocalizations.of(context)!.weWillSendA,
+                                text: AppLocalizations.of(context).weWillSendA,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -109,7 +108,8 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: AppLocalizations.of(context)!.oneTimePasswordOtp,
+                                text: AppLocalizations.of(context)
+                                    .oneTimePasswordOtp,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
@@ -117,7 +117,8 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 ),
                               ),
                               TextSpan(
-                                text: AppLocalizations.of(context)!.toThisMobileNumber,
+                                text: AppLocalizations.of(context)
+                                    .toThisMobileNumber,
                                 style: GoogleFonts.notoSans(
                                   color: AppColors.greys60,
                                   fontSize: 14.sp,
