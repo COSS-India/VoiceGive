@@ -59,16 +59,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
-        body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - 
-                      MediaQuery.of(context).padding.top - 
-                      kToolbarHeight,
-          ),
-          child: Column(
-            children: [
+        body: Column(
+          children: [
             // Header Section - Same as Bolo Screen
             Container(
               padding: EdgeInsets.all(16).r,
@@ -116,23 +108,24 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             ),
             
             // Content Section
-            Padding(
-              padding: const EdgeInsets.all(12.0).r,
-              child: Column(
-                children: [
-                  _buildActionButtons(),
-                  SizedBox(height: 24.w),
-                  _buildLanguageSelection(),
-                  SizedBox(height: 40.w),
-                  _buildPlayRecordingContent(),
-                  SizedBox(height: 40.w),
-                ],
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(16.0).r,
+                child: Column(
+                  children: [
+                    _buildActionButtons(),
+                    SizedBox(height: 24.w),
+                    _buildLanguageSelection(),
+                    SizedBox(height: 24.w),
+                    _buildPlayRecordingContent(),
+                    SizedBox(height: 16.w),
+                  ],
+                ),
               ),
             ),
           ],
         ),
-        ),
-      ),
       ),
     );
   }
@@ -248,20 +241,25 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
 
   Widget _buildPlayRecordingContent() {
     return Container(
-      padding: EdgeInsets.all(16).r,
+      width: double.infinity,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.45,
+      ),
+      padding: EdgeInsets.all(20).r,
       decoration: BoxDecoration(
         color: AppColors.lightGreen3,
-        borderRadius: BorderRadius.circular(12).r,
+        borderRadius: BorderRadius.circular(16).r,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 2),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Progress Indicator and Counter
           Row(
@@ -269,10 +267,10 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
               // Progress Bar
               Expanded(
                 child: Container(
-                  height: 4.w,
+                  height: 5.w,
                   decoration: BoxDecoration(
                     color: AppColors.darkGreen,
-                    borderRadius: BorderRadius.circular(2).r,
+                    borderRadius: BorderRadius.circular(3).r,
                   ),
                 ),
               ),
@@ -300,11 +298,11 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 24.w),
+          SizedBox(height: 28.w),
           
           // Play Recording Section
           _buildPlayRecordingSection(),
-          SizedBox(height: 32.w),
+          SizedBox(height: 28.w),
           
           // Validation Buttons (Disabled)
           _buildValidationButtons(),
@@ -314,61 +312,77 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
   }
 
   Widget _buildPlayRecordingSection() {
-    return Column(
-      children: [
-        Text(
-          widget.audioUrl != null && widget.audioUrl!.isNotEmpty
-              ? AppLocalizations.of(context)!.playContribution
-              : AppLocalizations.of(context)!.playRecording,
-          style: GoogleFonts.notoSans(
-            fontSize: 16.sp,
-            color: AppColors.darkGreen,
-            fontWeight: FontWeight.w600,
-          ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 16.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColors.lightGreen3.withOpacity(0.4),
+            AppColors.lightGreen3.withOpacity(0.2),
+          ],
         ),
-        SizedBox(height: 20.w),
-        GestureDetector(
-          onTap: () {
-            // Navigate to Pause Recording Screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PauseRecordingScreen(
-                  recordedText: widget.recordedText,
-                  selectedLanguage: widget.selectedLanguage,
-                  currentIndex: widget.currentIndex,
-                  totalItems: widget.totalItems,
-                  sentenceId: widget.sentenceId,
-                  audioUrl: widget.audioUrl,
-                  contributionId: widget.contributionId,
+        borderRadius: BorderRadius.circular(16).r,
+      ),
+      child: Column(
+        children: [
+          Text(
+            widget.audioUrl != null && widget.audioUrl!.isNotEmpty
+                ? AppLocalizations.of(context)!.playContribution
+                : AppLocalizations.of(context)!.playRecording,
+            style: GoogleFonts.notoSans(
+              fontSize: 18.sp,
+              color: AppColors.darkGreen,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: 24.w),
+          GestureDetector(
+            onTap: () {
+              // Navigate to Pause Recording Screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PauseRecordingScreen(
+                    recordedText: widget.recordedText,
+                    selectedLanguage: widget.selectedLanguage,
+                    currentIndex: widget.currentIndex,
+                    totalItems: widget.totalItems,
+                    sentenceId: widget.sentenceId,
+                    audioUrl: widget.audioUrl,
+                    contributionId: widget.contributionId,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              height: 100.w,
+              width: 100.w,
+              decoration: BoxDecoration(
+                color: AppColors.darkGreen,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.darkGreen.withOpacity(0.4),
+                    spreadRadius: 4,
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Icon(
+                  isPlaying ? Icons.pause : Icons.play_arrow,
+                  color: Colors.white,
+                  size: 40.sp,
                 ),
               ),
-            );
-          },
-          child: Container(
-            height: 70.w,
-            width: 70.w,
-            decoration: BoxDecoration(
-              color: AppColors.darkGreen,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.darkGreen.withOpacity(0.3),
-                  spreadRadius: 4,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(
-              isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-              size: 28.sp,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -376,50 +390,42 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.incorrect,
-            textFontSize: 16.sp,
-            onTap: () {
-              // Handle incorrect validation without API call
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Marked Incorrect')),
-              );
-            },
-            textColor: AppColors.grey84,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              border: Border.all(
-                color: AppColors.grey84.withOpacity(0.5),
-                width: 1.5,
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context)!.incorrect,
+              textFontSize: 16.sp,
+              onTap: null, // Disabled button
+              textColor: AppColors.grey84,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                border: Border.all(
+                  color: AppColors.grey84.withOpacity(0.5),
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),
-        SizedBox(width: 24.w),
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.correct,
-            textFontSize: 16.sp,
-            onTap: () {
-              // Handle correct validation without API call
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Marked Correct')),
-              );
-            },
-            textColor: AppColors.grey84,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              border: Border.all(
-                color: AppColors.grey84.withOpacity(0.5),
-                width: 1.5,
+        SizedBox(width: 16.w),
+        Expanded(
+          child: SizedBox(
+            height: 48.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context)!.correct,
+              textFontSize: 16.sp,
+              onTap: null, // Disabled button
+              textColor: AppColors.grey84,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                border: Border.all(
+                  color: AppColors.grey84.withOpacity(0.5),
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0).r),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
             ),
           ),
         ),

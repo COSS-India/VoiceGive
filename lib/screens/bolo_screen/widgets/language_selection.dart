@@ -13,7 +13,7 @@ class LanguageSelection extends StatefulWidget {
 }
 
 class _LanguageSelectionState extends State<LanguageSelection> {
-  String selectedLanguage = "English";
+  String selectedLanguage = "Marathi";
 
   @override
   Widget build(BuildContext context) {
