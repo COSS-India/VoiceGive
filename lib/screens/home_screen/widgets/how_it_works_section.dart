@@ -13,7 +13,7 @@ class HowItWorksSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.howItWorks,
+          AppLocalizations.of(context).howItWorks,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -25,16 +25,17 @@ class HowItWorksSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             cardWidget(
-                title: AppLocalizations.of(context)!.contribute,
-                description: AppLocalizations.of(context)!.speakClearlyAndRecord,
+                title: AppLocalizations.of(context).contribute,
+                description: AppLocalizations.of(context).speakClearlyAndRecord,
                 icon: Icons.touch_app_outlined),
             cardWidget(
-                title: AppLocalizations.of(context)!.validate,
-                description: AppLocalizations.of(context)!.listenAndValidate,
+                title: AppLocalizations.of(context).validate,
+                description: AppLocalizations.of(context).listenAndValidate,
                 icon: Icons.check_circle_outline),
             cardWidget(
-                title: AppLocalizations.of(context)!.earnCertificate,
-                description: AppLocalizations.of(context)!.earnCertificateDescription,
+                title: AppLocalizations.of(context).earnCertificate,
+                description:
+                    AppLocalizations.of(context).earnCertificateDescription,
                 icon: Icons.badge_sharp)
           ],
         ),

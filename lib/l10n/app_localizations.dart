@@ -47,12 +47,13 @@ import 'app_localizations_ml.dart';
 /// For example, to get the localized string for 'helloWorld', you would use:
 ///
 /// ```dart
-/// AppLocalizations.of(context)!.helloWorld
+/// AppLocalizations.of(context).helloWorld
 /// ```
 ///
 /// If the string is not found, an error will be thrown.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   /// The locale of this localizations class.
   final String localeName;
@@ -63,7 +64,8 @@ abstract class AppLocalizations {
   ///
   /// Returns: a list of objects containing the current localizations class
   /// and information that Flutter Codegen can read.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     _AppLocalizationsDelegate(),
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
@@ -109,7 +111,8 @@ abstract class AppLocalizations {
   ///
   /// Throws an exception if the key is not found.
   String lookup(String key) {
-    throw FlutterError('AppLocalizations.of(context) called with a context that does not contain a Localizations widget.\n'
+    throw FlutterError(
+        'AppLocalizations.of(context) called with a context that does not contain a Localizations widget.\n'
         'No widget found that provides AppLocalizations.\n'
         'The context used was:\n'
         '  $this');
@@ -120,7 +123,8 @@ abstract class AppLocalizations {
   ///
   /// Throws an exception if the key is not found.
   String lookupByKey(String key) {
-    throw FlutterError('AppLocalizations.of(context) called with a context that does not contain a Localizations widget.\n'
+    throw FlutterError(
+        'AppLocalizations.of(context) called with a context that does not contain a Localizations widget.\n'
         'No widget found that provides AppLocalizations.\n'
         'The context used was:\n'
         '  $this');
@@ -353,7 +357,8 @@ abstract class AppLocalizations {
   String get viewProfile;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -362,7 +367,8 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ml'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ml'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -371,13 +377,14 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 AppLocalizations _lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
-    case 'ml': return AppLocalizationsMl();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'ml':
+      return AppLocalizationsMl();
   }
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

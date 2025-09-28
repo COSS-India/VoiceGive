@@ -102,13 +102,15 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.skip,
+            title: AppLocalizations.of(context).skip,
             textFontSize: 16.sp,
             onTap: () {
               // Handle skip without API call
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
+                SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context).skippedSuccessfully)),
               );
             },
             textColor: AppColors.orange,
@@ -124,7 +126,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.submit,
+            title: AppLocalizations.of(context).submit,
             textFontSize: 16.sp,
             onTap: () {
               print("Submit button tapped!");

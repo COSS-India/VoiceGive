@@ -18,7 +18,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _captchaController = TextEditingController();
-  
+
   String? _secureId;
   String? _captchaImageUrl;
   bool _isLoadingCaptcha = false;
@@ -52,7 +52,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${AppLocalizations.of(context)!.failedToLoadCaptcha}: $e')),
+          SnackBar(
+              content: Text(
+                  '${AppLocalizations.of(context).failedToLoadCaptcha}: $e')),
         );
       }
     } finally {
@@ -67,13 +69,14 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     if (!_formKey.currentState!.validate()) return;
     if (_secureId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.pleaseWaitForCaptcha)),
+        SnackBar(
+            content: Text(AppLocalizations.of(context).pleaseWaitForCaptcha)),
       );
       return;
     }
 
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    
+
     final loginRequest = LoginRequest(
       email: _emailController.text.trim(),
       password: _passwordController.text,
@@ -82,7 +85,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     );
 
     final success = await authProvider.login(loginRequest);
-    
+
     if (success && mounted) {
       // Navigate to home screen or dashboard
       Navigator.of(context).pushReplacementNamed('/home');
@@ -90,7 +93,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(authProvider.errorMessage ?? AppLocalizations.of(context)!.loginFailed),
+          content: Text(authProvider.errorMessage ??
+              AppLocalizations.of(context).loginFailed),
           backgroundColor: Colors.red,
         ),
       );
@@ -119,10 +123,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppLocalizations.of(context)!.emailRequired;
+                    return AppLocalizations.of(context).emailRequired;
                   }
                   if (!value.contains('@')) {
-                    return AppLocalizations.of(context)!.invalidEmail;
+                    return AppLocalizations.of(context).invalidEmail;
                   }
                   return null;
                 },
@@ -140,7 +144,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppLocalizations.of(context)!.passwordRequired;
+                    return AppLocalizations.of(context).passwordRequired;
                   }
                   return null;
                 },
@@ -163,7 +167,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         _captchaImageUrl!,
                         height: 100,
                         errorBuilder: (context, error, stackTrace) {
-                          return Text(AppLocalizations.of(context)!.failedToLoadCaptcha);
+                          return Text(
+                              AppLocalizations.of(context).failedToLoadCaptcha);
                         },
                       ),
                       const SizedBox(height: 8),
@@ -182,7 +187,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                       ),
                       TextButton(
                         onPressed: _loadCaptcha,
-                        child: Text(AppLocalizations.of(context)!.refreshCaptcha),
+                        child:
+                            Text(AppLocalizations.of(context).refreshCaptcha),
                       ),
                     ],
                   ),
@@ -199,7 +205,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         width: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : Text(AppLocalizations.of(context)!.login),
+                    : Text(AppLocalizations.of(context).login),
               ),
 
               // Error message

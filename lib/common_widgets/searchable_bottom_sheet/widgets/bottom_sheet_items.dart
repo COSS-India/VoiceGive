@@ -25,7 +25,7 @@ class ItemsList extends StatelessWidget {
         if (filtered.isEmpty && !isLoading) {
           return Center(
             child: Text(
-              AppLocalizations.of(context)!.mStaticNoSearchResultFound,
+              AppLocalizations.of(context).mStaticNoSearchResultFound,
               style: GoogleFonts.lato(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w400,

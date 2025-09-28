@@ -37,7 +37,7 @@ class HomeFooterSection extends StatelessWidget {
             children: [
               // Main heading
               Text(
-                AppLocalizations.of(context)!.digitalIndiaBhashiniDivision,
+                AppLocalizations.of(context).digitalIndiaBhashiniDivision,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 20.sp,
@@ -47,7 +47,7 @@ class HomeFooterSection extends StatelessWidget {
               SizedBox(height: 12.w),
               // Address
               Text(
-                AppLocalizations.of(context)!.electronicsNiketanAddress,
+                AppLocalizations.of(context).electronicsNiketanAddress,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 14.sp,
@@ -59,7 +59,7 @@ class HomeFooterSection extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.poweredBy,
+                    AppLocalizations.of(context).poweredBy,
                     style: GoogleFonts.notoSans(
                       color: Colors.white,
                       fontSize: 14.sp,
@@ -77,7 +77,7 @@ class HomeFooterSection extends StatelessWidget {
               SizedBox(height: 16.w),
               // Additional information
               Text(
-                AppLocalizations.of(context)!.digitalIndiaCorporation,
+                AppLocalizations.of(context).digitalIndiaCorporation,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -86,7 +86,7 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 4.w),
               Text(
-                AppLocalizations.of(context)!.ministryOfElectronicsIt,
+                AppLocalizations.of(context).ministryOfElectronicsIt,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -95,7 +95,7 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 4.w),
               Text(
-                AppLocalizations.of(context)!.governmentOfIndia,
+                AppLocalizations.of(context).governmentOfIndia,
                 style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -113,7 +113,7 @@ class HomeFooterSection extends StatelessWidget {
               // Copyright notice
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.copyrightNotice,
+                  AppLocalizations.of(context).copyrightNotice,
                   style: GoogleFonts.notoSans(
                     color: Colors.white,
                     fontSize: 12.sp,

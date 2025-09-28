@@ -20,10 +20,12 @@ class EmailOtpVerificationScreen extends StatefulWidget {
   });
 
   @override
-  State<EmailOtpVerificationScreen> createState() => _EmailOtpVerificationScreenState();
+  State<EmailOtpVerificationScreen> createState() =>
+      _EmailOtpVerificationScreenState();
 }
 
-class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen> {
+class _EmailOtpVerificationScreenState
+    extends State<EmailOtpVerificationScreen> {
   final ValueNotifier<bool> _isLoading = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isOtpValid = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isCaptchaValid = ValueNotifier<bool>(false);
@@ -49,10 +51,12 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
 
   void _generateCaptcha() {
     // Generate a random 4-character CAPTCHA
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     _captchaText = '';
     for (int i = 0; i < 4; i++) {
-      _captchaText += chars[(DateTime.now().millisecondsSinceEpoch + i) % chars.length];
+      _captchaText +=
+          chars[(DateTime.now().millisecondsSinceEpoch + i) % chars.length];
     }
     setState(() {});
   }
@@ -87,7 +91,8 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
   }
 
   void _verifyOtp() {
-    if (_otp.length == 6 && _captchaController.text.toLowerCase() == _captchaText.toLowerCase()) {
+    if (_otp.length == 6 &&
+        _captchaController.text.toLowerCase() == _captchaText.toLowerCase()) {
       _isLoading.value = true;
       // TODO: Implement OTP verification logic
       Future.delayed(const Duration(seconds: 2), () {
@@ -130,7 +135,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
       body: SafeArea(
         child: Column(
           children: [
-            GradientHeader(title: AppLocalizations.of(context)!.signUp),
+            GradientHeader(title: AppLocalizations.of(context).signUp),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -139,7 +144,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.verifyOtp,
+                        AppLocalizations.of(context).verifyOtp,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -149,7 +154,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        AppLocalizations.of(context)!.otpSentToMail,
+                        AppLocalizations.of(context).otpSentToMail,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,
@@ -158,22 +163,22 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 32.h),
-                      
+
                       // OTP Input Field
                       EmailOtpInputField(
                         onChanged: _onOtpChanged,
                         errorText: _otpErrorText,
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // OTP Timer
                       EmailOtpTimer(
                         onResend: _resendOtp,
                       ),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // CAPTCHA Section
                       CaptchaWidget(
                         captchaText: _captchaText,
@@ -181,7 +186,7 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                         onChanged: _onCaptchaChanged,
                         validator: _validateCaptcha,
                       ),
-                      
+
                       SizedBox(height: 40.h),
                     ],
                   ),
@@ -220,7 +225,9 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
                                         height: 20.w,
                                         child: CircularProgressIndicator(
                                           strokeWidth: 2,
-                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white),
                                         ),
                                       )
                                     : Text(
@@ -246,5 +253,4 @@ class _EmailOtpVerificationScreenState extends State<EmailOtpVerificationScreen>
       ),
     );
   }
-
 }

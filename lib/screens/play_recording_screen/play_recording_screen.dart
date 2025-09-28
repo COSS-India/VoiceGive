@@ -17,7 +17,7 @@ class PlayRecordingScreen extends StatefulWidget {
   final int? sentenceId;
   final String? audioUrl;
   final int? contributionId;
-  
+
   const PlayRecordingScreen({
     super.key,
     required this.recordedText,
@@ -60,79 +60,80 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - 
-                      MediaQuery.of(context).padding.top - 
-                      kToolbarHeight,
-          ),
-          child: Column(
-            children: [
-            // Header Section - Same as Bolo Screen
-            Container(
-              padding: EdgeInsets.all(16).r,
-              decoration: BoxDecoration(color: AppColors.orange),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: _navigateBackToValidation,
-                    child: Icon(
-                      Icons.arrow_circle_left_outlined,
-                      color: Colors.white,
-                      size: 36.sp,
-                    ),
-                  ),
-                  SizedBox(width: 24.w),
-                  ImageWidget(
-                    height: 40.w,
-                    width: 40.w,
-                    imageUrl: "assets/images/bolo_icon_white.svg",
-                  ),
-                  SizedBox(width: 8.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          physics: const BouncingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  kToolbarHeight,
+            ),
+            child: Column(
+              children: [
+                // Header Section - Same as Bolo Screen
+                Container(
+                  padding: EdgeInsets.all(16).r,
+                  decoration: BoxDecoration(color: AppColors.orange),
+                  child: Row(
                     children: [
-                      Text(
-                        AppLocalizations.of(context)!.boloIndia,
-                        style: GoogleFonts.notoSans(
+                      InkWell(
+                        onTap: _navigateBackToValidation,
+                        child: Icon(
+                          Icons.arrow_circle_left_outlined,
                           color: Colors.white,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
+                          size: 36.sp,
                         ),
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      SizedBox(width: 24.w),
+                      ImageWidget(
+                        height: 40.w,
+                        width: 40.w,
+                        imageUrl: "assets/images/bolo_icon_white.svg",
+                      ),
+                      SizedBox(width: 8.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).boloIndia,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            AppLocalizations.of(context)
+                                .enrichYourLanguageByDonatingVoice,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+
+                // Content Section
+                Padding(
+                  padding: const EdgeInsets.all(12.0).r,
+                  child: Column(
+                    children: [
+                      _buildActionButtons(),
+                      SizedBox(height: 24.w),
+                      _buildLanguageSelection(),
+                      SizedBox(height: 40.w),
+                      _buildPlayRecordingContent(),
+                      SizedBox(height: 40.w),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            
-            // Content Section
-            Padding(
-              padding: const EdgeInsets.all(12.0).r,
-              child: Column(
-                children: [
-                  _buildActionButtons(),
-                  SizedBox(height: 24.w),
-                  _buildLanguageSelection(),
-                  SizedBox(height: 40.w),
-                  _buildPlayRecordingContent(),
-                  SizedBox(height: 40.w),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
-        ),
-      ),
       ),
     );
   }
@@ -150,17 +151,17 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -209,7 +210,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForValidation,
+          AppLocalizations.of(context).selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -288,7 +289,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             ],
           ),
           SizedBox(height: 24.w),
-          
+
           // Recorded Text
           Text(
             widget.recordedText,
@@ -301,11 +302,11 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 24.w),
-          
+
           // Play Recording Section
           _buildPlayRecordingSection(),
           SizedBox(height: 32.w),
-          
+
           // Validation Buttons (Disabled)
           _buildValidationButtons(),
         ],
@@ -318,8 +319,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
       children: [
         Text(
           widget.audioUrl != null && widget.audioUrl!.isNotEmpty
-              ? AppLocalizations.of(context)!.playContribution
-              : AppLocalizations.of(context)!.playRecording,
+              ? AppLocalizations.of(context).playContribution
+              : AppLocalizations.of(context).playRecording,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -380,7 +381,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.incorrect,
+            title: AppLocalizations.of(context).incorrect,
             textFontSize: 16.sp,
             onTap: () {
               // Handle incorrect validation without API call
@@ -404,7 +405,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.correct,
+            title: AppLocalizations.of(context).correct,
             textFontSize: 16.sp,
             onTap: () {
               // Handle correct validation without API call
@@ -426,6 +427,4 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
       ],
     );
   }
-
 }
-        

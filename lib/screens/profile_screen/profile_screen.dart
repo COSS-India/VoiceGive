@@ -105,7 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => OtpVerificationScreen(phoneNumber: widget.phoneNumber!),
+          builder: (_) =>
+              OtpVerificationScreen(phoneNumber: widget.phoneNumber!),
         ),
       );
     } else {
@@ -126,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (_ageGroups.isEmpty) {
       _initializeLocalizedStrings();
     }
-    
+
     return WillPopScope(
       onWillPop: _navigateBackToOtp,
       child: Scaffold(
@@ -153,11 +154,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       alignment: Alignment.centerLeft,
                       child: InkWell(
                         onTap: _navigateBackToOtp,
-                        child: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+                        child: Icon(Icons.arrow_back,
+                            color: Colors.white, size: 20.sp),
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.completeYourProfile,
+                      AppLocalizations.of(context).completeYourProfile,
                       style: GoogleFonts.notoSans(
                         color: Colors.white,
                         fontSize: 16.sp,
@@ -178,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           SizedBox(height: 16.h),
                           Text(
-                            AppLocalizations.of(context)!.personalInformation,
+                            AppLocalizations.of(context).personalInformation,
                             style: GoogleFonts.notoSans(
                               color: AppColors.greys87,
                               fontSize: 16.sp,
@@ -202,7 +204,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.firstName,
+                                      text: AppLocalizations.of(context)
+                                          .firstName,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
                                         fontSize: 14.sp,
@@ -215,11 +218,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               enabledBorder: _outline(AppColors.darkGrey),
                               focusedBorder: _outline(AppColors.darkGrey),
                               errorBorder: _outline(AppColors.negativeLight),
-                              focusedErrorBorder: _outline(AppColors.negativeLight),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                              focusedErrorBorder:
+                                  _outline(AppColors.negativeLight),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 12.w),
                             ),
-                            validator: (v) => (v == null || v.trim().isEmpty) ? AppLocalizations.of(context)!.firstNameRequired : null,
-                            style: GoogleFonts.notoSans(color: AppColors.greys87, fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? AppLocalizations.of(context).firstNameRequired
+                                : null,
+                            style: GoogleFonts.notoSans(
+                                color: AppColors.greys87,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 16.h),
                           // Last name
@@ -238,7 +248,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.lastName,
+                                      text:
+                                          AppLocalizations.of(context).lastName,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
                                         fontSize: 14.sp,
@@ -251,11 +262,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               enabledBorder: _outline(AppColors.darkGrey),
                               focusedBorder: _outline(AppColors.darkGrey),
                               errorBorder: _outline(AppColors.negativeLight),
-                              focusedErrorBorder: _outline(AppColors.negativeLight),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                              focusedErrorBorder:
+                                  _outline(AppColors.negativeLight),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 12.w),
                             ),
-                            validator: (v) => (v == null || v.trim().isEmpty) ? AppLocalizations.of(context)!.lastNameRequired : null,
-                            style: GoogleFonts.notoSans(color: AppColors.greys87, fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            validator: (v) => (v == null || v.trim().isEmpty)
+                                ? AppLocalizations.of(context).lastNameRequired
+                                : null,
+                            style: GoogleFonts.notoSans(
+                                color: AppColors.greys87,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 16.h),
                           // Age group picker (read-only TextField with in-box label)
@@ -274,9 +292,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   });
                                   final ctx = _ageFieldKey.currentContext;
                                   if (ctx != null) {
-                                    Future.microtask(() => Scrollable.ensureVisible(
+                                    Future.microtask(() =>
+                                        Scrollable.ensureVisible(
                                           ctx,
-                                          duration: const Duration(milliseconds: 250),
+                                          duration:
+                                              const Duration(milliseconds: 250),
                                           alignment: 0.1,
                                         ));
                                   }
@@ -287,21 +307,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   text: TextSpan(children: [
                                     TextSpan(
                                       text: '*',
-                                      style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp),
+                                      style: GoogleFonts.notoSans(
+                                          color: AppColors.negativeLight,
+                                          fontSize: 14.sp),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.chooseYourAgeGroup,
-                                      style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
+                                      text: AppLocalizations.of(context)
+                                          .chooseYourAgeGroup,
+                                      style: GoogleFonts.notoSans(
+                                          color: AppColors.greys60,
+                                          fontSize: 14.sp),
                                     ),
                                   ]),
                                 ),
                                 border: _outline(AppColors.darkGrey),
                                 enabledBorder: _outline(AppColors.darkGrey),
                                 focusedBorder: _outline(AppColors.darkGrey),
-                                suffixIcon: Icon(Icons.keyboard_arrow_down, color: AppColors.greys87, size: 20.w),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.w),
+                                suffixIcon: Icon(Icons.keyboard_arrow_down,
+                                    color: AppColors.greys87, size: 20.w),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 16.w),
                               ),
-                              style: GoogleFonts.notoSans(color: AppColors.greys87, fontSize: 14.sp, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.notoSans(
+                                  color: AppColors.greys87,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(height: 16.h),
@@ -321,9 +351,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   });
                                   final ctx = _genderFieldKey.currentContext;
                                   if (ctx != null) {
-                                    Future.microtask(() => Scrollable.ensureVisible(
+                                    Future.microtask(() =>
+                                        Scrollable.ensureVisible(
                                           ctx,
-                                          duration: const Duration(milliseconds: 250),
+                                          duration:
+                                              const Duration(milliseconds: 250),
                                           alignment: 0.1,
                                         ));
                                   }
@@ -334,26 +366,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   text: TextSpan(children: [
                                     TextSpan(
                                       text: '*',
-                                      style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp),
+                                      style: GoogleFonts.notoSans(
+                                          color: AppColors.negativeLight,
+                                          fontSize: 14.sp),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.gender,
-                                      style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
+                                      text: AppLocalizations.of(context).gender,
+                                      style: GoogleFonts.notoSans(
+                                          color: AppColors.greys60,
+                                          fontSize: 14.sp),
                                     ),
                                   ]),
                                 ),
                                 border: _outline(AppColors.darkGrey),
                                 enabledBorder: _outline(AppColors.darkGrey),
                                 focusedBorder: _outline(AppColors.darkGrey),
-                                suffixIcon: Icon(Icons.keyboard_arrow_down, color: AppColors.greys87, size: 20.w),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.w),
+                                suffixIcon: Icon(Icons.keyboard_arrow_down,
+                                    color: AppColors.greys87, size: 20.w),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 16.w),
                               ),
-                              style: GoogleFonts.notoSans(color: AppColors.greys87, fontSize: 14.sp, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.notoSans(
+                                  color: AppColors.greys87,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           SizedBox(height: 16.h),
                           // Phone number (read-only) - only show if phone number is provided and not an email
-                          if (widget.phoneNumber != null && !widget.phoneNumber!.contains('@'))
+                          if (widget.phoneNumber != null &&
+                              !widget.phoneNumber!.contains('@'))
                             TextFormField(
                               initialValue: '+91 ${widget.phoneNumber}',
                               readOnly: true,
@@ -361,9 +403,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 enabled: false,
                                 enabledBorder: _outline(AppColors.darkGrey),
                                 disabledBorder: _outline(AppColors.darkGrey),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 12.w, vertical: 12.w),
                               ),
-                              style: GoogleFonts.notoSans(color: AppColors.darkGreen, fontSize: 14.sp, fontWeight: FontWeight.w600),
+                              style: GoogleFonts.notoSans(
+                                  color: AppColors.darkGreen,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600),
                             ),
                           SizedBox(height: 16.h),
                           // Email
@@ -371,23 +417,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)!.emailId,
-                              labelStyle: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
+                              labelText: AppLocalizations.of(context).emailId,
+                              labelStyle: GoogleFonts.notoSans(
+                                  color: AppColors.greys60, fontSize: 14.sp),
                               enabledBorder: _outline(AppColors.darkGrey),
                               focusedBorder: _outline(AppColors.darkGrey),
                               errorBorder: _outline(AppColors.negativeLight),
-                              focusedErrorBorder: _outline(AppColors.negativeLight),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                              focusedErrorBorder:
+                                  _outline(AppColors.negativeLight),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 12.w),
                             ),
                             // No strict validation required; accept any value (dummy emails)
                             validator: (v) => null,
-                            style: GoogleFonts.notoSans(color: AppColors.greys87, fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            style: GoogleFonts.notoSans(
+                                color: AppColors.greys87,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 32.h),
                           SizedBox(
                             width: double.infinity,
                             child: PrimaryButtonWidget(
-                              title: AppLocalizations.of(context)!.saveAndContinue,
+                              title:
+                                  AppLocalizations.of(context).saveAndContinue,
                               textColor: Colors.white,
                               decoration: BoxDecoration(
                                 color: AppColors.orange,
@@ -395,19 +448,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               verticalPadding: 14.w,
                               onTap: () {
-                                final valid = _formKey.currentState?.validate() ?? false;
-                                final selectionsValid = _ageController.text.isNotEmpty && _genderController.text.isNotEmpty;
+                                final valid =
+                                    _formKey.currentState?.validate() ?? false;
+                                final selectionsValid =
+                                    _ageController.text.isNotEmpty &&
+                                        _genderController.text.isNotEmpty;
                                 setState(() {});
                                 if (valid && selectionsValid) {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (_) => const OtherInformationScreen(),
+                                      builder: (_) =>
+                                          const OtherInformationScreen(),
                                     ),
                                   );
                                 } else if (!selectionsValid) {
                                   // Do not change border color; just show inline message
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(AppLocalizations.of(context)!.pleaseSelectAgeGroupAndGender)),
+                                    SnackBar(
+                                        content: Text(AppLocalizations.of(
+                                                context)
+                                            .pleaseSelectAgeGroupAndGender)),
                                   );
                                 }
                               },
@@ -426,5 +486,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-

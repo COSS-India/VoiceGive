@@ -20,7 +20,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForContribution,
+          AppLocalizations.of(context).selectLanguageForContribution,
           style: GoogleFonts.notoSans(
               fontSize: 12.sp,
               color: AppColors.darkGreen,
@@ -34,18 +34,18 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                 builder: (context) {
                   return SearchableBottomSheetContent(
                     items: [
-                      AppLocalizations.of(context)!.english,
-                      AppLocalizations.of(context)!.hindi,
-                      AppLocalizations.of(context)!.kannada,
-                      AppLocalizations.of(context)!.tamil,
-                      AppLocalizations.of(context)!.telugu,
-                      AppLocalizations.of(context)!.malayalam,
-                      AppLocalizations.of(context)!.bengali,
-                      AppLocalizations.of(context)!.marathi,
-                      AppLocalizations.of(context)!.gujarati,
-                      AppLocalizations.of(context)!.punjabi,
-                      AppLocalizations.of(context)!.odia,
-                      AppLocalizations.of(context)!.assamese,
+                      AppLocalizations.of(context).english,
+                      AppLocalizations.of(context).hindi,
+                      AppLocalizations.of(context).kannada,
+                      AppLocalizations.of(context).tamil,
+                      AppLocalizations.of(context).telugu,
+                      AppLocalizations.of(context).malayalam,
+                      AppLocalizations.of(context).bengali,
+                      AppLocalizations.of(context).marathi,
+                      AppLocalizations.of(context).gujarati,
+                      AppLocalizations.of(context).punjabi,
+                      AppLocalizations.of(context).odia,
+                      AppLocalizations.of(context).assamese,
                     ],
                     onItemSelected: (value) {
                       selectedLanguage = value;

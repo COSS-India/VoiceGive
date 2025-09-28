@@ -59,93 +59,93 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - 
-                      MediaQuery.of(context).padding.top - 
-                      kToolbarHeight,
-          ),
-          child: Column(
-            children: [
-              // Header Section - Same as Bolo Screen
-              Container(
-                padding: EdgeInsets.all(16).r,
-                decoration: BoxDecoration(color: AppColors.orange),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => PauseRecordingScreen(
-                              recordedText: widget.recordedText,
-                              selectedLanguage: widget.selectedLanguage,
-                              currentIndex: widget.currentIndex,
-                              totalItems: widget.totalItems,
-                              sentenceId: widget.sentenceId,
-                              audioUrl: widget.audioUrl,
-                              contributionId: widget.contributionId,
+          physics: const BouncingScrollPhysics(),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  kToolbarHeight,
+            ),
+            child: Column(
+              children: [
+                // Header Section - Same as Bolo Screen
+                Container(
+                  padding: EdgeInsets.all(16).r,
+                  decoration: BoxDecoration(color: AppColors.orange),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => PauseRecordingScreen(
+                                recordedText: widget.recordedText,
+                                selectedLanguage: widget.selectedLanguage,
+                                currentIndex: widget.currentIndex,
+                                totalItems: widget.totalItems,
+                                sentenceId: widget.sentenceId,
+                                audioUrl: widget.audioUrl,
+                                contributionId: widget.contributionId,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.arrow_circle_left_outlined,
+                          color: Colors.white,
+                          size: 36.sp,
+                        ),
+                      ),
+                      SizedBox(width: 24.w),
+                      ImageWidget(
+                        height: 40.w,
+                        width: 40.w,
+                        imageUrl: "assets/images/bolo_icon_white.svg",
+                      ),
+                      SizedBox(width: 8.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).boloIndia,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.arrow_circle_left_outlined,
-                        color: Colors.white,
-                        size: 36.sp,
+                          Text(
+                            AppLocalizations.of(context).enrichYourLanguage,
+                            style: GoogleFonts.notoSans(
+                              color: Colors.white,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 24.w),
-                    ImageWidget(
-                      height: 40.w,
-                      width: 40.w,
-                      imageUrl: "assets/images/bolo_icon_white.svg",
-                    ),
-                    SizedBox(width: 8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.boloIndia,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.enrichYourLanguage,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
-              // Content Section
-              Padding(
-                padding: const EdgeInsets.all(12.0).r,
-                child: Column(
-                  children: [
-                    _buildActionButtons(),
-                    SizedBox(height: 24.w),
-                    _buildLanguageSelection(),
-                    SizedBox(height: 40.w),
-                    _buildReplayRecordingContent(),
-                    SizedBox(height: 40.w),
-                  ],
+                // Content Section
+                Padding(
+                  padding: const EdgeInsets.all(12.0).r,
+                  child: Column(
+                    children: [
+                      _buildActionButtons(),
+                      SizedBox(height: 24.w),
+                      _buildLanguageSelection(),
+                      SizedBox(height: 40.w),
+                      _buildReplayRecordingContent(),
+                      SizedBox(height: 40.w),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
         ),
       ),
     );
@@ -164,17 +164,17 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.quickTips,
+            title: AppLocalizations.of(context).quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.report,
+            title: AppLocalizations.of(context).report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context)!.testSpeakers,
+            title: AppLocalizations.of(context).testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -223,7 +223,7 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context)!.selectLanguageForValidation,
+          AppLocalizations.of(context).selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -331,7 +331,7 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
     return Column(
       children: [
         Text(
-          AppLocalizations.of(context)!.replayRecording,
+          AppLocalizations.of(context).replayRecording,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -381,14 +381,14 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.incorrect,
+            title: AppLocalizations.of(context).incorrect,
             textFontSize: 16.sp,
             onTap: () {
               setState(() {
                 isIncorrect = true;
                 isCorrect = false;
               });
-              _showValidationResult(AppLocalizations.of(context)!.incorrect);
+              _showValidationResult(AppLocalizations.of(context).incorrect);
             },
             textColor: isIncorrect ? Colors.white : AppColors.orange,
             decoration: BoxDecoration(
@@ -406,7 +406,7 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.correct,
+            title: AppLocalizations.of(context).correct,
             textFontSize: 16.sp,
             onTap: () {
               setState(() {
@@ -448,14 +448,14 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(context)!.validationResult,
+            AppLocalizations.of(context).validationResult,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           content: Text(
-            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
+            AppLocalizations.of(context).youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),
@@ -467,7 +467,7 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
                 Navigator.of(context).pop(); // Go back to home
               },
               child: Text(
-                AppLocalizations.of(context)!.continueButton,
+                AppLocalizations.of(context).continueButton,
                 style: GoogleFonts.notoSans(
                   color: AppColors.orange,
                   fontWeight: FontWeight.w600,
@@ -480,4 +480,3 @@ class _ReplayRecordingScreenState extends State<ReplayRecordingScreen> {
     );
   }
 }
-
