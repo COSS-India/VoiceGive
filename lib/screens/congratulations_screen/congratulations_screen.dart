@@ -706,62 +706,75 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय",
-                    style: GoogleFonts.notoSans(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    "MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY",
-                    style: GoogleFonts.notoSans(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  SizedBox(height: 8.w),
-                  Text(
-                    "Digital India",
-                    style: GoogleFonts.notoSans(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.orange,
-                    ),
-                  ),
-                ],
-              ),
-              // BHASHINI Logo
-              Container(
-                padding: EdgeInsets.all(8).r,
-                decoration: BoxDecoration(
-                  color: AppColors.lightGreen3,
-                  borderRadius: BorderRadius.circular(8).r,
-                ),
+              Flexible(
+                flex: 2,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "BHASHINI",
-                      style: GoogleFonts.notoSans(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.darkGreen,
-                      ),
-                    ),
-                    Text(
-                      "भाषिणी",
+                      "इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय",
                       style: GoogleFonts.notoSans(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4.w),
+                    Text(
+                      "MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY",
+                      style: GoogleFonts.notoSans(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[600],
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 8.w),
+                    Text(
+                      "Digital India",
+                      style: GoogleFonts.notoSans(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
                         color: AppColors.orange,
                       ),
                     ),
                   ],
+                ),
+              ),
+              // BHASHINI Logo
+              Flexible(
+                flex: 1,
+                child: Container(
+                  padding: EdgeInsets.all(8).r,
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGreen3,
+                    borderRadius: BorderRadius.circular(8).r,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "BHASHINI",
+                        style: GoogleFonts.notoSans(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.darkGreen,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "भाषिणी",
+                        style: GoogleFonts.notoSans(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.orange,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

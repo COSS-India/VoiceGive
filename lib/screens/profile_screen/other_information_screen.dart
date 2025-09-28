@@ -128,7 +128,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                     ),
                   ),
                   Text(
-                    'Complete your profile',
+                    AppLocalizations.of(context)!.completeYourProfile,
                     style: GoogleFonts.notoSans(
                       color: Colors.white,
                       fontSize: 16.sp,
@@ -146,7 +146,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Other Information',
+                        AppLocalizations.of(context)!.otherInformation,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 16.sp,
@@ -166,7 +166,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                             label: RichText(
                               text: TextSpan(children: [
                                 TextSpan(text: '*', style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp)),
-                                TextSpan(text: 'Country', style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
+                                TextSpan(text: AppLocalizations.of(context)!.country, style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
                               ]),
                             ),
                             border: _outline(AppColors.darkGrey),
@@ -194,7 +194,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                             label: RichText(
                               text: TextSpan(children: [
                                 TextSpan(text: '*', style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp)),
-                                TextSpan(text: 'State', style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
+                                TextSpan(text: AppLocalizations.of(context)!.state, style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
                               ]),
                             ),
                             border: _outline(AppColors.darkGrey),
@@ -229,7 +229,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                             label: RichText(
                               text: TextSpan(children: [
                                 TextSpan(text: '*', style: GoogleFonts.notoSans(color: AppColors.negativeLight, fontSize: 14.sp)),
-                                TextSpan(text: 'District', style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
+                                TextSpan(text: AppLocalizations.of(context)!.district, style: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp)),
                               ]),
                             ),
                             border: _outline(AppColors.darkGrey),
@@ -245,7 +245,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         Padding(
                           padding: EdgeInsets.only(top: 6.w, left: 8.w),
                           child: Text(
-                            'This field is required to continue.',
+                            AppLocalizations.of(context)!.thisFieldIsRequiredToContinue,
                             style: GoogleFonts.notoSans(
                               color: AppColors.negativeLight,
                               fontSize: 12.sp,
@@ -267,7 +267,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           }),
                         ),
                         decoration: InputDecoration(
-                          labelText: 'Preferrered Language',
+                          labelText: AppLocalizations.of(context)!.preferredLanguage,
                           labelStyle: GoogleFonts.notoSans(color: AppColors.greys60, fontSize: 14.sp),
                           border: _outline(AppColors.darkGrey),
                           enabledBorder: _outline(AppColors.darkGrey),
@@ -281,7 +281,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: PrimaryButtonWidget(
-                          title: 'Save & Continue',
+                          title: AppLocalizations.of(context)!.saveAndContinue,
                           textColor: Colors.white,
                           decoration: BoxDecoration(
                             color: AppColors.orange,
