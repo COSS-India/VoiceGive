@@ -1,5 +1,5 @@
-package com.example.bhashadaan
+package gov.bhashini.bhashadaan
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity()
+class MainActivity : FlutterActivity()
