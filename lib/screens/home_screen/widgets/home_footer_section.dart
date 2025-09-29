@@ -45,12 +45,6 @@ class HomeFooterSection extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 12.w),
-              // Branding alignment
-              BrandingAlignmentWidget(
-                fontSize: 14.sp,
-                textColor: Colors.white,
-              ),
-              SizedBox(height: 12.w),
               // Address
               Text(
                 AppLocalizations.of(context)!.electronicsNiketanAddress,
