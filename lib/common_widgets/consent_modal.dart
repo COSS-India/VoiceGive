@@ -169,7 +169,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
 
                         _buildNumberedItem(
                           "5.",
-                          "You have read, understood, and accepted the following governing documents on the BhashaDaan portal:",
+                          "You have read, understood, and accepted the following governing documents on the BhashaDaan mobile app:",
                         ),
                         SizedBox(height: 16.w),
 

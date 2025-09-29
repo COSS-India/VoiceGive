@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
+import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
@@ -15,15 +16,12 @@ import 'package:path_provider/path_provider.dart';
 enum RecordingState { idle, recording, stopped }
 
 class RecordingButton extends StatefulWidget {
-  final String language;
-  final String text;
-  final int sentenceId;
-
+  final Function(File?) getRecordedFile;
+  final Function(bool?) isRecording;
   const RecordingButton({
     super.key,
-    required this.language,
-    required this.text,
-    required this.sentenceId,
+    required this.getRecordedFile,
+    required this.isRecording,
   });
 
   @override
@@ -61,10 +59,8 @@ class _RecordingButtonState extends State<RecordingButton>
     final timestamp = DateTime.now().millisecondsSinceEpoch;
 
     if (kIsWeb) {
-      // For web platform, use a simple filename with WAV extension
       return 'recording_$timestamp.wav';
     } else {
-      // For mobile platforms, get proper directory and create full path
       final directory = await getTemporaryDirectory();
       return '${directory.path}/recording_$timestamp.wav';
     }
@@ -79,7 +75,9 @@ class _RecordingButtonState extends State<RecordingButton>
   Future<void> _startRecording() async {
     if (!await _hasRequiredPermissions()) {
       Helper.showSnackBarMessage(
-          context: context, text: "Microphone permission not granted");
+          // ignore: use_build_context_synchronously
+          context: context,
+          text: "Microphone permission not granted");
       return;
     }
 
@@ -89,10 +87,10 @@ class _RecordingButtonState extends State<RecordingButton>
       await recorder.start(
         path: tempPath,
         RecordConfig(
-          encoder: AudioEncoder.wav, // Use WAV encoder for compatibility
-          sampleRate: 44100, // Standard sample rate
-          bitRate: 128000, // 128 kbps bit rate
-          numChannels: 1, // Mono recording
+          encoder: AudioEncoder.wav,
+          sampleRate: 44100,
+          bitRate: 128000,
+          numChannels: 1,
         ),
       );
       recordedFilePath = tempPath;
@@ -100,51 +98,28 @@ class _RecordingButtonState extends State<RecordingButton>
     } catch (e) {
       debugPrint('Error starting recording: $e');
       Helper.showSnackBarMessage(
-          context: context, text: "Failed to start recording: $e");
+          // ignore: use_build_context_synchronously
+          context: context,
+          text: "Failed to start recording: $e");
     }
   }
 
   Future<void> _stopRecording() async {
     try {
       final path = await recorder.stop();
-      if (path != null && path.isNotEmpty) {
+      if (path != null) {
         recordedFilePath = path;
-        debugPrint('Recording stopped and saved to: $path');
 
-        if (kIsWeb) {
-          // For web, we get a blob URL - no need to verify file existence
-          // The blob URL is valid and contains the recorded audio
-          debugPrint('Web recording completed with blob URL');
-        } else {
-          // For mobile platforms, verify the file exists and has content
-          final file = File(path);
-          if (await file.exists()) {
-            final fileSize = await file.length();
-            debugPrint('Recorded file size: $fileSize bytes');
-            if (fileSize == 0) {
-              debugPrint('Warning: Recorded file is empty');
-              Helper.showSnackBarMessage(
-                  context: context, text: "Recording failed - empty file");
-              recordedFilePath = null;
-            }
-          } else {
-            debugPrint('Error: Recorded file does not exist');
-            Helper.showSnackBarMessage(
-                context: context, text: "Recording failed - file not found");
-            recordedFilePath = null;
-          }
-        }
-      } else {
-        debugPrint('Recording stopped but no file path returned');
-        Helper.showSnackBarMessage(
-            context: context, text: "Recording failed - no file path returned");
-        recordedFilePath = null;
+        widget.getRecordedFile(File(path));
+
+        debugPrint('Recording saved: $path');
       }
     } catch (e) {
       debugPrint('Error stopping recording: $e');
       Helper.showSnackBarMessage(
-          context: context, text: "Failed to stop recording: $e");
-      recordedFilePath = null;
+          // ignore: use_build_context_synchronously
+          context: context,
+          text: "Failed to stop recording: $e");
     }
   }
 
@@ -167,11 +142,20 @@ class _RecordingButtonState extends State<RecordingButton>
   Widget _buildIcon() {
     switch (_state) {
       case RecordingState.idle:
-        return Icon(Icons.mic, size: 40.sp, color: Colors.white);
+        return ImageWidget(
+            imageUrl: "assets/icons/microphone.png",
+            height: 35.sp,
+            imageColor: Colors.white,
+            width: 30.sp);
+
       case RecordingState.recording:
         return Icon(Icons.stop, size: 40.sp, color: Colors.white);
       case RecordingState.stopped:
-        return Icon(Icons.mic, size: 40.sp, color: Colors.white);
+        return ImageWidget(
+            imageUrl: "assets/icons/microphone.png",
+            height: 35.sp,
+            imageColor: Colors.white,
+            width: 30.sp);
     }
   }
 

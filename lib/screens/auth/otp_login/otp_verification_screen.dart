@@ -120,6 +120,35 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         onChanged: _onOtpChanged,
                         errorText: _errorText,
                       ),
+                      SizedBox(height: 24.h),
+                      GestureDetector(
+                        onTap: () {
+                          // widget.onResend?.call();
+                          // _resetTimer();
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "I didn't receive any OTP. ",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.greys60,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "RESEND",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.darkGreen,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 40.h),
                     ],
                   ),

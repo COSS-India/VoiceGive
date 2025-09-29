@@ -3,6 +3,7 @@ import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
+import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_headers_section.dart';
 import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
 import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
 import 'package:flutter/material.dart';
@@ -64,54 +65,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              // Header Section - Same as Bolo Screen
-              Container(
-                padding: EdgeInsets.all(16).r,
-                decoration: BoxDecoration(color: AppColors.orange),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: _navigateBackToReRecord,
-                      child: Icon(
-                        Icons.arrow_circle_left_outlined,
-                        color: Colors.white,
-                        size: 36.sp,
-                      ),
-                    ),
-                    SizedBox(width: 24.w),
-                    ImageWidget(
-                      height: 40.w,
-                      width: 40.w,
-                      imageUrl: "assets/images/bolo_icon_white.svg",
-                    ),
-                    SizedBox(width: 8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context).boloIndia,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)
-                              .enrichYourLanguageByDonatingVoice,
-                          style: GoogleFonts.notoSans(
-                            color: Colors.white,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Content Section - Same padding as Bolo Screen
+              BoloHeadersSection(),
               Padding(
                 padding: const EdgeInsets.all(12.0).r,
                 child: Column(
@@ -297,106 +251,12 @@ class _ValidationScreenState extends State<ValidationScreen> {
           ),
           SizedBox(height: 50.w),
 
-          // Audio Player
-          _buildAudioPlayer(),
-          SizedBox(height: 30.w),
-
           // Re-Record Section
           _buildReRecordSection(),
           SizedBox(height: 50.w),
 
           // Action Buttons
           _buildBottomButtons(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAudioPlayer() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12).r,
-      decoration: BoxDecoration(
-        color: AppColors.lightGreen3,
-        borderRadius: BorderRadius.circular(8).r,
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              // Navigate to Play Recording Screen
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PlayRecordingScreen(
-                    recordedText: widget.recordedText,
-                    selectedLanguage: widget.selectedLanguage,
-                    currentIndex: widget.currentIndex,
-                    totalItems: widget.totalItems,
-                    sentenceId: widget.sentenceId,
-                    audioUrl: null,
-                  ),
-                ),
-              );
-            },
-            child: Icon(
-              Icons.play_arrow,
-              color: AppColors.darkGreen,
-              size: 24.sp,
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Expanded(
-            child: Column(
-              children: [
-                // Progress Bar
-                Container(
-                  height: 2.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.grey24,
-                    borderRadius: BorderRadius.circular(1).r,
-                  ),
-                  child: FractionallySizedBox(
-                    alignment: Alignment.centerLeft,
-                    widthFactor:
-                        currentPosition.inSeconds / totalDuration.inSeconds,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
-                        borderRadius: BorderRadius.circular(1).r,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 4.w),
-                // Time Display
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      _formatDuration(currentPosition),
-                      style: GoogleFonts.notoSans(
-                        fontSize: 10.sp,
-                        color: AppColors.grey84,
-                      ),
-                    ),
-                    Text(
-                      _formatDuration(totalDuration),
-                      style: GoogleFonts.notoSans(
-                        fontSize: 10.sp,
-                        color: AppColors.grey84,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Icon(
-            Icons.more_vert,
-            color: AppColors.grey84,
-            size: 20.sp,
-          ),
         ],
       ),
     );
@@ -508,12 +368,5 @@ class _ValidationScreenState extends State<ValidationScreen> {
         ),
       ],
     );
-  }
-
-  String _formatDuration(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
   }
 }

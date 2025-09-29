@@ -22,11 +22,14 @@ class AppLocalizationsEn {
   String get mStaticSkip => 'Skip';
   String get mStaticNoSearchResultFound => 'No results found';
   String get mStaticStartTyping => 'Start typing here...';
-  String get mStaticInputSubmitted => 'Thanks for your contribution! we have received your input.';
-  String get mStaticValidationSuccessMessage => 'Thank you for validating the input.';
+  String get mStaticInputSubmitted =>
+      'Thanks for your contribution! we have received your input.';
+  String get mStaticValidationSuccessMessage =>
+      'Thank you for validating the input.';
   String get login => 'Login';
   String get verifyPhoneNumber => 'Verify your phone number';
-  String get otpSentMessage => 'We will send a One Time Password(OTP) to this mobile number.';
+  String get otpSentMessage =>
+      'We will send a One Time Password(OTP) to this mobile number.';
   String get enterMobileNumber => 'Enter mobile no.*';
   String get getOtp => 'Get OTP';
   String get invalidPhoneNumber => 'Please enter a valid phone number';
@@ -45,11 +48,14 @@ class AppLocalizationsEn {
   String get refreshCaptcha => 'Refresh Captcha';
   String get passwordRequired => 'Password is required';
   String get passwordMinLength => 'Password must be at least 8 characters';
-  String get passwordComplexity => 'Password must contain uppercase, lowercase and number';
+  String get passwordComplexity =>
+      'Password must contain uppercase, lowercase and number';
   String get emailRequired => 'Email is required';
   String get invalidEmail => 'Please enter a valid email';
-  String get acceptTermsAndConditions => 'Please accept the Terms & Conditions and Privacy Policy';
-  String get termsAndConditionsComingSoon => 'Terms & Conditions page coming soon!';
+  String get acceptTermsAndConditions =>
+      'Please accept the Terms & Conditions and Privacy Policy';
+  String get termsAndConditionsComingSoon =>
+      'Terms & Conditions page coming soon!';
   String get privacyPolicyComingSoon => 'Privacy Policy page coming soon!';
   String get otpSentSuccessfully => 'OTP sent successfully';
   String get otpSentToEmail => 'OTP sent successfully to {email}';
@@ -65,7 +71,8 @@ class AppLocalizationsEn {
   String get skipFailed => 'Skip failed';
   String get noValidationItemsAvailable => 'No validation items available';
   String get failedToFetchValidationItems => 'Failed to fetch validation items';
-  String get pleaseSelectAgeGroupAndGender => 'Please select age group and gender';
+  String get pleaseSelectAgeGroupAndGender =>
+      'Please select age group and gender';
   String get enterMobileNumberHint => 'Enter mobile number';
   String get error => 'Error';
   String get submit => 'Submit';
@@ -76,7 +83,8 @@ class AppLocalizationsEn {
   String get selectLanguage => 'Select the language for contribution:';
   String get noResultsFound => 'No results found';
   String get startTyping => 'Start typing here...';
-  String get inputSubmitted => 'Thanks for your contribution! we have received your input.';
+  String get inputSubmitted =>
+      'Thanks for your contribution! we have received your input.';
   String get validationSuccessMessage => 'Thank you for validating the input.';
   String get completeYourProfile => 'Complete your profile';
   String get personalInformation => 'Personal Information';
@@ -98,8 +106,10 @@ class AppLocalizationsEn {
   String get female => 'Female';
   String get nonBinary => 'Non-binary';
   String get preferNotToSay => 'Prefer not to say';
-  String get enrichYourLanguage => 'Enrich your language by donating your voice.';
-  String get selectLanguageForValidation => 'Select the language for validation';
+  String get enrichYourLanguage =>
+      'Enrich your language by donating your voice.';
+  String get selectLanguageForValidation =>
+      'Select the language for validation';
   String get pauseRecording => 'Pause Recording';
   String get replayRecording => 'Replay Recording';
   String get markedIncorrect => 'Marked Incorrect';
@@ -107,7 +117,8 @@ class AppLocalizationsEn {
   String get rejectFailed => 'Reject failed';
   String get acceptFailed => 'Accept failed';
   String get validationResult => 'Validation Result';
-  String youMarkedRecordingAs(String result) => 'You marked this recording as \'$result\'. Thank you for your validation!';
+  String youMarkedRecordingAs(String result) =>
+      'You marked this recording as \'$result\'. Thank you for your validation!';
   String get continueButton => 'Continue';
   String get pleaseEnterCaptcha => 'Please enter CAPTCHA';
   String get captchaNotLoaded => 'CAPTCHA not loaded';
@@ -116,7 +127,8 @@ class AppLocalizationsEn {
   String get verifyOtp => 'Verify OTP';
   String get otpSentToMail => 'An OTP has been sent to your mail';
   String get namasteContributor => 'Namaste Contributor/Validator';
-  String get consentMessage => 'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.';
+  String get consentMessage =>
+      'Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.';
   String get iAgree => 'I agree';
   String get india => 'India';
   String get maharashtra => 'Maharashtra';
@@ -134,26 +146,34 @@ class AppLocalizationsEn {
   String get telugu => 'Telugu';
   String get karnataka => 'Karnataka';
   String get whatIsAgriDaan => 'What is AgriDaan?';
-  String get agriDaanDescription => 'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.';
-  String get empowerIndiasLinguisticDiversity => 'Empower India\'s \nLinguistic Diversity';
-  String get joinTheMovementDescription => 'Join the movement to enhance language understanding and accessibility for all 22 official languages in India';
+  String get agriDaanDescription =>
+      'Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India\'s diverse farming heritage.';
+  String get empowerIndiasLinguisticDiversity =>
+      'Empower India\'s \nLinguistic Diversity';
+  String get joinTheMovementDescription =>
+      'Join the movement to enhance language understanding and accessibility for all 22 official languages in India';
   String get letsGetStarted => 'Let\'s Get Started';
   String get digitalIndiaBhashiniDivision => 'Digital India Bhashini Division';
-  String get electronicsNiketanAddress => 'Electronics Niketan, 6-CGO Complex, New Delhi - 110003';
+  String get electronicsNiketanAddress =>
+      'Electronics Niketan, 6-CGO Complex, New Delhi - 110003';
   String get poweredBy => 'Powered by';
   String get digitalIndiaCorporation => 'Digital India Corporation(DIC)';
   String get ministryOfElectronicsIt => 'Ministry of Electronics & IT (MeitY)';
   String get governmentOfIndia => 'Government of India®';
   String get copyrightNotice => '© 2025 - Copyright All rights reserved.';
   String get needMoreInfo => 'Need More Information?';
-  String get writeYourConcern => 'Write your concern to us and we will get back to you.';
-  String get contactUs => 'Contact Us';
+  String get writeYourConcern =>
+      'Write your concern to us and we will get back to you.';
+  String get contactUs => 'Contact us';
   String get enterOtpFromSms => 'Enter the OTP from the sms we sent to +91';
   String get contribute => 'Contribute';
-  String get speakClearlyAndRecord => 'Speak clearly and record the displayed sentence';
-  String get listenAndValidate => 'Listen to recordings and validate their accuracy';
+  String get speakClearlyAndRecord =>
+      'Speak clearly and record the displayed sentence';
+  String get listenAndValidate =>
+      'Listen carefully and confirm if the recording matches the text';
   String get earnCertificate => 'Earn Certificate';
-  String get earnCertificateDescription => 'Earn a certificate for your contributions';
+  String get earnCertificateDescription =>
+      'Earn your certificate after completing 5 contributions and 25 validations.';
   String get checkYourSetup => 'Check Your Setup';
   String get pleaseTestYourSpeaker => 'Please Test Your Speaker';
   String get pleaseTestYourMicrophone => 'Please Test Your Microphone';
@@ -165,12 +185,18 @@ class AppLocalizationsEn {
   String get next => 'Next';
   String get previous => 'Previous';
   String get finish => 'Finish';
-  String get pleaseTestYourSpeakerDescription => 'Make sure your speakers are working properly';
-  String get pleaseTestYourMicrophoneDescription => 'Ensure your microphone is functioning correctly';
-  String get noBackgroundNoiseDescription => 'Find a quiet environment for better recording quality';
-  String get recordExactlyAsShownDescription => 'Read the text exactly as it appears on screen';
-  String get dontRecordPunctuationsDescription => 'Skip punctuation marks while recording';
-  String get tapRecordToStartDescription => 'Press the record button to begin speaking';
+  String get pleaseTestYourSpeakerDescription =>
+      'Make sure your speakers are working properly';
+  String get pleaseTestYourMicrophoneDescription =>
+      'Ensure your microphone is functioning correctly';
+  String get noBackgroundNoiseDescription =>
+      'Find a quiet environment for better recording quality';
+  String get recordExactlyAsShownDescription =>
+      'Read the text exactly as it appears on screen';
+  String get dontRecordPunctuationsDescription =>
+      'Skip punctuation marks while recording';
+  String get tapRecordToStartDescription =>
+      'Press the record button to begin speaking';
   String get tamil => 'Tamil';
   String get malayalam => 'Malayalam';
   String get bengali => 'Bengali';
@@ -182,8 +208,10 @@ class AppLocalizationsEn {
   String get reRecord => 'Re-record';
   String get playContribution => 'Play Contribution';
   String get playRecording => 'Play Recording';
-  String get selectLanguageForContribution => 'Select the language for contribution';
-  String get enrichYourLanguageByDonatingVoice => 'Enrich your language by donating your voice.';
+  String get selectLanguageForContribution =>
+      'Select the language for contribution';
+  String get enrichYourLanguageByDonatingVoice =>
+      'Enrich your language by donating your voice.';
   String get downloadCertificate => 'Download Certificate';
   String get validateMore => 'Validate More';
   String get downloadPdf => 'Download PDF';
@@ -199,24 +227,29 @@ class AppLocalizationsEn {
   String get invalidPhoneNumberMessage => 'Invalid phone number';
   String get phoneNumberMustBe10Digits => 'Phone number must be 10 digits';
   String get otpSentSuccessfullyMessage => 'OTP sent successfully!';
-  String get loginIntoYourBhashaDaanAccount => 'Login into your\nBhashaDaan Account';
+  String get loginIntoYourBhashaDaanAccount =>
+      'Login into your\nBhashaDaan Account';
   String get enterYour => 'Enter your ';
   String get emailAndPassword => 'email and password ';
   String get toAccessYourAccount => 'to access your account';
   String get doesntHaveAccount => 'Don\'t have an account? ';
-  String get howItWorks => 'How it Works';
+  String get howItWorks => 'How it Works?';
   String get enterYourMobileNumber => 'Enter your mobile number';
   String get otherInformation => 'Other Information';
   String get country => 'Country';
   String get state => 'State';
   String get district => 'District';
   String get preferredLanguage => 'Preferred Language';
-  String get thisFieldIsRequiredToContinue => 'This field is required to continue.';
+  String get thisFieldIsRequiredToContinue =>
+      'This field is required to continue.';
   String get tapToPreviewYourCertificate => 'Tap to preview your certificate';
   String get certificatePreview => 'Certificate Preview';
-  String get pdfPrintReadyIncludesNameAchievement => 'PDF (print-ready, includes your name & achievement)';
-  String get ministryOfElectronicsItHindi => 'इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय';
-  String get ministryOfElectronicsItEnglish => 'MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY';
+  String get pdfPrintReadyIncludesNameAchievement =>
+      'PDF (print-ready, includes your name & achievement)';
+  String get ministryOfElectronicsItHindi =>
+      'इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय';
+  String get ministryOfElectronicsItEnglish =>
+      'MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY';
   String get digitalIndia => 'Digital India';
   String get bhashiniHindi => 'भाषिणी';
   String get bhashiniEnglish => 'BHASHINI';
@@ -226,6 +259,7 @@ class AppLocalizationsEn {
   String get viewProfile => 'View Profile';
   String get errorTitle => 'OOPS!';
   String get errorSubtitle => 'There’s a connection error right now';
-  String get errorDesc =>'We are sorry for the inconvenience \n    Please come back after a while.';
+  String get errorDesc =>
+      'We are sorry for the inconvenience \n    Please come back after a while.';
   String get errorButton => 'GO BACK';
 }
