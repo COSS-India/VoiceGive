@@ -228,5 +228,7 @@
     "viewProfile":"View Profile",
     "errorDesc":"Something went wrong. Please try again.",
     "errorSubtitle":"We encountered an error while processing your request.",
-    "errorButton":"Try Again"
+    "errorButton":"Try Again",
+    "tapToPreviewCertificate":"Tap to preview your certificate",
+    "congratulations": "Congratulations"
 }

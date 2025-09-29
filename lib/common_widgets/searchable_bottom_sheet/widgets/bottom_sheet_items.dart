@@ -2,7 +2,7 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ItemsList extends StatelessWidget {
   final ValueNotifier<List<String>> filteredItems;
@@ -11,7 +11,7 @@ class ItemsList extends StatelessWidget {
   final Function(String) onItemSelected;
 
   const ItemsList({
-    super.key, 
+    super.key,
     required this.filteredItems,
     required this.isLoading,
     required this.scrollController,

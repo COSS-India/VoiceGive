@@ -9,7 +9,7 @@ import '../otp_login/widgets/gradient_header.dart';
 import '../login/widgets/custom_text_field.dart';
 import '../login/login_screen.dart';
 import 'email_otp_verification_screen.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -201,8 +201,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text:
-                                        AppLocalizations.of(context)!.fillInYour,
+                                    text: AppLocalizations.of(context)!
+                                        .fillInYour,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
                                       fontSize: 14.sp,

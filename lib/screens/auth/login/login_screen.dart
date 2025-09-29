@@ -14,7 +14,7 @@ import '../signup/signup_screen.dart';
 import '../../../models/auth/login_request.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../services/auth_service.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -318,7 +318,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: _forgotPassword,
                                   child: Text(
-                                    AppLocalizations.of(context)!.forgotPassword,
+                                    AppLocalizations.of(context)!
+                                        .forgotPassword,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,
