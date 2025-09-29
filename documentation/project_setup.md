@@ -1,8 +1,8 @@
-# Ai4Voice Project Setup Guide
+# Bhashadaan Project Setup Guide
 
 ## Project Overview
 
-Ai4Voice is a Flutter-based UI application designed for language data collection and crowdsourcing initiatives. This project provides a complete, customizable user interface that can be adopted by organizations, government agencies, and developers to build their own language data collection applications with features like voice recording, text validation, and multi-language support.
+Bhashadaan is a Flutter-based UI application designed for language data collection and crowdsourcing initiatives. This project provides a complete, customizable user interface that can be adopted by organizations, government agencies, and developers to build their own language data collection applications with features like voice recording, text validation, and multi-language support.
 
 The UI is built on a Swagger API specification, making it adaptable for different implementations. Adopters can:
 
@@ -13,7 +13,7 @@ The UI is built on a Swagger API specification, making it adaptable for differen
 
 ## Prerequisites
 
-Before setting up the Ai4Voice project, ensure you have the following software and tools installed:
+Before setting up the Bhashadaan project, ensure you have the following software and tools installed:
 
 ### Required Software
 - **Flutter SDK** (3.6.0 or higher)
@@ -97,7 +97,7 @@ Before setting up the Ai4Voice project, ensure you have the following software a
 
 ```bash
 git clone <repository-url>
-cd Ai4Voice
+cd Bhashadaan
 ```
 
 ### 2. Verify Flutter Installation
@@ -437,7 +437,7 @@ flutter doctor --android-licenses
 ### Key Directories
 
 ```
-Ai4Voice/
+Bhashadaan/
 ├── android/                 # Android-specific configuration
 ├── ios/                     # iOS-specific configuration
 ├── lib/                     # Main Dart code
