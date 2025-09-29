@@ -1,699 +1,2235 @@
-swagger: '2.0'
+openapi: 3.0.3
 info:
-  title: API Doc
-  description: Swagger API Documentation
+  title: AgriDaan API
+  description: |
+    AgriDaan is a crowdsourcing initiative to collect agriculture-related knowledge from citizens 
+    across India as part of Project BHASHINI. The platform enables users to contribute agricultural 
+    knowledge through voice recordings (BOLO India) and validate contributions from others.
+    
+    **Certificate Requirements:**
+    - 5 voice contributions (BOLO India)
+    - 25 validations
+    - Certificate Title: "Agri Bhasha Samarthak"
+    
+    **Support:** support-bhashadaan.dibd@gmail.com
+    
   version: 1.0.0
-host: localhost
-basePath: /
-tags: []
-schemes:
-  - http
-consumes: []
-produces: []
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
+  contact:
+    name: AgriDaan Support
+    email: support-bhashadaan.dibd@gmail.com
+  license:
+    name: Government of India
+
+servers:
+  - url: https://api.agridaan.gov.in/v1
+    description: Production server
+  - url: https://dev-api.agridaan.gov.in/v1
+    description: Development server
+
+tags:
+  - name: Authentication
+    description: Mobile OTP-based authentication and consent management
+  - name: User Profile
+    description: User registration and profile management
+  - name: Location
+    description: Country, State, and District data
+  - name: System
+    description: System checks, language list, and utilities
+  - name: Contribution
+    description: BOLO India - Voice recording contributions
+  - name: Validation
+    description: Audio-text validation
+  - name: Certificate
+    description: Certificate generation and download
+
+security:
+  - BearerAuth: []
+
 paths:
-  /get-state:
-    post:
-      security:
-        - Bearer: []
-      tags: []
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              districtId:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-  /get-district-list:
-    post:
-      security:
-        - Bearer: []
-      tags: []
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              stateId:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-  /get-state-list:
-    get:
-      security:
-        - Bearer: []
-      tags: []
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-  /user-registration:
+  # ==================== Authentication ====================
+  /auth/send-otp:
     post:
       tags:
-        - User
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              firstName:
-                example: any
-              lastName:
-                example: any
-              dateOfBirth:
-                example: any
-              gender:
-                example: any
-              email:
-                example: any
-              mobileNo:
-                example: any
-              preferredLanguage:
-                example: any
-              district:
-                example: any
-              pswd:
-                example: any
-              country:
-                example: any
-              age:
-                example: any
+        - Authentication
+      summary: Send OTP to mobile number
+      description: |
+        Send 6-digit OTP to user's mobile number for authentication.
+        OTP is valid for 5 minutes (300 seconds).
+        
+        **Figma Reference:** Page 3, 4
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - mobileNo
+              properties:
+                mobileNo:
+                  type: string
+                  pattern: '^[6-9]\d{9}$'
+                  example: "9177454678"
+                  description: 10-digit Indian mobile number (must start with 6-9)
+                countryCode:
+                  type: string
+                  default: "+91"
+                  example: "+91"
+            examples:
+              validRequest:
+                value:
+                  mobileNo: "9177454678"
+                  countryCode: "+91"
       responses:
         '200':
-          description: OK
-        '201':
-          description: Created
+          description: OTP sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "OTP sent successfully"
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                        format: uuid
+                        example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      expiresIn:
+                        type: integer
+                        example: 300
+                        description: OTP validity in seconds
+                      expiresAt:
+                        type: string
+                        format: date-time
+                        example: "2025-09-29T10:35:00Z"
+                      isNewUser:
+                        type: boolean
+                        example: false
+                        description: Whether user needs to complete registration
         '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error 
-  /verify-user-email:
-    post:
-      tags:
-        - User
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              email:
-                example: any
-              otp:
-                example: any
-              secureId:
-                example: any
-              captchaText:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-  /login-user:
-    post:
-      tags:
-        - User
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              email:
-                example: any
-              password:
-                example: any
-              secureId:
-                example: any
-              captchaText:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '201':
-          description: Created
-        '400':
-          description: Bad Request
+          description: Invalid mobile number format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error:
+                  code: "INVALID_MOBILE"
+                  message: "Invalid mobile number format"
+        '404':
+          description: Number not registered (Figma Page 22)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: "USER_NOT_FOUND"
+                      message:
+                        type: string
+                        example: "This number isn't registered with us."
+                      supportEmail:
+                        type: string
+                        example: "support-bhashadaan.dibd@gmail.com"
+                      contactMessage:
+                        type: string
+                        example: "Please contact admin to continue."
         '429':
-          description: Too Many Requests
-        '500':
-          description: Internal Server Error
-  /get-country-list:
-    get:
-      security:
-        - Bearer: []
-      tags: []
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-  /resend-otp:
+          description: Too many OTP requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/resend-otp:
     post:
       tags:
-        - User
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              email:
-                example: any
+        - Authentication
+      summary: Resend OTP
+      description: |
+        Resend OTP if user didn't receive it. Can only be called after initial send-otp.
+        
+        **Figma Reference:** Page 5 - "I didn't receive any OTP. RESEND"
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+                  example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       responses:
         '200':
-          description: OK
+          description: OTP resent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "OTP resent successfully"
+                  data:
+                    type: object
+                    properties:
+                      expiresIn:
+                        type: integer
+                        example: 300
         '400':
-          description: Bad Request
-  /forgot-password:
+          description: Invalid or expired session
+        '429':
+          description: Too many resend attempts
+
+  /auth/verify-otp:
     post:
       tags:
-        - User
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              email:
-                example: any
+        - Authentication
+      summary: Verify OTP and login
+      description: |
+        Verify the 6-digit OTP and get JWT access token.
+        Timer shows remaining time (02:32 format).
+        
+        **Figma Reference:** Page 5
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - otp
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+                otp:
+                  type: string
+                  pattern: '^\d{6}$'
+                  example: "536247"
+                  description: 6-digit OTP from SMS
+            examples:
+              validOTP:
+                value:
+                  sessionId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  otp: "536247"
       responses:
         '200':
-          description: OK
-        '400':
-          description: Bad Request
-  /my-profile:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - User
-      description: ''
-      parameters:
-        - name: userNum
-          in: query
-          type: string
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              userNum:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
+          description: OTP verified successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Login successful"
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        description: JWT Bearer token
+                      refreshToken:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                      tokenType:
+                        type: string
+                        example: "Bearer"
+                      expiresIn:
+                        type: integer
+                        example: 86400
+                        description: Token expiry in seconds (24 hours)
+                      user:
+                        $ref: '#/components/schemas/User'
+                      requiresConsent:
+                        type: boolean
+                        description: Whether user needs to accept terms
+                        example: true
+                      requiresProfile:
+                        type: boolean
+                        description: Whether user needs to complete profile
+                        example: false
         '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error 
-  /update-profile:
+          description: Invalid OTP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error:
+                  code: "INVALID_OTP"
+                  message: "Invalid OTP. Please try again."
+        '410':
+          description: OTP expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/consent:
     post:
-      security:
-        - Bearer: []
       tags:
-        - User
-      description: ''
-      parameters:
-        - name: userNum
-          in: query
-          type: string
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              firstName:
-                example: any
-              lastName:
-                example: any
-              dateOfBirth:
-                example: any
-              gender:
-                example: any
-              email:
-                example: any
-              mobileNo:
-                example: any
-              preferredLanguage:
-                example: any
-              district:
-                example: any
-              country:
-                example: any
-              age:
-                example: any 
-              userNum:
-                example: any
+        - Authentication
+      summary: Accept terms and conditions
+      description: |
+        User must accept all three policies before contributing or validating.
+        All checkboxes must be checked to proceed.
+        
+        **Figma Reference:** Page 2, 21, 24 - "We Respect Your Privacy" modal
+        
+        **Required Documents:**
+        1. Terms of Use / Contribution Terms
+        2. Privacy Policy
+        3. Copyright & Licensing Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - termsAccepted
+                - privacyAccepted
+                - copyrightAccepted
+              properties:
+                termsAccepted:
+                  type: boolean
+                  description: Terms of Use / Contribution Terms checkbox
+                privacyAccepted:
+                  type: boolean
+                  description: Privacy Policy checkbox
+                copyrightAccepted:
+                  type: boolean
+                  description: Copyright & Licensing Policy checkbox
+                consentText:
+                  type: object
+                  description: Stores the consent text user agreed to
+                  properties:
+                    termsVersion:
+                      type: string
+                    privacyVersion:
+                      type: string
+                    copyrightVersion:
+                      type: string
+            examples:
+              allAccepted:
+                value:
+                  termsAccepted: true
+                  privacyAccepted: true
+                  copyrightAccepted: true
       responses:
         '200':
-          description: OK
+          description: Consent recorded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Consent recorded successfully"
+                  data:
+                    type: object
+                    properties:
+                      consentId:
+                        type: string
+                        format: uuid
+                      consentTimestamp:
+                        type: string
+                        format: date-time
+                      ipAddress:
+                        type: string
         '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-  /get-secure-cap:
+          description: All consents must be accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                error:
+                  code: "CONSENT_REQUIRED"
+                  message: "All consents must be accepted to continue"
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout user
+      description: Invalidate current access token and refresh token
+      responses:
+        '200':
+          description: Logged out successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Logged out successfully"
+
+  /auth/refresh-token:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token
+      description: Get new access token using refresh token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refreshToken
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  tokenType:
+                    type: string
+                  expiresIn:
+                    type: integer
+
+  # ==================== User Profile ====================
+  /users/register:
+    post:
+      tags:
+        - User Profile
+      summary: Complete user registration
+      description: |
+        Complete profile after OTP verification. This is called for new users.
+        All fields are mandatory.
+        
+        **Figma Reference:** Page 6-9 - "Complete your profile"
+        
+        **Steps:**
+        1. Personal Information (Page 6-7): First Name, Last Name, Age Group, Gender, Phone, Email
+        2. Other Information (Page 8-9): Country, State, District, Preferred Language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - firstName
+                - lastName
+                - ageGroup
+                - gender
+                - country
+                - state
+                - district
+                - preferredLanguage
+              properties:
+                firstName:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+                  example: "Ragani"
+                  description: User's first name
+                lastName:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+                  example: "Shukla"
+                  description: User's last name
+                ageGroup:
+                  type: string
+                  enum:
+                    - "Under 18"
+                    - "18-25 years"
+                    - "26-30 years"
+                    - "31-40 years"
+                    - "41-50 years"
+                    - "51-60 years"
+                    - "Above 60"
+                  example: "26-30 years"
+                  description: Age group selection (dropdown)
+                gender:
+                  type: string
+                  enum:
+                    - "Male"
+                    - "Female"
+                    - "Other"
+                    - "Prefer not to say"
+                  example: "Female"
+                  description: Gender selection (dropdown)
+                mobileNo:
+                  type: string
+                  example: "9177454678"
+                  description: Auto-filled from OTP authentication (read-only)
+                  readOnly: true
+                email:
+                  type: string
+                  format: email
+                  example: "ragani.dibd@gmail.com"
+                  description: Optional email address
+                country:
+                  type: string
+                  example: "India"
+                  description: Country selection (dropdown)
+                state:
+                  type: string
+                  example: "Maharashtra"
+                  description: State selection (dropdown, filtered by country)
+                district:
+                  type: string
+                  example: "Amravati"
+                  description: District selection (dropdown, filtered by state)
+                preferredLanguage:
+                  type: string
+                  example: "Marathi"
+                  description: Preferred language for contributions (dropdown)
+            examples:
+              completeProfile:
+                value:
+                  firstName: "Ragani"
+                  lastName: "Shukla"
+                  ageGroup: "26-30 years"
+                  gender: "Female"
+                  mobileNo: "9177454678"
+                  email: "ragani.dibd@gmail.com"
+                  country: "India"
+                  state: "Maharashtra"
+                  district: "Amravati"
+                  preferredLanguage: "Marathi"
+      responses:
+        '201':
+          description: Registration completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Profile completed successfully"
+                  data:
+                    $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: Validation error (Figma Page 23)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: "VALIDATION_ERROR"
+                      message:
+                        type: string
+                        example: "This field is required to continue."
+                      field:
+                        type: string
+                        example: "district"
+                      validationErrors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            field:
+                              type: string
+                            message:
+                              type: string
+
+  /users/profile:
     get:
-      tags: []
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-  /verify-secure-cap:
-    post:
-      tags: []
-      description: ''
-      parameters:
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              secureId:
-                example: any
-              captchaText:
-                example: any
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-  /verify-user:
-    post:
       tags:
-        - User
-      description: ''
+        - User Profile
+      summary: Get current user profile
+      description: Retrieve current user's complete profile information
+      responses:
+        '200':
+          description: Profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/UserProfile'
+
+    put:
+      tags:
+        - User Profile
+      summary: Update user profile
+      description: Update user profile information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                ageGroup:
+                  type: string
+                gender:
+                  type: string
+                email:
+                  type: string
+                country:
+                  type: string
+                state:
+                  type: string
+                district:
+                  type: string
+                preferredLanguage:
+                  type: string
+      responses:
+        '200':
+          description: Profile updated successfully
+
+  /users/stats:
+    get:
+      tags:
+        - User Profile
+      summary: Get user contribution statistics
+      description: |
+        Get user's contribution and validation counts.
+        Used to track progress toward certificate eligibility.
+      responses:
+        '200':
+          description: Statistics retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      contributionCount:
+                        type: integer
+                        example: 5
+                        description: Total voice contributions
+                      validationCount:
+                        type: integer
+                        example: 25
+                        description: Total validations completed
+                      certificateEligible:
+                        type: boolean
+                        example: true
+                        description: Whether 5+25 requirement is met
+                      certificateIssued:
+                        type: boolean
+                        example: false
+                      certificateId:
+                        type: string
+                        example: "DIC-20250917-0123"
+                        description: Certificate ID if issued
+                      lastContributionDate:
+                        type: string
+                        format: date-time
+                      lastValidationDate:
+                        type: string
+                        format: date-time
+
+  # ==================== Location Data ====================
+  /location/countries:
+    get:
+      tags:
+        - Location
+      summary: Get country list
+      description: |
+        Get list of supported countries.
+        
+        **Figma Reference:** Page 8 - Country dropdown
+      security: []
+      responses:
+        '200':
+          description: Country list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        countryId:
+                          type: string
+                          example: "IN"
+                        countryName:
+                          type: string
+                          example: "India"
+                        countryCode:
+                          type: string
+                          example: "+91"
+
+  /location/states:
+    get:
+      tags:
+        - Location
+      summary: Get state list
+      description: |
+        Get list of states for a country.
+        
+        **Figma Reference:** Page 8 - State dropdown (Maharashtra)
+      security: []
       parameters:
-        - name: userName
-          in: body
-          description: media type
+        - name: countryId
+          in: query
           required: true
           schema:
             type: string
-            example: name
+            default: "IN"
+            example: "IN"
       responses:
         '200':
-          description: OK
-  /media/{type}:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Contribution
-      description: Endpoint to get media for contribution
-      parameters:
-        - name: type
-          in: path
-          required: true
-          type: string
-          description: media type
-        - name: userNum
-          in: query
-          type: string
-        - name: obj
-          in: body
-          description: User info
-          required: true
-          schema:
-            type: object
-            properties:
-              userName:
-                type: string
-                example: name
-              language:
-                type: string
-                example: Hindi
-              toLanguage:
-                type: string
-                example: English
-              age:
-                type: string
-                example: upto 10
-        - name: userId
-          in: header
-          type: string
-          description: user id header
-          required: true
-      responses:
-        '200':
-          description: response data
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    dataset_row_id:
-                      type: string
-                      example: '123'
-                    media_data:
-                      type: string
-                      example: qwe
-                    source_info:
-                      type: string
-                      example: abc
-            xml:
-              name: main
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-  /contributions/{type}/{userNum}:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Validation
-      description: >-
-        Endpoint to get contributed data for validation. parameter "to" is only
-        required if type=parallel.
-      parameters:
-        - name: type
-          in: path
-          required: true
-          type: string
-          description: media type
-        - name: userNum
-          in: path
-          required: true
-          type: string
-        - name: from
-          in: query
-          type: string
-          description: From language
-          required: true
-        - name: to
-          in: query
-          type: string
-          description: To language
-          required: true
-        - name: username
-          in: query
-          type: string
-        - name: platformId
-          in: query
-          type: string
-        - name: userId
-          in: header
-          type: string
-          description: user id header
-          required: true
-        - name: obj
-          in: body
-          schema:
-            type: object
-            properties:
-              userNum:
-                example: any
-      responses:
-        '200':
-          description: response data
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    contribution_id:
-                      type: string
-                      example: '123'
-                    dataset_row_id:
-                      type: number
-                      example: 321
-                    sentence:
-                      type: string
-                      example: Text 1
-                    contribution:
-                      type: string
-                      example: contribution/1
-                    source_info:
-                      type: string
-                      example: info
-            xml:
-              name: main
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-  /validate/{contributionId}/{action}:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Validation
-      description: Endpoint to store validation for a contributed data.
-      parameters:
-        - name: contributionId
-          in: path
-          required: true
-          type: string
-        - name: action
-          in: path
-          required: true
-          type: string
-          description: Validation action taken (accept/reject/skip)
-        - name: userNum
-          in: query
-          type: string
-        - name: userId
-          in: header
-          type: string
-          description: user id header
-          required: true
-        - name: obj
-          in: body
-          description: Validation details
-          required: true
-          schema:
-            type: object
-            properties:
-              sentenceId:
-                type: number
-                example: 1123
-              state:
-                type: string
-                example: Punjab
-              country:
-                type: string
-                example: India
-              userName:
-                type: string
-                example: name
-              device:
-                type: string
-                example: device
-              browser:
-                type: string
-                example: browser_name
-              type:
-                type: string
-                example: asr
-              fromLanguage:
-                type: string
-                example: Hindi
-              language:
-                type: string
-                example: English
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '422':
-          description: Unprocessable Entity
-  /skip:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Contribution
-      description: Endpoint to mark contribution as skipped
-      parameters:
-        - name: userNum
-          in: query
-          type: string
-        - name: userId
-          in: header
-          type: string
-          description: user id header
-          required: true
-        - name: obj
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              language:
-                type: string
-                example: Hindi
-              sentenceId:
-                type: number
-                example: 123
-              userName:
-                type: string
-                example: name
-              fromLanguage:
-                type: string
-                example: English
-              state_region:
-                type: string
-                example: Punjab
-              country:
-                type: string
-                example: India
-              device:
-                type: string
-                example: deviceName
-              browser:
-                type: string
-                example: browserName
-              type:
-                type: string
-                example: parallel
-      responses:
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '429':
-          description: Too Many Requests
-  /store:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Contribution
-      description: Endpoint to store contribution data
-      parameters:
-        - name: userNum
-          in: query
-          type: string
-        - name: userId
-          in: header
-          type: string
-          description: user id header
-          required: true
-        - name: obj
-          in: body
-          required: true
-          schema:
-            type: object
-            properties:
-              sentenceId:
-                type: number
-                example: 123
-              audioDuration:
-                type: number
-                example: 3
-              userInput:
-                type: string
-                example: text contribution sentence
-              speakerDetails:
+          description: State list retrieved
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  userName:
-                    type: string
-                    example: name
-                  motherTongue:
-                    type: string
-                    example: Hindi
-                  gender:
-                    type: string
-                    example: Male
-                  age:
-                    type: string
-                    example: upto 10
-              language:
-                type: string
-                example: Hindi
-              state:
-                type: string
-                example: Punjab
-              country:
-                type: string
-                example: India
-              device:
-                type: string
-                example: deviceName
-              browser:
-                type: string
-                example: browserName
-              type:
-                type: string
-                example: parallel
-              fromLanguage:
-                type: string
-                example: English
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        stateId:
+                          type: string
+                          example: "MH"
+                        stateName:
+                          type: string
+                          example: "Maharashtra"
+
+  /location/districts:
+    get:
+      tags:
+        - Location
+      summary: Get district list
+      description: |
+        Get list of districts for a state.
+        
+        **Figma Reference:** Page 8 - District dropdown (Amravati)
+      security: []
+      parameters:
+        - name: stateId
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "MH"
       responses:
+        '200':
+          description: District list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        districtId:
+                          type: string
+                          example: "MH-AMR"
+                        districtName:
+                          type: string
+                          example: "Amravati"
+
+  # ==================== System ====================
+  /system/languages:
+    get:
+      tags:
+        - System
+      summary: Get supported languages
+      description: |
+        Get list of languages available for contribution and validation.
+        
+        **Figma Reference:** Page 12 - "Select the language for contribution" dropdown
+      security: []
+      responses:
+        '200':
+          description: Language list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        languageCode:
+                          type: string
+                          example: "mr"
+                        languageName:
+                          type: string
+                          example: "Marathi"
+                        nativeName:
+                          type: string
+                          example: "मराठी"
+                        isActive:
+                          type: boolean
+                          example: true
+
+  /system/test-speaker:
+    get:
+      tags:
+        - System
+      summary: Get sample audio for speaker test
+      description: |
+        Returns a sample audio file to test user's speakers/headphones.
+        
+        **Figma Reference:** Page 10 - "Please Test Your Speaker"
+      responses:
+        '200':
+          description: Sample audio file
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+
+  /system/test-microphone:
+    post:
+      tags:
+        - System
+      summary: Test microphone quality
+      description: |
+        Upload a test recording to verify microphone setup and audio quality.
+        
+        **Figma Reference:** Page 10 - "Please Test Your Microphone"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - audio
+              properties:
+                audio:
+                  type: string
+                  format: binary
+                  description: Test audio recording
+      responses:
+        '200':
+          description: Microphone test results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      quality:
+                        type: string
+                        enum:
+                          - excellent
+                          - good
+                          - acceptable
+                          - poor
+                        example: "good"
+                      volumeLevel:
+                        type: number
+                        format: float
+                        example: 0.75
+                        description: Volume level (0-1)
+                      backgroundNoise:
+                        type: number
+                        format: float
+                        example: 0.15
+                        description: Background noise level (0-1)
+                      recommendations:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "Reduce background noise"
+                          - "Speak slightly louder"
+
+  /system/health:
+    get:
+      tags:
+        - System
+      summary: Health check endpoint
+      description: |
+        Check API server health status and service availability.
+        Used for monitoring, load balancer health checks, and system diagnostics.
+      security: []
+      responses:
+        '200':
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "System is healthy"
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        enum:
+                          - healthy
+                          - degraded
+                          - unhealthy
+                        example: "healthy"
+                      timestamp:
+                        type: string
+                        format: date-time
+                        example: "2025-01-17T10:30:00Z"
+                      version:
+                        type: string
+                        example: "1.0.0"
+                      uptime:
+                        type: integer
+                        example: 86400
+                        description: Server uptime in seconds
+                      services:
+                        type: object
+                        properties:
+                          database:
+                            type: string
+                            enum:
+                              - up
+                              - down
+                              - degraded
+                            example: "up"
+                          storage:
+                            type: string
+                            enum:
+                              - up
+                              - down
+                              - degraded
+                            example: "up"
+                          external_apis:
+                            type: string
+                            enum:
+                              - up
+                              - down
+                              - degraded
+                            example: "up"
+        '503':
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Service temporarily unavailable"
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: "unhealthy"
+                      timestamp:
+                        type: string
+                        format: date-time
+                      issues:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "Database connection failed"
+                          - "Storage service timeout"
+
+  /system/version:
+    get:
+      tags:
+        - System
+      summary: Get API version information
+      description: |
+        Return current API version, build information, and deployment details.
+        Useful for client compatibility checks and debugging.
+      security: []
+      responses:
+        '200':
+          description: Version information retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      apiVersion:
+                        type: string
+                        example: "1.0.0"
+                        description: Current API version
+                      buildVersion:
+                        type: string
+                        example: "1.0.0-build.123"
+                        description: Build version with commit hash
+                      buildDate:
+                        type: string
+                        format: date-time
+                        example: "2025-01-17T08:15:30Z"
+                        description: Build timestamp
+                      environment:
+                        type: string
+                        enum:
+                          - development
+                          - staging
+                          - production
+                        example: "production"
+                        description: Current environment
+                      features:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "voice_contributions"
+                          - "audio_validation"
+                          - "certificate_generation"
+                          - "multi_language_support"
+                        description: Enabled features
+                      supportedLanguages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                              example: "mr"
+                            name:
+                              type: string
+                              example: "Marathi"
+                            nativeName:
+                              type: string
+                              example: "मराठी"
+                        description: Supported languages for contributions
+                      limits:
+                        type: object
+                        properties:
+                          maxAudioSize:
+                            type: integer
+                            example: 10485760
+                            description: Maximum audio file size in bytes (10MB)
+                          maxAudioDuration:
+                            type: integer
+                            example: 300
+                            description: Maximum audio duration in seconds
+                          sessionTimeout:
+                            type: integer
+                            example: 1800
+                            description: Session timeout in seconds
+                      dependencies:
+                        type: object
+                        properties:
+                          database:
+                            type: string
+                            example: "PostgreSQL 14.5"
+                          cache:
+                            type: string
+                            example: "Redis 6.2"
+                          storage:
+                            type: string
+                            example: "AWS S3"
+
+  /system/config:
+    get:
+      tags:
+        - System
+      summary: Get system configuration
+      description: |
+        Get current system configuration values including business rules, limits, and settings.
+        This endpoint provides all configurable parameters that can be adjusted without code changes.
+      security: []
+      responses:
+        '200':
+          description: Configuration retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: '#/components/schemas/SystemConfig'
+
+  # ==================== BOLO India - Contributions ====================
+  /contributions/get-sentences:
+    post:
+      tags:
+        - Contribution
+      summary: Get sentences for recording
+      description: |
+        Get a batch of sentences to record in the selected language.
+        Returns 5 sentences per session as shown in UI (1/5, 2/5, etc.)
+        
+        **Figma Reference:** Page 12-15 - BOLO India recording screens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - language
+              properties:
+                language:
+                  type: string
+                  example: "Marathi"
+                  description: Language selected from dropdown
+                count:
+                  type: integer
+                  default: 5
+                  maximum: 5
+                  example: 5
+                  description: Number of sentences (fixed at 5)
+      responses:
+        '200':
+          description: Sentences retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                        format: uuid
+                        example: "session-123-abc"
+                      language:
+                        type: string
+                        example: "Marathi"
+                      sentences:
+                        type: array
+                        minItems: 5
+                        maxItems: 5
+                        items:
+                          type: object
+                          properties:
+                            sentenceId:
+                              type: string
+                              example: "sent-12345"
+                            text:
+                              type: string
+                              example: "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली."
+                            sequenceNumber:
+                              type: integer
+                              example: 1
+                              minimum: 1
+                              maximum: 5
+                              description: Position in session (1/5, 2/5, etc.)
+                            metadata:
+                              type: object
+                              properties:
+                                category:
+                                  type: string
+                                difficulty:
+                                  type: string
+                      totalCount:
+                        type: integer
+                        example: 5
+
+  /contributions/record:
+    post:
+      tags:
+        - Contribution
+      summary: Submit audio recording
+      description: |
+        Upload audio recording for a sentence.
+        User can re-record if not satisfied.
+        
+        **Figma Reference:** 
+        - Page 12: Start Recording
+        - Page 13: Stop Recording
+        - Page 14: Re-record with playback
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - sentenceId
+                - audio
+                - duration
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+                  description: Session ID from get-sentences
+                sentenceId:
+                  type: string
+                  description: Sentence ID being recorded
+                audio:
+                  type: string
+                  format: binary
+                  description: Audio file (MP3, WAV, max 10MB)
+                duration:
+                  type: number
+                  format: float
+                  example: 20.0
+                  description: Recording duration in seconds
+                language:
+                  type: string
+                  example: "Marathi"
+                sequenceNumber:
+                  type: integer
+                  example: 1
+                  description: Position in session (1-5)
+                metadata:
+                  type: string
+                  description: JSON string with device, browser info
+      responses:
+        '201':
+          description: Recording submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Recording submitted successfully"
+                  data:
+                    type: object
+                    properties:
+                      contributionId:
+                        type: string
+                        format: uuid
+                      audioUrl:
+                        type: string
+                        format: uri
+                        description: URL to play back the recording
+                      duration:
+                        type: number
+                        format: float
+                        example: 20.0
+                      status:
+                        type: string
+                        enum:
+                          - pending
+                          - accepted
+                        example: "pending"
+                      sequenceNumber:
+                        type: integer
+                        example: 1
+                      totalInSession:
+                        type: integer
+                        example: 5
+                      remainingInSession:
+                        type: integer
+                        example: 4
+                      progressPercentage:
+                        type: integer
+                        example: 20
         '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
+          description: Invalid audio or exceeded size limit
 
+  /contributions/skip:
+    post:
+      tags:
+        - Contribution
+      summary: Skip a sentence
+      description: |
+        Skip current sentence and get next one.
+        
+        **Figma Reference:** Page 12 - "Skip" button
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - sentenceId
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+                sentenceId:
+                  type: string
+                reason:
+                  type: string
+                  enum:
+                    - too_difficult
+                    - unclear_text
+                    - inappropriate
+                    - technical_issue
+                    - other
+                  example: "too_difficult"
+                comment:
+                  type: string
+                  maxLength: 200
+      responses:
+        '200':
+          description: Sentence skipped
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      nextSentence:
+                        type: object
+                        properties:
+                          sentenceId:
+                            type: string
+                          text:
+                            type: string
+                          sequenceNumber:
+                            type: integer
 
+  /contributions/report:
+    post:
+      tags:
+        - Contribution
+      summary: Report issue with sentence
+      description: |
+        Report inappropriate, incorrect, or offensive sentence.
+        
+        **Figma Reference:** Page 12 - "Report" button
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sentenceId
+                - reportType
+              properties:
+                sentenceId:
+                  type: string
+                reportType:
+                  type: string
+                  enum:
+                    - inappropriate
+                    - incorrect
+                    - offensive
+                    - duplicate
+                    - poor_quality
+                    - other
+                description:
+                  type: string
+                  maxLength: 500
+      responses:
+        '200':
+          description: Report submitted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Report submitted. Thank you for your feedback."
 
+  /contributions/session-complete:
+    post:
+      tags:
+        - Contribution
+      summary: Complete contribution session
+      description: |
+        Mark session as complete after recording all 5 sentences.
+        Returns certificate eligibility status.
+        
+        **Figma Reference:** Page 15 - Completion screen with "Contribute More" / "Validate" buttons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: Session completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Session completed successfully"
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                      totalContributions:
+                        type: integer
+                        example: 5
+                      userTotalContributions:
+                        type: integer
+                        example: 5
+                        description: User's total contributions across all sessions
+                      certificateProgress:
+                        type: object
+                        properties:
+                          contributionsCompleted:
+                            type: integer
+                            example: 5
+                          contributionsRequired:
+                            type: integer
+                            example: 5
+                          validationsCompleted:
+                            type: integer
+                            example: 0
+                          validationsRequired:
+                            type: integer
+                            example: 25
+                          isEligible:
+                            type: boolean
+                            example: false
+                          percentageComplete:
+                            type: integer
+                            example: 17
+                            description: Overall progress (5+0)/(5+25) = 17%
 
+  # ==================== Validation ====================
+  /validations/get-queue:
+    get:
+      tags:
+        - Validation
+      summary: Get validation queue
+      description: |
+        Get audio recordings that need validation (25 items per session).
+        Returns audio-text pairs for validation.
+        
+        **Figma Reference:** Page 16-18 - Validation screens showing 1/25 progress
+      parameters:
+        - name: language
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "Marathi"
+          description: Language for validation
+        - name: count
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 25
+      responses:
+        '200':
+          description: Validation queue retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                        format: uuid
+                      language:
+                        type: string
+                      validationItems:
+                        type: array
+                        minItems: 25
+                        maxItems: 25
+                        items:
+                          type: object
+                          properties:
+                            contributionId:
+                              type: string
+                              format: uuid
+                            sentenceId:
+                              type: string
+                            text:
+                              type: string
+                              example: "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली."
+                              description: Text to compare with audio
+                            audioUrl:
+                              type: string
+                              format: uri
+                              description: Audio recording URL
+                            duration:
+                              type: number
+                              format: float
+                              example: 20.0
+                            sequenceNumber:
+                              type: integer
+                              example: 1
+                              minimum: 1
+                              maximum: 25
+                              description: Position in session (1/25, 2/25, etc.)
+                      totalCount:
+                        type: integer
+                        example: 25
 
+  /validations/submit:
+    post:
+      tags:
+        - Validation
+      summary: Submit validation decision
+      description: |
+        Mark audio recording as Correct or Incorrect.
+        
+        **Figma Reference:** 
+        - Page 16: "Correct" / "Incorrect" buttons
+        - Page 17: Pause Recording
+        - Page 18: Replay Recording
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - contributionId
+                - decision
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+                contributionId:
+                  type: string
+                  format: uuid
+                sentenceId:
+                  type: string
+                decision:
+                  type: string
+                  enum:
+                    - correct
+                    - incorrect
+                  example: "correct"
+                  description: Whether audio matches text
+                feedback:
+                  type: string
+                  maxLength: 200
+                  description: Optional feedback (especially for incorrect validations)
+                sequenceNumber:
+                  type: integer
+                  example: 1
+      responses:
+        '200':
+          description: Validation submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      validationId:
+                        type: string
+                        format: uuid
+                      sequenceNumber:
+                        type: integer
+                        example: 1
+                      totalInSession:
+                        type: integer
+                        example: 25
+                      remainingInSession:
+                        type: integer
+                        example: 24
+                      progressPercentage:
+                        type: integer
+                        example: 4
+        '400':
+          description: Invalid request
+        '422':
+          description: Validation conflict (already validated by this user)
+
+  /validations/session-complete:
+    post:
+      tags:
+        - Validation
+      summary: Complete validation session
+      description: |
+        Mark validation session as complete after validating all 25 recordings.
+        Check certificate eligibility after completion.
+        
+        **Figma Reference:** Validation completion flow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+              properties:
+                sessionId:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: Validation session completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                      totalValidations:
+                        type: integer
+                        example: 25
+                      userTotalValidations:
+                        type: integer
+                        example: 25
+                      certificateProgress:
+                        type: object
+                        properties:
+                          contributionsCompleted:
+                            type: integer
+                            example: 5
+                          contributionsRequired:
+                            type: integer
+                            example: 5
+                          validationsCompleted:
+                            type: integer
+                            example: 25
+                          validationsRequired:
+                            type: integer
+                            example: 25
+                          isEligible:
+                            type: boolean
+                            example: true
+                            description: True when both 5 contributions and 25 validations are complete
+                          certificateAvailable:
+                            type: boolean
+                            description: Whether certificate can be generated
+
+  # ==================== Certificate ====================
+  /certificates/check-eligibility:
+    get:
+      tags:
+        - Certificate
+      summary: Check certificate eligibility
+      description: |
+        Check if user has met certificate requirements:
+        - 5 voice contributions (BOLO India)
+        - 25 validations
+        
+        **Figma Reference:** Used throughout to show progress
+      responses:
+        '200':
+          description: Eligibility status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      isEligible:
+                        type: boolean
+                        example: true
+                      contributionsCompleted:
+                        type: integer
+                        example: 5
+                      contributionsRequired:
+                        type: integer
+                        example: 5
+                      validationsCompleted:
+                        type: integer
+                        example: 25
+                      validationsRequired:
+                        type: integer
+                        example: 25
+                      certificateIssued:
+                        type: boolean
+                      certificateId:
+                        type: string
+                        example: "DIC-20250917-0123"
+                      percentageComplete:
+                        type: integer
+                        example: 100
+
+  /certificates/generate:
+    post:
+      tags:
+        - Certificate
+      summary: Generate certificate
+      description: |
+        Generate certificate after completing requirements (5 contributions + 25 validations).
+        Certificate Title: "Agri Bhasha Samarthak"
+        
+        **Figma Reference:** Page 19 - Congratulations screen
+      responses:
+        '200':
+          description: Certificate generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Congratulations!"
+                  data:
+                    type: object
+                    properties:
+                      certificateId:
+                        type: string
+                        example: "DIC-20250917-0123"
+                        description: Unique certificate ID format
+                      recipientName:
+                        type: string
+                        example: "Animesh Patil"
+                      badgeName:
+                        type: string
+                        example: "Agri Bhasha Samarthak"
+                        description: Fixed badge name for all certificates
+                      issuedDate:
+                        type: string
+                        format: date
+                        example: "2025-09-17"
+                        description: Certificate issue date
+                      contributionsCount:
+                        type: integer
+                        example: 5
+                      validationsCount:
+                        type: integer
+                        example: 25
+                      certificateUrl:
+                        type: string
+                        format: uri
+                        description: URL to download PDF
+                      thumbnailUrl:
+                        type: string
+                        format: uri
+                        description: URL for certificate preview image
+                      shareUrl:
+                        type: string
+                        format: uri
+                        description: Shareable certificate URL
+        '400':
+          description: Requirements not met
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        example: "REQUIREMENTS_NOT_MET"
+                      message:
+                        type: string
+                        example: "Complete 5 contributions and 25 validations to earn certificate"
+                      missingContributions:
+                        type: integer
+                      missingValidations:
+                        type: integer
+
+  /certificates/{certificateId}/download:
+    get:
+      tags:
+        - Certificate
+      summary: Download certificate PDF
+      description: |
+        Download certificate as PDF (print-ready, includes name & achievement).
+        
+        **Figma Reference:** Page 19 - "Download Certificate" button
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "DIC-20250917-0123"
+          description: Certificate ID
+      responses:
+        '200':
+          description: Certificate PDF file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Certificate not found
+
+  /certificates/{certificateId}/preview:
+    get:
+      tags:
+        - Certificate
+      summary: Preview certificate
+      description: |
+        Get certificate preview image.
+        
+        **Figma Reference:** Page 19 - Certificate thumbnail shown in "Tap to preview your certificate"
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Certificate preview image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+  /certificates/{certificateId}:
+    get:
+      tags:
+        - Certificate
+      summary: Get certificate details
+      description: Get detailed information about a specific certificate
+      parameters:
+        - name: certificateId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Certificate details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      certificateId:
+                        type: string
+                      recipientName:
+                        type: string
+                      badgeName:
+                        type: string
+                      issuedDate:
+                        type: string
+                      contributionsCount:
+                        type: integer
+                      validationsCount:
+                        type: integer
+                      certificateUrl:
+                        type: string
+                      thumbnailUrl:
+                        type: string
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from OTP verification
+
+  schemas:
+    SystemConfig:
+      type: object
+      description: System configuration parameters that can be adjusted without code changes
+      properties:
+        certificateRequirements:
+          type: object
+          description: Certificate eligibility requirements
+          properties:
+            contributionsRequired:
+              type: integer
+              example: 5
+              description: Number of voice contributions required for certificate
+            validationsRequired:
+              type: integer
+              example: 25
+              description: Number of validations required for certificate
+            certificateTitle:
+              type: string
+              example: "Agri Bhasha Samarthak"
+              description: Title of the certificate to be issued
+        
+        sessionLimits:
+          type: object
+          description: Limits for user sessions
+          properties:
+            contributionsPerSession:
+              type: integer
+              example: 5
+              description: Number of contributions per recording session
+            validationsPerSession:
+              type: integer
+              example: 25
+              description: Number of validations per validation session
+        
+        timeouts:
+          type: object
+          description: Timeout configurations
+          properties:
+            otpExpirySeconds:
+              type: integer
+              example: 300
+              description: OTP validity period in seconds (5 minutes)
+            tokenExpirySeconds:
+              type: integer
+              example: 86400
+              description: JWT token expiry in seconds (24 hours)
+            sessionTimeoutSeconds:
+              type: integer
+              example: 1800
+              description: Session timeout in seconds (30 minutes)
+            refreshTokenExpiryDays:
+              type: integer
+              example: 30
+              description: Refresh token expiry in days
+        
+        fileLimits:
+          type: object
+          description: File upload and processing limits
+          properties:
+            maxAudioSizeBytes:
+              type: integer
+              example: 10485760
+              description: Maximum audio file size in bytes (10MB)
+            maxAudioDurationSeconds:
+              type: integer
+              example: 300
+              description: Maximum audio duration in seconds (5 minutes)
+            allowedAudioFormats:
+              type: array
+              items:
+                type: string
+              example: ["mp3", "wav", "m4a", "aac"]
+              description: Allowed audio file formats
+        
+        validationRules:
+          type: object
+          description: Input validation rules
+          properties:
+            nameMinLength:
+              type: integer
+              example: 2
+              description: Minimum length for user names
+            nameMaxLength:
+              type: integer
+              example: 50
+              description: Maximum length for user names
+            mobileNumberPattern:
+              type: string
+              example: "^[6-9]\\d{9}$"
+              description: Regex pattern for Indian mobile numbers
+            otpPattern:
+              type: string
+              example: "^\\d{6}$"
+              description: Regex pattern for OTP validation
+        
+        contactInfo:
+          type: object
+          description: Contact and support information
+          properties:
+            supportEmail:
+              type: string
+              example: "support-bhashadaan.dibd@gmail.com"
+              description: Support email address
+            supportPhone:
+              type: string
+              example: "+91-11-12345678"
+              description: Support phone number
+            website:
+              type: string
+              example: "https://agridaan.gov.in"
+              description: Official website URL
+        
+        serverUrls:
+          type: object
+          description: Server endpoint configurations
+          properties:
+            productionUrl:
+              type: string
+              example: "https://api.agridaan.gov.in/v1"
+              description: Production server URL
+            developmentUrl:
+              type: string
+              example: "https://dev-api.agridaan.gov.in/v1"
+              description: Development server URL
+            stagingUrl:
+              type: string
+              example: "https://staging-api.agridaan.gov.in/v1"
+              description: Staging server URL
+        
+        rateLimits:
+          type: object
+          description: Rate limiting configurations
+          properties:
+            otpRequestsPerHour:
+              type: integer
+              example: 5
+              description: Maximum OTP requests per hour per mobile number
+            apiRequestsPerMinute:
+              type: integer
+              example: 60
+              description: Maximum API requests per minute per user
+            fileUploadsPerHour:
+              type: integer
+              example: 20
+              description: Maximum file uploads per hour per user
+        
+        features:
+          type: object
+          description: Feature flags and toggles
+          properties:
+            enableVoiceContributions:
+              type: boolean
+              example: true
+              description: Enable BOLO India voice contributions
+            enableAudioValidation:
+              type: boolean
+              example: true
+              description: Enable audio-text validation
+            enableCertificateGeneration:
+              type: boolean
+              example: true
+              description: Enable certificate generation
+            enableMultiLanguage:
+              type: boolean
+              example: true
+              description: Enable multi-language support
+            enableLocationServices:
+              type: boolean
+              example: true
+              description: Enable location-based features
+        
+        lastUpdated:
+          type: string
+          format: date-time
+          example: "2025-01-17T10:30:00Z"
+          description: Timestamp when configuration was last updated
+        version:
+          type: string
+          example: "1.0.0"
+          description: Configuration version
+
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        mobileNo:
+          type: string
+          example: "+919177454678"
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    UserProfile:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+          example: "Ragani"
+        lastName:
+          type: string
+          example: "Shukla"
+        mobileNo:
+          type: string
+          example: "+919177454678"
+        email:
+          type: string
+          example: "ragani.dibd@gmail.com"
+        ageGroup:
+          type: string
+          example: "26-30 years"
+        gender:
+          type: string
+          example: "Female"
+        country:
+          type: string
+          example: "India"
+        state:
+          type: string
+          example: "Maharashtra"
+        district:
+          type: string
+          example: "Amravati"
+        preferredLanguage:
+          type: string
+          example: "Marathi"
+        contributionCount:
+          type: integer
+          example: 5
+        validationCount:
+          type: integer
+          example: 25
+        certificateEarned:
+          type: boolean
+        certificateId:
+          type: string
+        consentGiven:
+          type: boolean
+        consentTimestamp:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "ERROR_CODE"
+            message:
+              type: string
+              example: "Error message"
+            details:
+              type: object
+            timestamp:
+              type: string
+              format: date-time
