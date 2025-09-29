@@ -52,30 +52,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).emailRequired;
+      return AppLocalizations.of(context)!.emailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return AppLocalizations.of(context).invalidEmail;
+      return AppLocalizations.of(context)!.invalidEmail;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).passwordRequired;
+      return AppLocalizations.of(context)!.passwordRequired;
     }
     if (value.length < 6) {
-      return AppLocalizations.of(context).passwordMinLength;
+      return AppLocalizations.of(context)!.passwordMinLength;
     }
     return null;
   }
 
   String? _validateCaptcha(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).pleaseEnterCaptcha;
+      return AppLocalizations.of(context)!.pleaseEnterCaptcha;
     }
     if (_captchaId.isEmpty) {
-      return AppLocalizations.of(context).captchaNotLoaded;
+      return AppLocalizations.of(context)!.captchaNotLoaded;
     }
     return null;
   }
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _refreshCaptcha();
 
           // Extract clean error message
-          String errorMessage = AppLocalizations.of(context).loginFailed;
+          String errorMessage = AppLocalizations.of(context)!.loginFailed;
           if (e is AuthException) {
             final message = e.message;
             if (message.startsWith('Status: ')) {
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
               errorMessage = message;
             }
           } else {
-            errorMessage = AppLocalizations.of(context).networkError;
+            errorMessage = AppLocalizations.of(context)!.networkError;
           }
 
           ScaffoldMessenger.of(context).showSnackBar(
@@ -183,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // TODO: Implement forgot password logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context).forgotPassword),
+        content: Text(AppLocalizations.of(context)!.forgotPassword),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -219,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppLocalizations.of(context)
+                              AppLocalizations.of(context)!
                                   .loginIntoYourBhashaDaanAccount,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
@@ -234,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        AppLocalizations.of(context).enterYour,
+                                        AppLocalizations.of(context)!.enterYour,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
                                       fontSize: 14.sp,
@@ -242,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: AppLocalizations.of(context)
+                                    text: AppLocalizations.of(context)!
                                         .emailAndPassword,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
@@ -251,7 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: AppLocalizations.of(context)
+                                    text: AppLocalizations.of(context)!
                                         .toAccessYourAccount,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
@@ -318,7 +318,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: _forgotPassword,
                                   child: Text(
-                                    AppLocalizations.of(context).forgotPassword,
+                                    AppLocalizations.of(context)!.forgotPassword,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,
@@ -329,7 +329,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Row(
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)
+                                      AppLocalizations.of(context)!
                                           .doesntHaveAccount,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
@@ -340,7 +340,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     GestureDetector(
                                       onTap: _navigateToSignup,
                                       child: Text(
-                                        AppLocalizations.of(context).signUp,
+                                        AppLocalizations.of(context)!.signUp,
                                         style: GoogleFonts.notoSans(
                                           color: AppColors.darkBlue,
                                           fontSize: 14.sp,
@@ -386,7 +386,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   )
                                 : Text(
-                                    AppLocalizations.of(context)
+                                    AppLocalizations.of(context)!
                                         .login
                                         .toUpperCase(),
                                     style: GoogleFonts.notoSans(

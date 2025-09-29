@@ -1,5 +1,4 @@
 import 'package:bhashadaan/constants/app_constants.dart';
-import 'package:bhashadaan/l10n/l10n.dart';
 import 'package:bhashadaan/constants/app_theme.dart';
 import 'package:bhashadaan/screens/splash_screen/splash_screen.dart';
 import 'package:bhashadaan/util/routes.dart';
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: L10n.supportedLocale,
+              supportedLocales: AppLocalizations.supportedLocales,
               locale: const Locale('en'),
               home: CustomSplashScreen(),
               onGenerateRoute: Routes.generateRoute,

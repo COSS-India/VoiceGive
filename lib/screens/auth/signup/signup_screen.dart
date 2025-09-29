@@ -40,7 +40,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   String? _validateName(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)
+      return AppLocalizations.of(context)!
           .emailRequired; // Using emailRequired as generic required field
     }
     if (value.length < 2) {
@@ -51,23 +51,23 @@ class _SignupScreenState extends State<SignupScreen> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).emailRequired;
+      return AppLocalizations.of(context)!.emailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return AppLocalizations.of(context).invalidEmail;
+      return AppLocalizations.of(context)!.invalidEmail;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).passwordRequired;
+      return AppLocalizations.of(context)!.passwordRequired;
     }
     if (value.length < 8) {
-      return AppLocalizations.of(context).passwordMinLength;
+      return AppLocalizations.of(context)!.passwordMinLength;
     }
     if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)').hasMatch(value)) {
-      return AppLocalizations.of(context).passwordComplexity;
+      return AppLocalizations.of(context)!.passwordComplexity;
     }
     return null;
   }
@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
     } else if (!_isTermsAccepted.value) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context).acceptTermsAndConditions),
+          content: Text(AppLocalizations.of(context)!.acceptTermsAndConditions),
           backgroundColor: AppColors.negativeLight,
         ),
       );
@@ -112,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content:
-            Text(AppLocalizations.of(context).termsAndConditionsComingSoon),
+            Text(AppLocalizations.of(context)!.termsAndConditionsComingSoon),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -122,7 +122,7 @@ class _SignupScreenState extends State<SignupScreen> {
     // TODO: Implement privacy policy page
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context).privacyPolicyComingSoon),
+        content: Text(AppLocalizations.of(context)!.privacyPolicyComingSoon),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -147,7 +147,7 @@ class _SignupScreenState extends State<SignupScreen> {
           body: SafeArea(
             child: Column(
               children: [
-                GradientHeader(title: AppLocalizations.of(context).signUp),
+                GradientHeader(title: AppLocalizations.of(context)!.signUp),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -162,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)
+                                  AppLocalizations.of(context)!
                                       .alreadyHaveAccount,
                                   style: GoogleFonts.notoSans(
                                     color: AppColors.greys60,
@@ -173,7 +173,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 GestureDetector(
                                   onTap: _navigateToLogin,
                                   child: Text(
-                                    AppLocalizations.of(context).signIn,
+                                    AppLocalizations.of(context)!.signIn,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,
@@ -187,7 +187,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                             // Title
                             Text(
-                              AppLocalizations.of(context)
+                              AppLocalizations.of(context)!
                                   .createBhashaDaanAccount,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
@@ -202,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        AppLocalizations.of(context).fillInYour,
+                                        AppLocalizations.of(context)!.fillInYour,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
                                       fontSize: 14.sp,
@@ -210,7 +210,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: AppLocalizations.of(context)
+                                    text: AppLocalizations.of(context)!
                                         .personalDetails,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
@@ -219,7 +219,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: AppLocalizations.of(context)
+                                    text: AppLocalizations.of(context)!
                                         .toCreateYourAccount,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.greys60,
@@ -353,7 +353,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                               child: GestureDetector(
                                                 onTap: _openPrivacyPolicy,
                                                 child: Text(
-                                                  AppLocalizations.of(context)
+                                                  AppLocalizations.of(context)!
                                                       .privacyPolicyComingSoon,
                                                   style: GoogleFonts.notoSans(
                                                     color: AppColors.darkBlue,
@@ -408,7 +408,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                   )
                                 : Text(
-                                    AppLocalizations.of(context).signUp,
+                                    AppLocalizations.of(context)!.signUp,
                                     style: GoogleFonts.notoSans(
                                       color: Colors.white,
                                       fontSize: 16.sp,

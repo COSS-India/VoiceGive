@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import '../constants/app_colors.dart';
@@ -19,19 +17,17 @@ class ErrorPage extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: EdgeInsets.only(top: 160).w,
-                  child: SvgPicture.asset(
-                    'assets/img/Unexpected_error.svg',
-                    alignment: Alignment.center,
-                    // width: MediaQuery.of(context).size.width,
-                    // height: MediaQuery.of(context).size.height,
-                    fit: BoxFit.cover,
+                  child: Icon(
+                    Icons.error_outline,
+                    color: AppColors.darkGreen,
+                    size: 100.w,
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 24).w,
                 child: Text(
-                  AppLocalizations.of(context).namasteContributor,
+                  AppLocalizations.of(context)!.namasteContributor,
                   style: GoogleFonts.montserrat(
                       color: AppColors.darkGreen,
                       fontWeight: FontWeight.w600,
@@ -42,7 +38,7 @@ class ErrorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0).w,
                 child: Text(
-                  AppLocalizations.of(context).errorDesc,
+                  AppLocalizations.of(context)!.errorDesc,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                       color: AppColors.greys87,
@@ -55,7 +51,7 @@ class ErrorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: Text(
-                  AppLocalizations.of(context).errorSubtitle,
+                  AppLocalizations.of(context)!.errorSubtitle,
                   style: GoogleFonts.lato(
                     color: AppColors.greys87,
                     fontWeight: FontWeight.w400,
@@ -80,7 +76,7 @@ class ErrorPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         )),
                     child: Text(
-                      AppLocalizations.of(context).errorButton,
+                      AppLocalizations.of(context)!.errorButton,
                       style: GoogleFonts.lato(
                           color: AppColors.appBarBackground,
                           fontWeight: FontWeight.w700,

@@ -18,7 +18,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context).whatIsAgriDaan,
+          AppLocalizations.of(context)!.whatIsAgriDaan,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -27,7 +27,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
         ),
         SizedBox(height: 16.w),
         Text(
-          AppLocalizations.of(context).agriDaanDescription,
+          AppLocalizations.of(context)!.agriDaanDescription,
           style: GoogleFonts.notoSans(
             color: Colors.black,
             fontSize: 14.sp,

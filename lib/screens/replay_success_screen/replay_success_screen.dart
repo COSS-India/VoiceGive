@@ -136,7 +136,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context).boloIndia,
+                            AppLocalizations.of(context)!.boloIndia,
                             style: GoogleFonts.notoSans(
                               color: Colors.white,
                               fontSize: 20.sp,
@@ -144,7 +144,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                             ),
                           ),
                           Text(
-                            AppLocalizations.of(context)
+                            AppLocalizations.of(context)!
                                 .enrichYourLanguageByDonatingVoice,
                             style: GoogleFonts.notoSans(
                               color: Colors.white,
@@ -208,17 +208,17 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).quickTips,
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).report,
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).testSpeakers,
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -267,7 +267,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context).selectLanguageForValidation,
+          AppLocalizations.of(context)!.selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -401,7 +401,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
       child: Column(
         children: [
           Text(
-            AppLocalizations.of(context).replayRecording,
+            AppLocalizations.of(context)!.replayRecording,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               color: AppColors.darkGreen,
@@ -450,11 +450,11 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).incorrect,
+              title: AppLocalizations.of(context)!.incorrect,
               textFontSize: 16.sp,
               onTap: () {
                 // Show validation result
-                _showValidationResult(AppLocalizations.of(context).incorrect);
+                _showValidationResult(AppLocalizations.of(context)!.incorrect);
               },
               textColor: AppColors.orange,
               decoration: BoxDecoration(
@@ -473,7 +473,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).correct,
+              title: AppLocalizations.of(context)!.correct,
               textFontSize: 16.sp,
               onTap: () {
                 // Navigate to Congratulations Screen
@@ -511,14 +511,14 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(context).validationResult,
+            AppLocalizations.of(context)!.validationResult,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           content: Text(
-            AppLocalizations.of(context).youMarkedRecordingAs(result),
+            AppLocalizations.of(context)!.youMarkedRecordingAs(result),
             style: GoogleFonts.notoSans(
               fontSize: 14.sp,
             ),
@@ -530,7 +530,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
               child: Text(
-                AppLocalizations.of(context).continueButton,
+                AppLocalizations.of(context)!.continueButton,
                 style: GoogleFonts.notoSans(
                   color: AppColors.orange,
                   fontWeight: FontWeight.w600,

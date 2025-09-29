@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!!;
     _ageGroups = [
       l10n.under18Years,
       l10n.age18To24,
@@ -158,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context).completeYourProfile,
+                      AppLocalizations.of(context)!.completeYourProfile,
                       style: GoogleFonts.notoSans(
                         color: Colors.white,
                         fontSize: 20.sp,
@@ -179,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           SizedBox(height: 16.h),
                           Text(
-                            AppLocalizations.of(context).personalInformation,
+                            AppLocalizations.of(context)!.personalInformation,
                             style: GoogleFonts.notoSans(
                               color: AppColors.greys87,
                               fontSize: 16.sp,
@@ -203,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)
+                                      text: AppLocalizations.of(context)!
                                           .firstName,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   horizontal: 12.w, vertical: 12.w),
                             ),
                             validator: (v) => (v == null || v.trim().isEmpty)
-                                ? AppLocalizations.of(context).firstNameRequired
+                                ? AppLocalizations.of(context)!.firstNameRequired
                                 : null,
                             style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
@@ -248,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     TextSpan(
                                       text:
-                                          AppLocalizations.of(context).lastName,
+                                          AppLocalizations.of(context)!.lastName,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
                                         fontSize: 14.sp,
@@ -267,7 +267,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   horizontal: 12.w, vertical: 12.w),
                             ),
                             validator: (v) => (v == null || v.trim().isEmpty)
-                                ? AppLocalizations.of(context).lastNameRequired
+                                ? AppLocalizations.of(context)!.lastNameRequired
                                 : null,
                             style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
@@ -311,7 +311,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fontSize: 14.sp),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)
+                                      text: AppLocalizations.of(context)!
                                           .chooseYourAgeGroup,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
@@ -370,7 +370,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fontSize: 14.sp),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context).gender,
+                                      text: AppLocalizations.of(context)!.gender,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp),
@@ -416,7 +416,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context).emailId,
+                              labelText: AppLocalizations.of(context)!.emailId,
                               labelStyle: GoogleFonts.notoSans(
                                   color: AppColors.greys60, fontSize: 14.sp),
                               enabledBorder: _outline(AppColors.darkGrey),
@@ -439,7 +439,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: double.infinity,
                             child: PrimaryButtonWidget(
                               title:
-                                  AppLocalizations.of(context).saveAndContinue,
+                                  AppLocalizations.of(context)!.saveAndContinue,
                               textColor: Colors.white,
                               decoration: BoxDecoration(
                                 color: AppColors.orange,
@@ -465,7 +465,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(AppLocalizations.of(
-                                                context)
+                                                context)!
                                             .pleaseSelectAgeGroupAndGender)),
                                   );
                                 }
