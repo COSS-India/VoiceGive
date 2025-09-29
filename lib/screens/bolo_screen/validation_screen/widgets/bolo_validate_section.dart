@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BoloValidateSection extends StatefulWidget {
-  const BoloValidateSection({super.key});
+  final Function() onComplete;
+  const BoloValidateSection({super.key, required this.onComplete});
 
   @override
   State<BoloValidateSection> createState() => _BoloValidateSectionState();
@@ -152,8 +153,11 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
         currentIndex++;
       });
     } else {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+      widget.onComplete();
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+      });
     }
   }
 }
