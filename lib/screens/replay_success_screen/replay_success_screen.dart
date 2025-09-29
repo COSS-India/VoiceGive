@@ -480,12 +480,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CongratulationsScreen(
-                      recordedText: widget.recordedText,
-                      selectedLanguage: widget.selectedLanguage,
-                      currentIndex: widget.currentIndex,
-                      totalItems: widget.totalItems,
-                    ),
+                    builder: (context) => CongratulationsScreen(),
                   ),
                 );
               },

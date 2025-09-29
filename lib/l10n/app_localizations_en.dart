@@ -619,8 +619,6 @@ class AppLocalizationsEn {
   @override
   String get loginIntoYourBhashaDaanAccount =>
       'Login into your\nBhashaDaan Account';
-
-  @override
   String get enterYour => 'Enter your ';
 
   @override
@@ -697,7 +695,8 @@ class AppLocalizationsEn {
   String get viewProfile => 'View Profile';
   String get errorTitle => 'OOPS!';
   String get errorSubtitle => 'There’s a connection error right now';
-  String get errorDesc =>'We are sorry for the inconvenience \n    Please come back after a while.';
+  String get errorDesc =>
+      'We are sorry for the inconvenience \n    Please come back after a while.';
   String get errorButton => 'GO BACK';
   String get tapToPreviewCertificate => 'Tap to preview your certificate';
   String get congratulations => 'Congratulations';

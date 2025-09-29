@@ -1,28 +1,18 @@
+import 'dart:io';
+
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/constants/helper.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
-import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
+import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoloContentSection extends StatefulWidget {
-  final String selectedLanguage;
-  final int currentIndex;
-  final int totalItems;
-  final String recordedText;
-  final int sentenceId;
-  final VoidCallback onLanguageChanged;
-
   const BoloContentSection({
     super.key,
-    required this.selectedLanguage,
-    required this.currentIndex,
-    required this.totalItems,
-    required this.recordedText,
-    required this.sentenceId,
-    required this.onLanguageChanged,
   });
 
   @override
@@ -30,8 +20,22 @@ class BoloContentSection extends StatefulWidget {
 }
 
 class _BoloContentSectionState extends State<BoloContentSection> {
+  ValueNotifier<bool> enableSubmit = ValueNotifier<bool>(false);
+
+  List<String> recordedTexts = [
+    "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+    "माझ्या आईला तुझी भेट झाली होती.",
+    "आज हवामान खूप छान आहे.",
+    "आपण उद्या भेटू या.",
+    "मला पुस्तक वाचायला आवडते.",
+  ];
+
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    double progress = (currentIndex + 1) / recordedTexts.length;
+
     return Container(
       padding: EdgeInsets.all(12).r,
       decoration: BoxDecoration(
@@ -39,7 +43,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.5),
+              color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -49,9 +53,9 @@ class _BoloContentSectionState extends State<BoloContentSection> {
         children: [
           Row(
             children: [
-              Spacer(),
+              const Spacer(),
               Text(
-                "${widget.currentIndex}/${widget.totalItems}",
+                "${currentIndex + 1}/${recordedTexts.length}",
                 style: GoogleFonts.notoSans(
                     fontSize: 12.sp,
                     color: AppColors.darkGreen,
@@ -60,19 +64,19 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             ],
           ),
           SizedBox(height: 12.w),
-          Container(
-            height: 5.w,
-            width: 1.sw,
-            decoration: BoxDecoration(
-              color: AppColors.darkGreen,
-              borderRadius: BorderRadius.circular(4).r,
+          SizedBox(
+            height: 4.0,
+            child: LinearProgressIndicator(
+              value: progress,
+              backgroundColor: AppColors.lightGreen4,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
             ),
           ),
           SizedBox(height: 24.w),
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
             child: Text(
-              widget.recordedText,
+              recordedTexts[currentIndex],
               style: GoogleFonts.notoSans(
                   fontSize: 16.sp,
                   color: Colors.black,
@@ -82,9 +86,13 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           ),
           SizedBox(height: 50.w),
           RecordingButton(
-            language: widget.selectedLanguage,
-            text: widget.recordedText,
-            sentenceId: widget.sentenceId,
+            isRecording: (bool? recording) {
+              debugPrint("Recording state changed: $recording");
+            },
+            getRecordedFile: (File? file) {
+              debugPrint("Received recorded file: ${file?.path}");
+              enableSubmit.value = file != null;
+            },
           ),
           SizedBox(height: 50.w),
           actionButtons(),
@@ -95,70 +103,128 @@ class _BoloContentSectionState extends State<BoloContentSection> {
   }
 
   Widget actionButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.skip,
-            textFontSize: 16.sp,
-            onTap: () {
-              // Handle skip without API call
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                    content: Text(
-                        AppLocalizations.of(context)!.skippedSuccessfully)),
-              );
-            },
-            textColor: AppColors.orange,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: AppColors.orange),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+    if (currentIndex >= 4) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 165.w,
+            child: PrimaryButtonWidget(
+              title: "Contribute More",
+              textFontSize: 16.sp,
+              onTap: () {
+                setState(() {
+                  currentIndex = 0;
+                });
+              },
+              textColor: AppColors.orange,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: AppColors.orange),
+                borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+              ),
             ),
           ),
-        ),
-        SizedBox(width: 24.w),
-        SizedBox(
-          height: 40.w,
-          width: 120.w,
-          child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context)!.submit,
-            textFontSize: 16.sp,
-            onTap: () {
-              debugPrint("Submit button tapped!");
-              debugPrint("Recorded text: ${widget.recordedText}");
-              debugPrint("Selected language: ${widget.selectedLanguage}");
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ValidationScreen(
-                    recordedText: widget.recordedText,
-                    selectedLanguage: widget.selectedLanguage,
-                    currentIndex: widget.currentIndex,
-                    totalItems: widget.totalItems,
-                    sentenceId: widget.sentenceId,
+          SizedBox(width: 24.w),
+          SizedBox(
+            width: 140.w,
+            child: PrimaryButtonWidget(
+              title: "Validate",
+              textFontSize: 16.sp,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ValidationScreen(),
                   ),
-                ),
-              ).then((_) {
-                debugPrint("ValidationScreen navigation completed");
-              }).catchError((error) {
-                debugPrint("ValidationScreen navigation error: $error");
-              });
-            },
-            textColor: Colors.white,
-            decoration: BoxDecoration(
-              color: AppColors.orange,
-              border: Border.all(color: AppColors.orange),
-              borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+                );
+              },
+              textColor: Colors.white,
+              decoration: BoxDecoration(
+                color: AppColors.orange,
+                border: Border.all(color: AppColors.orange),
+                borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 120.w,
+            child: PrimaryButtonWidget(
+              title: AppLocalizations.of(context)!.skip,
+              textFontSize: 16.sp,
+              onTap: () => onSkip(),
+              textColor: AppColors.orange,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: AppColors.orange),
+                borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+              ),
+            ),
+          ),
+          SizedBox(width: 24.w),
+          ValueListenableBuilder(
+              valueListenable: enableSubmit,
+              builder: (context, value, child) {
+                return SizedBox(
+                  width: 120.w,
+                  child: PrimaryButtonWidget(
+                    title: AppLocalizations.of(context)!.submit,
+                    textFontSize: 16.sp,
+                    onTap: () => onSubmit(value),
+                    textColor: Colors.white,
+                    decoration: BoxDecoration(
+                      color: value ? AppColors.orange : AppColors.grey16,
+                      border: Border.all(
+                          color: value ? AppColors.orange : AppColors.grey16),
+                      borderRadius: BorderRadius.all(Radius.circular(6.0).r),
+                    ),
+                  ),
+                );
+              }),
+        ],
+      );
+    }
+  }
+
+  void onSkip() {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
     );
+    moveToNext();
+  }
+
+  void onSubmit(bool value) {
+    if (value) {
+      moveToNext();
+      enableSubmit.value = false;
+    } else {
+      Helper.showSnackBarMessage(
+        context: context,
+        text: "Please record your voice before submitting.",
+      );
+    }
+  }
+
+  void moveToNext() {
+    if (currentIndex < recordedTexts.length - 1) {
+      setState(() {
+        currentIndex++;
+      });
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ValidationScreen(),
+        ),
+      );
+    }
+    enableSubmit.value = false;
   }
 }
