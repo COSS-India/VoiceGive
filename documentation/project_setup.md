@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Bhashadaan is a comprehensive voice/audio recording Flutter application that enables users to contribute to language data collection through voice recordings. The application features secure authentication, multi-environment support, localization, and seamless audio recording capabilities. It's designed to work across Android and iOS platforms with a focus on accessibility and user experience.
+BhashaDaan is an initiative to crowdsource language inputs for multiple Indian languages as part of Project BHASHINI. It calls upon citizens to help build an open repository of data to digitally enrich his/her own language.
 
 ## Prerequisites
 
@@ -121,27 +121,30 @@ The project supports multiple environments. Create the following files in the ro
 
 #### For Development
 ```bash
-# Create .env file
-touch .env
+# Create .env.development file
+touch .env.development
 ```
 
-Add the following content to `.env`:
+Add the following content to `.env.development`:
 ```env
 # API Configuration
-API_BASE_URL=https://api-dev.bhashadaan.com
-API_VERSION=v1
+API_BASE_URL=https://example.com
+API_ORIGIN_URL=https://example.com
+API_REFERER_URL=https://example.com/
+```
 
-# Authentication
-AUTH_ENDPOINT=/auth
-OTP_ENDPOINT=/otp
+#### For Staging
+```bash
+# Create .env.staging file
+touch .env.staging
+```
 
-# Audio Configuration
-AUDIO_QUALITY=high
-MAX_RECORDING_DURATION=300
-
-# Environment
-ENVIRONMENT=development
-DEBUG_MODE=true
+Add the following content to `.env.staging`:
+```env
+# API Configuration
+API_BASE_URL=https://staging.example.com
+API_ORIGIN_URL=https://staging.example.com
+API_REFERER_URL=https://staging.example.com/
 ```
 
 #### For Production
@@ -150,23 +153,12 @@ DEBUG_MODE=true
 touch .env.production
 ```
 
-Add production-specific configurations:
+Add the following content to `.env.production`:
 ```env
 # API Configuration
-API_BASE_URL=https://api.bhashadaan.com
-API_VERSION=v1
-
-# Authentication
-AUTH_ENDPOINT=/auth
-OTP_ENDPOINT=/otp
-
-# Audio Configuration
-AUDIO_QUALITY=high
-MAX_RECORDING_DURATION=300
-
-# Environment
-ENVIRONMENT=production
-DEBUG_MODE=false
+API_BASE_URL=https://production.example.com
+API_ORIGIN_URL=https://production.example.com
+API_REFERER_URL=https://production.example.com/
 ```
 
 ### 2. Verify Environment Configuration
@@ -177,6 +169,21 @@ Check that your environment files are properly configured by examining the app c
 # Check if environment files exist
 ls -la | grep .env
 ```
+
+Expected output should show:
+- `.env.development`
+- `.env.staging` 
+- `.env.production`
+
+### 3. Environment Variable Requirements
+
+Ensure each environment file contains the following required variables that match `lib/config/app_config.dart`:
+
+- `API_BASE_URL` - The base URL for API endpoints
+- `API_ORIGIN_URL` - The origin URL for CORS headers
+- `API_REFERER_URL` - The referer URL for CORS headers  
+
+**Note**: Replace the placeholder bearer tokens with actual values for each environment.
 
 ## Dependencies Installation
 
@@ -513,12 +520,6 @@ flutter doctor
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/flutter)
 - [Flutter GitHub](https://github.com/flutter/flutter)
 
-### Support
-- Check the troubleshooting section above
-- Review Flutter documentation
-- Search existing issues in the project repository
-- Create a new issue with detailed information if needed
-
 ---
 
 ## Quick Start Checklist
@@ -531,5 +532,3 @@ flutter doctor
 - [ ] Android emulator or device connected
 - [ ] App runs successfully (`flutter run`)
 - [ ] All features working as expected
-
-**Congratulations!** You have successfully set up the Bhashadaan project. You can now start developing and contributing to the project.
