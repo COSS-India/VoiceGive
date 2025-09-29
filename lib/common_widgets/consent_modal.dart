@@ -131,7 +131,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "By clicking \"${AppLocalizations.of(context).iAgree}\", you confirm that:",
+                        "By clicking \"${AppLocalizations.of(context)!.iAgree}\", you confirm that:",
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
