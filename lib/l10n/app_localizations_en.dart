@@ -26,7 +26,7 @@ class AppLocalizationsEn {
   String get mStaticValidationSuccessMessage => 'Thank you for validating the input.';
   String get login => 'Login';
   String get verifyPhoneNumber => 'Verify your phone number';
-  String get otpSentMessage => 'We will send a One Time Password(OTP) to this mobile number.';
+  String get otpSentMessage => 'We have sent a One Time Password(OTP) to this mobile number.';
   String get enterMobileNumber => 'Enter mobile no.*';
   String get getOtp => 'Get OTP';
   String get invalidPhoneNumber => 'Please enter a valid phone number';
@@ -193,7 +193,7 @@ class AppLocalizationsEn {
   String get personalDetails => 'personal details ';
   String get toCreateYourAccount => 'to create your account';
   String get verifyYourPhoneNumber => 'Verify your\nphone number';
-  String get weWillSendA => 'We will send a ';
+  String get weWillSendA => 'We have sent a ';
   String get oneTimePasswordOtp => 'One Time Password (OTP)';
   String get toThisMobileNumber => ' to this mobile number.';
   String get invalidPhoneNumberMessage => 'Invalid phone number';
