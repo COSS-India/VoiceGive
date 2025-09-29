@@ -1,5 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../constants/app_constants.dart';
+
 /// AppConfig class manages environment variables and API endpoints
 /// following Flutter enterprise standards
 class AppConfig {
@@ -13,52 +15,23 @@ class AppConfig {
 
   /// Initialize the configuration with environment variables
   static Future<void> initialize({String? environment}) async {
-    String envFile = '.env';
-    
-    // Determine which environment file to load
-    if (environment != null) {
-      switch (environment.toLowerCase()) {
-        case 'development':
-          envFile = '.env.development';
-          break;
-        case 'staging':
-          envFile = '.env.staging';
-          break;
-        case 'production':
-          envFile = '.env.production';
-          break;
-        default:
-          envFile = '.env';
-      }
-    }
+    String envFile = environment ?? Environment.development; // Default to development
 
     // Load the environment file
     await dotenv.load(fileName: envFile);
   }
 
   /// API Base URL
-  String get apiBaseUrl => dotenv.env['API_BASE_URL'] ?? 'https://agridaan-be.bhashini.co.in';
+  String get apiBaseUrl => dotenv.env['API_BASE_URL'] ?? '';
 
   /// API Origin URL for CORS headers
-  String get apiOriginUrl => dotenv.env['API_ORIGIN_URL'] ?? 'https://bhashini.gov.in';
+  String get apiOriginUrl => dotenv.env['API_ORIGIN_URL'] ?? '';
 
   /// API Referer URL for CORS headers
-  String get apiRefererUrl => dotenv.env['API_REFERER_URL'] ?? 'https://bhashini.gov.in/';
+  String get apiRefererUrl => dotenv.env['API_REFERER_URL'] ?? '';
 
   /// API Bearer Token
   String get apiBearerToken => dotenv.env['API_BEARER_TOKEN'] ?? '';
-
-  /// Current Environment
-  String get environment => dotenv.env['ENVIRONMENT'] ?? 'development';
-
-  /// Check if running in development mode
-  bool get isDevelopment => environment.toLowerCase() == 'development';
-
-  /// Check if running in staging mode
-  bool get isStaging => environment.toLowerCase() == 'staging';
-
-  /// Check if running in production mode
-  bool get isProduction => environment.toLowerCase() == 'production';
 
   /// Get environment-specific API endpoints
   Map<String, String> get apiEndpoints => {
