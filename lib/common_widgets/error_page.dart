@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import '../constants/app_colors.dart';
@@ -19,12 +17,10 @@ class ErrorPage extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: EdgeInsets.only(top: 160).w,
-                  child: SvgPicture.asset(
-                    'assets/img/Unexpected_error.svg',
-                    alignment: Alignment.center,
-                    // width: MediaQuery.of(context).size.width,
-                    // height: MediaQuery.of(context).size.height,
-                    fit: BoxFit.cover,
+                  child: Icon(
+                    Icons.error_outline,
+                    color: AppColors.darkGreen,
+                    size: 100.w,
                   ),
                 ),
               ),
