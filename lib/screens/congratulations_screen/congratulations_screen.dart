@@ -4,6 +4,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
+import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
 import 'package:bhashadaan/screens/bolo_screen/validation_screen/widgets/bolo_validate_section.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -562,8 +563,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => BoloValidateSection()),
+                  MaterialPageRoute(builder: (context) => ValidationScreen()),
                 );
               },
               textColor: AppColors.orange,
