@@ -309,32 +309,6 @@ chmod +x build_scripts/build.sh
 ./build_scripts/build.sh
 ```
 
-## Verification Steps
-
-### 1. App Launch Verification
-
-After running `flutter run`, verify:
-- ✅ App launches without crashes
-- ✅ Splash screen appears
-- ✅ Authentication screen loads
-- ✅ No error messages in console
-
-### 2. Feature Verification
-
-Test the following features:
-- ✅ Phone number input
-- ✅ OTP verification
-- ✅ Audio recording
-- ✅ Audio playback
-- ✅ Navigation between screens
-
-### 3. Console Verification
-
-Check the console output for:
-- ✅ No error messages
-- ✅ Successful API connections
-- ✅ Proper environment loading
-
 ## Troubleshooting
 
 ### Common Issues and Solutions
@@ -464,51 +438,6 @@ Bhashadaan/
 - `android/app/src/main/AndroidManifest.xml` - Android permissions and configuration
 - `build_scripts/build.sh` - Build automation script
 - `l10n.yaml` - Localization configuration
-
-## Development Workflow
-
-### 1. Code Organization
-
-- Follow Flutter best practices
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Maintain consistent code formatting
-
-### 2. State Management
-
-- Use Provider pattern for state management
-- Keep business logic in services
-- Separate UI and data layers
-
-### 3. Testing
-
-```bash
-# Run unit tests
-flutter test
-
-# Run integration tests
-flutter test integration_test/
-```
-
-### 4. Code Quality
-
-```bash
-# Analyze code
-flutter analyze
-
-# Format code
-dart format .
-
-# Check for issues
-flutter doctor
-```
-
-### 5. Version Control
-
-- Create feature branches for new features
-- Write descriptive commit messages
-- Review code before merging
-- Keep main branch stable
 
 ## Additional Resources
 
