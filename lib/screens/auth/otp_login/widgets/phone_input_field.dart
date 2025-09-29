@@ -21,7 +21,7 @@ class PhoneInputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)?.enterMobileNumber ?? 'Enter mobile no.*',
+          AppLocalizations.of(context)!.enterMobileNumber,
           style: GoogleFonts.notoSans(
             color: AppColors.grey,
             fontSize: 14.sp,
