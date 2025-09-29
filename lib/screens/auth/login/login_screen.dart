@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
-import '../../bolo_screen/bolo_screen.dart';
 import '../../home_screen/home_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';

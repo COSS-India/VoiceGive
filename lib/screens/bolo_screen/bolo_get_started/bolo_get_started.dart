@@ -6,8 +6,7 @@ import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
-import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_content_section.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,7 +1,6 @@
 import 'package:bhashadaan/common_widgets/fade_route.dart';
 import 'package:bhashadaan/constants/app_routes.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
