@@ -2,7 +2,14 @@
 
 ## Project Overview
 
-BhashaDaan is an initiative to crowdsource language inputs for multiple Indian languages as part of Project BHASHINI. It calls upon citizens to help build an open repository of data to digitally enrich his/her own language.
+BhashaDaan is a Flutter-based UI application that serves as the frontend component for the BhashaDaan initiative, which crowdsources language inputs for multiple Indian languages as part of Project BHASHINI. This project provides a complete user interface that can be adopted by organizations to build their own language data collection applications.
+
+The UI is built on a Swagger API specification, making it adaptable for different implementations. Adopters can:
+
+- **Reference the API Documentation**: Use the provided Swagger specification to understand the complete API structure and endpoints
+- **Build Custom APIs**: Implement their own backend services based on the API specification
+- **Integrate with Existing UI**: Use this Flutter UI as a ready-made frontend that works with the API specification
+- **Customize for Different Use Cases**: Adapt the UI components and API integration to meet specific organizational needs
 
 ## Prerequisites
 
