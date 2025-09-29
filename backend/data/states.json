@@ -1,0 +1,66 @@
+{
+  "IN": [
+    {
+      "stateId": "MH",
+      "stateName": "Maharashtra"
+    },
+    {
+      "stateId": "KA",
+      "stateName": "Karnataka"
+    },
+    {
+      "stateId": "TN",
+      "stateName": "Tamil Nadu"
+    },
+    {
+      "stateId": "UP",
+      "stateName": "Uttar Pradesh"
+    },
+    {
+      "stateId": "WB",
+      "stateName": "West Bengal"
+    },
+    {
+      "stateId": "GJ",
+      "stateName": "Gujarat"
+    },
+    {
+      "stateId": "RJ",
+      "stateName": "Rajasthan"
+    },
+    {
+      "stateId": "MP",
+      "stateName": "Madhya Pradesh"
+    },
+    {
+      "stateId": "AP",
+      "stateName": "Andhra Pradesh"
+    },
+    {
+      "stateId": "KL",
+      "stateName": "Kerala"
+    }
+  ],
+  "US": [
+    {
+      "stateId": "CA",
+      "stateName": "California"
+    },
+    {
+      "stateId": "TX",
+      "stateName": "Texas"
+    },
+    {
+      "stateId": "FL",
+      "stateName": "Florida"
+    },
+    {
+      "stateId": "NY",
+      "stateName": "New York"
+    },
+    {
+      "stateId": "IL",
+      "stateName": "Illinois"
+    }
+  ]
+}

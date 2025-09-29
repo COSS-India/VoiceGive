@@ -1,0 +1,44 @@
+[
+  {
+    "value": "Under 18",
+    "label": "Under 18",
+    "minAge": 0,
+    "maxAge": 17
+  },
+  {
+    "value": "18-25 years",
+    "label": "18-25 years",
+    "minAge": 18,
+    "maxAge": 25
+  },
+  {
+    "value": "26-30 years",
+    "label": "26-30 years",
+    "minAge": 26,
+    "maxAge": 30
+  },
+  {
+    "value": "31-40 years",
+    "label": "31-40 years",
+    "minAge": 31,
+    "maxAge": 40
+  },
+  {
+    "value": "41-50 years",
+    "label": "41-50 years",
+    "minAge": 41,
+    "maxAge": 50
+  },
+  {
+    "value": "51-60 years",
+    "label": "51-60 years",
+    "minAge": 51,
+    "maxAge": 60
+  },
+  {
+    "value": "Above 60",
+    "label": "Above 60",
+    "minAge": 61,
+    "maxAge": 100
+  }
+]
