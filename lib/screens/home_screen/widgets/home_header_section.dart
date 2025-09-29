@@ -55,7 +55,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                AppLocalizations.of(context).empowerIndiasLinguisticDiversity,
+                AppLocalizations.of(context)!.empowerIndiasLinguisticDiversity,
                 style: GoogleFonts.notoSans(
                     color: AppColors.darkBlue,
                     fontSize: 20.sp,
@@ -72,7 +72,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           ),
           SizedBox(height: 12.w),
           Text(
-            AppLocalizations.of(context).joinTheMovementDescription,
+            AppLocalizations.of(context)!.joinTheMovementDescription,
             style: GoogleFonts.notoSans(
                 color: Colors.black,
                 fontSize: 14.sp,
@@ -88,7 +88,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
               ),
             ),
             child: Text(
-              AppLocalizations.of(context).letsGetStarted,
+              AppLocalizations.of(context)!.letsGetStarted,
               style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 16.sp,

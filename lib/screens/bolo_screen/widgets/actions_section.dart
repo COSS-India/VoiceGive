@@ -21,15 +21,15 @@ class ActionsSection extends StatelessWidget {
         children: [
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).quickTips,
+              title: AppLocalizations.of(context)!.quickTips,
               icon: Icons.lightbulb_outline),
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).report,
+              title: AppLocalizations.of(context)!.report,
               icon: Icons.report_outlined),
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).testSpeakers,
+              title: AppLocalizations.of(context)!.testSpeakers,
               icon: Icons.volume_up_outlined),
         ],
       ),

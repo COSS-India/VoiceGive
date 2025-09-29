@@ -86,7 +86,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context).boloIndia,
+                        AppLocalizations.of(context)!.boloIndia,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -94,7 +94,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)
+                        AppLocalizations.of(context)!
                             .enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
@@ -144,17 +144,17 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).quickTips,
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).report,
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).testSpeakers,
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -203,7 +203,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context).selectLanguageForValidation,
+          AppLocalizations.of(context)!.selectLanguageForValidation,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: AppColors.darkGreen,
@@ -330,8 +330,8 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
         children: [
           Text(
             widget.audioUrl != null && widget.audioUrl!.isNotEmpty
-                ? AppLocalizations.of(context).playContribution
-                : AppLocalizations.of(context).playRecording,
+                ? AppLocalizations.of(context)!.playContribution
+                : AppLocalizations.of(context)!.playRecording,
             style: GoogleFonts.notoSans(
               fontSize: 18.sp,
               color: AppColors.darkGreen,
@@ -395,7 +395,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).incorrect,
+              title: AppLocalizations.of(context)!.incorrect,
               textFontSize: 16.sp,
               onTap: null, // Disabled button
               textColor: AppColors.grey84,
@@ -415,7 +415,7 @@ class _PlayRecordingScreenState extends State<PlayRecordingScreen> {
           child: SizedBox(
             height: 48.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).correct,
+              title: AppLocalizations.of(context)!.correct,
               textFontSize: 16.sp,
               onTap: null, // Disabled button
               textColor: AppColors.grey84,

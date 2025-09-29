@@ -165,12 +165,12 @@
     "next":"Next",
     "previous":"Previous",
     "finish":"Finish",
-    "pleaseTestYourSpeakerDescription":"Make sure your speakers are working properly",
-    "pleaseTestYourMicrophoneDescription":"Ensure your microphone is functioning correctly",
-    "noBackgroundNoiseDescription":"Find a quiet environment for better recording quality",
-    "recordExactlyAsShownDescription":"Read the text exactly as it appears on screen",
-    "dontRecordPunctuationsDescription":"Skip punctuation marks while recording",
-    "tapRecordToStartDescription":"Press the record button to begin speaking",
+    "pleaseTestYourSpeakerDescription":"Play the sample audio and confirm you can hear it clearly before starting the task",
+    "pleaseTestYourMicrophoneDescription":"Speak a few words to check if your voice is being recorded properly and without distortion",
+    "noBackgroundNoiseDescription":"Choose a quiet environment. Avoid background sounds like fans, traffic, or other voices while recording",
+    "recordExactlyAsShownDescription":"Speak clearly, exactly following the text displayed, so your contribution is accurate and usable",
+    "dontRecordPunctuationsDescription":"Read only the words shown on screen. Do not say commas, full stops, or other punctuations marks.",
+    "tapRecordToStartDescription":"Press the record button once you are ready, and speak clearly and naturally.",
     "tamil":"Tamil",
     "malayalam":"Malayalam",
     "bengali":"Bengali",
@@ -225,5 +225,8 @@
     "certificate":"CERTIFICATE",
     "ofAppreciation":"OF APPRECIATION",
     "proudlyPresentedTo":"PROUDLY PRESENTED TO",
-    "viewProfile":"View Profile"
+    "viewProfile":"View Profile",
+    "errorDesc":"Something went wrong. Please try again.",
+    "errorSubtitle":"We encountered an error while processing your request.",
+    "errorButton":"Try Again"
 }
