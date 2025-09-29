@@ -15,7 +15,6 @@ class AppLocalizationsEn {
   String get dekhoIndia => 'Dekho India';
   String get mStaticLabel => 'Label';
   String get mStaticValidate => 'Validate';
-  String get mStaticSelectLanguage => 'Select the language for contribution:';
   String get mStaticSearch => 'Search';
   String get mStaticSubmit => 'Submit';
   String get mStaticCancel => 'Cancel';
@@ -73,7 +72,6 @@ class AppLocalizationsEn {
   String get skip => 'Skip';
   String get label => 'Label';
   String get search => 'Search';
-  String get selectLanguage => 'Select the language for contribution:';
   String get noResultsFound => 'No results found';
   String get startTyping => 'Start typing here...';
   String get inputSubmitted => 'Thanks for your contribution! we have received your input.';
@@ -228,4 +226,7 @@ class AppLocalizationsEn {
   String get errorSubtitle => 'There’s a connection error right now';
   String get errorDesc =>'We are sorry for the inconvenience \n    Please come back after a while.';
   String get errorButton => 'GO BACK';
+  String get tapToPreviewCertificate => 'Tap to preview your certificate';
+  String get congratulations => 'Congratulations';
+
 }

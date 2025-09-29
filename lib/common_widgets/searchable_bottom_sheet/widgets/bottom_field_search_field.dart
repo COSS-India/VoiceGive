@@ -21,14 +21,14 @@ class BottomSheetSearchField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: AppLocalizations.of(parentContext).mStaticSearch,
         hintStyle: Theme.of(context).textTheme.labelLarge,
-        prefixIcon: Icon(Icons.search, color: AppColors.darkBlue),
+        prefixIcon: Icon(Icons.search, color: AppColors.darkGreen),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(63).r,
-          borderSide: BorderSide(color: AppColors.darkBlue),
+          borderSide: BorderSide(color: AppColors.darkGreen),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(63).r,
-          borderSide: BorderSide(color: AppColors.darkBlue),
+          borderSide: BorderSide(color: AppColors.darkGreen),
         ),
       ),
       style: Theme.of(context)

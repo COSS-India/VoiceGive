@@ -32,26 +32,40 @@ class _LanguageSelectionState extends State<LanguageSelection> {
             showBottomSheet(
                 context: context,
                 builder: (context) {
-                  return SearchableBottomSheetContent(
-                    items: [
-                      AppLocalizations.of(context).english,
-                      AppLocalizations.of(context).hindi,
-                      AppLocalizations.of(context).kannada,
-                      AppLocalizations.of(context).tamil,
-                      AppLocalizations.of(context).telugu,
-                      AppLocalizations.of(context).bengali,
-                      AppLocalizations.of(context).marathi,
-                      AppLocalizations.of(context).gujarati,
-                      AppLocalizations.of(context).punjabi,
-                      AppLocalizations.of(context).odia,
-                      AppLocalizations.of(context).assamese,
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(alignment: Alignment.centerRight,
+                        child: IconButton(
+                          icon: Icon(Icons.close, color: AppColors.darkGreen),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      SearchableBottomSheetContent(
+                        items: [
+                          AppLocalizations.of(context).english,
+                          AppLocalizations.of(context).hindi,
+                          AppLocalizations.of(context).kannada,
+                          AppLocalizations.of(context).tamil,
+                          AppLocalizations.of(context).telugu,
+                          AppLocalizations.of(context).bengali,
+                          AppLocalizations.of(context).marathi,
+                          AppLocalizations.of(context).gujarati,
+                          AppLocalizations.of(context).punjabi,
+                          AppLocalizations.of(context).odia,
+                          AppLocalizations.of(context).assamese
+                        ],
+                        onItemSelected: (value) {
+                          selectedLanguage = value;
+                          Navigator.pop(context);
+                          setState(() {});
+                        },
+                        hasMore: false,
+                        initialQuery: "",
+                      ),
                     ],
-                    onItemSelected: (value) {
-                      selectedLanguage = value;
-                      setState(() {});
-                    },
-                    hasMore: false,
-                    initialQuery: "",
                   );
                 });
           },

@@ -49,7 +49,6 @@ class AppLocalizations {
   String get dekhoIndia => _localizedValues.dekhoIndia;
   String get mStaticLabel => _localizedValues.mStaticLabel;
   String get mStaticValidate => _localizedValues.mStaticValidate;
-  String get mStaticSelectLanguage => _localizedValues.mStaticSelectLanguage;
   String get mStaticSearch => _localizedValues.mStaticSearch;
   String get mStaticSubmit => _localizedValues.mStaticSubmit;
   String get mStaticCancel => _localizedValues.mStaticCancel;
@@ -107,7 +106,6 @@ class AppLocalizations {
   String get skip => _localizedValues.skip;
   String get label => _localizedValues.label;
   String get search => _localizedValues.search;
-  String get selectLanguage => _localizedValues.selectLanguage;
   String get noResultsFound => _localizedValues.noResultsFound;
   String get startTyping => _localizedValues.startTyping;
   String get inputSubmitted => _localizedValues.inputSubmitted;
@@ -262,6 +260,8 @@ class AppLocalizations {
   String get errorSubtitle => _localizedValues.errorSubtitle;
   String get errorDesc => _localizedValues.errorDesc;
   String get errorButton => _localizedValues.errorButton;
+  String get tapToPreviewCertificate => _localizedValues.tapToPreviewCertificate;
+  String get congratulations => _localizedValues.congratulations;
 }
 
 class _AppLocalizationsDelegate

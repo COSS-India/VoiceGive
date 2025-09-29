@@ -98,7 +98,7 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context).enrichYourLanguage,
+                        AppLocalizations.of(context).enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,
