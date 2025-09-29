@@ -5,7 +5,6 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
-import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,7 +140,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     // Action Buttons
                     _buildActionButtons(),
                     // Add extra bottom padding to ensure buttons are above navigation bar
-                    SizedBox(height: MediaQuery.of(context).padding.bottom + 20.w),
+                    SizedBox(
+                        height: MediaQuery.of(context).padding.bottom + 20.w),
                   ],
                 ),
               ),
@@ -569,20 +569,20 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate to play recording screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PlayRecordingScreen(
-                      recordedText: widget.recordedText,
-                      selectedLanguage: widget.selectedLanguage,
-                      currentIndex: widget.currentIndex,
-                      totalItems: widget.totalItems,
-                      sentenceId: null,
-                      audioUrl: null,
-                      contributionId: null,
-                    ),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => PlayRecordingScreen(
+                //       recordedText: widget.recordedText,
+                //       selectedLanguage: widget.selectedLanguage,
+                //       currentIndex: widget.currentIndex,
+                //       totalItems: widget.totalItems,
+                //       sentenceId: null,
+                //       audioUrl: null,
+                //       contributionId: null,
+                //     ),
+                //   ),
+                // );
               },
               textColor: AppColors.orange,
               decoration: BoxDecoration(
@@ -602,12 +602,12 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate to Bolo screen for new recording
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BoloScreen(),
-                  ),
-                );
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => BoloScreen(),
+                //   ),
+                // );
               },
               textColor: Colors.white,
               decoration: BoxDecoration(

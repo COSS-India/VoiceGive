@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LanguageSelection extends StatefulWidget {
-  const LanguageSelection({super.key});
+  final String description;
+  const LanguageSelection({super.key, required this.description});
 
   @override
   State<LanguageSelection> createState() => _LanguageSelectionState();
@@ -20,7 +21,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context).selectLanguageForContribution,
+          widget.description,
           style: GoogleFonts.notoSans(
               fontSize: 12.sp,
               color: AppColors.darkGreen,
@@ -49,6 +50,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                     onItemSelected: (value) {
                       selectedLanguage = value;
                       setState(() {});
+                      Navigator.pop(context);
                     },
                     hasMore: false,
                     initialQuery: "",

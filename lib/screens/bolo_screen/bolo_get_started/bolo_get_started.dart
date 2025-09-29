@@ -4,8 +4,10 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
+import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_content_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -194,7 +196,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const BoloScreen(),
+                          builder: (context) => const BoloContribute(),
                         ));
                   },
                 ),
@@ -256,7 +258,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BoloScreen()),
+                          builder: (context) => const BoloContribute()),
                     );
                   },
                 ),
