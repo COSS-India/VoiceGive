@@ -102,7 +102,7 @@ class HomeFooterSection extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              SizedBox(height: 40.w),
+              SizedBox(height: 80.w),
               // Separator line
               Container(
                 height: 2.w,
@@ -117,7 +117,7 @@ class HomeFooterSection extends StatelessWidget {
                   style: GoogleFonts.notoSans(
                     color: Colors.white,
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

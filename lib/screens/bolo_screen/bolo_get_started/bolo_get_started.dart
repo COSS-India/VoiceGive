@@ -4,8 +4,9 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -242,7 +243,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const BoloScreen(),
+                              builder: (context) => const BoloContribute(),
                             ),
                           );
                         }
@@ -259,35 +260,92 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   }
 
   Widget actionButtons() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: SizedBox(
-        width: 110.w,
-        child: PrimaryButtonWidget(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8).r,
-            border: Border.all(color: AppColors.darkGreen),
-          ),
-          title: AppLocalizations.of(context)!.skip,
-          textColor: AppColors.darkGreen,
-          onTap: () {
-            if (_currentPage == 0) {
-              _pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease,
-              );
-            } else {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BoloScreen(),
+    return _currentPage == 0
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 110.w,
+                child: PrimaryButtonWidget(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8).r,
+                    border: Border.all(color: AppColors.darkGreen),
+                  ),
+                  title: AppLocalizations.of(context)!.skip,
+                  textColor: AppColors.darkGreen,
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BoloContribute(),
+                        ));
+                  },
                 ),
-              );
-            }
-          },
-        ),
-      ),
-    );
+              ),
+              SizedBox(width: 50.w),
+              SizedBox(
+                width: 110.w,
+                child: PrimaryButtonWidget(
+                  decoration: BoxDecoration(
+                    color: AppColors.darkGreen,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.darkGreen),
+                  ),
+                  title: AppLocalizations.of(context)!.next,
+                  textColor: Colors.white,
+                  onTap: () {
+                    _pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 110.w,
+                child: PrimaryButtonWidget(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8).r,
+                    border: Border.all(color: AppColors.darkGreen),
+                  ),
+                  title: AppLocalizations.of(context)!.previous,
+                  textColor: AppColors.darkGreen,
+                  onTap: () {
+                    _pageController.previousPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.ease,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(width: 50.w),
+              SizedBox(
+                width: 110.w,
+                child: PrimaryButtonWidget(
+                  decoration: BoxDecoration(
+                    color: AppColors.darkGreen,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.darkGreen),
+                  ),
+                  title: AppLocalizations.of(context)!.finish,
+                  textColor: Colors.white,
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BoloContribute()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
   }
 }

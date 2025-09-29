@@ -3,10 +3,9 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
+import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
-import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,18 +13,10 @@ import 'dart:ui';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class CongratulationsScreen extends StatefulWidget {
-  final String recordedText;
-  final String selectedLanguage;
-  final int currentIndex;
-  final int totalItems;
 
+class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
     super.key,
-    required this.recordedText,
-    required this.selectedLanguage,
-    required this.currentIndex,
-    required this.totalItems,
   });
 
   @override
@@ -149,7 +140,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     // Action Buttons
                     _buildActionButtons(),
                     // Add extra bottom padding to ensure buttons are above navigation bar
-                    SizedBox(height: MediaQuery.of(context).padding.bottom + 20.w),
+                    SizedBox(
+                        height: MediaQuery.of(context).padding.bottom + 20.w),
                   ],
                 ),
               ),
@@ -356,20 +348,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               title: AppLocalizations.of(context)!.validateMore,
               textFontSize: 14.sp,
               onTap: () {
-                // Navigate to play recording screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => PlayRecordingScreen(
-                      recordedText: widget.recordedText,
-                      selectedLanguage: widget.selectedLanguage,
-                      currentIndex: widget.currentIndex,
-                      totalItems: widget.totalItems,
-                      sentenceId: null,
-                      audioUrl: null,
-                      contributionId: null,
-                    ),
-                  ),
+                  MaterialPageRoute(builder: (context) => ValidationScreen()),
                 );
               },
               textColor: AppColors.orange,
@@ -389,12 +370,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               title: AppLocalizations.of(context)!.contributeMore,
               textFontSize: 14.sp,
               onTap: () {
-                // Navigate to Bolo screen for new recording
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => BoloScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => BoloContribute()),
                 );
               },
               textColor: Colors.white,
