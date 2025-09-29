@@ -2,12 +2,13 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+// Removed duplicate import of AppLocalizations
 import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
 import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PauseRecordingScreen extends StatefulWidget {
   final String recordedText;
@@ -98,7 +99,8 @@ class _PauseRecordingScreenState extends State<PauseRecordingScreen> {
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.enrichYourLanguage,
+                        AppLocalizations.of(context)!
+                            .enrichYourLanguageByDonatingVoice,
                         style: GoogleFonts.notoSans(
                           color: Colors.white,
                           fontSize: 10.sp,

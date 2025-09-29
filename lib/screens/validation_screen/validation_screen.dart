@@ -8,7 +8,7 @@ import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ValidationScreen extends StatefulWidget {
   final String recordedText;
