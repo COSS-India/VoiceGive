@@ -141,7 +141,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     // Action Buttons
                     _buildActionButtons(),
                     // Add extra bottom padding to ensure buttons are above navigation bar
-                    SizedBox(height: MediaQuery.of(context).padding.bottom + 20.w),
+                    SizedBox(
+                        height: MediaQuery.of(context).padding.bottom + 20.w),
                   ],
                 ),
               ),
@@ -161,35 +162,11 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           child: Column(
             children: [
               // Badge
-              Container(
-                width: 120.w,
+              ImageWidget(
                 height: 120.w,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.darkGreen.withValues(alpha: 0.3),
-                      spreadRadius: 4,
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: Container(
-                    height: 120.w,
-                    width: 120.w,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    child: ImageWidget(
-                      height: 120.w,
-                      width: 120.w,
-                      imageUrl: "assets/images/logo.svg",
-                      boxFit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+                width: 120.w,
+                imageUrl: "assets/images/bolo_logo.png",
+                boxFit: BoxFit.contain,
               ),
               SizedBox(height: 24.w),
               // Congratulations Text
