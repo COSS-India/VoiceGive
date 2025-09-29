@@ -1,0 +1,535 @@
+# Bhashadaan Project Setup Guide
+
+## Project Overview
+
+Bhashadaan is a comprehensive voice/audio recording Flutter application that enables users to contribute to language data collection through voice recordings. The application features secure authentication, multi-environment support, localization, and seamless audio recording capabilities. It's designed to work across Android and iOS platforms with a focus on accessibility and user experience.
+
+## Prerequisites
+
+Before setting up the Bhashadaan project, ensure you have the following software and tools installed:
+
+### Required Software
+- **Flutter SDK** (3.6.0 or higher)
+- **Dart SDK** (included with Flutter)
+- **Android Studio** (latest stable version)
+- **Git** (for version control)
+- **Java Development Kit (JDK)** (version 11 or higher)
+
+### Optional but Recommended
+- **Visual Studio Code** with Flutter and Dart extensions
+- **Android Device** or **Android Emulator**
+- **iOS Device** and **Xcode** (for iOS development)
+
+## System Requirements
+
+### Minimum Hardware Requirements
+- **RAM**: 8GB (16GB recommended)
+- **Storage**: 10GB free space
+- **Processor**: 64-bit processor
+- **Display**: 1280x800 resolution
+
+### Supported Operating Systems
+- **Windows**: Windows 10 version 1903 or higher (64-bit)
+- **macOS**: macOS 10.14 (Mojave) or higher
+- **Linux**: Ubuntu 18.04 LTS or higher (64-bit)
+
+## Installation Steps
+
+### 1. Install Flutter SDK
+
+#### Windows
+1. Download the Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install/windows)
+2. Extract the zip file to `C:\flutter`
+3. Add `C:\flutter\bin` to your system PATH
+4. Verify installation by running `flutter doctor` in Command Prompt
+
+#### macOS
+1. Download the Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install/macos)
+2. Extract the zip file to your desired location (e.g., `/Users/username/flutter`)
+3. Add Flutter to your PATH by editing `~/.zshrc` or `~/.bash_profile`:
+   ```bash
+   export PATH="$PATH:/Users/username/flutter/bin"
+   ```
+4. Run `source ~/.zshrc` or `source ~/.bash_profile`
+5. Verify installation by running `flutter doctor`
+
+#### Linux
+1. Download the Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install/linux)
+2. Extract the tar file to your desired location (e.g., `/home/username/flutter`)
+3. Add Flutter to your PATH by editing `~/.bashrc`:
+   ```bash
+   export PATH="$PATH:/home/username/flutter/bin"
+   ```
+4. Run `source ~/.bashrc`
+5. Verify installation by running `flutter doctor`
+
+### 2. Install Android Studio
+
+1. Download Android Studio from [developer.android.com](https://developer.android.com/studio)
+2. Follow the installation wizard
+3. During setup, ensure you install:
+   - Android SDK
+   - Android SDK Platform
+   - Android Virtual Device
+   - Android SDK Build-Tools
+
+### 3. Configure Android SDK
+
+1. Open Android Studio
+2. Go to **File > Settings** (Windows/Linux) or **Android Studio > Preferences** (macOS)
+3. Navigate to **Appearance & Behavior > System Settings > Android SDK**
+4. Install the following:
+   - **Android 13 (API level 33)** or higher
+   - **Android SDK Build-Tools** (latest version)
+   - **Android SDK Platform-Tools**
+   - **Android SDK Tools**
+
+## Repository Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd Bhashadaan
+```
+
+### 2. Verify Flutter Installation
+
+```bash
+flutter doctor
+```
+
+Ensure all checks pass, especially:
+- ✅ Flutter (Channel stable, 3.6.0 or higher)
+- ✅ Android toolchain - develop for Android devices
+- ✅ Android Studio (version 2022.1 or higher)
+- ✅ VS Code (optional but recommended)
+
+### 3. Check Flutter Version
+
+```bash
+flutter --version
+```
+
+Expected output should show Flutter 3.6.0 or higher.
+
+## Environment Configuration
+
+### 1. Create Environment Files
+
+The project supports multiple environments. Create the following files in the root directory:
+
+#### For Development
+```bash
+# Create .env file
+touch .env
+```
+
+Add the following content to `.env`:
+```env
+# API Configuration
+API_BASE_URL=https://api-dev.bhashadaan.com
+API_VERSION=v1
+
+# Authentication
+AUTH_ENDPOINT=/auth
+OTP_ENDPOINT=/otp
+
+# Audio Configuration
+AUDIO_QUALITY=high
+MAX_RECORDING_DURATION=300
+
+# Environment
+ENVIRONMENT=development
+DEBUG_MODE=true
+```
+
+#### For Production
+```bash
+# Create .env.production file
+touch .env.production
+```
+
+Add production-specific configurations:
+```env
+# API Configuration
+API_BASE_URL=https://api.bhashadaan.com
+API_VERSION=v1
+
+# Authentication
+AUTH_ENDPOINT=/auth
+OTP_ENDPOINT=/otp
+
+# Audio Configuration
+AUDIO_QUALITY=high
+MAX_RECORDING_DURATION=300
+
+# Environment
+ENVIRONMENT=production
+DEBUG_MODE=false
+```
+
+### 2. Verify Environment Configuration
+
+Check that your environment files are properly configured by examining the app configuration:
+
+```bash
+# Check if environment files exist
+ls -la | grep .env
+```
+
+## Dependencies Installation
+
+### 1. Install Flutter Dependencies
+
+```bash
+flutter pub get
+```
+
+### 2. Verify Dependencies
+
+```bash
+flutter pub deps
+```
+
+### 3. Check for Dependency Issues
+
+```bash
+flutter pub outdated
+```
+
+### 4. Clean and Rebuild (if needed)
+
+```bash
+flutter clean
+flutter pub get
+```
+
+## Android Setup
+
+### 1. Configure Android SDK
+
+Ensure your Android SDK is properly configured:
+
+```bash
+flutter doctor --android-licenses
+```
+
+Accept all licenses when prompted.
+
+### 2. Set Up Android Emulator
+
+#### Option A: Using Android Studio
+1. Open Android Studio
+2. Go to **Tools > AVD Manager**
+3. Click **Create Virtual Device**
+4. Choose a device (e.g., Pixel 6)
+5. Select **API Level 33** or higher
+6. Click **Finish**
+
+#### Option B: Using Command Line
+```bash
+# List available emulators
+flutter emulators
+
+# Launch emulator
+flutter emulators --launch <emulator_id>
+```
+
+### 3. Connect Physical Device (Alternative)
+
+1. Enable **Developer Options** on your Android device
+2. Enable **USB Debugging**
+3. Connect device via USB
+4. Verify connection:
+   ```bash
+   flutter devices
+   ```
+
+### 4. Verify Android Configuration
+
+```bash
+flutter doctor -v
+```
+
+Ensure Android toolchain shows:
+- ✅ Android SDK at [your-sdk-path]
+- ✅ Android NDK location not configured
+- ✅ Platform android-33, build-tools 33.0.0
+- ✅ Java binary at [java-path]
+
+## Running the Application
+
+### 1. Development Mode
+
+```bash
+# Run on connected device/emulator
+flutter run
+
+# Run in debug mode with verbose output
+flutter run --verbose
+
+# Run on specific device
+flutter run -d <device_id>
+```
+
+### 2. Release Mode
+
+```bash
+# Build release APK
+flutter build apk --release
+
+# Build release app bundle
+flutter build appbundle --release
+```
+
+### 3. Using Build Scripts
+
+The project includes build scripts for different environments:
+
+```bash
+# Make build script executable
+chmod +x build_scripts/build.sh
+
+# Run build script
+./build_scripts/build.sh
+```
+
+## Verification Steps
+
+### 1. App Launch Verification
+
+After running `flutter run`, verify:
+- ✅ App launches without crashes
+- ✅ Splash screen appears
+- ✅ Authentication screen loads
+- ✅ No error messages in console
+
+### 2. Feature Verification
+
+Test the following features:
+- ✅ Phone number input
+- ✅ OTP verification
+- ✅ Audio recording
+- ✅ Audio playback
+- ✅ Navigation between screens
+
+### 3. Console Verification
+
+Check the console output for:
+- ✅ No error messages
+- ✅ Successful API connections
+- ✅ Proper environment loading
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+#### 1. Flutter Doctor Issues
+
+**Issue**: Android toolchain not found
+```bash
+# Solution: Install Android SDK
+flutter doctor --android-licenses
+```
+
+**Issue**: Flutter version mismatch
+```bash
+# Solution: Update Flutter
+flutter upgrade
+```
+
+#### 2. Build Issues
+
+**Issue**: Gradle build failed
+```bash
+# Solution: Clean and rebuild
+flutter clean
+cd android
+./gradlew clean
+cd ..
+flutter pub get
+flutter run
+```
+
+**Issue**: Android SDK not found
+```bash
+# Solution: Set ANDROID_HOME
+export ANDROID_HOME=/path/to/android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+```
+
+#### 3. Dependency Issues
+
+**Issue**: Package not found
+```bash
+# Solution: Update dependencies
+flutter pub get
+flutter pub upgrade
+```
+
+**Issue**: Version conflict
+```bash
+# Solution: Check pubspec.yaml and resolve conflicts
+flutter pub deps
+```
+
+#### 4. Emulator Issues
+
+**Issue**: Emulator not starting
+```bash
+# Solution: Check emulator configuration
+flutter emulators
+flutter emulators --launch <emulator_id>
+```
+
+**Issue**: Device not recognized
+```bash
+# Solution: Check USB debugging and drivers
+adb devices
+```
+
+#### 5. Audio Recording Issues
+
+**Issue**: Microphone permission denied
+- Check Android permissions in `android/app/src/main/AndroidManifest.xml`
+- Ensure `RECORD_AUDIO` permission is granted
+
+**Issue**: Audio quality issues
+- Check audio configuration in environment files
+- Verify device microphone functionality
+
+### Debug Commands
+
+```bash
+# Check Flutter installation
+flutter doctor -v
+
+# List connected devices
+flutter devices
+
+# Check Flutter version
+flutter --version
+
+# Analyze project
+flutter analyze
+
+# Check for issues
+flutter doctor --android-licenses
+```
+
+## Project Structure
+
+### Key Directories
+
+```
+Bhashadaan/
+├── android/                 # Android-specific configuration
+├── ios/                     # iOS-specific configuration
+├── lib/                     # Main Dart code
+│   ├── common_widgets/      # Reusable UI components
+│   ├── config/              # App configuration
+│   ├── constants/           # App constants
+│   ├── l10n/               # Localization files
+│   ├── models/             # Data models
+│   ├── providers/          # State management
+│   ├── screens/            # App screens
+│   ├── services/           # API and business logic
+│   └── util/               # Utility functions
+├── assets/                 # Images, icons, animations
+├── build_scripts/          # Build automation scripts
+├── documentation/          # Project documentation
+└── test/                   # Test files
+```
+
+### Key Files
+
+- `pubspec.yaml` - Project dependencies and configuration
+- `main.dart` - App entry point
+- `android/app/build.gradle` - Android build configuration
+- `android/app/src/main/AndroidManifest.xml` - Android permissions and configuration
+- `build_scripts/build.sh` - Build automation script
+- `l10n.yaml` - Localization configuration
+
+## Development Workflow
+
+### 1. Code Organization
+
+- Follow Flutter best practices
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Maintain consistent code formatting
+
+### 2. State Management
+
+- Use Provider pattern for state management
+- Keep business logic in services
+- Separate UI and data layers
+
+### 3. Testing
+
+```bash
+# Run unit tests
+flutter test
+
+# Run integration tests
+flutter test integration_test/
+```
+
+### 4. Code Quality
+
+```bash
+# Analyze code
+flutter analyze
+
+# Format code
+dart format .
+
+# Check for issues
+flutter doctor
+```
+
+### 5. Version Control
+
+- Create feature branches for new features
+- Write descriptive commit messages
+- Review code before merging
+- Keep main branch stable
+
+## Additional Resources
+
+### Official Documentation
+- [Flutter Documentation](https://flutter.dev/docs)
+- [Dart Documentation](https://dart.dev/guides)
+- [Android Studio Documentation](https://developer.android.com/studio)
+
+### Project-Specific Resources
+- [README.md](../README.md) - Project overview and authentication details
+- [API Documentation](api_doc.yaml) - API endpoint documentation
+- [Build Scripts](../build_scripts/build.sh) - Environment-specific build scripts
+
+### Community Resources
+- [Flutter Community](https://flutter.dev/community)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/flutter)
+- [Flutter GitHub](https://github.com/flutter/flutter)
+
+### Support
+- Check the troubleshooting section above
+- Review Flutter documentation
+- Search existing issues in the project repository
+- Create a new issue with detailed information if needed
+
+---
+
+## Quick Start Checklist
+
+- [ ] Flutter SDK installed and configured
+- [ ] Android Studio installed with SDK
+- [ ] Repository cloned successfully
+- [ ] Environment files created
+- [ ] Dependencies installed (`flutter pub get`)
+- [ ] Android emulator or device connected
+- [ ] App runs successfully (`flutter run`)
+- [ ] All features working as expected
+
+**Congratulations!** You have successfully set up the Bhashadaan project. You can now start developing and contributing to the project.
