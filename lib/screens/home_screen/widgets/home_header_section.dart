@@ -1,6 +1,8 @@
 import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,24 +18,26 @@ class HomeHeaderSection extends StatefulWidget {
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
   void _showConsentModal(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return InformedConsentModal(
-          onApprove: () {
-            Navigator.of(context).pop(); // Close the modal
-            Navigator.pushNamed(
-              context,
-              AppRoutes.otpVerification,
-            );
-          },
-          onDeny: () {
-            Navigator.of(context).pop(); // Close the modal
-          },
-        );
-      },
-    );
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => BoloScreen()));
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (BuildContext context) {
+    //     return InformedConsentModal(
+    //       onApprove: () {
+    //         Navigator.of(context).pop(); // Close the modal
+    //         Navigator.pushNamed(
+    //           context,
+    //           AppRoutes.otpVerification,
+    //         );
+    //       },
+    //       onDeny: () {
+    //         Navigator.of(context).pop(); // Close the modal
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   @override

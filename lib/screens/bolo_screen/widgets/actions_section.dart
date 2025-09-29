@@ -10,7 +10,7 @@ class ActionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16).r,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12).r,
       decoration: BoxDecoration(
         color: AppColors.lightGreen2,
         border: Border.all(color: AppColors.lightGreen),
