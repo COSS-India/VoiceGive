@@ -8,9 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 enum AudioPlayerButtonState { idle, playing, paused, replay, completed }
 
 class AudioPlayerButtons extends StatefulWidget {
+  final String audioUrl;
   final Function(AudioPlayerButtonState?) playerStatus;
 
-  const AudioPlayerButtons({super.key, required this.playerStatus});
+  const AudioPlayerButtons(
+      {super.key, required this.playerStatus, required this.audioUrl});
 
   @override
   State<AudioPlayerButtons> createState() => _AudioPlayerButtonsState();
@@ -18,7 +20,7 @@ class AudioPlayerButtons extends StatefulWidget {
 
 class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
     with SingleTickerProviderStateMixin {
-  static const int audioDurationSeconds = 10;
+  static const int audioDurationSeconds = 3;
   AudioPlayerButtonState _state = AudioPlayerButtonState.idle;
   late AnimationController _controller;
   Timer? _playbackTimer;
@@ -38,6 +40,19 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
     _controller.dispose();
     _playbackTimer?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant AudioPlayerButtons oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.audioUrl != widget.audioUrl) {
+      setState(() {
+        _state = AudioPlayerButtonState.idle;
+        _controller.reset();
+        _playbackTimer?.cancel();
+        _remainingSeconds = audioDurationSeconds;
+      });
+    }
   }
 
   void _startPlayback() {

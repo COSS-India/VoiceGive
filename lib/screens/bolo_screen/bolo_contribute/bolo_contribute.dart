@@ -15,20 +15,6 @@ class BoloContribute extends StatefulWidget {
 }
 
 class _BoloContributeState extends State<BoloContribute> {
-  String selectedLanguage = "Marathi";
-  int currentIndex = 1;
-  int totalItems = 5;
-  String recordedText = "";
-  int? sentenceId;
-
-  @override
-  void initState() {
-    super.initState();
-    recordedText =
-        "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.";
-    sentenceId = 1;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +36,7 @@ class _BoloContributeState extends State<BoloContribute> {
                           .selectLanguageForContribution,
                     ),
                     SizedBox(height: 24.w),
-                    BoloContentSection(
-                      selectedLanguage: selectedLanguage,
-                      currentIndex: currentIndex,
-                      totalItems: totalItems,
-                      recordedText:
-                          recordedText.isNotEmpty ? recordedText : '...',
-                      sentenceId: sentenceId ?? 0,
-                      onLanguageChanged: () {
-                        setState(() {});
-                      },
-                    ),
+                    BoloContentSection(),
                   ],
                 ),
               )

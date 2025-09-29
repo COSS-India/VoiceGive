@@ -2,6 +2,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_screen/validation_screen/widgets/audio_player_buttons.dart';
+import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,8 +17,20 @@ class BoloValidateSection extends StatefulWidget {
 class _BoloValidateSectionState extends State<BoloValidateSection> {
   ValueNotifier<bool> enableActionButtons = ValueNotifier<bool>(false);
 
+  List<String> recordedTexts = [
+    "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+    "माझ्या आईला तुझी भेट झाली होती.",
+    "आज हवामान खूप छान आहे.",
+    "आपण उद्या भेटू या.",
+    "मला पुस्तक वाचायला आवडते.",
+  ];
+
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    double progress = (currentIndex + 1) / recordedTexts.length;
+
     return Container(
       padding: EdgeInsets.all(12).r,
       decoration: BoxDecoration(
@@ -25,7 +38,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
         borderRadius: BorderRadius.circular(8).r,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.5),
+            color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),
@@ -34,12 +47,11 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
       ),
       child: Column(
         children: [
-          // Progress Indicator - Same as Bolo Screen
           Row(
             children: [
-              Spacer(),
+              const Spacer(),
               Text(
-                "1/25",
+                "${currentIndex + 1}/${recordedTexts.length}",
                 style: GoogleFonts.notoSans(
                   fontSize: 12.sp,
                   color: AppColors.darkGreen,
@@ -52,18 +64,16 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
           SizedBox(
             height: 4.0,
             child: LinearProgressIndicator(
-              value: 0.2,
+              value: progress,
               backgroundColor: AppColors.lightGreen4,
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
             ),
           ),
           SizedBox(height: 24.w),
-
-          // Recorded Text - Same padding as Bolo Screen
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
             child: Text(
-              "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+              recordedTexts[currentIndex],
               style: GoogleFonts.notoSans(
                 fontSize: 16.sp,
                 color: Colors.black,
@@ -72,9 +82,9 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
               textAlign: TextAlign.center,
             ),
           ),
-
           SizedBox(height: 30.w),
           AudioPlayerButtons(
+            audioUrl: recordedTexts[currentIndex],
             playerStatus: (value) {
               if (value == AudioPlayerButtonState.completed ||
                   value == AudioPlayerButtonState.replay) {
@@ -102,7 +112,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                 child: PrimaryButtonWidget(
                   title: AppLocalizations.of(context).incorrect,
                   textFontSize: 16.sp,
-                  onTap: () {},
+                  onTap: value ? () => onValidate(false) : null,
                   textColor: value ? AppColors.orange : AppColors.grey24,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -119,7 +129,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                 child: PrimaryButtonWidget(
                   title: AppLocalizations.of(context).correct,
                   textFontSize: 16.sp,
-                  onTap: () {},
+                  onTap: value ? () => onValidate(true) : null,
                   textColor: Colors.white,
                   decoration: BoxDecoration(
                     color: value ? AppColors.orange : AppColors.grey24,
@@ -133,5 +143,17 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
             ],
           );
         });
+  }
+
+  void onValidate(bool isCorrect) {
+    enableActionButtons.value = false;
+    if (currentIndex < recordedTexts.length - 1) {
+      setState(() {
+        currentIndex++;
+      });
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+    }
   }
 }
