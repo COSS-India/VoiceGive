@@ -135,7 +135,7 @@ class _EmailOtpVerificationScreenState
       body: SafeArea(
         child: Column(
           children: [
-            GradientHeader(title: AppLocalizations.of(context).signUp),
+            GradientHeader(title: AppLocalizations.of(context)!.signUp),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -144,7 +144,7 @@ class _EmailOtpVerificationScreenState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context).verifyOtp,
+                        AppLocalizations.of(context)!.verifyOtp,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -154,7 +154,7 @@ class _EmailOtpVerificationScreenState
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        AppLocalizations.of(context).otpSentToMail,
+                        AppLocalizations.of(context)!.otpSentToMail,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,

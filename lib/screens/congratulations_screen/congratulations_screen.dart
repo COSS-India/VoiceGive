@@ -1,3 +1,4 @@
+import 'package:bhashadaan/common_widgets/branding_alignment_widget.dart';
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
@@ -459,14 +460,33 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 8.w),
-                            Text(
-                              "For contributing to AgriDaan under BhashaDaan by BHASHINI, strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 4.sp,
-                                color: Colors.grey[600],
-                                height: 1.2,
-                              ),
-                              textAlign: TextAlign.center,
+                            Column(
+                              children: [
+                                Text(
+                                  "For contributing to",
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 4.sp,
+                                    color: Colors.grey[600],
+                                    height: 1.2,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 4.w),
+                                BrandingAlignmentWidget(
+                                  fontSize: 4.sp,
+                                  textColor: Colors.grey[600],
+                                ),
+                                SizedBox(height: 4.w),
+                                Text(
+                                  "strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.",
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 4.sp,
+                                    color: Colors.grey[600],
+                                    height: 1.2,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
                             SizedBox(height: 12.w),
                             Text(
@@ -503,7 +523,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
       width: double.infinity,
       height: 48.w,
       child: PrimaryButtonWidget(
-        title: AppLocalizations.of(context).downloadCertificate,
+        title: AppLocalizations.of(context)!.downloadCertificate,
         textFontSize: 16.sp,
         onTap: () {
           // Download certificate as PDF
@@ -565,7 +585,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           child: SizedBox(
             height: 40.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).validateMore,
+              title: AppLocalizations.of(context)!.validateMore,
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate to play recording screen
@@ -598,7 +618,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           child: SizedBox(
             height: 40.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).contributeMore,
+              title: AppLocalizations.of(context)!.contributeMore,
               textFontSize: 14.sp,
               onTap: () {
                 // Navigate to Bolo screen for new recording
@@ -691,7 +711,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     width: double.infinity,
                     height: 48.w,
                     child: PrimaryButtonWidget(
-                      title: AppLocalizations.of(context).downloadPdf,
+                      title: AppLocalizations.of(context)!.downloadPdf,
                       textFontSize: 16.sp,
                       onTap: () {
                         Navigator.of(context).pop();
@@ -894,14 +914,33 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
           SizedBox(height: 24.w),
 
           // Description
-          Text(
-            "For contributing to AgriDaan under BhashaDaan by BHASHINI, strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.",
-            style: GoogleFonts.notoSans(
-              fontSize: 12.sp,
-              color: Colors.black87,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
+          Column(
+            children: [
+              Text(
+                "For contributing to",
+                style: GoogleFonts.notoSans(
+                  fontSize: 12.sp,
+                  color: Colors.black87,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 8.w),
+              BrandingAlignmentWidget(
+                fontSize: 12.sp,
+                textColor: Colors.black87,
+              ),
+              SizedBox(height: 8.w),
+              Text(
+                "strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.",
+                style: GoogleFonts.notoSans(
+                  fontSize: 12.sp,
+                  color: Colors.black87,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
           SizedBox(height: 32.w),
 

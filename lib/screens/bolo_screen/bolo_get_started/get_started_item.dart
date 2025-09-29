@@ -34,6 +34,7 @@ class GetStartedItem extends StatelessWidget {
                 style: GoogleFonts.notoSans(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
+                  color: AppColors.darkGreen,
                 ),
               ),
             ),
@@ -47,7 +48,7 @@ class GetStartedItem extends StatelessWidget {
             style: GoogleFonts.notoSans(
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
-              color: AppColors.grey40,
+              color: AppColors.slateText,
             ),
           ),
         ),

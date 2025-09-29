@@ -178,13 +178,13 @@ class _RecordingButtonState extends State<RecordingButton>
   Widget _buildText() {
     switch (_state) {
       case RecordingState.idle:
-        return Text(AppLocalizations.of(context).startRecording,
+        return Text(AppLocalizations.of(context)!.startRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.darkGreen));
       case RecordingState.recording:
-        return Text(AppLocalizations.of(context).stopRecording,
+        return Text(AppLocalizations.of(context)!.stopRecording,
             style: GoogleFonts.notoSans(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
@@ -209,7 +209,7 @@ class _RecordingButtonState extends State<RecordingButton>
               SizedBox(height: 8.w),
             ],
             SizedBox(height: 16.w),
-            Text(AppLocalizations.of(context).reRecord,
+            Text(AppLocalizations.of(context)!.reRecord,
                 style: GoogleFonts.notoSans(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,

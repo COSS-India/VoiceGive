@@ -31,7 +31,7 @@ class ErrorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 24).w,
                 child: Text(
-                  AppLocalizations.of(context).namasteContributor,
+                  AppLocalizations.of(context)!.namasteContributor,
                   style: GoogleFonts.montserrat(
                       color: AppColors.darkGreen,
                       fontWeight: FontWeight.w600,
@@ -42,7 +42,7 @@ class ErrorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0).w,
                 child: Text(
-                  AppLocalizations.of(context).errorDesc,
+                  AppLocalizations.of(context)!.errorDesc,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                       color: AppColors.greys87,
@@ -55,7 +55,7 @@ class ErrorPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: Text(
-                  AppLocalizations.of(context).errorSubtitle,
+                  AppLocalizations.of(context)!.errorSubtitle,
                   style: GoogleFonts.lato(
                     color: AppColors.greys87,
                     fontWeight: FontWeight.w400,
@@ -80,7 +80,7 @@ class ErrorPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         )),
                     child: Text(
-                      AppLocalizations.of(context).errorButton,
+                      AppLocalizations.of(context)!.errorButton,
                       style: GoogleFonts.lato(
                           color: AppColors.appBarBackground,
                           fontWeight: FontWeight.w700,

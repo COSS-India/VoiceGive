@@ -80,7 +80,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                   Row(
                     children: [
                       Text(
-                        AppLocalizations.of(context).namasteContributor,
+                        AppLocalizations.of(context)!.namasteContributor,
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
@@ -98,7 +98,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
 
                   // Introduction paragraph
                   Text(
-                    AppLocalizations.of(context).consentMessage,
+                    AppLocalizations.of(context)!.consentMessage,
                     style: GoogleFonts.notoSans(
                       color: Colors.black,
                       fontSize: 14.sp,
@@ -229,7 +229,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              AppLocalizations.of(context).iAgree,
+                              AppLocalizations.of(context)!.iAgree,
                               style: GoogleFonts.notoSans(
                                 color: _allAccepted
                                     ? Colors.white

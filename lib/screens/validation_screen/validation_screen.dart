@@ -89,7 +89,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context).boloIndia,
+                          AppLocalizations.of(context)!.boloIndia,
                           style: GoogleFonts.notoSans(
                             color: Colors.white,
                             fontSize: 20.sp,
@@ -97,7 +97,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
                           ),
                         ),
                         Text(
-                          AppLocalizations.of(context)
+                          AppLocalizations.of(context)!
                               .enrichYourLanguageByDonatingVoice,
                           style: GoogleFonts.notoSans(
                             color: Colors.white,
@@ -144,17 +144,17 @@ class _ValidationScreenState extends State<ValidationScreen> {
         children: [
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).quickTips,
+            title: AppLocalizations.of(context)!.quickTips,
             icon: Icons.lightbulb_outline,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).report,
+            title: AppLocalizations.of(context)!.report,
             icon: Icons.report_outlined,
           ),
           _actionButton(
             onTap: () {},
-            title: AppLocalizations.of(context).testSpeakers,
+            title: AppLocalizations.of(context)!.testSpeakers,
             icon: Icons.volume_up_outlined,
           ),
         ],
@@ -203,7 +203,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Row(
       children: [
         Text(
-          AppLocalizations.of(context).selectLanguageForContribution,
+          AppLocalizations.of(context)!.selectLanguageForContribution,
           style: GoogleFonts.notoSans(
             fontSize: 14.sp,
             color: Colors.black,
@@ -406,7 +406,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
     return Column(
       children: [
         Text(
-          AppLocalizations.of(context).reRecord,
+          AppLocalizations.of(context)!.reRecord,
           style: GoogleFonts.notoSans(
             fontSize: 16.sp,
             color: AppColors.darkGreen,
@@ -455,7 +455,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 150.w, // Increased width to accommodate larger font
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context).contributeMore,
+            title: AppLocalizations.of(context)!.contributeMore,
             textFontSize: 12.sp, // Increased font size
             onTap: () {
               // Navigate to Bolo screen for new recording
@@ -479,7 +479,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: AppLocalizations.of(context).validate,
+            title: AppLocalizations.of(context)!.validate,
             textFontSize: 16.sp,
             onTap: () {
               // Navigate to PlayRecordingScreen without API call
