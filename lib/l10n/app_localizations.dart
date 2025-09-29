@@ -235,7 +235,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpSentMessage.
   ///
   /// In en, this message translates to:
-  /// **'We will send a One Time Password(OTP) to this mobile number.'**
+  /// **'We have sent a One Time Password(OTP) to this mobile number.'**
   String get otpSentMessage;
 
   /// No description provided for @enterMobileNumber.
@@ -1237,7 +1237,7 @@ abstract class AppLocalizations {
   /// No description provided for @weWillSendA.
   ///
   /// In en, this message translates to:
-  /// **'We will send a '**
+  /// **'We have sent a '**
   String get weWillSendA;
 
   /// No description provided for @oneTimePasswordOtp.
@@ -1303,13 +1303,13 @@ abstract class AppLocalizations {
   /// No description provided for @howItWorks.
   ///
   /// In en, this message translates to:
-  /// **'How it Works'**
+  /// **'How it Works?'**
   String get howItWorks;
 
   /// No description provided for @enterYourMobileNumber.
   ///
   /// In en, this message translates to:
-  /// **'Enter your mobile number'**
+  /// **'Enter mobile no.*'**
   String get enterYourMobileNumber;
 
   /// No description provided for @otherInformation.

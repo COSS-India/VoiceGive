@@ -81,7 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpSentMessage =>
-      'We will send a One Time Password(OTP) to this mobile number.';
+      'We have sent a One Time Password(OTP) to this mobile number.';
 
   @override
   String get enterMobileNumber => 'Enter mobile no.*';
@@ -610,7 +610,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifyYourPhoneNumber => 'Verify your\nphone number';
 
   @override
-  String get weWillSendA => 'We will send a ';
+  String get weWillSendA => 'We have sent a ';
 
   @override
   String get oneTimePasswordOtp => 'One Time Password (OTP)';
@@ -644,10 +644,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get doesntHaveAccount => 'Don\'t have an account? ';
 
   @override
-  String get howItWorks => 'How it Works';
+  String get howItWorks => 'How it Works?';
 
   @override
-  String get enterYourMobileNumber => 'Enter your mobile number';
+  String get enterYourMobileNumber => 'Enter mobile no.*';
 
   @override
   String get otherInformation => 'Other Information';
