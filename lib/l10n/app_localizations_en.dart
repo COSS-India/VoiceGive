@@ -204,7 +204,7 @@ class AppLocalizationsEn {
   String get emailAndPassword => 'email and password ';
   String get toAccessYourAccount => 'to access your account';
   String get doesntHaveAccount => 'Don\'t have an account? ';
-  String get howItWorks => 'How it Works';
+  String get howItWorks => 'How it Works?';
   String get enterYourMobileNumber => 'Enter your mobile number';
   String get otherInformation => 'Other Information';
   String get country => 'Country';
