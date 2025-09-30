@@ -96,6 +96,10 @@
       "category": "agriculture",
       "difficulty": "medium",
       "sentenceId": "marathi-021"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-022"
     }
   ],
   "Hindi": [

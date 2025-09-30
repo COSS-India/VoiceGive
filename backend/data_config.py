@@ -267,7 +267,6 @@ class DataConfig:
                     "contributionId": "contrib-mr-001",
                     "sentenceId": "sent-mr-001",
                     "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-                    "audioUrl": "https://storage.example.com/audio/mr-001.mp3",
                     "duration": 15.5,
                     "contributorId": "user-001",
                     "quality": "good"
@@ -276,7 +275,6 @@ class DataConfig:
                     "contributionId": "contrib-mr-002",
                     "sentenceId": "sent-mr-002", 
                     "text": "शेतकऱ्यांना नवीन तंत्रज्ञानाची माहिती देणे हे आमचे उद्दिष्ट आहे.",
-                    "audioUrl": "https://storage.example.com/audio/mr-002.mp3",
                     "duration": 12.3,
                     "contributorId": "user-002",
                     "quality": "excellent"
@@ -287,7 +285,6 @@ class DataConfig:
                     "contributionId": "contrib-hi-001",
                     "sentenceId": "sent-hi-001",
                     "text": "किसानों को नई तकनीक की जानकारी देना हमारा उद्देश्य है।",
-                    "audioUrl": "https://storage.example.com/audio/hi-001.mp3",
                     "duration": 14.2,
                     "contributorId": "user-003",
                     "quality": "good"
@@ -323,12 +320,40 @@ class DataConfig:
     
     def get_sentences(self, language: str, count: int = 5) -> List[Dict[str, Any]]:
         """Get sentences for a specific language"""
-        sentences = self.sentences.get(language, [])
+        # Map language codes to language names
+        language_mapping = {
+            "mr": "Marathi",
+            "hi": "Hindi", 
+            "en": "English",
+            "te": "Telugu",
+            "ta": "Tamil",
+            "gu": "Gujarati",
+            "bn": "Bengali",
+            "kn": "Kannada"
+        }
+        
+        # Convert language code to language name if needed
+        language_name = language_mapping.get(language, language)
+        sentences = self.sentences.get(language_name, [])
         return sentences[:count]
     
     def get_validation_items(self, language: str, count: int = 25) -> List[Dict[str, Any]]:
         """Get validation items for a specific language"""
-        items = self.validation_items.get(language, [])
+        # Map language codes to language names
+        language_mapping = {
+            "mr": "Marathi",
+            "hi": "Hindi", 
+            "en": "English",
+            "te": "Telugu",
+            "ta": "Tamil",
+            "gu": "Gujarati",
+            "bn": "Bengali",
+            "kn": "Kannada"
+        }
+        
+        # Convert language code to language name if needed
+        language_name = language_mapping.get(language, language)
+        items = self.validation_items.get(language_name, [])
         return items[:count]
     
     def add_sentence(self, language: str, sentence_data: Dict[str, Any]) -> str:

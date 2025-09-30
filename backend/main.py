@@ -22,7 +22,27 @@ from logging_config import setup_logging, get_logger, log_api_call, log_authenti
 from storage_service import storage_service
 
 # Initialize FastAPI app
-app = FastAPI()
+app = FastAPI(
+    title="VoiceGive API",
+    description="""
+    VoiceGive is a mobile friendly application designed for language data (Voice based) collection 
+    and crowdsourcing initiatives. This project provides a complete, customizable user interface 
+    that can be adopted by organizations, government agencies, and developers to build their own 
+    language voice data collection applications.
+
+    **Certificate Requirements:**
+    - 5 voice contributions
+    - 25 validations
+    """,
+    version="1.0.0",
+    contact={
+        "name": "VoiceGive Support",
+        "email": "voicegive.ai4x@gmail.com"
+    },
+    license_info={
+        "name": "MIT"
+    }
+)
 
 # Setup middleware
 from middleware import setup_middleware
@@ -96,25 +116,37 @@ async def resend_otp(request: ResendOTPRequest, db: Session = Depends(get_db)):
     try:
         log_api_call(logger, "/auth/resend-otp", "POST")
         
-        # Get session from database
-        session = get_session_by_id(db, request.sessionId)
+        # Find the most recent session for this mobile number
+        session = db.query(UserSession).filter(
+            UserSession.mobile_no == request.mobileNo
+        ).order_by(UserSession.created_at.desc()).first()
+        
         if not session:
-            raise HTTPException(status_code=400, detail="Invalid or expired session")
+            raise HTTPException(status_code=400, detail="No OTP session found for this mobile number")
         
         # Check if session is expired
         from datetime import timezone
         if session.otp_expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
-            raise HTTPException(status_code=400, detail="Session expired")
+            raise HTTPException(status_code=400, detail="OTP session expired. Please request a new OTP.")
+        
+        # Update the session with new expiry time
+        new_expires_at = datetime.utcnow() + timedelta(seconds=config.otp_expiry_seconds)
+        session.otp_expires_at = new_expires_at
+        session.expires_at = new_expires_at
+        db.commit()
+        
+        log_authentication(logger, "otp_resent", None, request.mobileNo)
         
         return {
             "success": True,
             "message": "OTP resent successfully",
             "data": {
-                "expiresIn": config.otp_expiry_seconds
+                "expiresIn": config.otp_expiry_seconds,
+                "expiresAt": new_expires_at.isoformat() + "Z"
             }
         }
     except Exception as e:
-        log_error(logger, e, {"endpoint": "/auth/resend-otp", "sessionId": request.sessionId})
+        log_error(logger, e, {"endpoint": "/auth/resend-otp", "mobile": request.mobileNo})
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/auth/verify-otp", response_model=VerifyOTPResponse, tags=["Authentication"])
@@ -123,15 +155,18 @@ async def verify_otp(request: VerifyOTPRequest, db: Session = Depends(get_db)):
     try:
         log_api_call(logger, "/auth/verify-otp", "POST")
         
-        # Get session from database
-        session = get_session_by_id(db, request.sessionId)
+        # Find the most recent session for this mobile number
+        session = db.query(UserSession).filter(
+            UserSession.mobile_no == request.mobileNo
+        ).order_by(UserSession.created_at.desc()).first()
+        
         if not session:
-            raise HTTPException(status_code=400, detail="Invalid session")
+            raise HTTPException(status_code=400, detail="No OTP session found for this mobile number")
         
         # Check if session is expired
         from datetime import timezone
         if session.otp_expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
-            raise HTTPException(status_code=400, detail="Session expired")
+            raise HTTPException(status_code=400, detail="OTP session expired. Please request a new OTP.")
         
         # Verify OTP
         if session.otp_code != request.otp:
@@ -160,6 +195,7 @@ async def verify_otp(request: VerifyOTPRequest, db: Session = Depends(get_db)):
             )
             db.add(user)
             db.commit()
+            db.refresh(user)
         
         return VerifyOTPResponse(
             success=True,
@@ -178,7 +214,7 @@ async def verify_otp(request: VerifyOTPRequest, db: Session = Depends(get_db)):
             }
         )
     except Exception as e:
-        log_error(logger, e, {"endpoint": "/auth/verify-otp", "sessionId": request.sessionId})
+        log_error(logger, e, {"endpoint": "/auth/verify-otp", "mobile": request.mobileNo})
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/auth/consent", response_model=ConsentResponse, tags=["Authentication"])
@@ -229,7 +265,7 @@ async def register_user(request: UserRegistrationRequest):
         country=request.country,
         state=request.state,
         district=request.district,
-        preferredLanguage=request.preferredLanguage
+        preferredLanguageCode=request.preferredLanguageCode
     )
     
     mock_data["users"][user_id] = user_profile.dict()
@@ -472,7 +508,7 @@ async def get_sentences(request: GetSentencesRequest):
         log_api_call(logger, "/contributions/get-sentences", "POST")
         
         session_id = str(uuid.uuid4())
-        sentences_data = data_config.get_sentences(request.language, request.count)
+        sentences_data = data_config.get_sentences(request.languageCode, request.count)
         
         # Format sentences with sequence numbers
         sentences = []
@@ -495,32 +531,67 @@ async def get_sentences(request: GetSentencesRequest):
         return GetSentencesResponse(
             data={
                 "sessionId": session_id,
-                "language": request.language,
+                "languageCode": request.languageCode,
                 "sentences": sentences,
                 "totalCount": len(sentences)
             }
         )
     except Exception as e:
-        log_error(logger, e, {"endpoint": "/contributions/get-sentences", "language": request.language})
+        log_error(logger, e, {"endpoint": "/contributions/get-sentences", "languageCode": request.languageCode})
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/contributions/record", response_model=RecordContributionResponse, tags=["Contribution"])
 async def record_contribution(request: RecordContributionRequest):
-    """Submit audio recording"""
-    contribution_id = str(uuid.uuid4())
-    
-    return RecordContributionResponse(
-        data={
-            "contributionId": contribution_id,
-            "audioUrl": f"https://storage.example.com/audio/{contribution_id}.mp3",
+    """Submit audio recording with language code, Base64 audio data, and duration"""
+    try:
+        log_api_call(logger, "/contributions/record", "POST")
+        
+        contribution_id = str(uuid.uuid4())
+        
+        # Validate Base64 audio data
+        try:
+            import base64
+            # Decode to validate it's valid Base64
+            audio_bytes = base64.b64decode(request.audioContent)
+            file_size = len(audio_bytes)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail="Invalid Base64 audio data")
+        
+        # Validate duration
+        if request.duration <= 0:
+            raise HTTPException(status_code=400, detail="Duration must be greater than 0")
+        
+        if request.duration > 60:  # 1 minute max
+            raise HTTPException(status_code=400, detail="Duration cannot exceed 60 seconds")
+        
+        # Log the contribution
+        log_contribution(logger, "record_contribution", "anonymous", request.languageCode, contribution_id)
+        
+        return RecordContributionResponse(
+            data={
+                "contributionId": contribution_id,
+                "duration": request.duration,
+                "languageCode": request.languageCode,
+                "status": "pending",
+                "sequenceNumber": request.sequenceNumber,
+                "totalInSession": config.session_contributions_limit,
+                "remainingInSession": config.session_contributions_limit - request.sequenceNumber,
+                "progressPercentage": int((request.sequenceNumber / config.session_contributions_limit) * 100),
+                "fileSize": file_size,
+                "timestamp": datetime.now().isoformat() + "Z"
+            }
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        log_error(logger, e, {
+            "endpoint": "/contributions/record",
+            "languageCode": request.languageCode,
             "duration": request.duration,
-            "status": "pending",
-            "sequenceNumber": request.sequenceNumber,
-            "totalInSession": config.session_contributions_limit,
-            "remainingInSession": config.session_contributions_limit - request.sequenceNumber,
-            "progressPercentage": int((request.sequenceNumber / config.session_contributions_limit) * 100)
-        }
-    )
+            "sessionId": request.sessionId
+        })
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/contributions/skip", response_model=Dict[str, Any], tags=["Contribution"])
 async def skip_sentence(request: SkipSentenceRequest):
@@ -571,13 +642,13 @@ async def complete_contribution_session(request: Dict[str, str]):
 # ==================== Validation Endpoints ====================
 
 @app.get("/validations/get-queue", response_model=GetValidationQueueResponse, tags=["Validation"])
-async def get_validation_queue(language: str, count: int = 25):
+async def get_validation_queue(languageCode: str, count: int = 25):
     """Get validation queue"""
     try:
         log_api_call(logger, "/validations/get-queue", "GET")
         
         session_id = str(uuid.uuid4())
-        validation_data = data_config.get_validation_items(language, count)
+        validation_data = data_config.get_validation_items(languageCode, count)
         
         # Format validation items with sequence numbers
         validation_items = []
@@ -590,7 +661,7 @@ async def get_validation_queue(language: str, count: int = 25):
                 "contributionId": item_data["contributionId"],
                 "sentenceId": item_data.get("sentenceId", f"sent-{i}"),
                 "text": item_data["text"],
-                "audioUrl": item_data.get("audioUrl", ""),
+                "audioContent": item_data.get("audioContent", ""),
                 "duration": item_data.get("duration", 0),
                 "sequenceNumber": i
             })
@@ -598,13 +669,13 @@ async def get_validation_queue(language: str, count: int = 25):
         return GetValidationQueueResponse(
             data={
                 "sessionId": session_id,
-                "language": language,
+                "languageCode": languageCode,
                 "validationItems": validation_items,
                 "totalCount": len(validation_items)
             }
         )
     except Exception as e:
-        log_error(logger, e, {"endpoint": "/validations/get-queue", "language": language})
+        log_error(logger, e, {"endpoint": "/validations/get-queue", "languageCode": languageCode})
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.post("/validations/submit", response_model=SubmitValidationResponse, tags=["Validation"])
@@ -623,13 +694,13 @@ async def submit_validation(request: SubmitValidationRequest):
     )
 
 @app.post("/validations/session-complete", response_model=Dict[str, Any], tags=["Validation"])
-async def complete_validation_session(request: Dict[str, str]):
+async def complete_validation_session(request: ValidationSessionCompleteRequest):
     """Complete validation session"""
     return {
         "success": True,
         "message": "Validation session completed",
         "data": {
-            "sessionId": request.get("sessionId"),
+            "sessionId": request.sessionId,
             "totalValidations": config.session_validations_limit,
             "userTotalValidations": 25,
             "certificateProgress": {
@@ -817,4 +888,4 @@ async def cleanup_temp_files(max_age_hours: int = 24):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=9000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=9000, reload=True)

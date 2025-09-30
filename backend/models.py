@@ -2,7 +2,7 @@
 Pydantic models for AgriDaan API
 All request/response models based on the API documentation
 """
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, validator
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 from enum import Enum
@@ -24,11 +24,12 @@ class SendOTPResponse(BaseModel):
     })
 
 class ResendOTPRequest(BaseModel):
-    sessionId: str = Field(..., format="uuid")
+    mobileNo: str = Field(..., pattern="^[6-9]\\d{9}$", example="9177454678")
+    countryCode: str = Field(default="+91", example="+91")
 
 class VerifyOTPRequest(BaseModel):
-    sessionId: str = Field(..., format="uuid")
-    otp: str = Field(..., pattern="^\\d{6}$", example="536247")
+    mobileNo: str = Field(..., pattern="^[6-9]\\d{9}$", example="9177454678")
+    otp: str = Field(..., pattern="^\\d{6}$", example="123456")
 
 class VerifyOTPResponse(BaseModel):
     success: bool = True
@@ -85,7 +86,7 @@ class UserRegistrationRequest(BaseModel):
     country: str = Field(..., example="India")
     state: str = Field(..., example="Maharashtra")
     district: str = Field(..., example="Amravati")
-    preferredLanguage: str = Field(..., example="Marathi")
+    preferredLanguageCode: str = Field(..., example="mr")
 
 class UserProfile(BaseModel):
     userId: str = Field(..., format="uuid")
@@ -98,7 +99,7 @@ class UserProfile(BaseModel):
     country: str = Field(..., example="India")
     state: str = Field(..., example="Maharashtra")
     district: str = Field(..., example="Amravati")
-    preferredLanguage: str = Field(..., example="Marathi")
+    preferredLanguageCode: str = Field(..., example="mr")
     contributionCount: int = Field(default=0, example=5)
     validationCount: int = Field(default=0, example=25)
     certificateEarned: bool = Field(default=False)
@@ -144,7 +145,7 @@ class Language(BaseModel):
 # ==================== Contribution Models ====================
 
 class GetSentencesRequest(BaseModel):
-    language: str = Field(..., example="Marathi")
+    languageCode: str = Field(..., example="mr")
     count: int = Field(default=5, maximum=5, example=5)
 
 class Sentence(BaseModel):
@@ -166,7 +167,8 @@ class RecordContributionRequest(BaseModel):
     sessionId: str = Field(..., format="uuid")
     sentenceId: str = Field(...)
     duration: float = Field(..., example=20.0)
-    language: str = Field(..., example="Marathi")
+    languageCode: str = Field(..., example="mr", description="Language code (e.g., 'mr' for Marathi, 'hi' for Hindi)")
+    audioContent: str = Field(..., format="byte", description="audio content with audio duration <= 1min", example="byte64 encoded string")
     sequenceNumber: int = Field(..., example=1)
     metadata: Optional[str] = Field(None)
 
@@ -175,13 +177,15 @@ class RecordContributionResponse(BaseModel):
     message: str = "Recording submitted successfully"
     data: Dict[str, Any] = Field(example={
         "contributionId": "contrib-123-abc",
-        "audioUrl": "https://storage.example.com/audio/123.mp3",
         "duration": 20.0,
+        "languageCode": "mr",
         "status": "pending",
         "sequenceNumber": 1,
         "totalInSession": 5,
         "remainingInSession": 4,
-        "progressPercentage": 20
+        "progressPercentage": 20,
+        "fileSize": 245760,
+        "timestamp": "2025-09-30T07:30:00Z"
     })
 
 class SkipSentenceRequest(BaseModel):
@@ -195,13 +199,33 @@ class ReportSentenceRequest(BaseModel):
     reportType: str = Field(..., example="inappropriate")
     description: Optional[str] = Field(None, max_length=500)
 
+class ContributionRecordRequest(BaseModel):
+    languageCode: str = Field(..., example="mr", description="Language code (e.g., 'mr' for Marathi, 'hi' for Hindi)")
+    audioData: str = Field(..., description="Base64 encoded audio data")
+    duration: float = Field(..., example=15.5, description="Duration in seconds")
+    sessionId: Optional[str] = Field(None, format="uuid", description="Session ID if part of a session")
+    sentenceId: Optional[str] = Field(None, description="Sentence ID if part of a structured session")
+    metadata: Optional[Dict[str, Any]] = Field(None, description="Additional metadata")
+
+class ContributionRecordResponse(BaseModel):
+    success: bool = True
+    message: str = "Contribution recorded successfully"
+    data: Dict[str, Any] = Field(example={
+        "contributionId": "contrib-123-abc",
+        "languageCode": "mr",
+        "duration": 15.5,
+        "status": "pending",
+        "timestamp": "2025-09-30T07:30:00Z",
+        "fileSize": 245760
+    })
+
 # ==================== Validation Models ====================
 
 class ValidationItem(BaseModel):
     contributionId: str = Field(..., format="uuid")
     sentenceId: str = Field(...)
     text: str = Field(..., example="तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.")
-    audioUrl: str = Field(..., format="uri")
+    audioContent: str = Field(..., example="UklGRiQIAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAIAAA=")
     duration: float = Field(..., example=20.0)
     sequenceNumber: int = Field(..., minimum=1, maximum=25, example=1)
 
@@ -221,6 +245,20 @@ class SubmitValidationRequest(BaseModel):
     decision: str = Field(..., example="correct")
     feedback: Optional[str] = Field(None, max_length=200)
     sequenceNumber: int = Field(..., example=1)
+
+class ValidationSessionCompleteRequest(BaseModel):
+    sessionId: str = Field(..., description="Session ID for the validation session")
+    
+    @validator('sessionId')
+    def validate_session_id(cls, v):
+        if not v or not v.strip():
+            raise ValueError('sessionId cannot be empty')
+        # Basic UUID format validation
+        import re
+        uuid_pattern = r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+        if not re.match(uuid_pattern, v, re.IGNORECASE):
+            raise ValueError('sessionId must be a valid UUID format')
+        return v
 
 class SubmitValidationResponse(BaseModel):
     success: bool = True

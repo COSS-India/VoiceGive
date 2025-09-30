@@ -117,7 +117,6 @@ class Contribution(Base):
     sentence_id = Column(String(100), nullable=False)
     language = Column(String(50), nullable=False)
     text = Column(Text, nullable=False)
-    audio_url = Column(String(500), nullable=False)
     audio_duration = Column(Float, nullable=False)
     file_size = Column(Integer, nullable=False)
     file_format = Column(String(10), nullable=False)
