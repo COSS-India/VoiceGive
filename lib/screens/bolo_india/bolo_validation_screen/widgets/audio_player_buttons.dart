@@ -233,11 +233,12 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(text, style: _textStyle),
-        SizedBox(height: 24.h),
+        SizedBox(height: 36.h),
         GestureDetector(
           onTap: _toggleState,
           child: buttonContent,
         ),
+        SizedBox(height: 36.h),
       ],
     );
   }

@@ -54,17 +54,17 @@ class BoloValidateRepository {
     }
   }
 
-  Future<SessionCompletedModel> validateSessionCompleted() async {
+  Future<SessionCompletedModel?> validateSessionCompleted() async {
     try {
       Response response = await boloService.validateSessionCompleted();
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
         return SessionCompletedModel.fromJson(content['data']);
       } else {
-        throw Exception('Failed to complete validation session');
+        return null;
       }
     } catch (e) {
-      throw Exception('Failed to complete validation session: $e');
+      return null;
     }
   }
 }
