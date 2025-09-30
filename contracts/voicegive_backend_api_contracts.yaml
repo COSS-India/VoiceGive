@@ -1,29 +1,27 @@
 openapi: 3.0.3
 info:
-  title: AgriDaan API
+  title: VoiceGive API
   description: |
-    AgriDaan is a crowdsourcing initiative to collect agriculture-related knowledge from citizens 
-    across India as part of Project BHASHINI. The platform enables users to contribute agricultural 
-    knowledge through voice recordings (BOLO India) and validate contributions from others.
-    
+    VoiceGive is a mobile friendly application designed for language data (Voice based) collection 
+    and crowdsourcing initiatives. This project provides a complete, customizable user interface 
+    that can be adopted by organizations, government agencies, and developers to build their own 
+    language voice data collection applications.
+
     **Certificate Requirements:**
-    - 5 voice contributions (BOLO India)
+    - 5 voice contributions
     - 25 validations
-    - Certificate Title: "Agri Bhasha Samarthak"
-    
-    **Support:** support-bhashadaan.dibd@gmail.com
     
   version: 1.0.0
   contact:
-    name: AgriDaan Support
-    email: support-bhashadaan.dibd@gmail.com
+    name: VoiceGive Support
+    email: voicegive.ai4x@gmail.com
   license:
-    name: Government of India
+    name: MIT
 
 servers:
   - url: https://api.agridaan.gov.in/v1
     description: Production server
-  - url: https://dev-api.agridaan.gov.in/v1
+  - url: http://localhost:9000
     description: Development server
 
 tags:
@@ -41,7 +39,6 @@ tags:
     description: Audio-text validation
   - name: Certificate
     description: Certificate generation and download
-
 security:
   - BearerAuth: []
 
@@ -55,8 +52,6 @@ paths:
       description: |
         Send 6-digit OTP to user's mobile number for authentication.
         OTP is valid for 5 minutes (300 seconds).
-        
-        **Figma Reference:** Page 3, 4
       security: []
       requestBody:
         required: true
@@ -164,8 +159,6 @@ paths:
       summary: Resend OTP
       description: |
         Resend OTP if user didn't receive it. Can only be called after initial send-otp.
-        
-        **Figma Reference:** Page 5 - "I didn't receive any OTP. RESEND"
       security: []
       requestBody:
         required: true
@@ -174,12 +167,16 @@ paths:
             schema:
               type: object
               required:
-                - sessionId
+                - mobileNo
               properties:
-                sessionId:
+                mobileNo:
                   type: string
-                  format: uuid
-                  example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  pattern: '^[6-9]\d{9}$'
+                  example: "9177454678"
+                countryCode:
+                  type: string
+                  default: "+91"
+                  example: "+91"
       responses:
         '200':
           description: OTP resent successfully
@@ -190,6 +187,7 @@ paths:
                 properties:
                   success:
                     type: boolean
+                    example: true
                   message:
                     type: string
                     example: "OTP resent successfully"
@@ -199,6 +197,10 @@ paths:
                       expiresIn:
                         type: integer
                         example: 300
+                      expiresAt:
+                        type: string
+                        format: date-time
+                        example: "2025-09-29T10:35:00Z"
         '400':
           description: Invalid or expired session
         '429':
@@ -212,8 +214,6 @@ paths:
       description: |
         Verify the 6-digit OTP and get JWT access token.
         Timer shows remaining time (02:32 format).
-        
-        **Figma Reference:** Page 5
       security: []
       requestBody:
         required: true
@@ -222,22 +222,23 @@ paths:
             schema:
               type: object
               required:
-                - sessionId
+                - mobileNo
                 - otp
               properties:
-                sessionId:
+                mobileNo:
                   type: string
-                  format: uuid
+                  pattern: '^[6-9]\d{9}$'
+                  example: "9177454678"
                 otp:
                   type: string
                   pattern: '^\d{6}$'
-                  example: "536247"
+                  example: "123456"
                   description: 6-digit OTP from SMS
             examples:
               validOTP:
                 value:
-                  sessionId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                  otp: "536247"
+                  mobileNo: "9177454678"
+                  otp: "123456"
       responses:
         '200':
           description: OTP verified successfully
@@ -257,11 +258,11 @@ paths:
                     properties:
                       accessToken:
                         type: string
-                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        example: "jwt_token_12345"
                         description: JWT Bearer token
                       refreshToken:
                         type: string
-                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        example: "refresh_token_12345"
                       tokenType:
                         type: string
                         example: "Bearer"
@@ -270,7 +271,14 @@ paths:
                         example: 86400
                         description: Token expiry in seconds (24 hours)
                       user:
-                        $ref: '#/components/schemas/User'
+                        type: object
+                        properties:
+                          userId:
+                            type: string
+                            format: uuid
+                          mobileNo:
+                            type: string
+                            example: "9177454678"
                       requiresConsent:
                         type: boolean
                         description: Whether user needs to accept terms
@@ -447,12 +455,6 @@ paths:
       description: |
         Complete profile after OTP verification. This is called for new users.
         All fields are mandatory.
-        
-        **Figma Reference:** Page 6-9 - "Complete your profile"
-        
-        **Steps:**
-        1. Personal Information (Page 6-7): First Name, Last Name, Age Group, Gender, Phone, Email
-        2. Other Information (Page 8-9): Country, State, District, Preferred Language
       requestBody:
         required: true
         content:
@@ -467,7 +469,7 @@ paths:
                 - country
                 - state
                 - district
-                - preferredLanguage
+                - preferredLanguageCode
               properties:
                 firstName:
                   type: string
@@ -524,10 +526,10 @@ paths:
                   type: string
                   example: "Amravati"
                   description: District selection (dropdown, filtered by state)
-                preferredLanguage:
+                preferredLanguageCode:
                   type: string
-                  example: "Marathi"
-                  description: Preferred language for contributions (dropdown)
+                  example: "mr"
+                  description: Preferred language code for contributions (dropdown)
             examples:
               completeProfile:
                 value:
@@ -540,7 +542,7 @@ paths:
                   country: "India"
                   state: "Maharashtra"
                   district: "Amravati"
-                  preferredLanguage: "Marathi"
+                  preferredLanguageCode: "mr"
       responses:
         '201':
           description: Registration completed successfully
@@ -1148,8 +1150,6 @@ paths:
       description: |
         Get a batch of sentences to record in the selected language.
         Returns 5 sentences per session as shown in UI (1/5, 2/5, etc.)
-        
-        **Figma Reference:** Page 12-15 - BOLO India recording screens
       requestBody:
         required: true
         content:
@@ -1157,12 +1157,12 @@ paths:
             schema:
               type: object
               required:
-                - language
+                - languageCode
               properties:
-                language:
+                languageCode:
                   type: string
-                  example: "Marathi"
-                  description: Language selected from dropdown
+                  example: "mr"
+                  description: Language code selected from dropdown
                 count:
                   type: integer
                   default: 5
@@ -1227,22 +1227,19 @@ paths:
       description: |
         Upload audio recording for a sentence.
         User can re-record if not satisfied.
-        
-        **Figma Reference:** 
-        - Page 12: Start Recording
-        - Page 13: Stop Recording
-        - Page 14: Re-record with playback
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               required:
                 - sessionId
                 - sentenceId
-                - audio
+                - audioContent
                 - duration
+                - languageCode
+                - sequenceNumber
               properties:
                 sessionId:
                   type: string
@@ -1251,18 +1248,19 @@ paths:
                 sentenceId:
                   type: string
                   description: Sentence ID being recorded
-                audio:
+                audioContent:
                   type: string
-                  format: binary
-                  description: Audio file (MP3, WAV, max 10MB)
+                  format: byte
+                  description: Base64 encoded audio content
                 duration:
                   type: number
                   format: float
                   example: 20.0
                   description: Recording duration in seconds
-                language:
+                languageCode:
                   type: string
-                  example: "Marathi"
+                  example: "mr"
+                  description: Language code
                 sequenceNumber:
                   type: integer
                   example: 1
@@ -1503,16 +1501,14 @@ paths:
       description: |
         Get audio recordings that need validation (25 items per session).
         Returns audio-text pairs for validation.
-        
-        **Figma Reference:** Page 16-18 - Validation screens showing 1/25 progress
       parameters:
-        - name: language
+        - name: languageCode
           in: query
           required: true
           schema:
             type: string
-            example: "Marathi"
-          description: Language for validation
+            example: "mr"
+          description: Language code for validation
         - name: count
           in: query
           schema:
