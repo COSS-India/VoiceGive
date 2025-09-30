@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,7 +67,9 @@ class PhoneInputField extends StatelessWidget {
                 height: 48.w,
                 child: TextFormField(
                   controller: controller,
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.number,
+                  keyboardAppearance: Brightness.dark,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly,LengthLimitingTextInputFormatter(10)],
                   validator: validator,
                   decoration: InputDecoration(
                     hintText: '',
@@ -80,7 +83,7 @@ class PhoneInputField extends StatelessWidget {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(color: AppColors.lightGrey),
+                      borderSide: BorderSide(color: AppColors.lightGreen),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.r),

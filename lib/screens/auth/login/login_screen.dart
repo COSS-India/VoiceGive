@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _forgotPassword() {
-    // TODO: Implement forgot password logic
+    // Implement forgot password logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!.forgotPassword),
@@ -199,8 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _navigateBackToHome,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+      _navigateBackToHome();},
         child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,

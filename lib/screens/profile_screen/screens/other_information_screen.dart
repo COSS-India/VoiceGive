@@ -364,7 +364,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 32.h),
+                        SizedBox(height: 60.h),
                         Center(
                           child: SizedBox(
                             width: 280.w,

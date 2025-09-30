@@ -1,4 +1,4 @@
-import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
+import 'package:bhashadaan/screens/profile_screen/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -193,7 +193,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                   style: GoogleFonts.notoSans(
                                     color: AppColors.greys60,
                                     fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 TextSpan(

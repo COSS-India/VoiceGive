@@ -7,6 +7,7 @@ class ApiUrl {
   static const String reportIssueUrl = '$baseUrl/contributions/report';
   static const String contributeSessionCompleteUrl =
       '$baseUrl/contributions/session-complete';
+  static const String sendOTPUrl = '$baseUrl/auth/send-otp';
   static const String skipContributionUrl = '$baseUrl/v1/contributions/skip';
   static const String getValidationsQueUrl = '$baseUrl/validations/get-queue';
   static const String submitValidationUrl = '$baseUrl/validations/submit';

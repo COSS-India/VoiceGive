@@ -87,13 +87,20 @@ class _OtpInputFieldState extends State<OtpInputField> {
               width: 40.w,
               height: 40.w,
               decoration: BoxDecoration(
+                boxShadow: _focusNodes[index].hasFocus || _controllers[index].text.isNotEmpty?[
+                  BoxShadow(
+                    color: AppColors.saffron.withValues(alpha: 0.15),
+                    blurRadius: 6.r,
+                    offset: Offset(0, 3.h),
+                  ),
+                ]:null,
                 border: Border.all(
                   color: widget.errorText != null
                       ? AppColors.negativeLight
-                      : _focusNodes[index].hasFocus
+                      : _focusNodes[index].hasFocus || _controllers[index].text.isNotEmpty
                           ? AppColors.lightGreen
-                          : AppColors.lightGrey,
-                  width: 1.5,
+                          : AppColors.grey24,
+                  width: 0.5,
                 ),
                 borderRadius: BorderRadius.circular(6.r),
                 color: Colors.white,
