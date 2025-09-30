@@ -14,8 +14,9 @@ import '../widgets/name_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String? phoneNumber;
+  final String? countryCode;
 
-  const ProfileScreen({super.key, this.phoneNumber});
+  const ProfileScreen({super.key, this.phoneNumber, this.countryCode});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -108,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         context,
         MaterialPageRoute(
           builder: (_) =>
-              OtpVerificationScreen(phoneNumber: widget.phoneNumber!),
+              OtpVerificationScreen(phoneNumber: widget.phoneNumber!, countryCode: widget.countryCode!),
         ),
       );
     } else {
