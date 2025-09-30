@@ -368,7 +368,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               title: AppLocalizations.of(context)!.contributeMore,
               textFontSize: 14.sp,
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => BoloContribute()),
                 );
