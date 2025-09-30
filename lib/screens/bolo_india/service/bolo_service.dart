@@ -101,10 +101,10 @@ class BoloService {
     return response;
   }
 
-  Future<Response> completeSession({
+  Future<Response> contributeSessionCompleted({
     required String sessionId,
   }) async {
-    const url = ApiUrl.sessionCompleteUrl;
+    const url = ApiUrl.contributeSessionCompleteUrl;
 
     final body = jsonEncode({
       'sessionId': sessionId,
@@ -114,6 +114,65 @@ class BoloService {
       Uri.parse(url),
       headers: NetworkHeaders.postHeader,
       body: body,
+    );
+
+    return response;
+  }
+
+  Future<Response> validateSessionCompleted({
+    required String sessionId,
+  }) async {
+    const url = ApiUrl.validationSessionCompleteUrl;
+
+    final body = jsonEncode({
+      'sessionId': sessionId,
+    });
+
+    final response = await post(
+      Uri.parse(url),
+      headers: NetworkHeaders.postHeader,
+      body: body,
+    );
+
+    return response;
+  }
+
+  Future<Response> submitValidation({
+    required String sessionId,
+    required String contributionId,
+    required String sentenceId,
+    required String decision,
+    required String feedback,
+    required int sequenceNumber,
+  }) async {
+    final body = jsonEncode({
+      'sessionId': sessionId,
+      'contributionId': contributionId,
+      'sentenceId': sentenceId,
+      'decision': decision,
+      'feedback': feedback,
+      'sequenceNumber': sequenceNumber,
+    });
+
+    final response = await post(
+      Uri.parse(ApiUrl.submitValidationUrl),
+      headers: NetworkHeaders.postHeader,
+      body: body,
+    );
+
+    return response;
+  }
+
+  Future<Response> getValidationQueue({
+    required String language,
+    required int count,
+  }) async {
+    final url =
+        '${ApiUrl.getValidationsQueUrl}?language=$language&count=$count';
+
+    final response = await get(
+      Uri.parse(url),
+      headers: NetworkHeaders.getHeader,
     );
 
     return response;

@@ -109,7 +109,7 @@ class BoloRepository {
   }) async {
     try {
       Response response =
-          await boloService.completeSession(sessionId: sessionId);
+          await boloService.contributeSessionCompleted(sessionId: sessionId);
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
         return BoloSessionCompletedModel.fromJson(content);
