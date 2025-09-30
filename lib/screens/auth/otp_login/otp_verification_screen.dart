@@ -7,16 +7,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../repository/login_auth_repository.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/otp_input_field.dart';
 // OtpTimer will be inlined below
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
+  final String countryCode;
 
   const OtpVerificationScreen({
     super.key,
     required this.phoneNumber,
+    required this.countryCode
   });
 
   @override
@@ -91,20 +94,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     _isOtpValid.value = otp.length == 6;
   }
 
-  void _verifyOtp() {
+  Future<void> _verifyOtp() async {
     if (_otp.length == 6) {
       _isLoading.value = true;
-      // TODO: Implement OTP verification logic
+      dynamic userAuthData = await LoginAuthRepository().verifyOtp(otp: _otp, mobileNo: widget.phoneNumber);
       _isLoading.value = false;
       // Navigate to Profile Screen
-      Navigator.pushReplacement(
+      if (userAuthData is String) {
+        // An error occurred, show a snackbar with the error message
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(userAuthData),
+          ),
+        );
+        return;
+      }
+      else{Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ProfileScreen(
             phoneNumber: widget.phoneNumber,
+            countryCode: widget.countryCode
           ),
         ),
-      );
+      );}
     } else {
       setState(() {
         _errorText = AppLocalizations.of(context)!.invalidOtp;
@@ -112,15 +126,27 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
-  void _resendOtp() {
-    // TODO: Implement resend OTP logic
+  Future<void> _resendOtp() async {
+    final String? response = await LoginAuthRepository().resendOtp(mobileNo: widget.phoneNumber, countryCode: widget.countryCode);
+
+  if (!mounted) return;
+
+  if (response != null) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
         backgroundColor: AppColors.lightGreen,
       ),
     );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Error occurred while resending OTP'),
+      ),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

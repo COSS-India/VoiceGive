@@ -52,21 +52,28 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
     return null;
   }
 
-  void _requestOtp() {
+  Future<void> _requestOtp() async {
     if (_formKey.currentState!.validate()) {
       _isLoading.value = true;
-      LoginAuthRepository().sendOtp(_phoneController.text, "+91");
+      final String? message = await LoginAuthRepository().sendOtp(_phoneController.text, "+91");
       _isLoading.value = false;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OtpVerificationScreen(
-            phoneNumber: _phoneController.text,
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message??'Error occurred while sending OTP'),
+      ),
+    );
+      if (message != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationScreen(
+              phoneNumber: _phoneController.text,
+              countryCode: "+91",
           ),
         ),
       );
     }
-  }
+  }}
 
   @override
   Widget build(BuildContext context) {
