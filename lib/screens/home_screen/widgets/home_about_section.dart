@@ -1,4 +1,4 @@
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +21,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
           AppLocalizations.of(context)!.whatIsAgriDaan,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
-            fontSize: 20.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
         ),

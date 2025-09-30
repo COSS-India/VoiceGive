@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:bhashadaan/common_widgets/audio_player/custom_audio_player.dart';
-import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/constants/helper.dart';
+import 'package:VoiceGive/common_widgets/audio_player/custom_audio_player.dart';
+import 'package:VoiceGive/common_widgets/image_widget.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/constants/helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -144,16 +144,23 @@ class _RecordingButtonState extends State<RecordingButton>
       case RecordingState.idle:
         return ImageWidget(
             imageUrl: "assets/images/record.png",
-            height: 240,
+            height: 150,
             width: 240,
             boxFit: BoxFit.contain);
 
       case RecordingState.recording:
-        return Icon(Icons.stop, size: 64.sp, color: AppColors.appBarBackground);
+        return SizedBox(
+          height: 150,
+          child: CircleAvatar(
+              radius: 36.r,
+              backgroundColor: AppColors.lightGreen,
+              child:
+                  Icon(Icons.stop_rounded, size: 45.sp, color: Colors.white)),
+        );
       case RecordingState.stopped:
         return ImageWidget(
             imageUrl: "assets/images/record.png",
-            height: 240,
+            height: 150,
             width: 240,
             boxFit: BoxFit.contain);
     }
@@ -208,17 +215,17 @@ class _RecordingButtonState extends State<RecordingButton>
     return Column(
       children: [
         _buildText(),
-        SizedBox(height: 12.w),
+        SizedBox(height: 30.w),
         GestureDetector(
           onTap: _toggleState,
-          child: SizedBox(
-            width: 240,
-            height: 240,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (_state == RecordingState.recording)
-                  AnimatedBuilder(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (_state == RecordingState.recording)
+                SizedBox(
+                  height: 60.w,
+                  width: 60.w,
+                  child: AnimatedBuilder(
                     animation: _controller,
                     builder: (context, child) {
                       return Stack(
@@ -242,9 +249,9 @@ class _RecordingButtonState extends State<RecordingButton>
                       );
                     },
                   ),
-                _buildIcon(),
-              ],
-            ),
+                ),
+              _buildIcon(),
+            ],
           ),
         ),
       ],

@@ -58,9 +58,6 @@ VoiceGive/
 **Variables:**
 ```
 API_BASE_URL=...
-API_ORIGIN_URL=...
-API_REFERER_URL=...
-API_BEARER_TOKEN=your_bearer_token_here
 ENVIRONMENT=development
 ```
 

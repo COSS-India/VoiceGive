@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:VoiceGive/constants/network_headers.dart';
+import 'package:VoiceGive/models/auth/consent_response.dart';
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
@@ -20,8 +22,9 @@ class AuthService {
     };
 
     // Encrypt the password before sending to API
-    final encryptedPassword = PasswordEncryptionService.encryptPassword(request.password);
-    
+    final encryptedPassword =
+        PasswordEncryptionService.encryptPassword(request.password);
+
     // Create a new request with encrypted password
     final encryptedRequest = LoginRequest(
       email: request.email,
@@ -45,9 +48,10 @@ class AuthService {
       debugPrint('📥 Response body: ${response.body}');
 
       final responseData = jsonDecode(response.body) as Map<String, dynamic>;
-      
+
       // Check if the API returned an error response
-      if (responseData['status'] == false || responseData['statusCode'] != 201) {
+      if (responseData['status'] == false ||
+          responseData['statusCode'] != 201) {
         final errorMessage = responseData['message'] ?? 'Login failed';
         final statusCode = responseData['statusCode'] ?? response.statusCode;
         throw AuthException('Status: $statusCode - $errorMessage', statusCode);
@@ -90,7 +94,7 @@ class AuthService {
       debugPrint('❌ Captcha API error with minimal headers: $e');
       // If still fails, try with more headers
       final fullHeaders = _config.defaultHeaders;
-      
+
       try {
         debugPrint('📤 Trying captcha with full headers: $fullHeaders');
         final response = await http.get(uri, headers: fullHeaders);
@@ -143,6 +147,45 @@ class AuthService {
       return false;
     }
     return true;
+  }
+
+  /// Accept Consent
+  static Future<ConsentResponse> acceptConsent({
+    required bool termsAccepted,
+    required bool privacyAccepted,
+    required bool copyrightAccepted,
+  }) async {
+    final uri = Uri.parse('${_config.apiBaseUrl}/auth/consent');
+
+    final payload = {
+      "termsAccepted": termsAccepted,
+      "privacyAccepted": privacyAccepted,
+      "copyrightAccepted": copyrightAccepted
+    };
+
+    debugPrint('🌐 Making login API call to: $uri');
+    debugPrint('📤 Request body: ${jsonEncode(payload)}');
+
+    try {
+      final response = await http.post(
+        uri,
+        headers: NetworkHeaders.postHeader,
+        body: jsonEncode(payload),
+      );
+
+      final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+      debugPrint('📥 Response status: ${response.statusCode}');
+      debugPrint('📥 Response body: ${response.body}');
+
+      if (responseData['success'] ?? false) {
+        return ConsentResponse.fromJson(responseData);
+      } else {
+        return ConsentResponse(success: false);
+      }
+    } catch (e) {
+      debugPrint('❌ Login API error: $e');
+      return ConsentResponse(success: false);
+    }
   }
 }
 

@@ -1,5 +1,6 @@
-import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/common_widgets/image_widget.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +17,10 @@ class BoloHeadersSection extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const HomeScreen()),
+              );
             },
             child: Icon(
               Icons.arrow_circle_left_outlined,

@@ -33,8 +33,9 @@ class Sentence {
       sentenceId: json['sentenceId'] as String,
       text: json['text'] as String,
       sequenceNumber: json['sequenceNumber'] as int,
-      metadata:
-          SentenceMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
+      metadata: json['metadata'] != null
+          ? SentenceMetadata.fromJson(json['metadata'] as Map<String, dynamic>)
+          : null,
     );
   }
 }
@@ -55,7 +56,7 @@ class BoloContributeSentence {
   factory BoloContributeSentence.fromJson(Map<String, dynamic> json) {
     return BoloContributeSentence(
       sessionId: json['sessionId'] as String,
-      language: json['language'] as String,
+      language: json['languageCode'] as String,
       sentences: (json['sentences'] as List)
           .map((e) => Sentence.fromJson(e as Map<String, dynamic>))
           .toList(),

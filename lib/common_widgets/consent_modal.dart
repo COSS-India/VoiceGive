@@ -1,3 +1,7 @@
+import 'package:VoiceGive/common_widgets/page_loader.dart';
+import 'package:VoiceGive/constants/helper.dart';
+import 'package:VoiceGive/models/auth/consent_response.dart';
+import 'package:VoiceGive/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,9 +26,33 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
   bool _termsAccepted = false;
   bool _privacyAccepted = false;
   bool _copyrightAccepted = false;
+  final ValueNotifier<bool> isAcceptingConsent = ValueNotifier<bool>(false);
 
   bool get _allAccepted =>
       _termsAccepted && _privacyAccepted && _copyrightAccepted;
+
+  Future<void> _acceptConsent() async {
+    try {
+      isAcceptingConsent.value = true;
+      ConsentResponse? response = await AuthService.acceptConsent(
+          termsAccepted: true, privacyAccepted: true, copyrightAccepted: true);
+      if (response.success) {
+        widget.onApprove();
+      } else {
+        Helper.showSnackBarMessage(
+            context: context,
+            bgColor: AppColors.negativeLight,
+            text: response.message ?? AppLocalizations.of(context)!.errorDesc);
+      }
+      isAcceptingConsent.value = false;
+    } catch (e) {
+      isAcceptingConsent.value = false;
+      Helper.showSnackBarMessage(
+          context: context,
+          bgColor: AppColors.negativeLight,
+          text: AppLocalizations.of(context)!.errorDesc);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +84,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        "We Respect Your Privacy",
+                        AppLocalizations.of(context)!.weRespectYourPrivacy,
                         style: GoogleFonts.notoSans(
                           color: AppColors.darkGreen,
                           fontSize: 18.sp,
@@ -89,7 +117,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        "🙏",
+                        AppLocalizations.of(context)!.namasteEmoji,
                         style: TextStyle(fontSize: 16.sp),
                       ),
                     ],
@@ -131,7 +159,8 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "By clicking \"${AppLocalizations.of(context)!.iAgree}\", you confirm that:",
+                        AppLocalizations.of(context)!.consentConfirm(
+                            AppLocalizations.of(context)!.iAgree),
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
@@ -143,51 +172,51 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                       // Numbered list
                       _buildNumberedItem(
                         "1.",
-                        "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
+                        AppLocalizations.of(context)!.consentPoint1,
                       ),
                       SizedBox(height: 12.w),
 
                       _buildNumberedItem(
                         "2.",
-                        "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
+                        AppLocalizations.of(context)!.consentPoint2,
                       ),
                       SizedBox(height: 12.w),
 
                       _buildNumberedItem(
                         "3.",
-                        "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
+                        AppLocalizations.of(context)!.consentPoint3,
                       ),
                       SizedBox(height: 12.w),
 
                       _buildNumberedItem(
                         "4.",
-                        "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
+                        AppLocalizations.of(context)!.consentPoint4,
                       ),
                       SizedBox(height: 12.w),
 
-                        _buildNumberedItem(
-                          "5.",
-                          "You have read, understood, and accepted the following governing documents on the BhashaDaan mobile app:",
-                        ),
-                        SizedBox(height: 16.w),
+                      _buildNumberedItem(
+                        "5.",
+                        AppLocalizations.of(context)!.consentPoint5,
+                      ),
+                      SizedBox(height: 16.w),
 
                       // Checkboxes for documents
                       _buildCheckboxItem(
-                        "Terms of Use/ Contribution Terms",
+                        AppLocalizations.of(context)!.termsOfUse,
                         _termsAccepted,
                         (value) => setState(() => _termsAccepted = value!),
                       ),
                       SizedBox(height: 8.w),
 
                       _buildCheckboxItem(
-                        "Privacy Policy",
+                        AppLocalizations.of(context)!.privacyPolicy,
                         _privacyAccepted,
                         (value) => setState(() => _privacyAccepted = value!),
                       ),
                       SizedBox(height: 8.w),
 
                       _buildCheckboxItem(
-                        "Copyright & Licensing Policy",
+                        AppLocalizations.of(context)!.copyrightPolicy,
                         _copyrightAccepted,
                         (value) => setState(() => _copyrightAccepted = value!),
                       ),
@@ -203,6 +232,62 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
               padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.w),
               child: Row(
                 children: [
+                  Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: isAcceptingConsent,
+                          builder: (BuildContext context, bool loading,
+                              Widget? child) {
+                            return GestureDetector(
+                              onTap: () {
+                                if (_allAccepted && !loading) _acceptConsent();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 14.w),
+                                decoration: BoxDecoration(
+                                  color: _allAccepted
+                                      ? AppColors.orange
+                                      : AppColors.lightGrey,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    if (loading)
+                                      SizedBox(
+                                        width: 18.w,
+                                        height: 18.w,
+                                        child: PageLoader(
+                                          strokeWidth: 2,
+                                          isLightTheme: false,
+                                        ),
+                                      ),
+                                    if (!loading) ...[
+                                      Icon(
+                                        Icons.check,
+                                        color: _allAccepted
+                                            ? Colors.white
+                                            : AppColors.grey84,
+                                        size: 18.w,
+                                      ),
+                                      SizedBox(width: 8.w),
+                                      Text(
+                                        AppLocalizations.of(context)!.iAgree,
+                                        style: GoogleFonts.notoSans(
+                                          color: _allAccepted
+                                              ? Colors.white
+                                              : AppColors.grey84,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                            );
+                          })),
+                  SizedBox(width: 20.h),
                   Expanded(
                     child: GestureDetector(
                       onTap: widget.onDeny,
@@ -223,47 +308,9 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "Deny",
+                              AppLocalizations.of(context)!.deny,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.grey84,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20.h),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: _allAccepted ? widget.onApprove : null,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 14.w),
-                        decoration: BoxDecoration(
-                          color: _allAccepted
-                              ? AppColors.orange
-                              : AppColors.lightGrey,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.check,
-                              color: _allAccepted
-                                  ? Colors.white
-                                  : AppColors.grey84,
-                              size: 18.w,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              AppLocalizations.of(context)!.iAgree,
-                              style: GoogleFonts.notoSans(
-                                color: _allAccepted
-                                    ? Colors.white
-                                    : AppColors.grey84,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                               ),

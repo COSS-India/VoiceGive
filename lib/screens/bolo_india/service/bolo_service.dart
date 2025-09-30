@@ -1,16 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bhashadaan/constants/api_url.dart';
-import 'package:bhashadaan/constants/network_headers.dart';
+import 'package:VoiceGive/constants/api_url.dart';
+import 'package:VoiceGive/constants/network_headers.dart';
+import 'package:VoiceGive/constants/storage_constants.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
+import 'package:VoiceGive/services/secure_storage_service.dart';
 import 'package:http/http.dart';
-import 'package:http_parser/http_parser.dart';
 
 class BoloService {
+  static final _storage = SecureStorageService.instance.storage;
+
+  static Future<String> get sessionId async {
+    return await _storage.read(key: StorageConstants.sessionId) ?? "";
+  }
+
   Future<Response> getContributionSentances(
       {required String language, int? count}) async {
     Map data = {
-      "language": language,
+      //"language": language,
+      "languageCode": language,
       "count": count ?? 5,
     };
 
@@ -23,46 +32,46 @@ class BoloService {
   }
 
   Future<Response> submitContributeAudio({
-    required String audioFilePath,
-    required String sessionId,
     required String sentenceId,
     required int duration,
-    required String language,
+    required String languageCode,
+    required File audioFile,
     required int sequenceNumber,
   }) async {
-    final request = MultipartRequest('POST', Uri.parse(ApiUrl.sumbitAudioUrl))
-      ..fields['sessionId'] = sessionId
-      ..fields['sentenceId'] = sentenceId
-      ..fields['duration'] = duration.toString()
-      ..fields['language'] = language
-      ..fields['sequenceNumber'] = sequenceNumber.toString()
-      ..fields['metadata'] = "String"
-      ..headers.addAll(NetworkHeaders.postHeader);
+    final audioBytes = await audioFile.readAsBytes();
+    final audioBase64 = base64Encode(audioBytes);
+    var sessionId = await BoloService.sessionId;
 
-    final audioFile = File(audioFilePath);
+    final body = jsonEncode({
+      'sessionId': sessionId,
+      'sentenceId': sentenceId,
+      'duration': duration,
+      'languageCode': languageCode,
+      'audioContent': audioBase64,
+      'sequenceNumber': sequenceNumber,
+      'metadata': "String",
+    });
 
-    request.files.add(
-      await MultipartFile.fromPath(
-        'audio',
-        audioFile.path,
-        contentType: MediaType('audio', 'wav'),
-      ),
+    final headers = {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    final response = await post(
+      Uri.parse(ApiUrl.sumbitAudioUrl),
+      headers: headers,
+      body: body,
     );
 
-    try {
-      final streamedResponse = await request.send();
-      return await Response.fromStream(streamedResponse);
-    } catch (e) {
-      throw Exception('Failed to upload audio: $e');
-    }
+    return response;
   }
 
   Future<Response> skipContribution({
-    required String sessionId,
     required String sentenceId,
     required String reason,
     required String comment,
   }) async {
+    var sessionId = await BoloService.sessionId;
     final body = jsonEncode({
       'sessionId': sessionId,
       'sentenceId': sentenceId,
@@ -84,7 +93,7 @@ class BoloService {
     required String reportType,
     required String description,
   }) async {
-    const url = ApiUrl.reportIssueUrl;
+    var url = ApiUrl.reportIssueUrl;
 
     final body = jsonEncode({
       'sentenceId': sentenceId,
@@ -101,11 +110,9 @@ class BoloService {
     return response;
   }
 
-  Future<Response> contributeSessionCompleted({
-    required String sessionId,
-  }) async {
-    const url = ApiUrl.contributeSessionCompleteUrl;
-
+  Future<Response> contributeSessionCompleted() async {
+    var url = ApiUrl.contributeSessionCompleteUrl;
+    var sessionId = await BoloService.sessionId;
     final body = jsonEncode({
       'sessionId': sessionId,
     });
@@ -119,10 +126,9 @@ class BoloService {
     return response;
   }
 
-  Future<Response> validateSessionCompleted({
-    required String sessionId,
-  }) async {
-    const url = ApiUrl.validationSessionCompleteUrl;
+  Future<Response> validateSessionCompleted() async {
+    var url = ApiUrl.validationSessionCompleteUrl;
+    var sessionId = await BoloService.sessionId;
 
     final body = jsonEncode({
       'sessionId': sessionId,
@@ -138,13 +144,14 @@ class BoloService {
   }
 
   Future<Response> submitValidation({
-    required String sessionId,
     required String contributionId,
     required String sentenceId,
     required String decision,
     required String feedback,
     required int sequenceNumber,
   }) async {
+    var sessionId = await BoloService.sessionId;
+
     final body = jsonEncode({
       'sessionId': sessionId,
       'contributionId': contributionId,
@@ -163,12 +170,12 @@ class BoloService {
     return response;
   }
 
-  Future<Response> getValidationQueue({
+  Future<Response> getValidationsQueue({
     required String language,
     required int count,
   }) async {
     final url =
-        '${ApiUrl.getValidationsQueUrl}?language=$language&count=$count';
+        '${ApiUrl.getValidationsQueUrl}?languageCode=$language&count=$count';
 
     final response = await get(
       Uri.parse(url),
@@ -176,5 +183,19 @@ class BoloService {
     );
 
     return response;
+  }
+
+  Future<List<LanguageModel>> getLanguages() async {
+    final response = await get(
+      Uri.parse(ApiUrl.getLanguages),
+      headers: NetworkHeaders.getHeader,
+    );
+    if (response.statusCode == 200) {
+      var content = jsonDecode(response.body);
+      var data = content['data'] as List;
+      return data.map((e) => LanguageModel.fromJson(e)).toList();
+    } else {
+      return [];
+    }
   }
 }

@@ -1,28 +1,73 @@
-import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
+import 'package:VoiceGive/screens/profile_screen/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../repository/login_auth_repository.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/otp_input_field.dart';
-import 'widgets/otp_timer.dart';
+// OtpTimer will be inlined below
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
+  final String countryCode;
 
-  const OtpVerificationScreen({
-    super.key,
-    required this.phoneNumber,
-  });
+  const OtpVerificationScreen(
+      {super.key, required this.phoneNumber, required this.countryCode});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  // ---- OtpTimer widget code inlined below ----
+  late Timer _otpTimer;
+  late int _otpSeconds;
+  bool _canResendOtp = false;
+
+  final int _otpInitialSeconds = 180;
+
+  @override
+  void initState() {
+    super.initState();
+    _otpSeconds = _otpInitialSeconds;
+    _startOtpTimer();
+  }
+
+  void _startOtpTimer() {
+    _otpTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_otpSeconds > 0) {
+        setState(() {
+          _otpSeconds--;
+        });
+      } else {
+        setState(() {
+          _canResendOtp = true;
+        });
+        _otpTimer.cancel();
+      }
+    });
+  }
+
+  void _resetOtpTimer() {
+    setState(() {
+      _otpSeconds = _otpInitialSeconds;
+      _canResendOtp = false;
+    });
+    _startOtpTimer();
+  }
+
+  String _formatOtpTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+  }
+
+  // Removed duplicate dispose method
   final ValueNotifier<bool> _isLoading = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isOtpValid = ValueNotifier<bool>(false);
   String _otp = '';
@@ -32,6 +77,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void dispose() {
     _isLoading.dispose();
     _isOtpValid.dispose();
+    try {
+      _otpTimer.cancel();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -43,20 +91,32 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     _isOtpValid.value = otp.length == 6;
   }
 
-  void _verifyOtp() {
+  Future<void> _verifyOtp() async {
     if (_otp.length == 6) {
       _isLoading.value = true;
-      // TODO: Implement OTP verification logic
+      dynamic userAuthData = await LoginAuthRepository()
+          .verifyOtp(otp: _otp, mobileNo: widget.phoneNumber);
       _isLoading.value = false;
       // Navigate to Profile Screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProfileScreen(
-            phoneNumber: widget.phoneNumber,
+      if (userAuthData is String) {
+        // An error occurred, show a snackbar with the error message
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(userAuthData),
           ),
-        ),
-      );
+        );
+        return;
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(
+                phoneNumber: widget.phoneNumber,
+                countryCode: widget.countryCode),
+          ),
+        );
+      }
     } else {
       setState(() {
         _errorText = AppLocalizations.of(context)!.invalidOtp;
@@ -64,14 +124,27 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     }
   }
 
-  void _resendOtp() {
-    // TODO: Implement resend OTP logic
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
-        backgroundColor: AppColors.lightGreen,
-      ),
-    );
+  Future<void> _resendOtp() async {
+    final String? response = await LoginAuthRepository().resendOtp(
+        mobileNo: widget.phoneNumber, countryCode: widget.countryCode);
+
+    if (!mounted) return;
+
+    if (response != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
+          backgroundColor: AppColors.lightGreen,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error occurred while resending OTP'),
+        ),
+      );
+    }
   }
 
   @override
@@ -112,43 +185,56 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 32.h),
-                      OtpTimer(
-                        onResend: _resendOtp,
-                      ),
+                      // OTP Timer and resend UI
+                      if (!_canResendOtp) ...[
+                        Text(
+                          _formatOtpTime(_otpSeconds),
+                          style: GoogleFonts.notoSans(
+                            color: AppColors.lightGreen,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 16.h),
+                      ],
+
                       SizedBox(height: 24.h),
                       OtpInputField(
                         onChanged: _onOtpChanged,
                         errorText: _errorText,
                       ),
                       SizedBox(height: 24.h),
-                      GestureDetector(
-                        onTap: () {
-                          // widget.onResend?.call();
-                          // _resetTimer();
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "I didn't receive any OTP. ",
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
+                      if (_canResendOtp) ...[
+                        GestureDetector(
+                          onTap: () {
+                            _resendOtp();
+                            _resetOtpTimer();
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "I didn't receive any OTP. ",
+                                  style: GoogleFonts.notoSans(
+                                    color: AppColors.greys60,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: "RESEND",
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.darkGreen,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
+                                TextSpan(
+                                  text: "RESEND",
+                                  style: GoogleFonts.notoSans(
+                                    color: AppColors.lightGreen,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(height: 16.h),
+                      ],
                       SizedBox(height: 40.h),
                     ],
                   ),

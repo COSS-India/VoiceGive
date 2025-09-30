@@ -1,8 +1,7 @@
-import 'package:bhashadaan/common_widgets/container_skeleton.dart';
+import 'package:VoiceGive/common_widgets/container_skeleton.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 
 class ImageWidget extends StatefulWidget {
   final String imageUrl;
@@ -65,7 +64,7 @@ class _ImageWidgetState extends State<ImageWidget> {
                   fit: widget.boxFit ?? BoxFit.fill,
                   height: widget.height,
                   width: widget.width,
-                  imageUrl:  widget.imageUrl,
+                  imageUrl: widget.imageUrl,
                   color: widget.imageColor,
                   placeholder: (context, url) => ContainerSkeleton(
                     height: widget.height ?? 16,

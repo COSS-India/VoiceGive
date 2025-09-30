@@ -1,4 +1,4 @@
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,10 @@ class NeedMoreInfo extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.writeYourConcern,
-            style: GoogleFonts.notoSans(fontSize: 12.sp, color: AppColors.appBarBackground, fontWeight: FontWeight.w400),
+            style: GoogleFonts.notoSans(
+                fontSize: 12.sp,
+                color: AppColors.appBarBackground,
+                fontWeight: FontWeight.w400),
           ),
           SizedBox(height: 16.w),
           ElevatedButton(
@@ -60,7 +63,7 @@ class NeedMoreInfo extends StatelessWidget {
                   )
                 ],
               )),
-              SizedBox(height: 16.w)
+          SizedBox(height: 16.w)
         ],
       ),
     );

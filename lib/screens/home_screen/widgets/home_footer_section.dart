@@ -1,4 +1,4 @@
-import 'package:bhashadaan/common_widgets/image_widget.dart';
+import 'package:VoiceGive/common_widgets/image_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +31,7 @@ class HomeFooterSection extends StatelessWidget {
         // Dark blue footer section
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(24.w),
+          padding: EdgeInsets.only(top: 60, left: 60, right: 60, bottom: 20).r,
           color: Color.fromRGBO(15, 25, 65, 1), // Much darker navy blue
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class HomeFooterSection extends StatelessWidget {
               SizedBox(height: 80.w),
               // Separator line
               Container(
-                height: 2.w,
+                height: 3.w,
                 width: double.infinity,
                 color: AppColors.appBarBackground,
               ),
