@@ -3,16 +3,14 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
-import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-
 
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({
@@ -66,7 +64,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
         if (didPop) {
           return;
         }
-      _navigateBackToHome();},
+        _navigateBackToHome();
+      },
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
@@ -107,7 +106,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                           ),
                         ),
                         Text(
-                          AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
+                          AppLocalizations.of(context)!
+                              .enrichYourLanguageByDonatingVoice,
                           style: GoogleFonts.notoSans(
                             color: Colors.white,
                             fontSize: 10.sp,
@@ -244,10 +244,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
             Text(
               AppLocalizations.of(context)!.tapToPreviewCertificate,
               style: GoogleFonts.notoSans(
-                color: AppColors.greys,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500
-              ),
+                  color: AppColors.greys,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500),
             ),
             // Certificate Preview Content (Blurred)
             Expanded(
@@ -264,7 +263,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                             Border.all(color: AppColors.darkGreen, width: 2),
                       ),
                       child: ClipRRect(
-          borderRadius: BorderRadius.circular(8).r,
+                        borderRadius: BorderRadius.circular(8).r,
                         child: Image.asset(
                           'assets/images/certificate.jpg',
                           fit: BoxFit.contain,
@@ -318,20 +317,18 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
         Text(
           "PDF (print-ready, includes your name & achievement)",
           style: GoogleFonts.notoSans(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.disabledTextGrey
-          ),
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.disabledTextGrey),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 2.w),
         Text(
           "Issued on: 17 Sep 2025. Certificate ID: DIC-20250917-0123",
           style: GoogleFonts.notoSans(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.disabledTextGrey
-          ),
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.disabledTextGrey),
           textAlign: TextAlign.center,
         ),
       ],
@@ -350,7 +347,8 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ValidationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => BoloValidationScreen()),
                 );
               },
               textColor: AppColors.orange,
