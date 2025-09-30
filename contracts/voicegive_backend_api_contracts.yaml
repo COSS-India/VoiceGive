@@ -19,8 +19,8 @@ info:
     name: MIT
 
 servers:
-  - url: https://localhost/v1
-    description: Production server
+  - url: http://localhost:9000
+    description: Development server
 
 tags:
   - name: Authentication
@@ -52,7 +52,6 @@ paths:
         Send 6-digit OTP to user's mobile number for authentication.
         OTP is valid for 5 minutes (300 seconds).
         
-        **Figma Reference:** Page 3, 4
       security: []
       requestBody:
         required: true
@@ -161,7 +160,6 @@ paths:
       description: |
         Resend OTP if user didn't receive it. Can only be called after initial send-otp.
         
-        **Figma Reference:** Page 5 - "I didn't receive any OTP. RESEND"
       security: []
       requestBody:
         required: true
@@ -170,12 +168,16 @@ paths:
             schema:
               type: object
               required:
-                - sessionId
+                - mobileNo
               properties:
-                sessionId:
+                mobileNo:
                   type: string
-                  format: uuid
-                  example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  pattern: '^[6-9]\d{9}$'
+                  example: "9177454678"
+                countryCode:
+                  type: string
+                  default: "+91"
+                  example: "+91"
       responses:
         '200':
           description: OTP resent successfully
@@ -195,6 +197,10 @@ paths:
                       expiresIn:
                         type: integer
                         example: 300
+                      expiresAt:
+                        type: string
+                        format: date-time
+                        example: "2025-09-29T10:35:00Z"
         '400':
           description: Invalid or expired session
         '429':
@@ -208,8 +214,7 @@ paths:
       description: |
         Verify the 6-digit OTP and get JWT access token.
         Timer shows remaining time (02:32 format).
-        
-        **Figma Reference:** Page 5
+
       security: []
       requestBody:
         required: true
@@ -218,22 +223,23 @@ paths:
             schema:
               type: object
               required:
-                - sessionId
+                - mobileNo
                 - otp
               properties:
-                sessionId:
+                mobileNo:
                   type: string
-                  format: uuid
+                  pattern: '^[6-9]\d{9}$'
+                  example: "9177454678"
                 otp:
                   type: string
                   pattern: '^\d{6}$'
-                  example: "536247"
+                  example: "123456"
                   description: 6-digit OTP from SMS
             examples:
               validOTP:
                 value:
-                  sessionId: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                  otp: "536247"
+                  mobileNo: "9177454678"
+                  otp: "123456"
       responses:
         '200':
           description: OTP verified successfully
@@ -253,11 +259,11 @@ paths:
                     properties:
                       accessToken:
                         type: string
-                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        example: "jwt_token_12345"
                         description: JWT Bearer token
                       refreshToken:
                         type: string
-                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        example: "refresh_token_12345"
                       tokenType:
                         type: string
                         example: "Bearer"
@@ -266,7 +272,14 @@ paths:
                         example: 86400
                         description: Token expiry in seconds (24 hours)
                       user:
-                        $ref: '#/components/schemas/User'
+                        type: object
+                        properties:
+                          userId:
+                            type: string
+                            format: uuid
+                          mobileNo:
+                            type: string
+                            example: "9177454678"
                       requiresConsent:
                         type: boolean
                         description: Whether user needs to accept terms
@@ -301,8 +314,6 @@ paths:
       description: |
         User must accept all three policies before contributing or validating.
         All checkboxes must be checked to proceed.
-        
-        **Figma Reference:** Page 2, 21, 24 - "We Respect Your Privacy" modal
         
         **Required Documents:**
         1. Terms of Use / Contribution Terms
@@ -443,8 +454,6 @@ paths:
       description: |
         Complete profile after OTP verification. This is called for new users.
         All fields are mandatory.
-        
-        **Figma Reference:** Page 6-9 - "Complete your profile"
         
         **Steps:**
         1. Personal Information (Page 6-7): First Name, Last Name, Age Group, Gender, Phone, Email
@@ -692,8 +701,7 @@ paths:
       summary: Get country list
       description: |
         Get list of supported countries.
-        
-        **Figma Reference:** Page 8 - Country dropdown
+
       security: []
       responses:
         '200':
@@ -727,8 +735,7 @@ paths:
       summary: Get state list
       description: |
         Get list of states for a country.
-        
-        **Figma Reference:** Page 8 - State dropdown (Maharashtra)
+
       security: []
       parameters:
         - name: countryId
@@ -768,7 +775,6 @@ paths:
       description: |
         Get list of districts for a state.
         
-        **Figma Reference:** Page 8 - District dropdown (Amravati)
       security: []
       parameters:
         - name: stateId
@@ -808,7 +814,7 @@ paths:
       description: |
         Get list of languages available for contribution and validation.
         
-        **Figma Reference:** Page 12 - "Select the language for contribution" dropdown
+
       security: []
       responses:
         '200':
@@ -846,7 +852,6 @@ paths:
       description: |
         Returns a sample audio file to test user's speakers/headphones.
         
-        **Figma Reference:** Page 10 - "Please Test Your Speaker"
       responses:
         '200':
           description: Sample audio file
@@ -864,7 +869,6 @@ paths:
       description: |
         Upload a test recording to verify microphone setup and audio quality.
         
-        **Figma Reference:** Page 10 - "Please Test Your Microphone"
       requestBody:
         required: true
         content:
@@ -1144,8 +1148,7 @@ paths:
       description: |
         Get a batch of sentences to record in the selected language.
         Returns 5 sentences per session as shown in UI (1/5, 2/5, etc.)
-        
-        **Figma Reference:** Page 12-15 - Recording screens
+
       requestBody:
         required: true
         content:
@@ -1224,21 +1227,19 @@ paths:
         Upload audio recording for a sentence.
         User can re-record if not satisfied.
         
-        **Figma Reference:** 
-        - Page 12: Start Recording
-        - Page 13: Stop Recording
-        - Page 14: Re-record with playback
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               required:
                 - sessionId
                 - sentenceId
-                - audio
+                - audioContent
                 - duration
+                - languageCode
+                - sequenceNumber
               properties:
                 sessionId:
                   type: string
@@ -1247,10 +1248,10 @@ paths:
                 sentenceId:
                   type: string
                   description: Sentence ID being recorded
-                audio:
+                audioContent:
                   type: string
-                  format: binary
-                  description: Audio file (MP3, WAV, max 10MB)
+                  format: byte
+                  description: Base64 encoded audio content
                 duration:
                   type: number
                   format: float
@@ -1285,10 +1286,10 @@ paths:
                       contributionId:
                         type: string
                         format: uuid
-                      audioUrl:
+                      audioContent:
                         type: string
-                        format: uri
-                        description: URL to play back the recording
+                        format: byte
+                        description: Base64 encoded audio content
                       duration:
                         type: number
                         format: float
@@ -1321,8 +1322,7 @@ paths:
       summary: Skip a sentence
       description: |
         Skip current sentence and get next one.
-        
-        **Figma Reference:** Page 12 - "Skip" button
+
       requestBody:
         required: true
         content:
@@ -1380,8 +1380,7 @@ paths:
       summary: Report issue with sentence
       description: |
         Report inappropriate, incorrect, or offensive sentence.
-        
-        **Figma Reference:** Page 12 - "Report" button
+
       requestBody:
         required: true
         content:
@@ -1429,7 +1428,6 @@ paths:
         Mark session as complete after recording all 5 sentences.
         Returns certificate eligibility status.
         
-        **Figma Reference:** Page 15 - Completion screen with "Contribute More" / "Validate" buttons
       requestBody:
         required: true
         content:
@@ -1499,8 +1497,7 @@ paths:
       description: |
         Get audio recordings that need validation (25 items per session).
         Returns audio-text pairs for validation.
-        
-        **Figma Reference:** Page 16-18 - Validation screens showing 1/25 progress
+
       parameters:
         - name: languageCode
           in: query
@@ -1549,10 +1546,10 @@ paths:
                               type: string
                               example: "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली."
                               description: Text to compare with audio
-                            audioUrl:
+                            audioContent:
                               type: string
-                              format: uri
-                              description: Audio recording URL
+                              format: byte
+                              description: Base64 encoded audio content
                             duration:
                               type: number
                               format: float
@@ -1574,8 +1571,7 @@ paths:
       summary: Submit validation decision
       description: |
         Mark audio recording as Correct or Incorrect.
-        
-        **Figma Reference:** 
+
         - Page 16: "Correct" / "Incorrect" buttons
         - Page 17: Pause Recording
         - Page 18: Replay Recording
@@ -1656,7 +1652,6 @@ paths:
         Mark validation session as complete after validating all 25 recordings.
         Check certificate eligibility after completion.
         
-        **Figma Reference:** Validation completion flow
       requestBody:
         required: true
         content:
@@ -1725,8 +1720,7 @@ paths:
         Check if user has met certificate requirements:
         - 5 voice contributions
         - 25 validations
-        
-        **Figma Reference:** Used throughout to show progress
+
       responses:
         '200':
           description: Eligibility status
@@ -1772,8 +1766,7 @@ paths:
       description: |
         Generate certificate after completing requirements (5 contributions + 25 validations).
         Certificate Title: "Agri Bhasha Samarthak"
-        
-        **Figma Reference:** Page 19 - Congratulations screen
+
       responses:
         '200':
           description: Certificate generated successfully
@@ -1856,7 +1849,6 @@ paths:
       description: |
         Download certificate as PDF (print-ready, includes name & achievement).
         
-        **Figma Reference:** Page 19 - "Download Certificate" button
       parameters:
         - name: certificateId
           in: path
@@ -1884,7 +1876,6 @@ paths:
       description: |
         Get certificate preview image.
         
-        **Figma Reference:** Page 19 - Certificate thumbnail shown in "Tap to preview your certificate"
       parameters:
         - name: certificateId
           in: path
