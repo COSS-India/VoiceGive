@@ -41,7 +41,7 @@ class ValidationQueueModel {
   factory ValidationQueueModel.fromJson(Map<String, dynamic> json) {
     return ValidationQueueModel(
       sessionId: json['sessionId'] as String,
-      language: json['language'] as String,
+      language: json['languageCode'] as String,
       validationItems: (json['validationItems'] as List)
           .map((e) => ValidationItem.fromJson(e as Map<String, dynamic>))
           .toList(),

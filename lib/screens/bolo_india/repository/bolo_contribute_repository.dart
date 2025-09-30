@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bhashadaan/screens/bolo_india/models/bolo_contribute_sentence.dart';
 import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
-import 'package:bhashadaan/screens/bolo_india/repository/mock_api_response.dart';
 import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
 
 import 'package:http/http.dart';
@@ -13,19 +13,18 @@ class BoloContributeRepository {
   Future<BoloContributeSentence?> getContributionSentances(
       {required String language, int? count}) async {
     try {
-      // Response response = await boloService.getContributionSentances(
-      //     language: language, count: count);
-      //if (response.statusCode == 200) {
-      //  var content = jsonDecode(response.body);
-      var content = jsonDecode(MockApiResponse.contributeSentencesResponse);
+      Response response = await boloService.getContributionSentances(
+          language: language, count: count);
+      if (response.statusCode == 200) {
+        var content = jsonDecode(response.body);
+        // var content = jsonDecode(MockApiResponse.contributeSentencesResponse);
 
-      var data = content['data'];
-      if (data != null) {
-        return BoloContributeSentence.fromJson(data);
-
-        //   }
-        // } else {
-        //   throw Exception('Failed to load sentences');
+        var data = content['data'];
+        if (data != null) {
+          return BoloContributeSentence.fromJson(data);
+        }
+      } else {
+        throw Exception('Failed to load sentences');
       }
     } catch (e) {
       throw Exception('Failed to load sentences: $e');
@@ -34,27 +33,24 @@ class BoloContributeRepository {
   }
 
   Future<bool> submitContributeAudio({
-    required String audioFilePath,
-    required String sessionId,
     required String sentenceId,
     required int duration,
-    required String language,
+    required String languageCode,
+    required File audioFile,
     required int sequenceNumber,
   }) async {
     try {
       Response response = await boloService.submitContributeAudio(
-        language: language,
+        languageCode: languageCode,
         sequenceNumber: sequenceNumber,
-        audioFilePath: audioFilePath,
-        sessionId: sessionId,
+        audioFile: audioFile,
         sentenceId: sentenceId,
         duration: duration,
       );
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
-        var data = content['data'];
 
-        return data['success'] ?? false;
+        return content['success'] ?? false;
       } else {
         throw Exception('Failed to upload audio');
       }
@@ -65,17 +61,16 @@ class BoloContributeRepository {
   }
 
   Future<Sentence?> skipContribution({
-    required String sessionId,
     required String sentenceId,
     required String reason,
     required String comment,
   }) async {
     try {
       Response response = await boloService.skipContribution(
-          sessionId: sessionId,
-          sentenceId: sentenceId,
-          reason: reason,
-          comment: comment);
+        sentenceId: sentenceId,
+        reason: reason,
+        comment: comment,
+      );
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
         if (content['success'] == true) {
@@ -86,10 +81,7 @@ class BoloContributeRepository {
         return null;
       }
     } catch (e) {
-      var content = jsonDecode(MockApiResponse().skipContribution);
-
-      return Sentence.fromJson(content['data']['nextSentence']);
-      throw Exception('Failed to skip contribution: $e');
+      return null;
     }
     return null;
   }
@@ -114,18 +106,15 @@ class BoloContributeRepository {
     return false;
   }
 
-  Future<SessionCompletedData?> completeSession({
-    required String sessionId,
-  }) async {
+  Future<SessionCompletedData?> completeSession() async {
     try {
-      Response response =
-          await boloService.contributeSessionCompleted(sessionId: sessionId);
+      Response response = await boloService.contributeSessionCompleted();
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
         return SessionCompletedData.fromJson(content);
       }
     } catch (e) {
-      throw Exception('Failed to complete session: $e');
+      return null;
     }
     return null;
   }

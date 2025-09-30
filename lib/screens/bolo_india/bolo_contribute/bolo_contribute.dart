@@ -1,4 +1,5 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
+import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_india/widgets/actions_section.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_contribute/widgets/bolo_content_section.dart';
@@ -15,7 +16,13 @@ class BoloContribute extends StatefulWidget {
 }
 
 class _BoloContributeState extends State<BoloContribute> {
-  String selectedLanguage = 'hindi';
+  LanguageModel selectedLanguage = LanguageModel(
+      languageName: "Hindi",
+      nativeName: "हिन्दी",
+      isActive: true,
+      languageCode: "hi",
+      region: "India",
+      speakers: "");
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +45,7 @@ class _BoloContributeState extends State<BoloContribute> {
                           .selectLanguageForContribution,
                       onLanguageChanged: (value) {
                         selectedLanguage = value;
+                        setState(() {});
                       },
                     ),
                     SizedBox(height: 24.w),
