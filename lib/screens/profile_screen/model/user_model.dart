@@ -15,9 +15,9 @@ class UserModel {
     bool certificateEarned;
     String certificateId;
     bool consentGiven;
-    DateTime consentTimestamp;
-    DateTime createdAt;
-    DateTime updatedAt;
+    DateTime? consentTimestamp;
+    DateTime? createdAt;
+    DateTime? updatedAt;
 
     UserModel({
         required this.userId,
@@ -36,52 +36,52 @@ class UserModel {
         required this.certificateEarned,
         required this.certificateId,
         required this.consentGiven,
-        required this.consentTimestamp,
-        required this.createdAt,
-        required this.updatedAt,
+        this.consentTimestamp,
+        this.createdAt,
+        this.updatedAt,
     });
 
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        userId: json["userId"],
-        firstName: json["firstName"],
-        lastName: json["lastName"],
-        mobileNo: json["mobileNo"],
-        email: json["email"],
-        ageGroup: json["ageGroup"],
-        gender: json["gender"],
-        country: json["country"],
-        state: json["state"],
-        district: json["district"],
-        preferredLanguage: json["preferredLanguage"],
-        contributionCount: json["contributionCount"],
-        validationCount: json["validationCount"],
-        certificateEarned: json["certificateEarned"],
-        certificateId: json["certificateId"],
-        consentGiven: json["consentGiven"],
-        consentTimestamp: DateTime.parse(json["consentTimestamp"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        userId: json['userId']??'',
+        firstName: json['firstName']??'',
+        lastName: json['lastName']??'',
+        mobileNo: json['mobileNo']??'',
+        email: json['email']??'',
+        ageGroup: json['ageGroup']??'',
+        gender: json['gender']??'',
+        country: json['country']??'',
+        state: json['state']??'',
+        district: json['district']??'',
+        preferredLanguage: json['preferredLanguage']??'',
+        contributionCount: json['contributionCount']??0,
+        validationCount: json['validationCount']??0,
+        certificateEarned: json['certificateEarned']??false,
+        certificateId: json['certificateId']??'',
+        consentGiven: json['consentGiven']??false,
+        consentTimestamp: json['consentTimestamp'] != null ? DateTime.parse(json['consentTimestamp']) : null,
+        createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+        updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
 
     Map<String, dynamic> toJson() => {
-        "userId": userId,
-        "firstName": firstName,
-        "lastName": lastName,
-        "mobileNo": mobileNo,
-        "email": email,
-        "ageGroup": ageGroup,
-        "gender": gender,
-        "country": country,
-        "state": state,
-        "district": district,
-        "preferredLanguage": preferredLanguage,
-        "contributionCount": contributionCount,
-        "validationCount": validationCount,
-        "certificateEarned": certificateEarned,
-        "certificateId": certificateId,
-        "consentGiven": consentGiven,
-        "consentTimestamp": consentTimestamp.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        'userId': userId,
+        'firstName': firstName,
+        'lastName': lastName,
+        'mobileNo': mobileNo,
+        'email': email,
+        'ageGroup': ageGroup,
+        'gender': gender,
+        'country': country,
+        'state': state,
+        'district': district,
+        'preferredLanguage': preferredLanguage,
+        'contributionCount': contributionCount,
+        'validationCount': validationCount,
+        'certificateEarned': certificateEarned,
+        'certificateId': certificateId,
+        'consentGiven': consentGiven,
+        'consentTimestamp': consentTimestamp?.toIso8601String(),
+        'createdAt': createdAt?.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
     };
 }
