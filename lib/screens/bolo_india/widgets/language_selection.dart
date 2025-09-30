@@ -86,7 +86,7 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                       color: Colors.white,
                       fontWeight: FontWeight.w500),
                 ),
-                SizedBox(width: 4.w),
+                SizedBox(width: 8.w),
                 Icon(
                   Icons.keyboard_arrow_down_rounded,
                   color: Colors.white,

@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -368,40 +367,47 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         SizedBox(height: 60.h),
                         Center(
                           child: SizedBox(
-                            width: 0.8.sw,
-                            child: PrimaryButtonWidget(
-                              title:
-                                  AppLocalizations.of(context)!.saveAndContinue,
-                              textColor: Colors.white,
-                              decoration: BoxDecoration(
-                                color: AppColors.orange,
+                            width: 280.w,
+                            child: ElevatedButton(
+                            onPressed: () {
+                              if (_district == null) {
+                                setState(() => _showDistrictError = true);
+                                final ctx = _districtFieldKey.currentContext;
+                                if (ctx != null) {
+                                  Future.microtask(() =>
+                                      Scrollable.ensureVisible(
+                                        ctx,
+                                        duration:
+                                            const Duration(milliseconds: 250),
+                                        alignment: 0.1,
+                                      ));
+                                }
+                                return;
+                              }
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (_) => const BoloGetStarted(),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orange,
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6.r),
                               ),
-                              verticalPadding: 14.w,
-                              onTap: () {
-                                if (_district == null) {
-                                  setState(() => _showDistrictError = true);
-                                  final ctx = _districtFieldKey.currentContext;
-                                  if (ctx != null) {
-                                    Future.microtask(() =>
-                                        Scrollable.ensureVisible(
-                                          ctx,
-                                          duration:
-                                              const Duration(milliseconds: 250),
-                                          alignment: 0.1,
-                                        ));
-                                  }
-                                  return;
-                                }
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_) => const BoloGetStarted(),
-                                  ),
-                                );
-                              },
+                              padding: EdgeInsets.symmetric(vertical: 16.w),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.saveAndContinue,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
+                      ),
                       ],
                     ),
                   ),

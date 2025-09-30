@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -346,46 +345,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: 60.h),
                           Center(
                             child: SizedBox(
-                              width: 0.8.sw,
-                              child: PrimaryButtonWidget(
-                                title:
-                                    AppLocalizations.of(context)!.saveAndContinue,
-                                textColor: Colors.white,
-                                decoration: BoxDecoration(
-                                  color: AppColors.orange,
-                                  borderRadius: BorderRadius.circular(6.r),
-                                ),
-                                verticalPadding: 14.w,
-                                onTap: () {
-                                  final valid =
-                                      _formKey.currentState?.validate() ?? false;
-                                  final selectionsValid =
-                                      _ageController.text.isNotEmpty &&
-                                          _genderController.text.isNotEmpty;
-                                  setState(() {});
-                                  if (valid && selectionsValid) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            const OtherInformationScreen(),
-                                      ),
-                                    );
-                                  } else if (!selectionsValid) {
-                                    // Do not change border color; just show inline message
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(AppLocalizations.of(
-                                                  context)!
-                                              .pleaseSelectAgeGroupAndGender)),
-                                    );
-                                  }else{ScaffoldMessenger.of(context).showSnackBar(
+                              width: 280.w,
+                              child: ElevatedButton(
+                              onPressed: () {
+                                final valid =
+                                    _formKey.currentState?.validate() ?? false;
+                                final selectionsValid =
+                                    _ageController.text.isNotEmpty &&
+                                        _genderController.text.isNotEmpty;
+                                setState(() {});
+                                if (valid && selectionsValid) {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          const OtherInformationScreen(),
+                                    ),
+                                  );
+                                } else if (!selectionsValid) {
+                                  // Do not change border color; just show inline message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(AppLocalizations.of(
+                                                context)!
+                                            .pleaseSelectAgeGroupAndGender)),
+                                  );
+                                }else{ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(AppLocalizations.of(context)!.registrationSubmitError))
                                     );}
-                                },
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.orange,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 16.w),
+                              ),
+                              child: Text(
+                                AppLocalizations.of(context)!.saveAndContinue,
+                                style: GoogleFonts.notoSans(
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ),
                             ),
                           ),
+                        ),
                         ],
                       ),
                     ),

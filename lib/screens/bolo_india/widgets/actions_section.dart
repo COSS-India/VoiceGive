@@ -10,27 +10,35 @@ class ActionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16).r,
+      padding: EdgeInsets.all(12).r,
       decoration: BoxDecoration(
         color: AppColors.lightGreen2,
         border: Border.all(color: AppColors.lightGreen),
         borderRadius: BorderRadius.circular(12).r,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          actionButton(
-              onTap: () {},
-              title: AppLocalizations.of(context)!.quickTips,
-              icon: Icons.lightbulb_outline),
-          actionButton(
-              onTap: () {},
-              title: AppLocalizations.of(context)!.report,
-              icon: Icons.report_outlined),
-          actionButton(
-              onTap: () {},
-              title: AppLocalizations.of(context)!.testSpeakers,
-              icon: Icons.volume_up_outlined),
+          Flexible(
+            child: actionButton(
+                onTap: () {},
+                title: AppLocalizations.of(context)!.quickTips,
+                icon: Icons.lightbulb_outline),
+          ),
+          SizedBox(width: 12.w),
+          Flexible(
+            child: actionButton(
+                onTap: () {},
+                title: AppLocalizations.of(context)!.report,
+                icon: Icons.report_outlined),
+          ),
+          SizedBox(width: 12.w),
+          Flexible(
+            child: actionButton(
+                onTap: () {},
+                title: AppLocalizations.of(context)!.testSpeakers,
+                icon: Icons.volume_up_outlined),
+          ),
         ],
       ),
     );
@@ -43,13 +51,14 @@ class ActionsSection extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8).r,
+        padding: EdgeInsets.all(8).r,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: AppColors.darkGreen),
           borderRadius: BorderRadius.circular(8).r,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,

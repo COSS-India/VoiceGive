@@ -1,0 +1,66 @@
+[
+  {
+    "languageCode": "mr",
+    "languageName": "Marathi",
+    "nativeName": "मराठी",
+    "isActive": true,
+    "region": "Maharashtra",
+    "speakers": "83 million"
+  },
+  {
+    "languageCode": "hi",
+    "languageName": "Hindi",
+    "nativeName": "हिन्दी",
+    "isActive": true,
+    "region": "North India",
+    "speakers": "600 million"
+  },
+  {
+    "languageCode": "en",
+    "languageName": "English",
+    "nativeName": "English",
+    "isActive": true,
+    "region": "Global",
+    "speakers": "1.5 billion"
+  },
+  {
+    "languageCode": "te",
+    "languageName": "Telugu",
+    "nativeName": "తెలుగు",
+    "isActive": true,
+    "region": "Andhra Pradesh, Telangana",
+    "speakers": "75 million"
+  },
+  {
+    "languageCode": "ta",
+    "languageName": "Tamil",
+    "nativeName": "தமிழ்",
+    "isActive": true,
+    "region": "Tamil Nadu",
+    "speakers": "70 million"
+  },
+  {
+    "languageCode": "gu",
+    "languageName": "Gujarati",
+    "nativeName": "ગુજરાતી",
+    "isActive": true,
+    "region": "Gujarat",
+    "speakers": "55 million"
+  },
+  {
+    "languageCode": "bn",
+    "languageName": "Bengali",
+    "nativeName": "বাংলা",
+    "isActive": true,
+    "region": "West Bengal",
+    "speakers": "230 million"
+  },
+  {
+    "languageCode": "kn",
+    "languageName": "Kannada",
+    "nativeName": "ಕನ್ನಡ",
+    "isActive": true,
+    "region": "Karnataka",
+    "speakers": "44 million"
+  }
+]

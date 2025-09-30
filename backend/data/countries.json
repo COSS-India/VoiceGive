@@ -1,0 +1,27 @@
+[
+  {
+    "countryId": "IN",
+    "countryName": "India",
+    "countryCode": "+91"
+  },
+  {
+    "countryId": "US",
+    "countryName": "United States",
+    "countryCode": "+1"
+  },
+  {
+    "countryId": "GB",
+    "countryName": "United Kingdom",
+    "countryCode": "+44"
+  },
+  {
+    "countryId": "AU",
+    "countryName": "Australia",
+    "countryCode": "+61"
+  },
+  {
+    "countryId": "CA",
+    "countryName": "Canada",
+    "countryCode": "+1"
+  }
+]
