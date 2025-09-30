@@ -1,23 +1,22 @@
 import 'dart:math';
-
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/screens/bolo_screen/validation_screen/widgets/bolo_validate_section.dart';
-import 'package:bhashadaan/screens/bolo_screen/widgets/actions_section.dart';
-import 'package:bhashadaan/screens/bolo_screen/widgets/bolo_headers_section.dart';
-import 'package:bhashadaan/screens/bolo_screen/widgets/language_selection.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/widgets/bolo_validate_section.dart';
+import 'package:bhashadaan/screens/bolo_india/widgets/actions_section.dart';
+import 'package:bhashadaan/screens/bolo_india/widgets/bolo_headers_section.dart';
+import 'package:bhashadaan/screens/bolo_india/widgets/language_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ValidationScreen extends StatefulWidget {
-  const ValidationScreen({
+class BoloValidationScreen extends StatefulWidget {
+  const BoloValidationScreen({
     super.key,
   });
 
   @override
-  State<ValidationScreen> createState() => _ValidationScreenState();
+  State<BoloValidationScreen> createState() => _BoloValidationScreenState();
 }
 
-class _ValidationScreenState extends State<ValidationScreen>
+class _BoloValidationScreenState extends State<BoloValidationScreen>
     with TickerProviderStateMixin {
   late AnimationController _confettiController;
   late AnimationController _scaleController;

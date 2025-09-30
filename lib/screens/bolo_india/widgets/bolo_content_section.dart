@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
-import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
-import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
+import 'package:bhashadaan/screens/bolo_india/widgets/recording_icon.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,6 +39,10 @@ class _BoloContentSectionState extends State<BoloContentSection> {
     return Container(
       padding: EdgeInsets.all(12).r,
       decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/contribute_bg.png"),
+            fit: BoxFit.cover,
+          ),
           color: AppColors.lightGreen3,
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [
@@ -135,7 +139,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ValidationScreen(),
+                    builder: (context) => BoloValidationScreen(),
                   ),
                 );
               },
@@ -195,7 +199,8 @@ class _BoloContentSectionState extends State<BoloContentSection> {
   void onSkip() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
+      SnackBar(
+          content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
     );
     moveToNext();
   }
@@ -221,7 +226,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ValidationScreen(),
+          builder: (context) => BoloValidationScreen(),
         ),
       );
     }
