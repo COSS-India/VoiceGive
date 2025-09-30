@@ -2,8 +2,6 @@ import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/app_routes.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

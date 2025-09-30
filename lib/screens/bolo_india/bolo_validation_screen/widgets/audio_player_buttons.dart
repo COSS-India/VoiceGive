@@ -173,8 +173,8 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color:
-                              AppColors.lightGreen.withOpacity(opacity * 0.3),
+                          color: AppColors.lightGreen
+                              .withValues(alpha: opacity * 0.3),
                         ),
                       ),
                     );
@@ -203,7 +203,7 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
         icon = Icons.play_arrow;
         buttonContent = CircleAvatar(
             radius: 36.r,
-            backgroundColor: AppColors.lightGreen.withOpacity(0.9),
+            backgroundColor: AppColors.lightGreen.withValues(alpha: 0.9),
             child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
       case AudioPlayerButtonState.playing:
@@ -215,7 +215,7 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
         icon = Icons.play_arrow;
         buttonContent = CircleAvatar(
             radius: 36.r,
-            backgroundColor: AppColors.lightGreen.withOpacity(0.9),
+            backgroundColor: AppColors.lightGreen.withValues(alpha: 0.9),
             child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
       case AudioPlayerButtonState.replay:
@@ -224,7 +224,7 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
         icon = Icons.replay;
         buttonContent = CircleAvatar(
             radius: 36.r,
-            backgroundColor: AppColors.lightGreen.withOpacity(0.9),
+            backgroundColor: AppColors.lightGreen.withValues(alpha: 0.9),
             child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
     }

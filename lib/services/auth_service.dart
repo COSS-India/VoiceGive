@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:bhashadaan/constants/network_headers.dart';
+import 'package:bhashadaan/models/auth/consent_response.dart';
 import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:http/http.dart' as http;
 import '../config/app_config.dart';
@@ -143,6 +145,49 @@ class AuthService {
       return false;
     }
     return true;
+  }
+
+  /// Accept Consent
+  static Future<ConsentResponse> acceptConsent({
+    required bool termsAccepted,
+    required bool privacyAccepted,
+    required bool copyrightAccepted,
+  }) async {
+    final uri = Uri.parse('${_config.apiBaseUrl}/auth/consent');
+
+    final payload = {
+      "termsAccepted": termsAccepted,
+      "privacyAccepted": privacyAccepted,
+      "copyrightAccepted": copyrightAccepted
+    };
+
+    debugPrint('🌐 Making login API call to: $uri');
+    debugPrint('📤 Request body: ${jsonEncode(payload)}');
+
+    try {
+      final response = await http.post(
+        uri,
+        headers: NetworkHeaders.postHeader,
+        body: jsonEncode(payload),
+      );
+
+      final responseData = jsonDecode(response.body) as Map<String, dynamic>;
+      debugPrint('📥 Response status: ${response.statusCode}');
+      debugPrint('📥 Response body: ${response.body}');
+
+      if (responseData['success'] ?? false) {
+        return ConsentResponse.fromJson(responseData);
+      } else {
+        return ConsentResponse(
+          success: false
+        );
+      }
+    } catch (e) {
+      debugPrint('❌ Login API error: $e');
+      return  ConsentResponse(
+        success: false
+      );
+    }
   }
 }
 

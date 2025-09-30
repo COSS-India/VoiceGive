@@ -56,7 +56,6 @@ class BoloContributeRepository {
       }
     } catch (e) {
       return true;
-      throw Exception('Failed to upload audio: $e');
     }
   }
 
