@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/constants/helper.dart';
 import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
 import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/validation_submit_model.dart';
 import 'package:bhashadaan/screens/bolo_india/repository/bolo_validate_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/widgets/audio_player_buttons.dart';
@@ -31,7 +36,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
   @override
   void initState() {
     getValidationsQueue = BoloValidateRepository().getValidationsQueue(
-        language: widget.languageModel.languageCode, count: 5);
+        language: widget.languageModel.languageCode, count: 2);
     super.initState();
   }
 
@@ -134,7 +139,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                     },
                   ),
                   SizedBox(height: 30.w),
-                  actionButtons(),
+                  actionButtons(item: recordedTexts[currentIndex]),
                   SizedBox(height: 30.w),
                 ],
               ),
@@ -144,7 +149,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
         });
   }
 
-  Widget actionButtons() {
+  Widget actionButtons({required ValidationItem item}) {
     return ValueListenableBuilder(
         valueListenable: enableActionButtons,
         builder: (context, value, child) {
@@ -156,7 +161,9 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                 child: PrimaryButtonWidget(
                   title: AppLocalizations.of(context)!.incorrect,
                   textFontSize: 16.sp,
-                  onTap: value ? () => onValidate(false) : null,
+                  onTap: value
+                      ? () => onValidate(isCorrect: false, item: item)
+                      : null,
                   textColor: value ? AppColors.orange : AppColors.grey24,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -173,7 +180,9 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                 child: PrimaryButtonWidget(
                   title: AppLocalizations.of(context)!.correct,
                   textFontSize: 16.sp,
-                  onTap: value ? () => onValidate(true) : null,
+                  onTap: value
+                      ? () => onValidate(isCorrect: true, item: item)
+                      : null,
                   textColor: Colors.white,
                   decoration: BoxDecoration(
                     color: value ? AppColors.orange : AppColors.grey24,
@@ -189,17 +198,39 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
         });
   }
 
-  void onValidate(bool isCorrect) {
+  void onValidate(
+      {required bool isCorrect, required ValidationItem item}) async {
     enableActionButtons.value = false;
     if (currentIndex < recordedTexts.length - 1) {
-      setState(() {
-        currentIndex++;
-      });
+      ValidationSubmitData? data = await BoloValidateRepository()
+          .submitValidation(
+              contributionId: item.contributionId,
+              sentenceId: item.sentenceId,
+              decision: isCorrect ? "Correct" : "Incorrect",
+              feedback: "",
+              sequenceNumber: currentIndex + 1);
+
+      if (mounted && data != null) {
+        Helper.showSnackBarMessage(
+            context: context, text: "Response submitted successfully");
+        setState(() {
+          currentIndex++;
+        });
+      } else {
+        if (mounted) {
+          Helper.showSnackBarMessage(
+              context: context, text: "Failed to submit response");
+        }
+      }
     } else {
       widget.onComplete();
+      SessionCompletedModel? data =
+          await BoloValidateRepository().validateSessionCompleted();
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+        if (mounted) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+        }
       });
     }
   }

@@ -28,7 +28,6 @@ class BoloValidateRepository {
   }
 
   Future<ValidationSubmitData?> submitValidation({
-    required String sessionId,
     required String contributionId,
     required String sentenceId,
     required String decision,
@@ -42,7 +41,6 @@ class BoloValidateRepository {
         decision: decision,
         feedback: feedback,
         sequenceNumber: sequenceNumber,
-        sessionId: sessionId,
       );
 
       if (response.statusCode == 200) {
@@ -56,12 +54,9 @@ class BoloValidateRepository {
     }
   }
 
-  Future<SessionCompletedModel> validateSessionCompleted({
-    required String sessionId,
-  }) async {
+  Future<SessionCompletedModel> validateSessionCompleted() async {
     try {
-      Response response =
-          await boloService.validateSessionCompleted(sessionId: sessionId);
+      Response response = await boloService.validateSessionCompleted();
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
         return SessionCompletedModel.fromJson(content['data']);

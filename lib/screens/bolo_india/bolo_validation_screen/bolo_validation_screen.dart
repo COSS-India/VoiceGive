@@ -106,11 +106,11 @@ class _BoloValidationScreenState extends State<BoloValidationScreen>
                 ],
               ),
             ),
-            // isCompleted
-            //     ? Positioned(
-            //         child: _buildConfetti(),
-            //       )
-            //     : SizedBox()
+            isCompleted
+                ? Positioned(
+                    child: _buildConfetti(),
+                  )
+                : SizedBox()
           ],
         ),
       ),

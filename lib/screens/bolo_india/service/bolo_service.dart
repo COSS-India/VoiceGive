@@ -5,6 +5,7 @@ import 'package:bhashadaan/constants/api_url.dart';
 import 'package:bhashadaan/constants/network_headers.dart';
 import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
 import 'package:http/http.dart';
+import 'package:http_parser/http_parser.dart';
 
 class BoloService {
   Future<Response> getContributionSentances(
@@ -116,13 +117,11 @@ class BoloService {
     return response;
   }
 
-  Future<Response> validateSessionCompleted({
-    required String sessionId,
-  }) async {
+  Future<Response> validateSessionCompleted() async {
     const url = ApiUrl.validationSessionCompleteUrl;
 
     final body = jsonEncode({
-      'sessionId': sessionId,
+      'sessionId': "sessionId",
     });
 
     final response = await post(
@@ -135,7 +134,6 @@ class BoloService {
   }
 
   Future<Response> submitValidation({
-    required String sessionId,
     required String contributionId,
     required String sentenceId,
     required String decision,
@@ -143,7 +141,7 @@ class BoloService {
     required int sequenceNumber,
   }) async {
     final body = jsonEncode({
-      'sessionId': sessionId,
+      'sessionId': "sessionId",
       'contributionId': contributionId,
       'sentenceId': sentenceId,
       'decision': decision,

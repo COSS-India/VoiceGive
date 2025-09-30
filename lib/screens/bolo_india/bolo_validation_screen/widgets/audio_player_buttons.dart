@@ -85,7 +85,8 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
   @override
   void didUpdateWidget(covariant AudioPlayerButtons oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.audioUrl != widget.audioUrl) {
+    if (oldWidget.audioUrl != widget.audioUrl ||
+        widget.audioUrl == oldWidget.audioUrl) {
       setState(() {
         _state = AudioPlayerButtonState.idle;
         _controller.reset();
@@ -152,14 +153,9 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
       );
 
   Widget _buildPulsingIndicator() {
-    const double overallWidth = 280;
-    const double overallHeight = 154;
-    const double innerDiameter = 77; // circle holding the control
-    const double playIconSize = 40; // maintain consistency for pause too
-
     return SizedBox(
-      width: overallWidth,
-      height: overallHeight,
+      width: 60,
+      height: 60,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -168,20 +164,17 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
               animation: _controller,
               builder: (context, child) {
                 return Stack(
-                  alignment: Alignment.center,
-                  children: List.generate(2, (index) {
+                  children: List.generate(3, (index) {
                     final progress = (_controller.value + index / 3) % 1.0;
-                    final scale = 1.0 + progress * 0.8;
+                    final scale = 1.0 + progress * 2.0;
                     final opacity = (1 - progress).clamp(0.0, 1.0);
                     return Transform.scale(
                       scale: scale,
                       child: Container(
-                        width: innerDiameter + 18,
-                        height: innerDiameter + 18,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: const Color.fromRGBO(39, 200, 84, 1)
-                              .withOpacity(opacity * 0.2),
+                          color:
+                              AppColors.lightGreen.withOpacity(opacity * 0.3),
                         ),
                       ),
                     );
@@ -189,16 +182,10 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
                 );
               },
             ),
-          // Inner solid circle with pause icon
-          Container(
-            width: innerDiameter,
-            height: innerDiameter,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color.fromRGBO(39, 200, 84, 1),
-            ),
-            alignment: Alignment.center,
-            child: Icon(Icons.pause, size: playIconSize, color: Colors.white),
+          CircleAvatar(
+            radius: 36.r,
+            backgroundColor: AppColors.lightGreen,
+            child: Icon(Icons.pause, size: 40.sp, color: Colors.white),
           ),
         ],
       ),
@@ -213,44 +200,11 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
     switch (_state) {
       case AudioPlayerButtonState.idle:
         text = "Play Recording";
-        icon = null;
-        buttonContent = SizedBox(
-          width: 280,
-          height: 154,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // outer lighter circle
-              Container(
-                width: 95,
-                height: 95,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color.fromRGBO(39, 200, 84, 1).withOpacity(0.2),
-                ),
-              ),
-              // inner solid circle
-              Container(
-                width: 77,
-                height: 77,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color.fromRGBO(39, 200, 84, 1),
-                ),
-                alignment: Alignment.center,
-                child: Transform.translate(
-                  offset: const Offset(4, 0),
-                  child: Image.asset(
-                    'assets/images/play_button.png',
-                    width: 52,
-                    height: 52,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+        icon = Icons.play_arrow;
+        buttonContent = CircleAvatar(
+            radius: 36.r,
+            backgroundColor: AppColors.lightGreen.withOpacity(0.9),
+            child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
       case AudioPlayerButtonState.playing:
         text = "Pause Recording";
@@ -258,42 +212,11 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
         break;
       case AudioPlayerButtonState.paused:
         text = "Resume Recording";
-        icon = null;
-        buttonContent = SizedBox(
-          width: 280,
-          height: 154,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 95,
-                height: 95,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color.fromRGBO(39, 200, 84, 1).withOpacity(0.2),
-                ),
-              ),
-              Container(
-                width: 77,
-                height: 77,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color.fromRGBO(39, 200, 84, 1),
-                ),
-                alignment: Alignment.center,
-                child: Transform.translate(
-                  offset: const Offset(4, 0),
-                  child: Image.asset(
-                    'assets/images/play_button.png',
-                    width: 52,
-                    height: 52,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+        icon = Icons.play_arrow;
+        buttonContent = CircleAvatar(
+            radius: 36.r,
+            backgroundColor: AppColors.lightGreen.withOpacity(0.9),
+            child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
       case AudioPlayerButtonState.replay:
       case AudioPlayerButtonState.completed:
