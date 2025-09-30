@@ -105,10 +105,13 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 80.w),
               // Separator line
-              Container(
-                height: 2.w,
-                width: double.infinity,
-                color: AppColors.appBarBackground,
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0).w,
+                child: Container(
+                  height: 2.w,
+                  width: double.infinity,
+                  color: AppColors.appBarBackground,
+                ),
               ),
               SizedBox(height: 20.w),
               // Copyright notice

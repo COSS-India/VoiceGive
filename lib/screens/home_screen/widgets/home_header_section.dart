@@ -48,25 +48,53 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                AppLocalizations.of(context)!.empowerIndiasLinguisticDiversity,
-                style: GoogleFonts.notoSans(
-                    color: AppColors.darkBlue,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ShaderMask(
+                      shaderCallback: (bounds) => LinearGradient(
+                        colors: [AppColors.darkGreen, AppColors.lightGreen],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ).createShader(
+                          Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                      child: Text(
+                        AppLocalizations.of(context)!.agriDaan,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!
+                          .empowerIndiasLinguisticDiversity,
+                      style: GoogleFonts.notoSans(
+                          color: AppColors.darkBlue,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
               ),
-              Spacer(),
-              ImageWidget(
-                imageUrl: "assets/images/home_header_image.png",
-                height: 110.w,
-                width: 110.w,
+              Container(
+                color: Colors.red,
+                child: Expanded(
+                  flex: 1,
+                  child: ImageWidget(
+                    imageUrl: "assets/images/home_header_image.png",
+                    height: 180.w,
+                    width: 200.w,
+                    boxFit: BoxFit.cover,
+                  ),
+                ),
               ),
-              SizedBox(width: 24.w),
             ],
           ),
           SizedBox(height: 12.w),

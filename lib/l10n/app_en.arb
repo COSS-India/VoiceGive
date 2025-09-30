@@ -1,5 +1,17 @@
 {
     "@@locale": "en",
+    "@@locale": "en",
+    "weRespectYourPrivacy": "We Respect Your Privacy",
+    "namasteEmoji": "🙏",
+    "consentConfirm": "By clicking \"{button}\", you confirm that:",
+    "consentPoint1": "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
+    "consentPoint2": "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
+    "consentPoint3": "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
+    "consentPoint4": "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
+    "consentPoint5": "You have read, understood, and accepted the following governing documents on the BhashaDaan mobile app:",
+    "termsOfUse": "Terms of Use/ Contribution Terms",
+    "privacyPolicy": "Privacy Policy",
+    "copyrightPolicy": "Copyright & Licensing Policy",
     
     "bhashadaan": "Bhashadaan",
     "home": "Home",
@@ -142,6 +154,11 @@
     "namasteContributor": "Namaste Contributor/Validator",
     "consentMessage": "Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.",
     "iAgree": "I agree",
+    "deny": "I deny",
+
+    "bhasha": "Bhasha",
+    "daan": "Daan",
+    "agriDaan": "AgriDaan",
     
     "quickTips": "Quick Tips",
     "howItWorks": "How it Works?",
