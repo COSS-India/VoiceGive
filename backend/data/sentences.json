@@ -22,137 +22,158 @@
       "topic": "water_management"
     },
     {
-      "sentenceId": "marathi-004",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-004",
+      "text": "सेंद्रिय शेती मातीची सुपीकता वाढवते आणि पर्यावरणाचे संरक्षण करते.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "organic_farming"
     },
     {
-      "sentenceId": "marathi-005",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-005",
+      "text": "पीक चक्र पद्धतीने शेतकरी आपले उत्पन्न वाढवू शकतात.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "easy",
+      "topic": "crop_rotation"
     },
     {
-      "sentenceId": "marathi-006",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-006",
+      "text": "योग्य वेळी बियाणे पेरणे चांगल्या पिकासाठी आवश्यक आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "farming_practices"
     },
     {
-      "sentenceId": "marathi-007",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-007",
+      "text": "थेंब सिंचन पद्धत पाण्याची बचत करते आणि पीक उत्पादन वाढवते.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "hard",
+      "topic": "irrigation"
     },
     {
-      "sentenceId": "marathi-008",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-008",
+      "text": "शेतीमध्ये जैविक खते वापरल्याने रासायनिक खतांवरील अवलंबित्व कमी होते.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "fertilizers"
     },
     {
-      "sentenceId": "marathi-009",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-009",
+      "text": "कीटकनाशकांचा योग्य वापर पिकांना रोगांपासून वाचवतो.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "easy",
+      "topic": "pest_control"
     },
     {
-      "sentenceId": "marathi-010",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-010",
+      "text": "शेतकऱ्यांना हवामान अंदाज माहिती असणे महत्वाचे आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "weather"
     },
     {
-      "sentenceId": "marathi-011",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-011",
+      "text": "मिश्र शेती पद्धतीने शेतकरी विविध पिके घेऊन जोखीम कमी करू शकतात.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "hard",
+      "topic": "mixed_farming"
     },
     {
-      "sentenceId": "marathi-012",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-012",
+      "text": "शेतमाल साठवणुकीसाठी योग्य गोदाम सुविधा असणे गरजेचे आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "storage"
     },
     {
-      "sentenceId": "marathi-013",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-013",
+      "text": "शेतकऱ्यांना त्यांच्या उत्पन्नासाठी न्याय्य किंमत मिळणे आवश्यक आहे.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "easy",
+      "topic": "marketing"
     },
     {
-      "sentenceId": "marathi-014",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-014",
+      "text": "ग्रीनहाऊस तंत्रज्ञान वापरून वर्षभर भाज्यांचे उत्पादन घेता येते.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "hard",
+      "topic": "greenhouse"
     },
     {
-      "sentenceId": "marathi-015",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-015",
+      "text": "मधुमाशी पालन शेतकऱ्यांसाठी अतिरिक्त उत्पन्नाचा स्रोत आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "beekeeping"
     },
     {
-      "sentenceId": "marathi-016",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-016",
+      "text": "शेतीसाठी कर्ज योजना शेतकऱ्यांना नवीन तंत्रज्ञान अवलंबण्यास मदत करतात.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "credit"
     },
     {
-      "sentenceId": "marathi-017",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-017",
+      "text": "मातीची चाचणी करून योग्य खते निवडणे गरजेचे आहे.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "hard",
+      "topic": "soil_testing"
     },
     {
-      "sentenceId": "marathi-018",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-018",
+      "text": "शेती यंत्रे वापरल्याने कामाची वेळ आणि खर्च कमी होतो.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "easy",
+      "topic": "mechanization"
     },
     {
-      "sentenceId": "marathi-019",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-019",
+      "text": "शेतकरी उत्पादक संघटना स्थापन करून बाजारात चांगली किंमत मिळवू शकतात.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "cooperatives"
     },
     {
-      "sentenceId": "marathi-020",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-020",
+      "text": "जल संधारण तलाव बांधून पाण्याचा पुरवठा सुधारला जाऊ शकतो.",
       "category": "agriculture",
-      "difficulty": "medium",
-      "topic": "general"
+      "difficulty": "hard",
+      "topic": "water_conservation"
     },
     {
-      "sentenceId": "marathi-021",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-021",
+      "text": "शेतकऱ्यांना विमा योजनांची माहिती असणे महत्वाचे आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "insurance"
     },
     {
-      "sentenceId": "marathi-022",
-      "text": "नवीन वाक्य जोडले गेले आहे",
+      "sentenceId": "mr-022",
+      "text": "पिकांच्या रोगांवर लक्ष ठेवून लवकर उपाययोजना करणे आवश्यक आहे.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "disease_management"
+    },
+    {
+      "sentenceId": "mr-023",
+      "text": "हिरव्या खतासाठी शेंगदाणे पिके घेणे मातीसाठी फायदेशीर आहे.",
       "category": "agriculture",
       "difficulty": "medium",
-      "topic": "general"
+      "topic": "green_manure"
+    },
+    {
+      "sentenceId": "mr-024",
+      "text": "शेतीतील अपशिष्ट पदार्थांपासून कंपोस्ट खत तयार करता येते.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "composting"
+    },
+    {
+      "sentenceId": "mr-025",
+      "text": "शेती विस्तार सेवा शेतकऱ्यांना नवीन तंत्रे शिकण्यास मदत करतात.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "extension_services"
     }
   ],
   "Hindi": [
@@ -190,6 +211,146 @@
       "category": "agriculture",
       "difficulty": "medium",
       "topic": "farming_practices"
+    },
+    {
+      "sentenceId": "hi-006",
+      "text": "ड्रिप सिंचाई विधि से पानी की बचत होती है और फसल उत्पादन बढ़ता है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "irrigation"
+    },
+    {
+      "sentenceId": "hi-007",
+      "text": "खेती में जैविक खाद का उपयोग रासायनिक खाद पर निर्भरता कम करता है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "fertilizers"
+    },
+    {
+      "sentenceId": "hi-008",
+      "text": "कीटनाशकों का सही उपयोग फसलों को रोगों से बचाता है।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "pest_control"
+    },
+    {
+      "sentenceId": "hi-009",
+      "text": "किसानों को मौसम की जानकारी होना बहुत आवश्यक है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "weather"
+    },
+    {
+      "sentenceId": "hi-010",
+      "text": "मिश्रित खेती पद्धति से किसान विभिन्न फसलें लेकर जोखिम कम कर सकते हैं।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "mixed_farming"
+    },
+    {
+      "sentenceId": "hi-011",
+      "text": "अनाज भंडारण के लिए उचित गोदाम सुविधा होना जरूरी है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "storage"
+    },
+    {
+      "sentenceId": "hi-012",
+      "text": "किसानों को उनकी उपज के लिए उचित मूल्य मिलना चाहिए।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "marketing"
+    },
+    {
+      "sentenceId": "hi-013",
+      "text": "ग्रीनहाउस तकनीक से साल भर सब्जियों का उत्पादन किया जा सकता है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "greenhouse"
+    },
+    {
+      "sentenceId": "hi-014",
+      "text": "मधुमक्खी पालन किसानों के लिए अतिरिक्त आय का स्रोत है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "beekeeping"
+    },
+    {
+      "sentenceId": "hi-015",
+      "text": "कृषि ऋण योजनाएं किसानों को नई तकनीक अपनाने में मदद करती हैं।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "credit"
+    },
+    {
+      "sentenceId": "hi-016",
+      "text": "मिट्टी की जांच करके उचित खाद का चयन करना जरूरी है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "soil_testing"
+    },
+    {
+      "sentenceId": "hi-017",
+      "text": "कृषि यंत्रों के उपयोग से काम का समय और खर्च कम होता है।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "mechanization"
+    },
+    {
+      "sentenceId": "hi-018",
+      "text": "किसान उत्पादक संगठन बनाकर बाजार में अच्छी कीमत प्राप्त कर सकते हैं।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "cooperatives"
+    },
+    {
+      "sentenceId": "hi-019",
+      "text": "जल संरक्षण तालाब बनाकर पानी की आपूर्ति सुधारी जा सकती है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "water_conservation"
+    },
+    {
+      "sentenceId": "hi-020",
+      "text": "किसानों को बीमा योजनाओं की जानकारी होना महत्वपूर्ण है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "insurance"
+    },
+    {
+      "sentenceId": "hi-021",
+      "text": "फसल के रोगों पर ध्यान देकर जल्दी उपाय करना आवश्यक है।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "disease_management"
+    },
+    {
+      "sentenceId": "hi-022",
+      "text": "हरी खाद के लिए दलहन फसलें उगाना मिट्टी के लिए फायदेमंद है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "green_manure"
+    },
+    {
+      "sentenceId": "hi-023",
+      "text": "खेती के अपशिष्ट पदार्थों से कंपोस्ट खाद तैयार की जा सकती है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "composting"
+    },
+    {
+      "sentenceId": "hi-024",
+      "text": "कृषि विस्तार सेवाएं किसानों को नई तकनीकें सीखने में मदद करती हैं।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "extension_services"
+    },
+    {
+      "sentenceId": "hi-025",
+      "text": "समय पर फसल की कटाई करना उपज की गुणवत्ता बनाए रखने के लिए जरूरी है।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "harvesting"
     }
   ],
   "English": [
@@ -227,6 +388,146 @@
       "category": "agriculture",
       "difficulty": "medium",
       "topic": "farming_practices"
+    },
+    {
+      "sentenceId": "en-006",
+      "text": "Drip irrigation saves water and increases crop production significantly.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "irrigation"
+    },
+    {
+      "sentenceId": "en-007",
+      "text": "Using organic fertilizers in farming reduces dependence on chemical fertilizers.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "fertilizers"
+    },
+    {
+      "sentenceId": "en-008",
+      "text": "Proper use of pesticides protects crops from diseases and pests.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "pest_control"
+    },
+    {
+      "sentenceId": "en-009",
+      "text": "It is important for farmers to have access to weather forecast information.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "weather"
+    },
+    {
+      "sentenceId": "en-010",
+      "text": "Mixed farming allows farmers to reduce risk by growing different crops.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "mixed_farming"
+    },
+    {
+      "sentenceId": "en-011",
+      "text": "Proper warehouse facilities are necessary for storing agricultural produce.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "storage"
+    },
+    {
+      "sentenceId": "en-012",
+      "text": "Farmers should receive fair prices for their produce.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "marketing"
+    },
+    {
+      "sentenceId": "en-013",
+      "text": "Greenhouse technology enables year-round vegetable production.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "greenhouse"
+    },
+    {
+      "sentenceId": "en-014",
+      "text": "Beekeeping is an additional source of income for farmers.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "beekeeping"
+    },
+    {
+      "sentenceId": "en-015",
+      "text": "Agricultural credit schemes help farmers adopt new technologies.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "credit"
+    },
+    {
+      "sentenceId": "en-016",
+      "text": "Soil testing is necessary to select the right fertilizers for crops.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "soil_testing"
+    },
+    {
+      "sentenceId": "en-017",
+      "text": "Using farm machinery reduces labor time and costs.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "mechanization"
+    },
+    {
+      "sentenceId": "en-018",
+      "text": "Farmer producer organizations help obtain better prices in the market.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "cooperatives"
+    },
+    {
+      "sentenceId": "en-019",
+      "text": "Water conservation ponds can improve water supply for agriculture.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "water_conservation"
+    },
+    {
+      "sentenceId": "en-020",
+      "text": "It is important for farmers to know about insurance schemes.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "insurance"
+    },
+    {
+      "sentenceId": "en-021",
+      "text": "Early detection and treatment of crop diseases is necessary.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "disease_management"
+    },
+    {
+      "sentenceId": "en-022",
+      "text": "Growing legume crops for green manure is beneficial for soil health.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "green_manure"
+    },
+    {
+      "sentenceId": "en-023",
+      "text": "Compost fertilizer can be prepared from agricultural waste materials.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "composting"
+    },
+    {
+      "sentenceId": "en-024",
+      "text": "Agricultural extension services help farmers learn new techniques.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "extension_services"
+    },
+    {
+      "sentenceId": "en-025",
+      "text": "Timely harvesting of crops is essential to maintain quality of produce.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "harvesting"
     }
   ]
 }

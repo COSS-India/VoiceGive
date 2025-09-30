@@ -1,208 +1,137 @@
 {
-  "Marathi": [
-    {
-      "contributionId": "contrib-mr-001",
-      "sentenceId": "sent-mr-001",
-      "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-      "duration": 15.5,
-      "contributorId": "user-001",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-002",
-      "sentenceId": "sent-mr-002",
-      "text": "शेतकऱ्यांना नवीन तंत्रज्ञानाची माहिती देणे हे आमचे उद्दिष्ट आहे.",
-      "duration": 12.3,
-      "contributorId": "user-002",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-003",
-      "sentenceId": "sent-mr-003",
-      "text": "पावसाच्या पाण्याचे व्यवस्थापन करणे हे शेतीसाठी खूप महत्वाचे आहे.",
-      "duration": 18.2,
-      "contributorId": "user-004",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-004",
-      "sentenceId": "sent-mr-004",
-      "text": "नवीन बियाणे वापरून पिकाची उत्पादकता वाढवता येते.",
-      "duration": 16.8,
-      "contributorId": "user-005",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-005",
-      "sentenceId": "sent-mr-005",
-      "text": "जैविक शेती ही पर्यावरणासाठी चांगली आहे.",
-      "duration": 14.5,
-      "contributorId": "user-006",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-006",
-      "sentenceId": "sent-mr-006",
-      "text": "शेतकऱ्यांना बाजाराची माहिती असणे आवश्यक आहे.",
-      "duration": 17.3,
-      "contributorId": "user-007",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-007",
-      "sentenceId": "sent-mr-007",
-      "text": "पिकांच्या रोगांवर नियंत्रण ठेवणे महत्वाचे आहे.",
-      "duration": 19.1,
-      "contributorId": "user-008",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-008",
-      "sentenceId": "sent-mr-008",
-      "text": "मशागत करताना यंत्रांचा वापर करावा.",
-      "duration": 15.7,
-      "contributorId": "user-009",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-009",
-      "sentenceId": "sent-mr-009",
-      "text": "पिकांच्या वेळी योग्य खतांचा वापर करावा.",
-      "duration": 16.4,
-      "contributorId": "user-010",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-010",
-      "sentenceId": "sent-mr-010",
-      "text": "शेतीमध्ये पाण्याचा वापर काटकसराने करावा.",
-      "duration": 18.9,
-      "contributorId": "user-011",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-011",
-      "sentenceId": "sent-mr-011",
-      "text": "नवीन तंत्रज्ञानाचा वापर करून शेती सुधारता येते.",
-      "duration": 17.6,
-      "contributorId": "user-012",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-012",
-      "sentenceId": "sent-mr-012",
-      "text": "पिकांच्या निगराणीसाठी नियमित तपासणी करावी.",
-      "duration": 15.2,
-      "contributorId": "user-013",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-013",
-      "sentenceId": "sent-mr-013",
-      "text": "शेतकऱ्यांना सरकारी योजनांची माहिती असावी.",
-      "duration": 16.8,
-      "contributorId": "user-014",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-014",
-      "sentenceId": "sent-mr-014",
-      "text": "पिकांच्या विक्रीसाठी योग्य वेळ निवडावी.",
-      "duration": 14.3,
-      "contributorId": "user-015",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-015",
-      "sentenceId": "sent-mr-015",
-      "text": "शेतीमध्ये विविध पिके घेणे चांगले आहे.",
-      "duration": 17.1,
-      "contributorId": "user-016",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-016",
-      "sentenceId": "sent-mr-016",
-      "text": "पिकांच्या साठवणुकीसाठी योग्य जागा निवडावी.",
-      "duration": 18.7,
-      "contributorId": "user-017",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-017",
-      "sentenceId": "sent-mr-017",
-      "text": "शेतकऱ्यांना बँकांच्या कर्जाची माहिती असावी.",
-      "duration": 16.5,
-      "contributorId": "user-018",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-mr-018",
-      "sentenceId": "sent-mr-018",
-      "text": "पिकांच्या निर्यातीसाठी गुणवत्ता महत्वाची आहे.",
-      "duration": 19.4,
-      "contributorId": "user-019",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-mr-019",
-      "sentenceId": "sent-mr-019",
-      "text": "शेतीमध्ये सहकारी संस्थांचा वापर करावा.",
-      "duration": 15.9,
-      "contributorId": "user-020",
-      "quality": "good"
-    }
-  ],
   "Hindi": [
-    {
-      "contributionId": "contrib-hi-001",
-      "sentenceId": "sent-hi-001",
-      "text": "किसानों को नई तकनीक की जानकारी देना हमारा उद्देश्य है।",
-      "duration": 14.2,
-      "contributorId": "user-003",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-hi-002",
-      "sentenceId": "sent-hi-002",
-      "text": "बारिश के पानी का प्रबंधन करना खेती के लिए बहुत महत्वपूर्ण है।",
-      "duration": 16.8,
-      "contributorId": "user-021",
-      "quality": "excellent"
-    },
-    {
-      "contributionId": "contrib-hi-003",
-      "sentenceId": "sent-hi-003",
-      "text": "नए बीजों का उपयोग करके फसल की उत्पादकता बढ़ाई जा सकती है।",
-      "duration": 18.5,
-      "contributorId": "user-022",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-hi-004",
-      "sentenceId": "sent-hi-004",
-      "text": "जैविक खेती पर्यावरण के लिए अच्छी है।",
-      "duration": 15.3,
-      "contributorId": "user-023",
-      "quality": "good"
-    },
-    {
-      "contributionId": "contrib-hi-005",
-      "sentenceId": "sent-hi-005",
-      "text": "किसानों को बाजार की जानकारी होनी चाहिए।",
-      "duration": 17.2,
-      "contributorId": "user-024",
-      "quality": "excellent"
-    }
+    {"contributionId": "contrib-hi-001", "sentenceId": "sent-hi-001", "text": "नमस्ते, आप कैसे हैं?", "duration": 8.5, "contributorId": "user-101", "quality": "good"},
+    {"contributionId": "contrib-hi-002", "sentenceId": "sent-hi-002", "text": "मुझे भारतीय संगीत बहुत पसंद है", "duration": 9.2, "contributorId": "user-102", "quality": "good"},
+    {"contributionId": "contrib-hi-003", "sentenceId": "sent-hi-003", "text": "आज मौसम बहुत अच्छा है", "duration": 7.8, "contributorId": "user-103", "quality": "excellent"},
+    {"contributionId": "contrib-hi-004", "sentenceId": "sent-hi-004", "text": "क्या आपने खाना खा लिया?", "duration": 6.5, "contributorId": "user-101", "quality": "good"},
+    {"contributionId": "contrib-hi-005", "sentenceId": "sent-hi-005", "text": "मैं बाजार जा रहा हूं", "duration": 7.0, "contributorId": "user-104", "quality": "good"},
+    {"contributionId": "contrib-hi-006", "sentenceId": "sent-hi-006", "text": "यह किताब बहुत रोचक है", "duration": 8.3, "contributorId": "user-105", "quality": "needs_review"},
+    {"contributionId": "contrib-hi-007", "sentenceId": "sent-hi-007", "text": "कृपया मेरी मदद करें", "duration": 6.8, "contributorId": "user-102", "quality": "good"},
+    {"contributionId": "contrib-hi-008", "sentenceId": "sent-hi-008", "text": "मुझे चाय पसंद है", "duration": 5.5, "contributorId": "user-106", "quality": "excellent"},
+    {"contributionId": "contrib-hi-009", "sentenceId": "sent-hi-009", "text": "स्कूल का समय हो गया है", "duration": 7.2, "contributorId": "user-107", "quality": "good"},
+    {"contributionId": "contrib-hi-010", "sentenceId": "sent-hi-010", "text": "यह फिल्म बहुत अच्छी थी", "duration": 8.0, "contributorId": "user-108", "quality": "good"},
+    {"contributionId": "contrib-hi-011", "sentenceId": "sent-hi-011", "text": "मेरा परिवार बहुत बड़ा है", "duration": 7.5, "contributorId": "user-109", "quality": "good"},
+    {"contributionId": "contrib-hi-012", "sentenceId": "sent-hi-012", "text": "क्या आप हिंदी बोल सकते हैं?", "duration": 8.8, "contributorId": "user-110", "quality": "excellent"},
+    {"contributionId": "contrib-hi-013", "sentenceId": "sent-hi-013", "text": "मुझे यात्रा करना पसंद है", "duration": 7.9, "contributorId": "user-101", "quality": "good"},
+    {"contributionId": "contrib-hi-014", "sentenceId": "sent-hi-014", "text": "धन्यवाद, आप बहुत दयालु हैं", "duration": 9.0, "contributorId": "user-111", "quality": "good"},
+    {"contributionId": "contrib-hi-015", "sentenceId": "sent-hi-015", "text": "मैं दिल्ली में रहता हूं", "duration": 6.9, "contributorId": "user-112", "quality": "needs_review"},
+    {"contributionId": "contrib-hi-016", "sentenceId": "sent-hi-016", "text": "आपका दिन शुभ हो", "duration": 6.2, "contributorId": "user-113", "quality": "good"},
+    {"contributionId": "contrib-hi-017", "sentenceId": "sent-hi-017", "text": "मुझे किताबें पढ़ना अच्छा लगता है", "duration": 10.5, "contributorId": "user-114", "quality": "excellent"},
+    {"contributionId": "contrib-hi-018", "sentenceId": "sent-hi-018", "text": "यह बहुत सुंदर जगह है", "duration": 7.4, "contributorId": "user-115", "quality": "good"},
+    {"contributionId": "contrib-hi-019", "sentenceId": "sent-hi-019", "text": "कल मुझे काम पर जाना है", "duration": 8.1, "contributorId": "user-102", "quality": "good"},
+    {"contributionId": "contrib-hi-020", "sentenceId": "sent-hi-020", "text": "क्या आप मेरे साथ चलेंगे?", "duration": 7.7, "contributorId": "user-116", "quality": "good"},
+    {"contributionId": "contrib-hi-021", "sentenceId": "sent-hi-021", "text": "मुझे संगीत सुनना पसंद है", "duration": 8.6, "contributorId": "user-117", "quality": "excellent"},
+    {"contributionId": "contrib-hi-022", "sentenceId": "sent-hi-022", "text": "यह मेरा घर है", "duration": 5.8, "contributorId": "user-118", "quality": "good"},
+    {"contributionId": "contrib-hi-023", "sentenceId": "sent-hi-023", "text": "आज रविवार है", "duration": 6.0, "contributorId": "user-119", "quality": "good"},
+    {"contributionId": "contrib-hi-024", "sentenceId": "sent-hi-024", "text": "मैं खुश हूं", "duration": 5.2, "contributorId": "user-120", "quality": "needs_review"},
+    {"contributionId": "contrib-hi-025", "sentenceId": "sent-hi-025", "text": "भारत एक विशाल देश है", "duration": 7.3, "contributorId": "user-121", "quality": "good"}
   ],
-  "mr": [
-    {
-      "contributionId": "contrib-mr-001",
-      "sentenceId": "sent-mr-test",
-      "text": "Test validation item to force reload",
-      "duration": 10.0,
-      "contributorId": "test-user",
-      "quality": "good"
-    }
+  "English": [
+    {"contributionId": "contrib-en-001", "sentenceId": "sent-en-001", "text": "Hello, how are you today?", "duration": 7.5, "contributorId": "user-201", "quality": "good"},
+    {"contributionId": "contrib-en-002", "sentenceId": "sent-en-002", "text": "I love reading books in my free time", "duration": 9.0, "contributorId": "user-202", "quality": "excellent"},
+    {"contributionId": "contrib-en-003", "sentenceId": "sent-en-003", "text": "The weather is beautiful today", "duration": 7.2, "contributorId": "user-203", "quality": "good"},
+    {"contributionId": "contrib-en-004", "sentenceId": "sent-en-004", "text": "Would you like some coffee?", "duration": 6.5, "contributorId": "user-204", "quality": "good"},
+    {"contributionId": "contrib-en-005", "sentenceId": "sent-en-005", "text": "I am going to the store", "duration": 6.8, "contributorId": "user-205", "quality": "good"},
+    {"contributionId": "contrib-en-006", "sentenceId": "sent-en-006", "text": "This is a very interesting project", "duration": 8.3, "contributorId": "user-206", "quality": "excellent"},
+    {"contributionId": "contrib-en-007", "sentenceId": "sent-en-007", "text": "Please help me with this task", "duration": 7.0, "contributorId": "user-207", "quality": "good"},
+    {"contributionId": "contrib-en-008", "sentenceId": "sent-en-008", "text": "I enjoy listening to music", "duration": 7.8, "contributorId": "user-208", "quality": "good"},
+    {"contributionId": "contrib-en-009", "sentenceId": "sent-en-009", "text": "The meeting starts at three o'clock", "duration": 8.5, "contributorId": "user-209", "quality": "needs_review"},
+    {"contributionId": "contrib-en-010", "sentenceId": "sent-en-010", "text": "That was an excellent movie", "duration": 7.4, "contributorId": "user-210", "quality": "good"},
+    {"contributionId": "contrib-en-011", "sentenceId": "sent-en-011", "text": "My family is very important to me", "duration": 8.9, "contributorId": "user-211", "quality": "excellent"},
+    {"contributionId": "contrib-en-012", "sentenceId": "sent-en-012", "text": "Can you speak English?", "duration": 6.2, "contributorId": "user-212", "quality": "good"},
+    {"contributionId": "contrib-en-013", "sentenceId": "sent-en-013", "text": "I love traveling to new places", "duration": 8.1, "contributorId": "user-213", "quality": "good"},
+    {"contributionId": "contrib-en-014", "sentenceId": "sent-en-014", "text": "Thank you for your kindness", "duration": 7.6, "contributorId": "user-214", "quality": "good"},
+    {"contributionId": "contrib-en-015", "sentenceId": "sent-en-015", "text": "I live in New York City", "duration": 6.9, "contributorId": "user-215", "quality": "good"},
+    {"contributionId": "contrib-en-016", "sentenceId": "sent-en-016", "text": "Have a wonderful day", "duration": 6.3, "contributorId": "user-216", "quality": "excellent"},
+    {"contributionId": "contrib-en-017", "sentenceId": "sent-en-017", "text": "Learning new skills is always exciting", "duration": 9.5, "contributorId": "user-217", "quality": "good"},
+    {"contributionId": "contrib-en-018", "sentenceId": "sent-en-018", "text": "This is a beautiful place", "duration": 7.1, "contributorId": "user-218", "quality": "good"},
+    {"contributionId": "contrib-en-019", "sentenceId": "sent-en-019", "text": "I have to go to work tomorrow", "duration": 7.7, "contributorId": "user-219", "quality": "needs_review"},
+    {"contributionId": "contrib-en-020", "sentenceId": "sent-en-020", "text": "Would you like to join me?", "duration": 6.8, "contributorId": "user-220", "quality": "good"},
+    {"contributionId": "contrib-en-021", "sentenceId": "sent-en-021", "text": "Technology is changing rapidly", "duration": 8.2, "contributorId": "user-221", "quality": "good"},
+    {"contributionId": "contrib-en-022", "sentenceId": "sent-en-022", "text": "This is my home", "duration": 5.5, "contributorId": "user-222", "quality": "good"},
+    {"contributionId": "contrib-en-023", "sentenceId": "sent-en-023", "text": "Today is Sunday", "duration": 5.8, "contributorId": "user-223", "quality": "excellent"},
+    {"contributionId": "contrib-en-024", "sentenceId": "sent-en-024", "text": "I am very happy", "duration": 5.9, "contributorId": "user-224", "quality": "good"},
+    {"contributionId": "contrib-en-025", "sentenceId": "sent-en-025", "text": "The world is full of possibilities", "duration": 8.4, "contributorId": "user-225", "quality": "good"}
+  ],
+  "Marathi": [
+    {"contributionId": "contrib-mr-001", "sentenceId": "sent-mr-001", "text": "नमस्कार, तुम्ही कसे आहात?", "duration": 8.2, "contributorId": "user-301", "quality": "good"},
+    {"contributionId": "contrib-mr-002", "sentenceId": "sent-mr-002", "text": "मला मराठी साहित्य आवडते", "duration": 8.7, "contributorId": "user-302", "quality": "excellent"},
+    {"contributionId": "contrib-mr-003", "sentenceId": "sent-mr-003", "text": "आज हवामान खूप छान आहे", "duration": 7.9, "contributorId": "user-303", "quality": "good"},
+    {"contributionId": "contrib-mr-004", "sentenceId": "sent-mr-004", "text": "तुम्ही जेवण केलं का?", "duration": 6.4, "contributorId": "user-304", "quality": "good"},
+    {"contributionId": "contrib-mr-005", "sentenceId": "sent-mr-005", "text": "मी बाजारात जात आहे", "duration": 7.1, "contributorId": "user-305", "quality": "good"},
+    {"contributionId": "contrib-mr-006", "sentenceId": "sent-mr-006", "text": "हे पुस्तक खूप मनोरंजक आहे", "duration": 8.5, "contributorId": "user-306", "quality": "needs_review"},
+    {"contributionId": "contrib-mr-007", "sentenceId": "sent-mr-007", "text": "कृपया माझी मदत करा", "duration": 6.9, "contributorId": "user-307", "quality": "good"},
+    {"contributionId": "contrib-mr-008", "sentenceId": "sent-mr-008", "text": "मला चहा आवडतो", "duration": 5.6, "contributorId": "user-308", "quality": "excellent"},
+    {"contributionId": "contrib-mr-009", "sentenceId": "sent-mr-009", "text": "शाळेची वेळ झाली आहे", "duration": 7.3, "contributorId": "user-309", "quality": "good"},
+    {"contributionId": "contrib-mr-010", "sentenceId": "sent-mr-010", "text": "हा चित्रपट खूप छान होता", "duration": 8.1, "contributorId": "user-310", "quality": "good"},
+    {"contributionId": "contrib-mr-011", "sentenceId": "sent-mr-011", "text": "माझे कुटुंब खूप मोठे आहे", "duration": 7.6, "contributorId": "user-311", "quality": "good"},
+    {"contributionId": "contrib-mr-012", "sentenceId": "sent-mr-012", "text": "तुम्ही मराठी बोलू शकता का?", "duration": 8.9, "contributorId": "user-312", "quality": "excellent"},
+    {"contributionId": "contrib-mr-013", "sentenceId": "sent-mr-013", "text": "मला प्रवास करायला आवडतो", "duration": 8.0, "contributorId": "user-313", "quality": "good"},
+    {"contributionId": "contrib-mr-014", "sentenceId": "sent-mr-014", "text": "धन्यवाद, तुम्ही खूप दयाळू आहात", "duration": 9.2, "contributorId": "user-314", "quality": "good"},
+    {"contributionId": "contrib-mr-015", "sentenceId": "sent-mr-015", "text": "मी मुंबईत राहतो", "duration": 6.7, "contributorId": "user-315", "quality": "needs_review"},
+    {"contributionId": "contrib-mr-016", "sentenceId": "sent-mr-016", "text": "तुमचा दिवस शुभ असो", "duration": 6.5, "contributorId": "user-316", "quality": "good"},
+    {"contributionId": "contrib-mr-017", "sentenceId": "sent-mr-017", "text": "मला पुस्तके वाचायला आवडतात", "duration": 9.8, "contributorId": "user-317", "quality": "excellent"},
+    {"contributionId": "contrib-mr-018", "sentenceId": "sent-mr-018", "text": "ही खूप सुंदर जागा आहे", "duration": 7.5, "contributorId": "user-318", "quality": "good"},
+    {"contributionId": "contrib-mr-019", "sentenceId": "sent-mr-019", "text": "उद्या मला कामावर जायचे आहे", "duration": 8.4, "contributorId": "user-319", "quality": "good"},
+    {"contributionId": "contrib-mr-020", "sentenceId": "sent-mr-020", "text": "तुम्ही माझ्यासोबत याल का?", "duration": 7.8, "contributorId": "user-320", "quality": "good"},
+    {"contributionId": "contrib-mr-021", "sentenceId": "sent-mr-021", "text": "मला संगीत ऐकायला आवडते", "duration": 8.6, "contributorId": "user-321", "quality": "excellent"},
+    {"contributionId": "contrib-mr-022", "sentenceId": "sent-mr-022", "text": "हे माझे घर आहे", "duration": 5.9, "contributorId": "user-322", "quality": "good"},
+    {"contributionId": "contrib-mr-023", "sentenceId": "sent-mr-023", "text": "आज रविवार आहे", "duration": 6.1, "contributorId": "user-323", "quality": "good"},
+    {"contributionId": "contrib-mr-024", "sentenceId": "sent-mr-024", "text": "मी आनंदी आहे", "duration": 5.3, "contributorId": "user-324", "quality": "needs_review"},
+    {"contributionId": "contrib-mr-025", "sentenceId": "sent-mr-025", "text": "महाराष्ट्र एक सुंदर राज्य आहे", "duration": 8.8, "contributorId": "user-325", "quality": "good"}
+  ],
+  "Kannada": [
+    {"contributionId": "contrib-ka-001", "sentenceId": "sent-ka-001", "text": "ನಮಸ್ಕಾರ, ನೀವು ಹೇಗಿದ್ದೀರಿ?", "duration": 8.3, "contributorId": "user-401", "quality": "good"},
+    {"contributionId": "contrib-ka-002", "sentenceId": "sent-ka-002", "text": "ನನಗೆ ಕನ್ನಡ ಸಾಹಿತ್ಯ ತುಂಬಾ ಇಷ್ಟ", "duration": 9.1, "contributorId": "user-402", "quality": "excellent"},
+    {"contributionId": "contrib-ka-003", "sentenceId": "sent-ka-003", "text": "ಇಂದು ಹವಾಮಾನ ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ", "duration": 8.0, "contributorId": "user-403", "quality": "good"},
+    {"contributionId": "contrib-ka-004", "sentenceId": "sent-ka-004", "text": "ನೀವು ಊಟ ಮಾಡಿದ್ದೀರಾ?", "duration": 6.6, "contributorId": "user-404", "quality": "good"},
+    {"contributionId": "contrib-ka-005", "sentenceId": "sent-ka-005", "text": "ನಾನು ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ", "duration": 8.2, "contributorId": "user-405", "quality": "good"},
+    {"contributionId": "contrib-ka-006", "sentenceId": "sent-ka-006", "text": "ಈ ಪುಸ್ತಕ ತುಂಬಾ ರೋಚಕವಾಗಿದೆ", "duration": 8.4, "contributorId": "user-406", "quality": "needs_review"},
+    {"contributionId": "contrib-ka-007", "sentenceId": "sent-ka-007", "text": "ದಯವಿಟ್ಟು ನನಗೆ ಸಹಾಯ ಮಾಡಿ", "duration": 7.0, "contributorId": "user-407", "quality": "good"},
+    {"contributionId": "contrib-ka-008", "sentenceId": "sent-ka-008", "text": "ನನಗೆ ಚಹಾ ಇಷ್ಟ", "duration": 5.7, "contributorId": "user-408", "quality": "excellent"},
+    {"contributionId": "contrib-ka-009", "sentenceId": "sent-ka-009", "text": "ಶಾಲೆಯ ಸಮಯವಾಗಿದೆ", "duration": 6.8, "contributorId": "user-409", "quality": "good"},
+    {"contributionId": "contrib-ka-010", "sentenceId": "sent-ka-010", "text": "ಈ ಚಿತ್ರ ತುಂಬಾ ಚೆನ್ನಾಗಿತ್ತು", "duration": 7.9, "contributorId": "user-410", "quality": "good"},
+    {"contributionId": "contrib-ka-011", "sentenceId": "sent-ka-011", "text": "ನನ್ನ ಕುಟುಂಬ ತುಂಬಾ ದೊಡ್ಡದು", "duration": 7.7, "contributorId": "user-411", "quality": "good"},
+    {"contributionId": "contrib-ka-012", "sentenceId": "sent-ka-012", "text": "ನೀವು ಕನ್ನಡ ಮಾತನಾಡಬಲ್ಲಿರಾ?", "duration": 8.5, "contributorId": "user-412", "quality": "excellent"},
+    {"contributionId": "contrib-ka-013", "sentenceId": "sent-ka-013", "text": "ನನಗೆ ಪ್ರಯಾಣ ಮಾಡುವುದು ಇಷ್ಟ", "duration": 8.3, "contributorId": "user-413", "quality": "good"},
+    {"contributionId": "contrib-ka-014", "sentenceId": "sent-ka-014", "text": "ಧನ್ಯವಾದಗಳು, ನೀವು ತುಂಬಾ ದಯೆಯುಳ್ಳವರು", "duration": 9.4, "contributorId": "user-414", "quality": "good"},
+    {"contributionId": "contrib-ka-015", "sentenceId": "sent-ka-015", "text": "ನಾನು ಬೆಂಗಳೂರಿನಲ್ಲಿ ವಾಸಿಸುತ್ತೇನೆ", "duration": 8.9, "contributorId": "user-415", "quality": "needs_review"},
+    {"contributionId": "contrib-ka-016", "sentenceId": "sent-ka-016", "text": "ನಿಮ್ಮ ದಿನ ಶುಭವಾಗಲಿ", "duration": 6.4, "contributorId": "user-416", "quality": "good"},
+    {"contributionId": "contrib-ka-017", "sentenceId": "sent-ka-017", "text": "ನನಗೆ ಪುಸ್ತಕಗಳನ್ನು ಓದುವುದು ಇಷ್ಟ", "duration": 9.6, "contributorId": "user-417", "quality": "excellent"},
+    {"contributionId": "contrib-ka-018", "sentenceId": "sent-ka-018", "text": "ಇದು ತುಂಬಾ ಸುಂದರವಾದ ಸ್ಥಳ", "duration": 7.6, "contributorId": "user-418", "quality": "good"},
+    {"contributionId": "contrib-ka-019", "sentenceId": "sent-ka-019", "text": "ನಾಳೆ ನಾನು ಕೆಲಸಕ್ಕೆ ಹೋಗಬೇಕು", "duration": 8.7, "contributorId": "user-419", "quality": "good"},
+    {"contributionId": "contrib-ka-020", "sentenceId": "sent-ka-020", "text": "ನೀವು ನನ್ನೊಂದಿಗೆ ಬರುತ್ತೀರಾ?", "duration": 7.5, "contributorId": "user-420", "quality": "good"},
+    {"contributionId": "contrib-ka-021", "sentenceId": "sent-ka-021", "text": "ನನಗೆ ಸಂಗೀತ ಕೇಳುವುದು ಇಷ್ಟ", "duration": 8.1, "contributorId": "user-421", "quality": "excellent"},
+    {"contributionId": "contrib-ka-022", "sentenceId": "sent-ka-022", "text": "ಇದು ನನ್ನ ಮನೆ", "duration": 5.4, "contributorId": "user-422", "quality": "good"},
+    {"contributionId": "contrib-ka-023", "sentenceId": "sent-ka-023", "text": "ಇಂದು ಭಾನುವಾರ", "duration": 5.5, "contributorId": "user-423", "quality": "good"},
+    {"contributionId": "contrib-ka-024", "sentenceId": "sent-ka-024", "text": "ನಾನು ಸಂತೋಷವಾಗಿದ್ದೇನೆ", "duration": 6.2, "contributorId": "user-424", "quality": "needs_review"},
+    {"contributionId": "contrib-ka-025", "sentenceId": "sent-ka-025", "text": "ಕರ್ನಾಟಕ ಒಂದು ಸುಂದರ ರಾಜ್ಯ", "duration": 7.8, "contributorId": "user-425", "quality": "good"}
+  ],
+  "Gujarati": [
+    {"contributionId": "contrib-gu-001", "sentenceId": "sent-gu-001", "text": "નમસ્તે, તમે કેમ છો?", "duration": 7.8, "contributorId": "user-501", "quality": "good"},
+    {"contributionId": "contrib-gu-002", "sentenceId": "sent-gu-002", "text": "મને ગુજરાતી સાહિત્ય ખૂબ ગમે છે", "duration": 9.3, "contributorId": "user-502", "quality": "excellent"},
+    {"contributionId": "contrib-gu-003", "sentenceId": "sent-gu-003", "text": "આજે હવામાન ખૂબ સરસ છે", "duration": 7.6, "contributorId": "user-503", "quality": "good"},
+    {"contributionId": "contrib-gu-004", "sentenceId": "sent-gu-004", "text": "તમે જમ્યા છો?", "duration": 5.9, "contributorId": "user-504", "quality": "good"},
+    {"contributionId": "contrib-gu-005", "sentenceId": "sent-gu-005", "text": "હું બજાર જાઉં છું", "duration": 6.5, "contributorId": "user-505", "quality": "good"},
+    {"contributionId": "contrib-gu-006", "sentenceId": "sent-gu-006", "text": "આ પુસ્તક ખૂબ રસપ્રદ છે", "duration": 7.9, "contributorId": "user-506", "quality": "needs_review"},
+    {"contributionId": "contrib-gu-007", "sentenceId": "sent-gu-007", "text": "કૃપા કરીને મારી મદદ કરો", "duration": 7.2, "contributorId": "user-507", "quality": "good"},
+    {"contributionId": "contrib-gu-008", "sentenceId": "sent-gu-008", "text": "મને ચા ગમે છે", "duration": 5.4, "contributorId": "user-508", "quality": "excellent"},
+    {"contributionId": "contrib-gu-009", "sentenceId": "sent-gu-009", "text": "શાળાનો સમય થઈ ગયો છે", "duration": 7.1, "contributorId": "user-509", "quality": "good"},
+    {"contributionId": "contrib-gu-010", "sentenceId": "sent-gu-010", "text": "આ ફિલ્મ ખૂબ સારી હતી", "duration": 7.7, "contributorId": "user-510", "quality": "good"},
+    {"contributionId": "contrib-gu-011", "sentenceId": "sent-gu-011", "text": "મારું કુટુંબ ખૂબ મોટું છે", "duration": 7.4, "contributorId": "user-511", "quality": "good"},
+    {"contributionId": "contrib-gu-012", "sentenceId": "sent-gu-012", "text": "શું તમે ગુજરાતી બોલી શકો છો?", "duration": 8.6, "contributorId": "user-512", "quality": "excellent"},
+    {"contributionId": "contrib-gu-013", "sentenceId": "sent-gu-013", "text": "મને મુસાફરી કરવી ગમે છે", "duration": 8.0, "contributorId": "user-513", "quality": "good"},
+    {"contributionId": "contrib-gu-014", "sentenceId": "sent-gu-014", "text": "આભાર, તમે ખૂબ દયાળુ છો", "duration": 8.8, "contributorId": "user-514", "quality": "good"},
+    {"contributionId": "contrib-gu-015", "sentenceId": "sent-gu-015", "text": "હું અમદાવાદમાં રહું છું", "duration": 7.3, "contributorId": "user-515", "quality": "needs_review"},
+    {"contributionId": "contrib-gu-016", "sentenceId": "sent-gu-016", "text": "તમારો દિવસ શુભ રહે", "duration": 6.7, "contributorId": "user-516", "quality": "good"},
+    {"contributionId": "contrib-gu-017", "sentenceId": "sent-gu-017", "text": "મને પુસ્તકો વાંચવી ગમે છે", "duration": 9.2, "contributorId": "user-517", "quality": "excellent"},
+    {"contributionId": "contrib-gu-018", "sentenceId": "sent-gu-018", "text": "આ ખૂબ સુંદર જગ્યા છે", "duration": 7.3, "contributorId": "user-518", "quality": "good"},
+    {"contributionId": "contrib-gu-019", "sentenceId": "sent-gu-019", "text": "કાલે મારે કામ પર જવું છે", "duration": 8.2, "contributorId": "user-519", "quality": "good"},
+    {"contributionId": "contrib-gu-020", "sentenceId": "sent-gu-020", "text": "શું તમે મારી સાથે આવશો?", "duration": 7.5, "contributorId": "user-520", "quality": "good"},
+    {"contributionId": "contrib-gu-021", "sentenceId": "sent-gu-021", "text": "મને સંગીત સાંભળવું ગમે છે", "duration": 8.4, "contributorId": "user-521", "quality": "excellent"},
+    {"contributionId": "contrib-gu-022", "sentenceId": "sent-gu-022", "text": "આ મારું ઘર છે", "duration": 5.6, "contributorId": "user-522", "quality": "good"},
+    {"contributionId": "contrib-gu-023", "sentenceId": "sent-gu-023", "text": "આજે રવિવાર છે", "duration": 5.8, "contributorId": "user-523", "quality": "good"},
+    {"contributionId": "contrib-gu-024", "sentenceId": "sent-gu-024", "text": "હું ખુશ છું", "duration": 5.1, "contributorId": "user-524", "quality": "needs_review"},
+    {"contributionId": "contrib-gu-025", "sentenceId": "sent-gu-025", "text": "ગુજરાત એક સુંદર રાજ્ય છે", "duration": 8.1, "contributorId": "user-525", "quality": "good"}
   ]
 }
