@@ -1,7 +1,7 @@
 
-# VoiceGive
+# VoiceGive Flutter Application - Setup & Authentication Guide
 
-This document provides a unified guide for setting up your environment, configuring authentication, and following best practices for the Bhashadaan Flutter application.
+This document provides a unified guide for setting up your environment, configuring authentication, and following best practices for the VoiceGive Flutter application.
 
 ---
 

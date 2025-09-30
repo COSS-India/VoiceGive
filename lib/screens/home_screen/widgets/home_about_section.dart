@@ -1,5 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +18,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context).whatIsAgriDaan,
+          AppLocalizations.of(context)!.whatIsAgriDaan,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -27,7 +27,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
         ),
         SizedBox(height: 16.w),
         Text(
-          AppLocalizations.of(context).agriDaanDescription,
+          AppLocalizations.of(context)!.agriDaanDescription,
           style: GoogleFonts.notoSans(
             color: Colors.black,
             fontSize: 14.sp,

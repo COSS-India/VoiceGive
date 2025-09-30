@@ -15,6 +15,7 @@ class AppColors {
   static const lightGreen = Color.fromRGBO(35, 208, 136, 1);
   static const lightGreen2 = Color.fromRGBO(233, 250, 243, 1);
   static const lightGreen3 = Color.fromRGBO(248, 254, 251, 1);
+  static const lightGreen4 = Color.fromRGBO(227, 249, 239, 1);
 
   // Greys
   static const grey = Color.fromRGBO(158, 158, 158, 1);
@@ -29,6 +30,8 @@ class AppColors {
   static const grey84 = Color.fromRGBO(84, 84, 84, 1);
   static const lightGrey = Color.fromRGBO(245, 245, 245, 1);
   static const darkGrey = Color.fromRGBO(216, 216, 216, 1);
+  // Text neutrals
+  static const slateText = Color.fromRGBO(120, 131, 149, 1);
 
   static const positiveLight = Color.fromRGBO(29, 137, 35, 1);
   static const negativeLight = Color.fromRGBO(209, 57, 36, 1);

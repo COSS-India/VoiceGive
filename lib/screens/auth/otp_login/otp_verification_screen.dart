@@ -2,7 +2,7 @@ import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
@@ -59,7 +59,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       );
     } else {
       setState(() {
-        _errorText = AppLocalizations.of(context).invalidOtp;
+        _errorText = AppLocalizations.of(context)!.invalidOtp;
       });
     }
   }
@@ -68,7 +68,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     // TODO: Implement resend OTP logic
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context).otpSentSuccessfullyMessage),
+        content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
         backgroundColor: AppColors.lightGreen,
       ),
     );
@@ -93,7 +93,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       SizedBox(height: 40.h),
                       Text(
-                        AppLocalizations.of(context).otpVerification,
+                        AppLocalizations.of(context)!.otpVerification,
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys87,
                           fontSize: 28.sp,
@@ -103,7 +103,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        "${AppLocalizations.of(context).enterOtpFromSms} ${widget.phoneNumber}",
+                        "${AppLocalizations.of(context)!.enterOtpFromSms} ${widget.phoneNumber}",
                         style: GoogleFonts.notoSans(
                           color: AppColors.greys60,
                           fontSize: 14.sp,
@@ -119,6 +119,35 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       OtpInputField(
                         onChanged: _onOtpChanged,
                         errorText: _errorText,
+                      ),
+                      SizedBox(height: 24.h),
+                      GestureDetector(
+                        onTap: () {
+                          // widget.onResend?.call();
+                          // _resetTimer();
+                        },
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "I didn't receive any OTP. ",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.greys60,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextSpan(
+                                text: "RESEND",
+                                style: GoogleFonts.notoSans(
+                                  color: AppColors.darkGreen,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       SizedBox(height: 40.h),
                     ],
@@ -160,7 +189,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               );
                             }
                             return Text(
-                              AppLocalizations.of(context).submit,
+                              AppLocalizations.of(context)!.submit,
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 16.sp,

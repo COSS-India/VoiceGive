@@ -2,8 +2,8 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,9 +36,48 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     _countries = [l10n.india];
-    _states = [l10n.maharashtra];
+    // Predefined list of Indian states and union territories for the dropdown
+    _states = [
+      'Andhra Pradesh',
+      'Arunachal Pradesh',
+      'Assam',
+      'Bihar',
+      'Chhattisgarh',
+      'Goa',
+      'Gujarat',
+      'Haryana',
+      'Himachal Pradesh',
+      'Jharkhand',
+      'Karnataka',
+      'Kerala',
+      'Madhya Pradesh',
+      'Maharashtra',
+      'Manipur',
+      'Meghalaya',
+      'Mizoram',
+      'Nagaland',
+      'Odisha',
+      'Punjab',
+      'Rajasthan',
+      'Sikkim',
+      'Tamil Nadu',
+      'Telangana',
+      'Tripura',
+      'Uttar Pradesh',
+      'Uttarakhand',
+      'West Bengal',
+      // Union Territories
+      'Andaman and Nicobar Islands',
+      'Chandigarh',
+      'Dadra and Nagar Haveli and Daman and Diu',
+      'Delhi',
+      'Jammu and Kashmir',
+      'Ladakh',
+      'Lakshadweep',
+      'Puducherry',
+    ];
     _districts = [
       l10n.pune,
       l10n.mumbai,
@@ -128,7 +167,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context).completeYourProfile,
+                      AppLocalizations.of(context)!.completeYourProfile,
                       style: GoogleFonts.notoSans(
                         color: Colors.white,
                         fontSize: 20.sp,
@@ -146,7 +185,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context).otherInformation,
+                          AppLocalizations.of(context)!.otherInformation,
                           style: GoogleFonts.notoSans(
                             color: AppColors.greys87,
                             fontSize: 16.sp,
@@ -172,7 +211,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                           fontSize: 14.sp)),
                                   TextSpan(
                                       text:
-                                          AppLocalizations.of(context).country,
+                                          AppLocalizations.of(context)!.country,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp)),
@@ -213,7 +252,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                           color: AppColors.negativeLight,
                                           fontSize: 14.sp)),
                                   TextSpan(
-                                      text: AppLocalizations.of(context).state,
+                                      text: AppLocalizations.of(context)!.state,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp)),
@@ -261,8 +300,8 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                           color: AppColors.negativeLight,
                                           fontSize: 14.sp)),
                                   TextSpan(
-                                      text:
-                                          AppLocalizations.of(context).district,
+                                      text: AppLocalizations.of(context)!
+                                          .district,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp)),
@@ -286,7 +325,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           Padding(
                             padding: EdgeInsets.only(top: 6.w, left: 8.w),
                             child: Text(
-                              AppLocalizations.of(context)
+                              AppLocalizations.of(context)!
                                   .thisFieldIsRequiredToContinue,
                               style: GoogleFonts.notoSans(
                                 color: AppColors.negativeLight,
@@ -310,7 +349,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           ),
                           decoration: InputDecoration(
                             labelText:
-                                AppLocalizations.of(context).preferredLanguage,
+                                AppLocalizations.of(context)!.preferredLanguage,
                             labelStyle: GoogleFonts.notoSans(
                                 color: AppColors.greys60, fontSize: 14.sp),
                             border: _outline(AppColors.darkGrey),
@@ -327,17 +366,11 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                               fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: 32.h),
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButtonWidget(
-                            title: AppLocalizations.of(context).saveAndContinue,
-                            textColor: Colors.white,
-                            decoration: BoxDecoration(
-                              color: AppColors.orange,
-                              borderRadius: BorderRadius.circular(6.r),
-                            ),
-                            verticalPadding: 14.w,
-                            onTap: () {
+                        Center(
+                          child: SizedBox(
+                            width: 280.w,
+                            child: ElevatedButton(
+                            onPressed: () {
                               if (_district == null) {
                                 setState(() => _showDistrictError = true);
                                 final ctx = _districtFieldKey.currentContext;
@@ -358,8 +391,24 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                 ),
                               );
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orange,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.r),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 16.w),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.saveAndContinue,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
+                      ),
                       ],
                     ),
                   ),

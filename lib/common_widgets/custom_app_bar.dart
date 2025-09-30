@@ -23,9 +23,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ImageWidget(
-            imageUrl: "assets/images/bhashini_logo.svg",
-            height: 36.w,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4.0).r,
+            child: ImageWidget(
+              imageUrl: "assets/images/bhashini_logo.svg",
+              height: 36.w,
+            ),
           ),
           Container(
             margin: EdgeInsets.only(left: 10, right: 10).r,

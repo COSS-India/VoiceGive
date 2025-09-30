@@ -1,5 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +11,7 @@ class NeedMoreInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16).r,
+      padding: const EdgeInsets.all(24).r,
       decoration: BoxDecoration(
         // color: Colors.black,
         image: DecorationImage(
@@ -23,16 +23,16 @@ class NeedMoreInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context).needMoreInfo,
+            AppLocalizations.of(context)!.needMoreInfo,
             style: GoogleFonts.notoSans(
                 fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
+                fontWeight: FontWeight.w500,
+                color: AppColors.appBarBackground),
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context).writeYourConcern,
-            style: GoogleFonts.notoSans(fontSize: 14.sp, color: Colors.white),
+            AppLocalizations.of(context)!.writeYourConcern,
+            style: GoogleFonts.notoSans(fontSize: 12.sp, color: AppColors.appBarBackground, fontWeight: FontWeight.w400),
           ),
           SizedBox(height: 16.w),
           ElevatedButton(
@@ -47,11 +47,11 @@ class NeedMoreInfo extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppLocalizations.of(context).contactUs,
+                    AppLocalizations.of(context)!.contactUs,
                     style: GoogleFonts.notoSans(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.appBarBackground),
                   ),
                   SizedBox(width: 8.w),
                   Icon(
@@ -59,7 +59,8 @@ class NeedMoreInfo extends StatelessWidget {
                     color: Colors.white,
                   )
                 ],
-              ))
+              )),
+              SizedBox(height: 16.w)
         ],
       ),
     );

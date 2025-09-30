@@ -12,7 +12,7 @@ class OtpTimer extends StatefulWidget {
   const OtpTimer({
     super.key,
     this.onResend,
-    this.initialSeconds = 180, // 3 minutes default
+    this.initialSeconds = 10, // 3 minutes default
   });
 
   @override
@@ -81,36 +81,36 @@ class _OtpTimerState extends State<OtpTimer> {
           ),
           SizedBox(height: 16.h),
         ],
-        if (_canResend) ...[
-          GestureDetector(
-            onTap: () {
-              widget.onResend?.call();
-              _resetTimer();
-            },
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "I didn't receive any OTP. ",
-                    style: GoogleFonts.notoSans(
-                      color: AppColors.greys60,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "RESEND",
-                    style: GoogleFonts.notoSans(
-                      color: AppColors.lightGreen,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+        // if (_canResend) ...[
+        //   GestureDetector(
+        //     onTap: () {
+        //       widget.onResend?.call();
+        //       _resetTimer();
+        //     },
+        //     child: RichText(
+        //       text: TextSpan(
+        //         children: [
+        //           TextSpan(
+        //             text: "I didn't receive any OTP. ",
+        //             style: GoogleFonts.notoSans(
+        //               color: AppColors.greys60,
+        //               fontSize: 14.sp,
+        //               fontWeight: FontWeight.w400,
+        //             ),
+        //           ),
+        //           TextSpan(
+        //             text: "RESEND",
+        //             style: GoogleFonts.notoSans(
+        //               color: AppColors.lightGreen,
+        //               fontSize: 14.sp,
+        //               fontWeight: FontWeight.w600,
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ],
     );
   }

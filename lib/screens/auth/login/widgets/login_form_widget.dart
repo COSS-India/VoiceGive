@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../../models/auth/login_request.dart';
 import '../../../../providers/auth_provider.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Login form widget with authentication integration
 class LoginFormWidget extends StatefulWidget {
@@ -54,7 +54,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
-                  '${AppLocalizations.of(context).failedToLoadCaptcha}: $e')),
+                  '${AppLocalizations.of(context)!.failedToLoadCaptcha}: $e')),
         );
       }
     } finally {
@@ -70,7 +70,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     if (_secureId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(AppLocalizations.of(context).pleaseWaitForCaptcha)),
+            content: Text(AppLocalizations.of(context)!.pleaseWaitForCaptcha)),
       );
       return;
     }
@@ -94,7 +94,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(authProvider.errorMessage ??
-              AppLocalizations.of(context).loginFailed),
+              AppLocalizations.of(context)!.loginFailed),
           backgroundColor: Colors.red,
         ),
       );
@@ -123,10 +123,10 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppLocalizations.of(context).emailRequired;
+                    return AppLocalizations.of(context)!.emailRequired;
                   }
                   if (!value.contains('@')) {
-                    return AppLocalizations.of(context).invalidEmail;
+                    return AppLocalizations.of(context)!.invalidEmail;
                   }
                   return null;
                 },
@@ -144,7 +144,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppLocalizations.of(context).passwordRequired;
+                    return AppLocalizations.of(context)!.passwordRequired;
                   }
                   return null;
                 },
@@ -167,8 +167,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         _captchaImageUrl!,
                         height: 100,
                         errorBuilder: (context, error, stackTrace) {
-                          return Text(
-                              AppLocalizations.of(context).failedToLoadCaptcha);
+                          return Text(AppLocalizations.of(context)!
+                              .failedToLoadCaptcha);
                         },
                       ),
                       const SizedBox(height: 8),
@@ -188,7 +188,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                       TextButton(
                         onPressed: _loadCaptcha,
                         child:
-                            Text(AppLocalizations.of(context).refreshCaptcha),
+                            Text(AppLocalizations.of(context)!.refreshCaptcha),
                       ),
                     ],
                   ),
@@ -205,7 +205,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         width: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : Text(AppLocalizations.of(context).login),
+                    : Text(AppLocalizations.of(context)!.login),
               ),
 
               // Error message
