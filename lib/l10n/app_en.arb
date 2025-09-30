@@ -1,5 +1,17 @@
 {
     "@@locale": "en",
+    "@@locale": "en",
+    "weRespectYourPrivacy": "We Respect Your Privacy",
+    "namasteEmoji": "🙏",
+    "consentConfirm": "By clicking \"{button}\", you confirm that:",
+    "consentPoint1": "are authorized to contribute and validate data provided by [Organisation/ Department/ DIBD], and acknowledge that the submission of personal information is voluntary and provided with your full consent.",
+    "consentPoint2": "You grant DIBD a perpetual, royalty-free, irrevocable license to use submitted data for training, research, validation, model development, and open datasets within the BHASHINI ecosystem.",
+    "consentPoint3": "Except for personal information, submitted data is non-confidential, free of third-party restrictions, and cleared for public use.",
+    "consentPoint4": "You waive any claim to ownership, compensation, or restriction on use of submitted data.",
+    "consentPoint5": "You have read, understood, and accepted the following governing documents on the BhashaDaan mobile app:",
+    "termsOfUse": "Terms of Use/ Contribution Terms",
+    "privacyPolicy": "Privacy Policy",
+    "copyrightPolicy": "Copyright & Licensing Policy",
     
     "bhashadaan": "Bhashadaan",
     "home": "Home",
@@ -142,6 +154,11 @@
     "namasteContributor": "Namaste Contributor/Validator",
     "consentMessage": "Before you begin contributing or validating on AgriDaan, please take a moment to review our Privacy Policy and Terms of Use. We kindly ask for your consent to continue.",
     "iAgree": "I agree",
+    "deny": "I deny",
+
+    "bhasha": "Bhasha",
+    "daan": "Daan",
+    "agriDaan": "AgriDaan",
     
     "quickTips": "Quick Tips",
     "howItWorks": "How it Works?",
@@ -234,8 +251,8 @@
     
     "whatIsAgriDaan": "What is AgriDaan?",
     "agriDaanDescription": "Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India's diverse farming heritage.",
-    "empowerIndiasLinguisticDiversity": "Empower India's \nLinguistic Diversity",
-    "joinTheMovementDescription": "Join the movement to enhance language understanding and accessibility for all 22 official languages in India.",
+    "empowerIndiasLinguisticDiversity": "Empower India's Linguistic\nDiversity",
+    "joinTheMovementDescription": "Join the movement to enhance language understanding and accessibility for all 22 official languages of India.",
     "letsGetStarted": "Let's Get Started",
     
     "digitalIndiaBhashiniDivision": "Digital India Bhashini Division",
@@ -254,5 +271,10 @@
     
     "needMoreInfo": "Need More Information?",
     "writeYourConcern": "Write your concern to us and we will get back to you.",
-    "contactUs": "Contact us"
+    "contactUs": "Contact us",
+    "nameWithoutSp": "Name field can only contain letters, space and dot(.).",
+    "firstNameMandatory": "First name is mandatory",
+    "lastNameMandatory": "Last name is mandatory",
+    "enterValidEmail": "Please enter a valid email address",
+    "registrationSubmitError" : "Some fields are missing or contain invalid values"
 }

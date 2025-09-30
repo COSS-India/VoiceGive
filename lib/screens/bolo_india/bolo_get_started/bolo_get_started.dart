@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_get_started/get_started_item.dart';
+import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -100,7 +101,12 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => const HomeScreen()),
+                      );
+                    },
                     child: Icon(
                       Icons.arrow_circle_left_outlined,
                       color: Colors.white,
@@ -197,7 +203,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
             ),
             SizedBox(height: 8.w),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
               child: Row(
                 children: [
                   // Indicators (left)

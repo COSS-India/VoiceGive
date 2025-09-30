@@ -21,7 +21,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
           AppLocalizations.of(context)!.whatIsAgriDaan,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
-            fontSize: 20.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
         ),

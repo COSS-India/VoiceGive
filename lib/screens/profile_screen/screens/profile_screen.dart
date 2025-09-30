@@ -1,19 +1,25 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/profile_screen/model/age_group_model.dart';
+import 'package:bhashadaan/screens/profile_screen/repository/profile_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
-import 'package:bhashadaan/screens/profile_screen/other_information_screen.dart';
+import 'package:bhashadaan/screens/profile_screen/screens/other_information_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../constants/app_constants.dart';
+import '../model/gender_model.dart';
+import '../widgets/name_widget.dart';
+
 class ProfileScreen extends StatefulWidget {
   final String? phoneNumber;
+  final String? countryCode;
 
-  const ProfileScreen({super.key, this.phoneNumber});
+  const ProfileScreen({super.key, this.phoneNumber, this.countryCode});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -33,31 +39,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? _selectedAgeGroup;
   String? _selectedGender;
 
-  List<String> _ageGroups = [];
-  List<String> _genders = [];
+  List<AgeModel> _ageGroups = [];
+  List<GenderModel> _genders = [];
+  List<String> _ageList = [];
+  List<String> _genderList = [];
 
   @override
   void initState() {
     super.initState();
-  }
-
-  void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
-    _ageGroups = [
-      l10n.under18Years,
-      l10n.age18To24,
-      l10n.age25To34,
-      l10n.age35To44,
-      l10n.age45To54,
-      l10n.age55To64,
-      l10n.age65Plus,
-    ];
-    _genders = [
-      l10n.male,
-      l10n.female,
-      l10n.nonBinary,
-      l10n.preferNotToSay,
-    ];
+    fetchData();
   }
 
   @override
@@ -105,8 +95,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) =>
-              OtpVerificationScreen(phoneNumber: widget.phoneNumber!),
+          builder: (_) => OtpVerificationScreen(
+              phoneNumber: widget.phoneNumber!,
+              countryCode: widget.countryCode!),
         ),
       );
     } else {
@@ -123,13 +114,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize localized strings if not already done
-    if (_ageGroups.isEmpty) {
-      _initializeLocalizedStrings();
-    }
-
-    return WillPopScope(
-      onWillPop: _navigateBackToOtp,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+        _navigateBackToOtp();
+      },
       child: Scaffold(
         appBar: const CustomAppBar(),
         backgroundColor: Colors.white,
@@ -188,92 +179,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           SizedBox(height: 16.h),
                           // First name
-                          TextFormField(
-                            controller: _firstNameController,
-                            decoration: InputDecoration(
-                              label: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '*',
-                                      style: GoogleFonts.notoSans(
-                                        color: AppColors.negativeLight,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: AppLocalizations.of(context)!
-                                          .firstName,
-                                      style: GoogleFonts.notoSans(
-                                        color: AppColors.greys60,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              enabledBorder: _outline(AppColors.darkGrey),
-                              focusedBorder: _outline(AppColors.darkGrey),
-                              errorBorder: _outline(AppColors.negativeLight),
-                              focusedErrorBorder:
-                                  _outline(AppColors.negativeLight),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 12.w),
-                            ),
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? AppLocalizations.of(context)!
-                                    .firstNameRequired
-                                : null,
-                            style: GoogleFonts.notoSans(
-                                color: AppColors.greys87,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500),
+                          NameWidget(
+                            nameController: _firstNameController,
+                            helperText: AppLocalizations.of(context)!.firstName,
+                            emptyErrorMsg: AppLocalizations.of(context)!
+                                .firstNameMandatory,
                           ),
                           SizedBox(height: 16.h),
                           // Last name
-                          TextFormField(
-                            controller: _lastNameController,
-                            decoration: InputDecoration(
-                              label: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '*',
-                                      style: GoogleFonts.notoSans(
-                                        color: AppColors.negativeLight,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: AppLocalizations.of(context)!
-                                          .lastName,
-                                      style: GoogleFonts.notoSans(
-                                        color: AppColors.greys60,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              enabledBorder: _outline(AppColors.darkGrey),
-                              focusedBorder: _outline(AppColors.darkGrey),
-                              errorBorder: _outline(AppColors.negativeLight),
-                              focusedErrorBorder:
-                                  _outline(AppColors.negativeLight),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 12.w),
-                            ),
-                            validator: (v) => (v == null || v.trim().isEmpty)
-                                ? AppLocalizations.of(context)!.lastNameRequired
-                                : null,
-                            style: GoogleFonts.notoSans(
-                                color: AppColors.greys87,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500),
+                          NameWidget(
+                            nameController: _lastNameController,
+                            helperText: AppLocalizations.of(context)!.lastName,
+                            emptyErrorMsg:
+                                AppLocalizations.of(context)!.lastNameMandatory,
                           ),
                           SizedBox(height: 16.h),
                           // Age group picker (read-only TextField with in-box label)
@@ -283,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               controller: _ageController,
                               readOnly: true,
                               onTap: () => _pickFromList(
-                                items: _ageGroups,
+                                items: _ageList,
                                 defaultItem: _selectedAgeGroup,
                                 onPicked: (value) {
                                   setState(() {
@@ -342,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               controller: _genderController,
                               readOnly: true,
                               onTap: () => _pickFromList(
-                                items: _genders,
+                                items: _genderList,
                                 defaultItem: _selectedGender,
                                 onPicked: (value) {
                                   setState(() {
@@ -403,14 +321,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               decoration: InputDecoration(
                                 enabled: false,
                                 enabledBorder: _outline(AppColors.darkGrey),
+                                fillColor: AppColors.lightGrey2,
+                                filled: true,
                                 disabledBorder: _outline(AppColors.darkGrey),
                                 contentPadding: EdgeInsets.symmetric(
                                     horizontal: 12.w, vertical: 12.w),
                               ),
                               style: GoogleFonts.notoSans(
                                   color: AppColors.darkGreen,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500),
                             ),
                           SizedBox(height: 16.h),
                           // Email
@@ -429,19 +349,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 12.w, vertical: 12.w),
                             ),
-                            // No strict validation required; accept any value (dummy emails)
-                            validator: (v) => null,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (String? value) {
+                              if (value != null && value.isNotEmpty) {
+                                String? matchedString = RegExpressions
+                                    .validEmail
+                                    .stringMatch(value);
+                                if (matchedString == null ||
+                                    matchedString.isEmpty ||
+                                    matchedString.length != value.length) {
+                                  return AppLocalizations.of(context)!
+                                      .enterValidEmail;
+                                }
+                                return null;
+                              } else {
+                                return null;
+                              }
+                            },
                             style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500),
                           ),
-                          SizedBox(height: 32.h),
+                          SizedBox(height: 60.h),
                           Center(
                             child: SizedBox(
                               width: 280.w,
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   final valid =
                                       _formKey.currentState?.validate() ??
                                           false;
@@ -452,12 +388,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   if (valid && selectionsValid) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (_) =>
-                                            const OtherInformationScreen(),
+                                        builder: (_) => OtherInformationScreen(
+                                          firstName: _firstNameController.text,
+                                          lastName: _lastNameController.text,
+                                          ageGroup: getAgeGroupValue(
+                                              _ageController.text),
+                                          gender: getGenderValue(
+                                              _genderController.text),
+                                          phoneNumber: widget.phoneNumber ?? '',
+                                          email:
+                                              _emailController.text.isNotEmpty
+                                                  ? _emailController.text
+                                                  : null,
+                                        ),
                                       ),
                                     );
-                                  } else if (!selectionsValid) {
-                                    // Do not change border color; just show inline message
+                                  } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(AppLocalizations.of(
@@ -495,5 +441,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> fetchData() async {
+    _ageGroups = await ProfileRepository().getAgeGroup();
+    _genders = await ProfileRepository().getGender();
+    _ageList = _ageGroups.map((e) => e.label).toList();
+    _genderList = _genders.map((e) => e.label).toList();
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  String getAgeGroupValue(String label) {
+    return _ageGroups.firstWhere((element) => element.label == label).value;
+  }
+
+  String getGenderValue(String label) {
+    return _genders.firstWhere((element) => element.label == label).value;
   }
 }

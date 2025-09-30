@@ -1,7 +1,5 @@
 import 'package:bhashadaan/constants/app_constants.dart';
 import 'package:bhashadaan/constants/app_theme.dart';
-import 'package:bhashadaan/screens/bolo_india/repository/bolo_contribute_repository.dart';
-import 'package:bhashadaan/screens/bolo_india/repository/bolo_validate_repository.dart';
 import 'package:bhashadaan/screens/splash_screen/splash_screen.dart';
 import 'package:bhashadaan/util/routes.dart';
 import 'package:flutter/material.dart';

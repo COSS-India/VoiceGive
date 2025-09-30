@@ -5,7 +5,6 @@ import 'package:bhashadaan/constants/api_url.dart';
 import 'package:bhashadaan/constants/network_headers.dart';
 import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
 import 'package:http/http.dart';
-import 'package:http_parser/http_parser.dart';
 
 class BoloService {
   Future<Response> getContributionSentances(

@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
+import '../repository/login_auth_repository.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/phone_input_field.dart';
 import 'otp_verification_screen.dart';
@@ -51,26 +52,33 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
     return null;
   }
 
-  void _requestOtp() {
+  Future<void> _requestOtp() async {
     if (_formKey.currentState!.validate()) {
       _isLoading.value = true;
-      // TODO: Implement OTP request logic
+      final String? message = await LoginAuthRepository().sendOtp(_phoneController.text, "+91");
       _isLoading.value = false;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => OtpVerificationScreen(
-            phoneNumber: _phoneController.text,
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message??'Error occurred while sending OTP'),
+      ),
+    );
+      if (message != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationScreen(
+              phoneNumber: _phoneController.text,
+              countryCode: "+91",
           ),
         ),
       );
     }
-  }
+  }}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.appBarBackground,
       resizeToAvoidBottomInset: true,
       appBar: const CustomAppBar(),
       body: SafeArea(
@@ -111,7 +119,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 text: AppLocalizations.of(context)!
                                     .oneTimePasswordOtp,
                                 style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
+                                  color: AppColors.greys87,
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -168,14 +176,14 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.white),
+                                      AppColors.appBarBackground),
                                 ),
                               );
                             }
                             return Text(
-                              "Get OTP",
+                              AppLocalizations.of(context)!.getOtp,
                               style: GoogleFonts.notoSans(
-                                color: Colors.white,
+                                color: AppColors.appBarBackground,
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.normal,
                               ),

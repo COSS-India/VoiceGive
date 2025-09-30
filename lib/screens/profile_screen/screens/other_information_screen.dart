@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,8 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../repository/profile_repository.dart';
+
 class OtherInformationScreen extends StatefulWidget {
-  const OtherInformationScreen({super.key});
+  final String firstName;
+  final String lastName;
+  final String ageGroup;
+  final String gender;
+  final String phoneNumber;
+  final String? email;
+  const OtherInformationScreen(
+      {super.key,
+      required this.firstName,
+      required this.lastName,
+      required this.ageGroup,
+      required this.gender,
+      required this.phoneNumber,
+      this.email});
 
   @override
   State<OtherInformationScreen> createState() => _OtherInformationScreenState();
@@ -33,69 +47,14 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   @override
   void initState() {
     super.initState();
+    fetchData();
   }
 
-  void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
-    _countries = [l10n.india];
-    // Predefined list of Indian states and union territories for the dropdown
-    _states = [
-      'Andhra Pradesh',
-      'Arunachal Pradesh',
-      'Assam',
-      'Bihar',
-      'Chhattisgarh',
-      'Goa',
-      'Gujarat',
-      'Haryana',
-      'Himachal Pradesh',
-      'Jharkhand',
-      'Karnataka',
-      'Kerala',
-      'Madhya Pradesh',
-      'Maharashtra',
-      'Manipur',
-      'Meghalaya',
-      'Mizoram',
-      'Nagaland',
-      'Odisha',
-      'Punjab',
-      'Rajasthan',
-      'Sikkim',
-      'Tamil Nadu',
-      'Telangana',
-      'Tripura',
-      'Uttar Pradesh',
-      'Uttarakhand',
-      'West Bengal',
-      // Union Territories
-      'Andaman and Nicobar Islands',
-      'Chandigarh',
-      'Dadra and Nagar Haveli and Daman and Diu',
-      'Delhi',
-      'Jammu and Kashmir',
-      'Ladakh',
-      'Lakshadweep',
-      'Puducherry',
-    ];
-    _districts = [
-      l10n.pune,
-      l10n.mumbai,
-      l10n.nashik,
-      l10n.nagpur,
-      l10n.thane,
-      l10n.aurangabad,
-    ];
-    _languages = [
-      l10n.english,
-      l10n.hindi,
-      l10n.marathi,
-      l10n.gujarati,
-      l10n.kannada,
-      l10n.telugu,
-    ];
-    _country = _countries.first;
-    _state = _states.first;
+  Future<void> fetchData() async {
+    List countryList = await ProfileRepository().getCountries();
+    //  List stateList = await ProfileRepository().getState(_country);
+    //  List districtsList = await ProfileRepository().getDistrict(_state);
+    List languagesList = await ProfileRepository().getLanguages();
   }
 
   Future<void> _pickFromList({
@@ -130,11 +89,6 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize localized strings if not already done
-    if (_countries.isEmpty) {
-      _initializeLocalizedStrings();
-    }
-
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -365,12 +319,12 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 32.h),
+                        SizedBox(height: 60.h),
                         Center(
                           child: SizedBox(
                             width: 280.w,
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_district == null) {
                                   setState(() => _showDistrictError = true);
                                   final ctx = _districtFieldKey.currentContext;
@@ -383,6 +337,27 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                           alignment: 0.1,
                                         ));
                                   }
+                                  return;
+                                }
+                                dynamic userData = await ProfileRepository()
+                                    .registration(
+                                        firstName: widget.firstName,
+                                        lastName: widget.lastName,
+                                        ageGroup: widget.ageGroup,
+                                        gender: widget.gender,
+                                        mobileNo: widget.phoneNumber,
+                                        country: _country,
+                                        state: _state,
+                                        district: _districtController.text,
+                                        email: widget.email,
+                                        preferredLanguage: _preferredLanguage);
+                                if (userData is String) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(userData),
+                                    ),
+                                  );
                                   return;
                                 }
                                 Navigator.of(context).pushReplacement(

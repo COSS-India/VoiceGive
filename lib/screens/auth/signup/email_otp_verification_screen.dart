@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../profile_screen/profile_screen.dart';
+import '../../profile_screen/screens/profile_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';
 import 'widgets/email_otp_timer.dart';
