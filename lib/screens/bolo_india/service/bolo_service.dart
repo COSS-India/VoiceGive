@@ -163,7 +163,7 @@ class BoloService {
     return response;
   }
 
-  Future<Response> getValidationQueue({
+  Future<Response> getValidationsQueue({
     required String language,
     required int count,
   }) async {

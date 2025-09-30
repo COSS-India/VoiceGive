@@ -4,7 +4,7 @@ class CertificateProgress {
   final int validationsCompleted;
   final int validationsRequired;
   final bool isEligible;
-  final int percentageComplete;
+  final bool certificateAvailable;
 
   CertificateProgress({
     required this.contributionsCompleted,
@@ -12,7 +12,7 @@ class CertificateProgress {
     required this.validationsCompleted,
     required this.validationsRequired,
     required this.isEligible,
-    required this.percentageComplete,
+    required this.certificateAvailable,
   });
 
   factory CertificateProgress.fromJson(Map<String, dynamic> json) {
@@ -22,48 +22,48 @@ class CertificateProgress {
       validationsCompleted: json['validationsCompleted'] as int,
       validationsRequired: json['validationsRequired'] as int,
       isEligible: json['isEligible'] as bool,
-      percentageComplete: json['percentageComplete'] as int,
+      certificateAvailable: json['certificateAvailable'] as bool,
     );
   }
 }
 
 class SessionCompletedData {
   final String sessionId;
-  final int totalContributions;
-  final int userTotalContributions;
+  final int totalValidations;
+  final int userTotalValidations;
   final CertificateProgress certificateProgress;
 
   SessionCompletedData({
     required this.sessionId,
-    required this.totalContributions,
-    required this.userTotalContributions,
+    required this.totalValidations,
+    required this.userTotalValidations,
     required this.certificateProgress,
   });
 
   factory SessionCompletedData.fromJson(Map<String, dynamic> json) {
     return SessionCompletedData(
       sessionId: json['sessionId'] as String,
-      totalContributions: json['totalContributions'] as int,
-      userTotalContributions: json['userTotalContributions'] as int,
+      totalValidations: json['totalValidations'] as int,
+      userTotalValidations: json['userTotalValidations'] as int,
       certificateProgress: CertificateProgress.fromJson(
           json['certificateProgress'] as Map<String, dynamic>),
     );
   }
 }
 
-class BoloSessionCompletedModel {
+class SessionCompletedModel {
   final bool success;
   final String message;
   final SessionCompletedData data;
 
-  BoloSessionCompletedModel({
+  SessionCompletedModel({
     required this.success,
     required this.message,
     required this.data,
   });
 
-  factory BoloSessionCompletedModel.fromJson(Map<String, dynamic> json) {
-    return BoloSessionCompletedModel(
+  factory SessionCompletedModel.fromJson(Map<String, dynamic> json) {
+    return SessionCompletedModel(
       success: json['success'] as bool,
       message: json['message'] as String,
       data: SessionCompletedData.fromJson(json['data'] as Map<String, dynamic>),

@@ -1,6 +1,7 @@
 import 'dart:convert';
-
 import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/validation_submit_model.dart';
 import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
 import 'package:http/http.dart';
 
@@ -26,25 +27,49 @@ class BoloValidateRepository {
     return null;
   }
 
-  // Future<bool> submitValidation({
-  //   required String sessionId,
-  //   required String contributionId,
-  //   required String sentenceId,
-  //   required String decision,
-  //   required String feedback,
-  //   required int sequenceNumber,
-  // }) async {
-  //   try {
-  //     Response response = await boloService.submitValidation(
-  //       contributionId: contributionId,
-  //       sentenceId: sentenceId,
-  //       decision: decision,
-  //       feedback: feedback,
-  //       sequenceNumber: sequenceNumber,
-  //       sessionId: sessionId,
-  //     );
-  //   } catch (e) {
-  //     throw Exception('Failed to submit validation: $e');
-  //   }
-  // }
+  Future<ValidationSubmitData?> submitValidation({
+    required String sessionId,
+    required String contributionId,
+    required String sentenceId,
+    required String decision,
+    required String feedback,
+    required int sequenceNumber,
+  }) async {
+    try {
+      Response response = await boloService.submitValidation(
+        contributionId: contributionId,
+        sentenceId: sentenceId,
+        decision: decision,
+        feedback: feedback,
+        sequenceNumber: sequenceNumber,
+        sessionId: sessionId,
+      );
+
+      if (response.statusCode == 200) {
+        var content = jsonDecode(response.body);
+        return ValidationSubmitData.fromJson(content['data']);
+      } else {
+        throw Exception('Failed to submit validation');
+      }
+    } catch (e) {
+      throw Exception('Failed to submit validation: $e');
+    }
+  }
+
+  Future<SessionCompletedModel> validateSessionCompleted({
+    required String sessionId,
+  }) async {
+    try {
+      Response response =
+          await boloService.validateSessionCompleted(sessionId: sessionId);
+      if (response.statusCode == 200) {
+        var content = jsonDecode(response.body);
+        return SessionCompletedModel.fromJson(content['data']);
+      } else {
+        throw Exception('Failed to complete validation session');
+      }
+    } catch (e) {
+      throw Exception('Failed to complete validation session: $e');
+    }
+  }
 }

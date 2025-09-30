@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bhashadaan/screens/bolo_india/models/bolo_contribute_sentence.dart';
-import 'package:bhashadaan/screens/bolo_india/models/bolo_session_completed_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
 import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
 import 'package:http/http.dart';
 
@@ -104,7 +104,7 @@ class BoloRepository {
     return false;
   }
 
-  Future<BoloSessionCompletedModel?> completeSession({
+  Future<SessionCompletedData?> completeSession({
     required String sessionId,
   }) async {
     try {
@@ -112,7 +112,7 @@ class BoloRepository {
           await boloService.contributeSessionCompleted(sessionId: sessionId);
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
-        return BoloSessionCompletedModel.fromJson(content);
+        return SessionCompletedData.fromJson(content);
       }
     } catch (e) {
       throw Exception('Failed to complete session: $e');
