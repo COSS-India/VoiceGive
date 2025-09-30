@@ -31,7 +31,7 @@ class HomeFooterSection extends StatelessWidget {
         // Dark blue footer section
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(24.w),
+          padding: EdgeInsets.only(top: 60, left: 60, right: 60, bottom: 20).r,
           color: Color.fromRGBO(15, 25, 65, 1), // Much darker navy blue
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,13 +105,10 @@ class HomeFooterSection extends StatelessWidget {
               ),
               SizedBox(height: 80.w),
               // Separator line
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0).w,
-                child: Container(
-                  height: 2.w,
-                  width: double.infinity,
-                  color: AppColors.appBarBackground,
-                ),
+              Container(
+                height: 3.w,
+                width: double.infinity,
+                color: AppColors.appBarBackground,
               ),
               SizedBox(height: 20.w),
               // Copyright notice

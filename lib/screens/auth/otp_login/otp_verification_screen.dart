@@ -1,5 +1,6 @@
 import 'package:bhashadaan/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,7 +9,7 @@ import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
 import 'widgets/gradient_header.dart';
 import 'widgets/otp_input_field.dart';
-import 'widgets/otp_timer.dart';
+// OtpTimer will be inlined below
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -23,6 +24,50 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  // ---- OtpTimer widget code inlined below ----
+  late Timer _otpTimer;
+  late int _otpSeconds;
+  bool _canResendOtp = false;
+
+  final int _otpInitialSeconds = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    _otpSeconds = _otpInitialSeconds;
+    _startOtpTimer();
+  }
+
+  void _startOtpTimer() {
+    _otpTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_otpSeconds > 0) {
+        setState(() {
+          _otpSeconds--;
+        });
+      } else {
+        setState(() {
+          _canResendOtp = true;
+        });
+        _otpTimer.cancel();
+      }
+    });
+  }
+
+  void _resetOtpTimer() {
+    setState(() {
+      _otpSeconds = _otpInitialSeconds;
+      _canResendOtp = false;
+    });
+    _startOtpTimer();
+  }
+
+  String _formatOtpTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+  }
+
+  // Removed duplicate dispose method
   final ValueNotifier<bool> _isLoading = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isOtpValid = ValueNotifier<bool>(false);
   String _otp = '';
@@ -32,6 +77,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void dispose() {
     _isLoading.dispose();
     _isOtpValid.dispose();
+    try {
+      _otpTimer.cancel();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -112,43 +160,56 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 32.h),
-                      OtpTimer(
-                        onResend: _resendOtp,
-                      ),
+                      // OTP Timer and resend UI
+                      if (!_canResendOtp) ...[
+                        Text(
+                          _formatOtpTime(_otpSeconds),
+                          style: GoogleFonts.notoSans(
+                            color: AppColors.lightGreen,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 16.h),
+                      ],
+
                       SizedBox(height: 24.h),
                       OtpInputField(
                         onChanged: _onOtpChanged,
                         errorText: _errorText,
                       ),
                       SizedBox(height: 24.h),
-                      GestureDetector(
-                        onTap: () {
-                          // widget.onResend?.call();
-                          // _resetTimer();
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "I didn't receive any OTP. ",
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.greys60,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
+                      if (_canResendOtp) ...[
+                        GestureDetector(
+                          onTap: () {
+                            _resendOtp();
+                            _resetOtpTimer();
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "I didn't receive any OTP. ",
+                                  style: GoogleFonts.notoSans(
+                                    color: AppColors.greys60,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: "RESEND",
-                                style: GoogleFonts.notoSans(
-                                  color: AppColors.darkGreen,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
+                                TextSpan(
+                                  text: "RESEND",
+                                  style: GoogleFonts.notoSans(
+                                    color: AppColors.lightGreen,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(height: 16.h),
+                      ],
                       SizedBox(height: 40.h),
                     ],
                   ),
