@@ -1,0 +1,72 @@
+{
+  "MH": [
+    {
+      "districtId": "MH-AMR",
+      "districtName": "Amravati"
+    },
+    {
+      "districtId": "MH-MUM",
+      "districtName": "Mumbai"
+    },
+    {
+      "districtId": "MH-PUN",
+      "districtName": "Pune"
+    },
+    {
+      "districtId": "MH-NAG",
+      "districtName": "Nagpur"
+    },
+    {
+      "districtId": "MH-NAS",
+      "districtName": "Nashik"
+    },
+    {
+      "districtId": "MH-AUR",
+      "districtName": "Aurangabad"
+    },
+    {
+      "districtId": "MH-SOL",
+      "districtName": "Solapur"
+    },
+    {
+      "districtId": "MH-KOL",
+      "districtName": "Kolhapur"
+    }
+  ],
+  "KA": [
+    {
+      "districtId": "KA-BLR",
+      "districtName": "Bangalore"
+    },
+    {
+      "districtId": "KA-MYS",
+      "districtName": "Mysore"
+    },
+    {
+      "districtId": "KA-HUB",
+      "districtName": "Hubli"
+    },
+    {
+      "districtId": "KA-MAN",
+      "districtName": "Mangalore"
+    }
+  ],
+  "TN": [
+    {
+      "districtId": "TN-CHN",
+      "districtName": "Chennai"
+    },
+    {
+      "districtId": "TN-COI",
+      "districtName": "Coimbatore"
+    },
+    {
+      "districtId": "TN-MAD",
+      "districtName": "Madurai"
+    },
+    {
+      "districtId": "TN-TIR",
+      "districtName": "Tiruchirapalli"
+    }
+  ]
+}
