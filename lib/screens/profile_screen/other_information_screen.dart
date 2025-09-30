@@ -1,5 +1,4 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

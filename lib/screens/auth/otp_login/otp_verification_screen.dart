@@ -29,7 +29,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   late int _otpSeconds;
   bool _canResendOtp = false;
 
-  final int _otpInitialSeconds = 10;
+  final int _otpInitialSeconds = 180;
 
   @override
   void initState() {

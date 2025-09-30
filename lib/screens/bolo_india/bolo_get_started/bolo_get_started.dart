@@ -197,7 +197,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
             ),
             SizedBox(height: 8.w),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
               child: Row(
                 children: [
                   // Indicators (left)
