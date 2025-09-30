@@ -4,6 +4,7 @@ import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
 import 'package:bhashadaan/screens/bolo_india/widgets/recording_icon.dart';
+import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -117,9 +118,12 @@ class _BoloContentSectionState extends State<BoloContentSection> {
               title: "Contribute More",
               textFontSize: 16.sp,
               onTap: () {
-                setState(() {
-                  currentIndex = 0;
-                });
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BoloContribute(),
+                  ),
+                );
               },
               textColor: AppColors.orange,
               decoration: BoxDecoration(

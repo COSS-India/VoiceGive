@@ -143,19 +143,19 @@ class _RecordingButtonState extends State<RecordingButton>
     switch (_state) {
       case RecordingState.idle:
         return ImageWidget(
-            imageUrl: "assets/icons/microphone.png",
-            height: 35.sp,
-            imageColor: Colors.white,
-            width: 30.sp);
+            imageUrl: "assets/images/record.png",
+            height: 240,
+            width: 240,
+            boxFit: BoxFit.contain);
 
       case RecordingState.recording:
-        return Icon(Icons.stop, size: 40.sp, color: Colors.white);
+        return Icon(Icons.stop, size: 64.sp, color: Colors.white);
       case RecordingState.stopped:
         return ImageWidget(
-            imageUrl: "assets/icons/microphone.png",
-            height: 35.sp,
-            imageColor: Colors.white,
-            width: 30.sp);
+            imageUrl: "assets/images/record.png",
+            height: 240,
+            width: 240,
+            boxFit: BoxFit.contain);
     }
   }
 
@@ -208,12 +208,12 @@ class _RecordingButtonState extends State<RecordingButton>
     return Column(
       children: [
         _buildText(),
-        SizedBox(height: 36.w),
+        SizedBox(height: 12.w),
         GestureDetector(
           onTap: _toggleState,
           child: SizedBox(
-            width: 60,
-            height: 60,
+            width: 240,
+            height: 240,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -242,11 +242,7 @@ class _RecordingButtonState extends State<RecordingButton>
                       );
                     },
                   ),
-                CircleAvatar(
-                  radius: 36.r,
-                  backgroundColor: AppColors.lightGreen,
-                  child: _buildIcon(),
-                ),
+                _buildIcon(),
               ],
             ),
           ),

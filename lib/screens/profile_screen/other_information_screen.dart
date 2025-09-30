@@ -366,18 +366,11 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                               fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: 32.h),
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButtonWidget(
-                            title:
-                                AppLocalizations.of(context)!.saveAndContinue,
-                            textColor: Colors.white,
-                            decoration: BoxDecoration(
-                              color: AppColors.orange,
-                              borderRadius: BorderRadius.circular(6.r),
-                            ),
-                            verticalPadding: 14.w,
-                            onTap: () {
+                        Center(
+                          child: SizedBox(
+                            width: 280.w,
+                            child: ElevatedButton(
+                            onPressed: () {
                               if (_district == null) {
                                 setState(() => _showDistrictError = true);
                                 final ctx = _districtFieldKey.currentContext;
@@ -398,8 +391,24 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                 ),
                               );
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orange,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.r),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 16.w),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.saveAndContinue,
+                              style: GoogleFonts.notoSans(
+                                color: Colors.white,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
+                      ),
                       ],
                     ),
                   ),

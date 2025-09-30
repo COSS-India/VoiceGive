@@ -1,0 +1,133 @@
+{
+  "Marathi": [
+    {
+      "sentenceId": "mr-001",
+      "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "farming_techniques"
+    },
+    {
+      "sentenceId": "mr-002",
+      "text": "शेतकऱ्यांना नवीन तंत्रज्ञानाची माहिती देणे हे आमचे उद्दिष्ट आहे.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "technology"
+    },
+    {
+      "sentenceId": "mr-003",
+      "text": "पावसाच्या पाण्याचे व्यवस्थापन करणे हे शेतीसाठी खूप महत्वाचे आहे.",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "water_management"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-004"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-005"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-006"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-007"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-008"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-009"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-010"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-011"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-012"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-013"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-014"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-015"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-016"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-017"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-018"
+    },
+    {
+      "language": "Marathi",
+      "sentenceId": "marathi-019"
+    },
+    {
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "sentenceId": "marathi-020"
+    },
+    {
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "sentenceId": "marathi-021"
+    }
+  ],
+  "Hindi": [
+    {
+      "sentenceId": "hi-001",
+      "text": "किसानों को नई तकनीक की जानकारी देना हमारा उद्देश्य है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "technology"
+    },
+    {
+      "sentenceId": "hi-002",
+      "text": "बारिश के पानी का प्रबंधन करना खेती के लिए बहुत महत्वपूर्ण है।",
+      "category": "agriculture",
+      "difficulty": "hard",
+      "topic": "water_management"
+    }
+  ],
+  "English": [
+    {
+      "sentenceId": "en-001",
+      "text": "Our goal is to provide farmers with information about new agricultural techniques.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "technology"
+    },
+    {
+      "sentenceId": "en-002",
+      "text": "Water management is very important for successful farming.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "water_management"
+    }
+  ]
+}
