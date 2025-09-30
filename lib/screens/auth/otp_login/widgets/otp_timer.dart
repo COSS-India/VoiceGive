@@ -12,7 +12,7 @@ class OtpTimer extends StatefulWidget {
   const OtpTimer({
     super.key,
     this.onResend,
-    this.initialSeconds = 10, // 3 minutes default
+    this.initialSeconds = 180, // 3 minutes default
   });
 
   @override
@@ -70,17 +70,17 @@ class _OtpTimerState extends State<OtpTimer> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (!_canResend) ...[
+        // if (!_canResend) ...[
           Text(
             _formatTime(_seconds),
             style: GoogleFonts.notoSans(
               color: AppColors.lightGreen,
               fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: 16.h),
-        ],
+        // ],
         // if (_canResend) ...[
         //   GestureDetector(
         //     onTap: () {

@@ -254,5 +254,10 @@
     
     "needMoreInfo": "Need More Information?",
     "writeYourConcern": "Write your concern to us and we will get back to you.",
-    "contactUs": "Contact us"
+    "contactUs": "Contact us",
+    "nameWithoutSp": "Name field can only contain letters, space and dot(.).",
+    "firstNameMandatory": "First name is mandatory",
+    "lastNameMandatory": "Last name is mandatory",
+    "enterValidEmail": "Please enter a valid email address",
+    "registrationSubmitError" : "Some fields are missing or contain invalid values"
 }

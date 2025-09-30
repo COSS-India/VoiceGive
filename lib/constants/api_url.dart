@@ -7,4 +7,5 @@ class ApiUrl {
   static const String reportIssueUrl = '$baseUrl/contributions/report';
   static const String sessionCompleteUrl =
       '$baseUrl/contributions/session-complete';
+  static const String sendOTPUrl = '$baseUrl/auth/send-otp';
 }

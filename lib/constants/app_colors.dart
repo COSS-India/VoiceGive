@@ -30,6 +30,7 @@ class AppColors {
   static const grey84 = Color.fromRGBO(84, 84, 84, 1);
   static const lightGrey = Color.fromRGBO(245, 245, 245, 1);
   static const darkGrey = Color.fromRGBO(216, 216, 216, 1);
+  static const lightGrey2 = Color.fromRGBO(247, 248, 249, 1);
   // Text neutrals
   static const slateText = Color.fromRGBO(120, 131, 149, 1);
 
