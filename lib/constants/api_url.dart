@@ -18,4 +18,8 @@ class ApiUrl {
   static const String userRegisterUrl = '$baseUrl/users/register';
   static const String ageGroupUrl = '$baseUrl/admin/data/age-groups';
   static const String genderUrl = '$baseUrl/admin/data/genders';
+  static const String countryUrl = '$baseUrl/admin/data/countries';
+  static const String stateUrl = '$baseUrl/admin/data/states/';
+  static const String districtUrl = '$baseUrl/admin/data/districts/';
+  static const String languageUrl = '$baseUrl/admin/data/languages';
 }
