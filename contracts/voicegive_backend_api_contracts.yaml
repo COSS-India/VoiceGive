@@ -1,30 +1,26 @@
 openapi: 3.0.3
 info:
-  title: AgriDaan API
+  title: VoiceGive API
   description: |
-    AgriDaan is a crowdsourcing initiative to collect agriculture-related knowledge from citizens 
-    across India as part of Project BHASHINI. The platform enables users to contribute agricultural 
-    knowledge through voice recordings (BOLO India) and validate contributions from others.
-    
+    VoiceGive is a mobile friendly application designed for language data (Voice based) collection 
+    and crowdsourcing initiatives. This project provides a complete, customizable user interface 
+    that can be adopted by organizations, government agencies, and developers to build their own 
+    language voice data collection applications.
+
     **Certificate Requirements:**
-    - 5 voice contributions (BOLO India)
+    - 5 voice contributions
     - 25 validations
-    - Certificate Title: "Agri Bhasha Samarthak"
-    
-    **Support:** support-bhashadaan.dibd@gmail.com
     
   version: 1.0.0
   contact:
-    name: AgriDaan Support
-    email: support-bhashadaan.dibd@gmail.com
+    name: VoiceGive Support
+    email: voicegive.ai4x@gmail.com
   license:
-    name: Government of India
+    name: MIT
 
 servers:
-  - url: https://api.agridaan.gov.in/v1
+  - url: https://localhost/v1
     description: Production server
-  - url: https://dev-api.agridaan.gov.in/v1
-    description: Development server
 
 tags:
   - name: Authentication
@@ -36,7 +32,7 @@ tags:
   - name: System
     description: System checks, language list, and utilities
   - name: Contribution
-    description: BOLO India - Voice recording contributions
+    description: Voice recording contributions
   - name: Validation
     description: Audio-text validation
   - name: Certificate
@@ -146,7 +142,7 @@ paths:
                         example: "This number isn't registered with us."
                       supportEmail:
                         type: string
-                        example: "support-bhashadaan.dibd@gmail.com"
+                        example: "voicegive.ai4x@gmail.com"
                       contactMessage:
                         type: string
                         example: "Please contact admin to continue."
@@ -1139,7 +1135,7 @@ paths:
                   data:
                     $ref: '#/components/schemas/SystemConfig'
 
-  # ==================== BOLO India - Contributions ====================
+  # ==================== Contributions ====================
   /contributions/get-sentences:
     post:
       tags:
@@ -1149,7 +1145,7 @@ paths:
         Get a batch of sentences to record in the selected language.
         Returns 5 sentences per session as shown in UI (1/5, 2/5, etc.)
         
-        **Figma Reference:** Page 12-15 - BOLO India recording screens
+        **Figma Reference:** Page 12-15 - Recording screens
       requestBody:
         required: true
         content:
@@ -1727,7 +1723,7 @@ paths:
       summary: Check certificate eligibility
       description: |
         Check if user has met certificate requirements:
-        - 5 voice contributions (BOLO India)
+        - 5 voice contributions
         - 25 validations
         
         **Figma Reference:** Used throughout to show progress
@@ -2056,7 +2052,7 @@ components:
           properties:
             supportEmail:
               type: string
-              example: "support-bhashadaan.dibd@gmail.com"
+              example: "voicegive.ai4x@gmail.com"
               description: Support email address
             supportPhone:
               type: string
@@ -2108,7 +2104,7 @@ components:
             enableVoiceContributions:
               type: boolean
               example: true
-              description: Enable BOLO India voice contributions
+              description: Enable voice contributions
             enableAudioValidation:
               type: boolean
               example: true
