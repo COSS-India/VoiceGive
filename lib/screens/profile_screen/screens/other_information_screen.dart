@@ -365,39 +365,41 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 32.h),
-                        SizedBox(
-                          width: double.infinity,
-                          child: PrimaryButtonWidget(
-                            title:
-                                AppLocalizations.of(context)!.saveAndContinue,
-                            textColor: Colors.white,
-                            decoration: BoxDecoration(
-                              color: AppColors.orange,
-                              borderRadius: BorderRadius.circular(6.r),
-                            ),
-                            verticalPadding: 14.w,
-                            onTap: () {
-                              if (_district == null) {
-                                setState(() => _showDistrictError = true);
-                                final ctx = _districtFieldKey.currentContext;
-                                if (ctx != null) {
-                                  Future.microtask(() =>
-                                      Scrollable.ensureVisible(
-                                        ctx,
-                                        duration:
-                                            const Duration(milliseconds: 250),
-                                        alignment: 0.1,
-                                      ));
+                        SizedBox(height: 60.h),
+                        Center(
+                          child: SizedBox(
+                            width: 0.8.sw,
+                            child: PrimaryButtonWidget(
+                              title:
+                                  AppLocalizations.of(context)!.saveAndContinue,
+                              textColor: Colors.white,
+                              decoration: BoxDecoration(
+                                color: AppColors.orange,
+                                borderRadius: BorderRadius.circular(6.r),
+                              ),
+                              verticalPadding: 14.w,
+                              onTap: () {
+                                if (_district == null) {
+                                  setState(() => _showDistrictError = true);
+                                  final ctx = _districtFieldKey.currentContext;
+                                  if (ctx != null) {
+                                    Future.microtask(() =>
+                                        Scrollable.ensureVisible(
+                                          ctx,
+                                          duration:
+                                              const Duration(milliseconds: 250),
+                                          alignment: 0.1,
+                                        ));
+                                  }
+                                  return;
                                 }
-                                return;
-                              }
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (_) => const BoloGetStarted(),
-                                ),
-                              );
-                            },
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (_) => const BoloGetStarted(),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],

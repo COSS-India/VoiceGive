@@ -343,45 +343,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: 16.h),
                           // Email
                           EmailWidget(emailController: _emailController),
-                          SizedBox(height: 32.h),
-                          SizedBox(
-                            width: double.infinity,
-                            child: PrimaryButtonWidget(
-                              title:
-                                  AppLocalizations.of(context)!.saveAndContinue,
-                              textColor: Colors.white,
-                              decoration: BoxDecoration(
-                                color: AppColors.orange,
-                                borderRadius: BorderRadius.circular(6.r),
+                          SizedBox(height: 60.h),
+                          Center(
+                            child: SizedBox(
+                              width: 0.8.sw,
+                              child: PrimaryButtonWidget(
+                                title:
+                                    AppLocalizations.of(context)!.saveAndContinue,
+                                textColor: Colors.white,
+                                decoration: BoxDecoration(
+                                  color: AppColors.orange,
+                                  borderRadius: BorderRadius.circular(6.r),
+                                ),
+                                verticalPadding: 14.w,
+                                onTap: () {
+                                  final valid =
+                                      _formKey.currentState?.validate() ?? false;
+                                  final selectionsValid =
+                                      _ageController.text.isNotEmpty &&
+                                          _genderController.text.isNotEmpty;
+                                  setState(() {});
+                                  if (valid && selectionsValid) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            const OtherInformationScreen(),
+                                      ),
+                                    );
+                                  } else if (!selectionsValid) {
+                                    // Do not change border color; just show inline message
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(AppLocalizations.of(
+                                                  context)!
+                                              .pleaseSelectAgeGroupAndGender)),
+                                    );
+                                  }else{ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(AppLocalizations.of(context)!.registrationSubmitError))
+                                    );}
+                                },
                               ),
-                              verticalPadding: 14.w,
-                              onTap: () {
-                                final valid =
-                                    _formKey.currentState?.validate() ?? false;
-                                final selectionsValid =
-                                    _ageController.text.isNotEmpty &&
-                                        _genderController.text.isNotEmpty;
-                                setState(() {});
-                                if (valid && selectionsValid) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          const OtherInformationScreen(),
-                                    ),
-                                  );
-                                } else if (!selectionsValid) {
-                                  // Do not change border color; just show inline message
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(AppLocalizations.of(
-                                                context)!
-                                            .pleaseSelectAgeGroupAndGender)),
-                                  );
-                                }else{ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(AppLocalizations.of(context)!.registrationSubmitError))
-                                  );}
-                              },
                             ),
                           ),
                         ],
