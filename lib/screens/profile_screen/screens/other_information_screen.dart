@@ -1,12 +1,16 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/profile_screen/model/country_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../model/district_model.dart';
+import '../model/language_model.dart';
+import '../model/state_model.dart';
 import '../repository/profile_repository.dart';
 
 class OtherInformationScreen extends StatefulWidget {
@@ -36,6 +40,10 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   List<String> _states = [];
   List<String> _districts = [];
   List<String> _languages = [];
+  List<CountryModel> countryList = [];
+  List<StateModel> stateList = [];
+  List<LanguageModel> languagesList = [];
+  List<DistrictModel> districtList = [];
 
   @override
   void initState() {
@@ -44,74 +52,17 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   Future<void> fetchData() async {
-   List countryList = await ProfileRepository().getCountries();
-  //  List stateList = await ProfileRepository().getState(_country);
-  //  List districtsList = await ProfileRepository().getDistrict(_state);
-   List languagesList = await ProfileRepository().getLanguages();
+   countryList = await ProfileRepository().getCountries();
+   languagesList = await ProfileRepository().getLanguages();
+   _countries = countryList.map((e) => e.countryName).toList();
+   _languages = languagesList.map((e) => e.languageName).toList();
+   if(mounted){
+    setState(() {
+    });
+   }
   }
 
-  void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
-    _countries = [l10n.india];
-    // Predefined list of Indian states and union territories for the dropdown
-    _states = [
-      'Andhra Pradesh',
-      'Arunachal Pradesh',
-      'Assam',
-      'Bihar',
-      'Chhattisgarh',
-      'Goa',
-      'Gujarat',
-      'Haryana',
-      'Himachal Pradesh',
-      'Jharkhand',
-      'Karnataka',
-      'Kerala',
-      'Madhya Pradesh',
-      'Maharashtra',
-      'Manipur',
-      'Meghalaya',
-      'Mizoram',
-      'Nagaland',
-      'Odisha',
-      'Punjab',
-      'Rajasthan',
-      'Sikkim',
-      'Tamil Nadu',
-      'Telangana',
-      'Tripura',
-      'Uttar Pradesh',
-      'Uttarakhand',
-      'West Bengal',
-      // Union Territories
-      'Andaman and Nicobar Islands',
-      'Chandigarh',
-      'Dadra and Nagar Haveli and Daman and Diu',
-      'Delhi',
-      'Jammu and Kashmir',
-      'Ladakh',
-      'Lakshadweep',
-      'Puducherry',
-    ];
-    _districts = [
-      l10n.pune,
-      l10n.mumbai,
-      l10n.nashik,
-      l10n.nagpur,
-      l10n.thane,
-      l10n.aurangabad,
-    ];
-    _languages = [
-      l10n.english,
-      l10n.hindi,
-      l10n.marathi,
-      l10n.gujarati,
-      l10n.kannada,
-      l10n.telugu,
-    ];
-    _country = _countries.first;
-    _state = _states.first;
-  }
+  
 
   Future<void> _pickFromList({
     required List<String> items,
@@ -145,11 +96,6 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
-     // Initialize localized strings if not already done
-    if (_countries.isEmpty) {
-      _initializeLocalizedStrings();
-    }
-
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -213,7 +159,14 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           onTap: () => _pickFromList(
                             items: _countries,
                             defaultItem: _country,
-                            onPicked: (v) => setState(() => _country = v),
+                            onPicked: (v)  async { _country = v;
+                              String countryId = getCountryId(_country);
+                              stateList = await ProfileRepository().getState(countryId);
+                              _states = stateList.map((e) => e.stateName).toList();
+                              if(mounted){
+                                setState(() {});
+                              }
+                            }
                           ),
                           child: InputDecorator(
                             decoration: InputDecoration(
@@ -252,10 +205,17 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         SizedBox(height: 16.h),
                         // State
                         GestureDetector(
-                          onTap: () => _pickFromList(
+                          onTap: _states.isEmpty?null:() => _pickFromList(
                             items: _states,
                             defaultItem: _state,
-                            onPicked: (v) => setState(() => _state = v),
+                            onPicked: (v) async { _state = v;
+                             String stateId = getStateId(_state);
+                              districtList = await ProfileRepository().getDistrict(stateId);
+                              _districts = districtList.map((e) => e.districtName).toList();
+                              if(mounted){
+                                setState(() {});
+                              }
+                            },
                           ),
                           child: InputDecorator(
                             decoration: InputDecoration(
@@ -410,11 +370,11 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                     );
                                     return;
                                   }
-                              Navigator.of(context).pushReplacement(
+                              else{Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                   builder: (_) => const BoloGetStarted(),
                                 ),
-                              );
+                              );}
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.orange,
@@ -444,5 +404,13 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
         ),
       ),
     );
+  }
+
+  String getCountryId(String countryName) {
+    return countryList.firstWhere((element) => element.countryName == countryName).countryId;
+  }
+
+  String getStateId(String stateName) {
+    return stateList.firstWhere((element) => element.stateName == stateName).stateId;
   }
 }

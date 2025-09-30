@@ -12,11 +12,11 @@ class ProfileService {
   'ageGroup': ageGroup,
   'gender': gender,
   'mobileNo': mobileNo,
-  'email': email??'dasdfa@vv.com',
+  'email': email,
   'country': country,
   'state': state,
   'district': district,
-  'preferredLanguage': preferredLanguage?? 'English'
+  'preferredLanguageCode': preferredLanguage
 };
 
     final response = await http.post(
