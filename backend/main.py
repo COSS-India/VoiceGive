@@ -268,7 +268,7 @@ async def register_user(request: UserRegistrationRequest, db: Session = Depends(
             existing_user.country = request.country
             existing_user.state = request.state
             existing_user.district = request.district
-            existing_user.preferred_language = request.preferredLanguage
+            existing_user.preferred_language = request.preferredLanguageCode
             existing_user.updated_at = datetime.utcnow()
             db.commit()
             
@@ -317,7 +317,7 @@ async def register_user(request: UserRegistrationRequest, db: Session = Depends(
                 country=request.country,
                 state=request.state,
                 district=request.district,
-                preferred_language=request.preferredLanguage,
+                preferred_language=request.preferredLanguageCode,
                 consent_given=False,
                 consent_timestamp=None
             )
@@ -750,6 +750,14 @@ async def get_validation_queue(languageCode: str, count: int = 25):
         session_id = str(uuid.uuid4())
         validation_data = data_config.get_validation_items(languageCode, count)
         
+        # Load base64 content from file dynamically
+        base64_content = ""
+        try:
+            with open("/home/ubuntu/VoiceGive/backend/data/sample_base64_en.txt", "r") as f:
+                base64_content = f.read().strip()
+        except FileNotFoundError:
+            logger.warning("Base64 audio file not found, using empty content")
+        
         # Format validation items with sequence numbers
         validation_items = []
         for i, item_data in enumerate(validation_data, 1):
@@ -761,7 +769,7 @@ async def get_validation_queue(languageCode: str, count: int = 25):
                 "contributionId": item_data["contributionId"],
                 "sentenceId": item_data.get("sentenceId", f"sent-{i}"),
                 "text": item_data["text"],
-                "audioContent": item_data.get("audioContent", ""),
+                "audioContent": base64_content,  # Use dynamically loaded content
                 "duration": item_data.get("duration", 0),
                 "sequenceNumber": i
             })

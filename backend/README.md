@@ -108,7 +108,7 @@ TOKEN_EXPIRY_SECONDS=86400
 SESSION_TIMEOUT_SECONDS=1800
 
 # Database Configuration
-DATABASE_URL="sqlite:///./agridaan.db"  # or PostgreSQL URL
+DATABASE_URL="sqlite:///./voicegive.db"  # or PostgreSQL URL
 REDIS_URL="redis://localhost:6379"
 
 # Logging Configuration
@@ -222,13 +222,13 @@ ENABLE_LOCATION_SERVICES=true
 ### View Logs
 ```bash
 # Application logs
-tail -f logs/agridaan.log
+tail -f logs/voicegive.log
 
 # Error logs
-tail -f logs/agridaan_errors.log
+tail -f logs/voicegive_errors.log
 
 # Access logs
-tail -f logs/agridaan_access.log
+tail -f logs/voicegive_access.log
 ```
 
 ### Log Format (JSON)
@@ -236,7 +236,7 @@ tail -f logs/agridaan_access.log
 {
   "timestamp": "2025-01-17T10:30:00Z",
   "level": "INFO",
-  "logger": "agridaan.main",
+  "logger": "voicegive.main",
   "message": "Request started: POST /auth/send-otp",
   "request_id": "123e4567-e89b-12d3-a456-426614174000",
   "method": "POST",
@@ -335,7 +335,7 @@ contributions = user.contributions
 ### Database Setup
 ```bash
 # PostgreSQL setup
-DATABASE_URL="postgresql://user:password@localhost:5432/agridaan"
+DATABASE_URL="postgresql://user:password@localhost:5432/voicegive"
 
 # Run migrations
 alembic upgrade head
@@ -416,7 +416,7 @@ Your FastAPI backend now has:
 python -m pytest test_all_apis.py -v
 
 # Run specific test categories
-python -m pytest test_agridaan_api.py -v
+python -m pytest test_voicegive_api.py -v
 python -m pytest test_complete_flow.py -v
 
 # Run with coverage
@@ -441,7 +441,7 @@ lsof -ti:9000 | xargs kill -9
 **Database Issues:**
 ```bash
 # Reset database
-rm agridaan.db
+rm voicegive.db
 python -c "from database import init_database; init_database()"
 ```
 
@@ -507,9 +507,9 @@ python -c "from config import config; print(config.api_title)"
 - `GET /system/config` - Configuration details
 
 ### Logging
-- **Application Logs**: `logs/agridaan.log`
-- **Error Logs**: `logs/agridaan_errors.log`
-- **Access Logs**: `logs/agridaan_access.log`
+- **Application Logs**: `logs/voicegive.log`
+- **Error Logs**: `logs/voicegive_errors.log`
+- **Access Logs**: `logs/voicegive_access.log`
 
 ### Metrics
 - **Request Count**: Tracked per endpoint

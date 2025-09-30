@@ -4,7 +4,6 @@
       "contributionId": "contrib-mr-001",
       "sentenceId": "sent-mr-001",
       "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-      "audioContent": "4KSk4KWB4KSu4KWN4KS54KWAIOCkruCksuCkviDgpKjgpYfgpLngpK7gpYDgpJog4KSV4KS/4KSy4KWN4KSy4KWN4KSv4KS+4KSC4KSs4KS+4KSs4KSkIOCkuOCkvuCkguCkl+CkpOCkviDgpKTgpLbgpYAg4KSk4KWN4KSv4KS+IOCkruCkvuCksOCljeCkl+CkpuCksOCljeCktuCkleCkvuCkqOClhyDgpIbgpK7gpY3gpLngpL7gpILgpLLgpL4g4KSV4KS/4KSy4KWN4KSy4KWN4KSv4KS+4KSs4KS+4KSs4KSkIOCkluClguCkqiDgpJvgpL7gpKgg4KSu4KS+4KS54KS/4KSk4KWAIOCkquClgeCksOCkteCksuClgA==",
       "duration": 15.5,
       "contributorId": "user-001",
       "quality": "good"
@@ -13,7 +12,6 @@
       "contributionId": "contrib-mr-002",
       "sentenceId": "sent-mr-002",
       "text": "शेतकऱ्यांना नवीन तंत्रज्ञानाची माहिती देणे हे आमचे उद्दिष्ट आहे.",
-      "audioContent": "4KS24KWH4KSk4KSV4KSx4KWN4KSv4KS+4KSC4KSo4KS+IOCkqOCkteClgOCkqCDgpKTgpILgpKTgpY3gpLDgpJzgpY3gpJ7gpL7gpKjgpL7gpJrgpYAg4KSu4KS+4KS54KS/4KSk4KWAIOCkpuClh+Cko+ClhyDgpLngpYcg4KSG4KSu4KSa4KWHIOCkieCkpuCljeCkpuCkv+Ckt+CljeCknyDgpIbgpLngpYc=",
       "duration": 12.3,
       "contributorId": "user-002",
       "quality": "excellent"
@@ -24,8 +22,7 @@
       "text": "पावसाच्या पाण्याचे व्यवस्थापन करणे हे शेतीसाठी खूप महत्वाचे आहे.",
       "duration": 18.2,
       "contributorId": "user-004",
-      "quality": "good",
-      "audioContent": "4KSq4KS+4KS14KS44KS+4KSa4KWN4KSv4KS+IOCkquCkvuCko+CljeCkr+CkvuCkmuClhyDgpLXgpY3gpK/gpLXgpLjgpY3gpKXgpL7gpKrgpKgg4KSV4KSw4KSj4KWHIOCkueClhyDgpLbgpYfgpKTgpYDgpLjgpL7gpKDgpYAg4KSW4KWC4KSqIOCkruCkueCkpOCljeCkteCkvuCkmuClhyDgpIbgpLngpYc="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-004",
@@ -33,8 +30,7 @@
       "text": "नवीन बियाणे वापरून पिकाची उत्पादकता वाढवता येते.",
       "duration": 16.8,
       "contributorId": "user-005",
-      "quality": "excellent",
-      "audioContent": "4KSo4KS14KWA4KSoIOCkrOCkv+Ckr+CkvuCko+ClhyDgpLXgpL7gpKrgpLDgpYLgpKgg4KSq4KS/4KSV4KS+4KSa4KWAIOCkieCkpOCljeCkquCkvuCkpuCkleCkpOCkviDgpLXgpL7gpKLgpLXgpKTgpL4g4KSv4KWH4KSk4KWH"
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-005",
@@ -42,8 +38,7 @@
       "text": "जैविक शेती ही पर्यावरणासाठी चांगली आहे.",
       "duration": 14.5,
       "contributorId": "user-006",
-      "quality": "good",
-      "audioContent": "4KSc4KWI4KS14KS/4KSVIOCktuClh+CkpOClgCDgpLngpYAg4KSq4KSw4KWN4KSv4KS+4KS14KSw4KSj4KS+4KS44KS+4KSg4KWAIOCkmuCkvuCkguCkl+CksuClgCDgpIbgpLngpYc="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-006",
@@ -51,8 +46,7 @@
       "text": "शेतकऱ्यांना बाजाराची माहिती असणे आवश्यक आहे.",
       "duration": 17.3,
       "contributorId": "user-007",
-      "quality": "good",
-      "audioContent": "4KS24KWH4KSk4KSV4KSx4KWN4KSv4KS+4KSC4KSo4KS+IOCkrOCkvuCknOCkvuCksOCkvuCkmuClgCDgpK7gpL7gpLngpL/gpKTgpYAg4KSF4KS44KSj4KWHIOCkhuCkteCktuCljeCkr+CklSDgpIbgpLngpYc="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-007",
@@ -60,8 +54,7 @@
       "text": "पिकांच्या रोगांवर नियंत्रण ठेवणे महत्वाचे आहे.",
       "duration": 19.1,
       "contributorId": "user-008",
-      "quality": "excellent",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCksOCli+Ckl+CkvuCkguCkteCksCDgpKjgpL/gpK/gpILgpKTgpY3gpLDgpKMg4KSg4KWH4KS14KSj4KWHIOCkruCkueCkpOCljeCkteCkvuCkmuClhyDgpIbgpLngpYc="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-008",
@@ -69,8 +62,7 @@
       "text": "मशागत करताना यंत्रांचा वापर करावा.",
       "duration": 15.7,
       "contributorId": "user-009",
-      "quality": "good",
-      "audioContent": "4KSu4KS24KS+4KSX4KSkIOCkleCksOCkpOCkvuCkqOCkviDgpK/gpILgpKTgpY3gpLDgpL7gpILgpJrgpL4g4KS14KS+4KSq4KSwIOCkleCksOCkvuCkteCkvg=="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-009",
@@ -78,8 +70,7 @@
       "text": "पिकांच्या वेळी योग्य खतांचा वापर करावा.",
       "duration": 16.4,
       "contributorId": "user-010",
-      "quality": "good",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCkteClh+Cks+ClgCDgpK/gpYvgpJfgpY3gpK8g4KSW4KSk4KS+4KSC4KSa4KS+IOCkteCkvuCkquCksCDgpJXgpLDgpL7gpLXgpL4="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-010",
@@ -87,8 +78,7 @@
       "text": "शेतीमध्ये पाण्याचा वापर काटकसराने करावा.",
       "duration": 18.9,
       "contributorId": "user-011",
-      "quality": "excellent",
-      "audioContent": "4KS24KWH4KSk4KWA4KSu4KSn4KWN4KSv4KWHIOCkquCkvuCko+CljeCkr+CkvuCkmuCkviDgpLXgpL7gpKrgpLAg4KSV4KS+4KSf4KSV4KS44KSw4KS+4KSo4KWHIOCkleCksOCkvuCkteCkvg=="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-011",
@@ -96,8 +86,7 @@
       "text": "नवीन तंत्रज्ञानाचा वापर करून शेती सुधारता येते.",
       "duration": 17.6,
       "contributorId": "user-012",
-      "quality": "good",
-      "audioContent": "4KSo4KS14KWA4KSoIOCkpOCkguCkpOCljeCksOCknOCljeCknuCkvuCkqOCkvuCkmuCkviDgpLXgpL7gpKrgpLAg4KSV4KSw4KWC4KSoIOCktuClh+CkpOClgCDgpLjgpYHgpKfgpL7gpLDgpKTgpL4g4KSv4KWH4KSk4KWH"
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-012",
@@ -105,8 +94,7 @@
       "text": "पिकांच्या निगराणीसाठी नियमित तपासणी करावी.",
       "duration": 15.2,
       "contributorId": "user-013",
-      "quality": "good",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCkqOCkv+Ckl+CksOCkvuCko+ClgOCkuOCkvuCkoOClgCDgpKjgpL/gpK/gpK7gpL/gpKQg4KSk4KSq4KS+4KS44KSj4KWAIOCkleCksOCkvuCkteClgA=="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-013",
@@ -114,8 +102,7 @@
       "text": "शेतकऱ्यांना सरकारी योजनांची माहिती असावी.",
       "duration": 16.8,
       "contributorId": "user-014",
-      "quality": "excellent",
-      "audioContent": "4KS24KWH4KSk4KSV4KSx4KWN4KSv4KS+4KSC4KSo4KS+IOCkuOCksOCkleCkvuCksOClgCDgpK/gpYvgpJzgpKjgpL7gpILgpJrgpYAg4KSu4KS+4KS54KS/4KSk4KWAIOCkheCkuOCkvuCkteClgA=="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-014",
@@ -123,8 +110,7 @@
       "text": "पिकांच्या विक्रीसाठी योग्य वेळ निवडावी.",
       "duration": 14.3,
       "contributorId": "user-015",
-      "quality": "good",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCkteCkv+CkleCljeCksOClgOCkuOCkvuCkoOClgCDgpK/gpYvgpJfgpY3gpK8g4KS14KWH4KSzIOCkqOCkv+CkteCkoeCkvuCkteClgA=="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-015",
@@ -132,8 +118,7 @@
       "text": "शेतीमध्ये विविध पिके घेणे चांगले आहे.",
       "duration": 17.1,
       "contributorId": "user-016",
-      "quality": "good",
-      "audioContent": "4KS24KWH4KSk4KWA4KSu4KSn4KWN4KSv4KWHIOCkteCkv+CkteCkv+CkpyDgpKrgpL/gpJXgpYcg4KSY4KWH4KSj4KWHIOCkmuCkvuCkguCkl+CksuClhyDgpIbgpLngpYc="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-016",
@@ -141,8 +126,7 @@
       "text": "पिकांच्या साठवणुकीसाठी योग्य जागा निवडावी.",
       "duration": 18.7,
       "contributorId": "user-017",
-      "quality": "excellent",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCkuOCkvuCkoOCkteCko+ClgeCkleClgOCkuOCkvuCkoOClgCDgpK/gpYvgpJfgpY3gpK8g4KSc4KS+4KSX4KS+IOCkqOCkv+CkteCkoeCkvuCkteClgC4="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-017",
@@ -150,8 +134,7 @@
       "text": "शेतकऱ्यांना बँकांच्या कर्जाची माहिती असावी.",
       "duration": 16.5,
       "contributorId": "user-018",
-      "quality": "good",
-      "audioContent": "4KS24KWH4KSk4KSV4KSx4KWN4KSv4KS+4KSC4KSo4KS+IOCkrOCkgeCkleCkvuCkguCkmuCljeCkr+CkviDgpJXgpLDgpY3gpJzgpL7gpJrgpYAg4KSu4KS+4KS54KS/4KSk4KWAIOCkheCkuOCkvuCkteClgC4="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-mr-018",
@@ -159,8 +142,7 @@
       "text": "पिकांच्या निर्यातीसाठी गुणवत्ता महत्वाची आहे.",
       "duration": 19.4,
       "contributorId": "user-019",
-      "quality": "excellent",
-      "audioContent": "4KSq4KS/4KSV4KS+4KSC4KSa4KWN4KSv4KS+IOCkqOCkv+CksOCljeCkr+CkvuCkpOClgOCkuOCkvuCkoOClgCDgpJfgpYHgpKPgpLXgpKTgpY3gpKTgpL4g4KSu4KS54KSk4KWN4KS14KS+4KSa4KWAIOCkhuCkueClhy4="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-mr-019",
@@ -168,8 +150,7 @@
       "text": "शेतीमध्ये सहकारी संस्थांचा वापर करावा.",
       "duration": 15.9,
       "contributorId": "user-020",
-      "quality": "good",
-      "audioContent": "4KS24KWH4KSk4KWA4KSu4KSn4KWN4KSv4KWHIOCkuOCkueCkleCkvuCksOClgCDgpLjgpILgpLjgpY3gpKXgpL7gpILgpJrgpL4g4KS14KS+4KSq4KSwIOCkleCksOCkvuCkteCkvi4="
+      "quality": "good"
     }
   ],
   "Hindi": [
@@ -179,8 +160,7 @@
       "text": "किसानों को नई तकनीक की जानकारी देना हमारा उद्देश्य है।",
       "duration": 14.2,
       "contributorId": "user-003",
-      "quality": "good",
-      "audioContent": "4KSV4KS/4KS44KS+4KSo4KWL4KSCIOCkleCliyDgpKjgpIgg4KSk4KSV4KSo4KWA4KSVIOCkleClgCDgpJzgpL7gpKjgpJXgpL7gpLDgpYAg4KSm4KWH4KSo4KS+IOCkueCkruCkvuCksOCkviDgpIngpKbgpY3gpKbgpYfgpLbgpY3gpK8g4KS54KWI4KWk"
+      "quality": "good"
     },
     {
       "contributionId": "contrib-hi-002",
@@ -188,8 +168,7 @@
       "text": "बारिश के पानी का प्रबंधन करना खेती के लिए बहुत महत्वपूर्ण है।",
       "duration": 16.8,
       "contributorId": "user-021",
-      "quality": "excellent",
-      "audioContent": "4KSs4KS+4KSw4KS/4KS2IOCkleClhyDgpKrgpL7gpKjgpYAg4KSV4KS+IOCkquCljeCksOCkrOCkguCkp+CkqCDgpJXgpLDgpKjgpL4g4KSW4KWH4KSk4KWAIOCkleClhyDgpLLgpL/gpI8g4KSs4KS54KWB4KSkIOCkruCkueCkpOCljeCkteCkquClguCksOCljeCkoyDgpLngpYjgpaQ="
+      "quality": "excellent"
     },
     {
       "contributionId": "contrib-hi-003",
@@ -197,8 +176,7 @@
       "text": "नए बीजों का उपयोग करके फसल की उत्पादकता बढ़ाई जा सकती है।",
       "duration": 18.5,
       "contributorId": "user-022",
-      "quality": "good",
-      "audioContent": "4KSo4KSPIOCkrOClgOCknOCli+CkgiDgpJXgpL4g4KSJ4KSq4KSv4KWL4KSXIOCkleCksOCkleClhyDgpKvgpLjgpLIg4KSV4KWAIOCkieCkpOCljeCkquCkvuCkpuCkleCkpOCkviDgpKzgpKLgpLzgpL7gpIgg4KSc4KS+IOCkuOCkleCkpOClgCDgpLngpYjgpaQ="
+      "quality": "good"
     },
     {
       "contributionId": "contrib-hi-004",
@@ -206,8 +184,7 @@
       "text": "जैविक खेती पर्यावरण के लिए अच्छी है।",
       "duration": 15.3,
       "contributorId": "user-023",
-      "quality": "good",
-      "audioContent": "4KSc4KWI4KS14KS/4KSVIOCkluClh+CkpOClgCDgpKrgpLDgpY3gpK/gpL7gpLXgpLDgpKMg4KSV4KWHIOCksuCkv+CkjyDgpIXgpJrgpY3gpJvgpYAg4KS54KWI4KWk"
+      "quality": "good"
     },
     {
       "contributionId": "contrib-hi-005",
@@ -215,8 +192,7 @@
       "text": "किसानों को बाजार की जानकारी होनी चाहिए।",
       "duration": 17.2,
       "contributorId": "user-024",
-      "quality": "excellent",
-      "audioContent": "4KSV4KS/4KS44KS+4KSo4KWL4KSCIOCkleCliyDgpKzgpL7gpJzgpL7gpLAg4KSV4KWAIOCknOCkvuCkqOCkleCkvuCksOClgCDgpLngpYvgpKjgpYAg4KSa4KS+4KS54KS/4KSP4KWk"
+      "quality": "excellent"
     }
   ],
   "mr": [
@@ -224,7 +200,6 @@
       "contributionId": "contrib-mr-001",
       "sentenceId": "sent-mr-test",
       "text": "Test validation item to force reload",
-      "audioContent": "VGVzdCB2YWxpZGF0aW9uIGl0ZW0gdG8gZm9yY2UgcmVsb2Fk",
       "duration": 10.0,
       "contributorId": "test-user",
       "quality": "good"
