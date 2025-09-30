@@ -15,6 +15,8 @@ class BoloContribute extends StatefulWidget {
 }
 
 class _BoloContributeState extends State<BoloContribute> {
+  String selectedLanguage = 'hindi';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +36,14 @@ class _BoloContributeState extends State<BoloContribute> {
                     LanguageSelection(
                       description: AppLocalizations.of(context)!
                           .selectLanguageForContribution,
+                      onLanguageChanged: (value) {
+                        selectedLanguage = value;
+                      },
                     ),
                     SizedBox(height: 24.w),
-                    BoloContentSection(),
+                    BoloContentSection(
+                      language: selectedLanguage,
+                    ),
                   ],
                 ),
               )

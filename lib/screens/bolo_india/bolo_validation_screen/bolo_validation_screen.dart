@@ -77,6 +77,7 @@ class _BoloValidationScreenState extends State<BoloValidationScreen>
                         SizedBox(height: 16.w),
                         LanguageSelection(
                           description: "Select language for validation",
+                          onLanguageChanged: (value) {},
                         ),
                         SizedBox(height: 24.w),
                         BoloValidateSection(

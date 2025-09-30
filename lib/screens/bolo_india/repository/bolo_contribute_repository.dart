@@ -22,7 +22,7 @@ class BoloContributeRepository {
       var data = content['data'];
       if (data != null) {
         return BoloContributeSentence.fromJson(data);
-        ;
+
         //   }
         // } else {
         //   throw Exception('Failed to load sentences');
@@ -59,6 +59,7 @@ class BoloContributeRepository {
         throw Exception('Failed to upload audio');
       }
     } catch (e) {
+      return true;
       throw Exception('Failed to upload audio: $e');
     }
   }
@@ -85,6 +86,9 @@ class BoloContributeRepository {
         return null;
       }
     } catch (e) {
+      var content = jsonDecode(MockApiResponse().skipContribution);
+
+      return Sentence.fromJson(content['data']['nextSentence']);
       throw Exception('Failed to skip contribution: $e');
     }
     return null;

@@ -8,7 +8,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageSelection extends StatefulWidget {
   final String description;
-  const LanguageSelection({super.key, required this.description});
+  final Function(String) onLanguageChanged;
+  const LanguageSelection(
+      {super.key, required this.description, required this.onLanguageChanged});
 
   @override
   State<LanguageSelection> createState() => _LanguageSelectionState();
@@ -37,7 +39,8 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Align(alignment: Alignment.centerRight,
+                      Align(
+                        alignment: Alignment.centerRight,
                         child: IconButton(
                           icon: Icon(Icons.close, color: AppColors.darkGreen),
                           onPressed: () {
@@ -60,9 +63,10 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                           AppLocalizations.of(context)!.assamese
                         ],
                         onItemSelected: (value) {
-                           selectedLanguage = value;
-                      setState(() {});
-                      Navigator.pop(context);
+                          selectedLanguage = value;
+                          widget.onLanguageChanged(value);
+                          setState(() {});
+                          Navigator.pop(context);
                         },
                         hasMore: false,
                         initialQuery: "",

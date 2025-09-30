@@ -33,8 +33,9 @@ class Sentence {
       sentenceId: json['sentenceId'] as String,
       text: json['text'] as String,
       sequenceNumber: json['sequenceNumber'] as int,
-      metadata:
-          SentenceMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
+      metadata: json['metadata'] != null
+          ? SentenceMetadata.fromJson(json['metadata'] as Map<String, dynamic>)
+          : null,
     );
   }
 }
