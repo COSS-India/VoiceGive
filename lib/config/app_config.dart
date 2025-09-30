@@ -24,14 +24,8 @@ class AppConfig {
   /// API Base URL
   String get apiBaseUrl => dotenv.env['API_BASE_URL'] ?? '';
 
-  /// API Origin URL for CORS headers
-  String get apiOriginUrl => dotenv.env['API_ORIGIN_URL'] ?? '';
-
-  /// API Referer URL for CORS headers
-  String get apiRefererUrl => dotenv.env['API_REFERER_URL'] ?? '';
-
-  /// API Bearer Token
-  String get apiBearerToken => dotenv.env['API_BEARER_TOKEN'] ?? '';
+  /// Application Environment (development, staging, production)
+  String get appEnvironment => dotenv.env['APP_ENVIRONMENT'] ?? Environment.development;
 
   /// Get environment-specific API endpoints
   Map<String, String> get apiEndpoints => {
@@ -49,9 +43,6 @@ class AppConfig {
     'accept': '*/*',
     'accept-language': 'en-US,en;q=0.9',
     'content-type': 'application/json',
-    'authorization': 'Bearer $apiBearerToken',
-    'origin': apiOriginUrl,
-    'referer': apiRefererUrl,
     'Cookie': 'SERVERID=GEN3',
   };
 
@@ -63,7 +54,7 @@ class AppConfig {
 
   /// Validate that all required environment variables are present
   bool validateConfig() {
-    final requiredVars = ['API_BASE_URL', 'API_ORIGIN_URL', 'API_REFERER_URL'];
+    final requiredVars = ['API_BASE_URL'];
     
     for (final varName in requiredVars) {
       if (dotenv.env[varName] == null || dotenv.env[varName]!.isEmpty) {

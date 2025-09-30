@@ -1,5 +1,5 @@
-import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/widgets/bottom_field_search_field.dart';
-import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/widgets/bottom_sheet_items.dart';
+import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/widgets/bottom_field_search_field.dart';
+import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/widgets/bottom_sheet_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -133,18 +133,17 @@ class _SearchableBottomSheetContentState
   @override
   Widget build(BuildContext context) {
     return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: IconButton(
-                                icon: Icon(Icons.close,
-                                    color: AppColors.darkGreen),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: IconButton(
+            icon: Icon(Icons.close, color: AppColors.darkGreen),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         Container(
           height: 0.7.sh,
           padding: const EdgeInsets.all(16).r,

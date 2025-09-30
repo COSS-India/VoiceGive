@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/constants/helper.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_contribute/widgets/recording_icon.dart';
-import 'package:bhashadaan/screens/bolo_india/models/bolo_contribute_sentence.dart';
-import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
-import 'package:bhashadaan/screens/bolo_india/repository/bolo_contribute_repository.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
+import 'package:VoiceGive/common_widgets/primary_button_widget.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/constants/helper.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_contribute/widgets/recording_icon.dart';
+import 'package:VoiceGive/screens/bolo_india/models/bolo_contribute_sentence.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
+import 'package:VoiceGive/screens/bolo_india/models/session_completed_model.dart';
+import 'package:VoiceGive/screens/bolo_india/repository/bolo_contribute_repository.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_validation_screen/bolo_validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,7 +98,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             borderRadius: BorderRadius.circular(8).r,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withValues(alpha:0.5),
+                color: Colors.grey.withValues(alpha: 0.5),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(0, 3),

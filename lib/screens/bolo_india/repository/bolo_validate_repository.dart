@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/validation_submit_model.dart';
-import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
+import 'package:VoiceGive/screens/bolo_india/models/bolo_validate_model.dart';
+import 'package:VoiceGive/screens/bolo_india/models/session_completed_model.dart';
+import 'package:VoiceGive/screens/bolo_india/models/validation_submit_model.dart';
+import 'package:VoiceGive/screens/bolo_india/service/bolo_service.dart';
 import 'package:http/http.dart';
 
 class BoloValidateRepository {

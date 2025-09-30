@@ -1,4 +1,4 @@
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';

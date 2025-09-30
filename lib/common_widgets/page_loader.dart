@@ -1,4 +1,4 @@
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PageLoader extends StatelessWidget {

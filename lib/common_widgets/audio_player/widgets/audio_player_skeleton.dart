@@ -1,4 +1,4 @@
-import 'package:bhashadaan/common_widgets/container_skeleton.dart';
+import 'package:VoiceGive/common_widgets/container_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

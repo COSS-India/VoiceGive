@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bhashadaan/constants/api_url.dart';
-import 'package:bhashadaan/constants/network_headers.dart';
-import 'package:bhashadaan/constants/storage_constants.dart';
-import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
-import 'package:bhashadaan/services/secure_storage_service.dart';
+import 'package:VoiceGive/constants/api_url.dart';
+import 'package:VoiceGive/constants/network_headers.dart';
+import 'package:VoiceGive/constants/storage_constants.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
+import 'package:VoiceGive/services/secure_storage_service.dart';
 import 'package:http/http.dart';
 
 class BoloService {
@@ -40,6 +40,7 @@ class BoloService {
   }) async {
     final audioBytes = await audioFile.readAsBytes();
     final audioBase64 = base64Encode(audioBytes);
+    var sessionId = await BoloService.sessionId;
 
     final body = jsonEncode({
       'sessionId': sessionId,
@@ -70,6 +71,7 @@ class BoloService {
     required String reason,
     required String comment,
   }) async {
+    var sessionId = await BoloService.sessionId;
     final body = jsonEncode({
       'sessionId': sessionId,
       'sentenceId': sentenceId,
@@ -110,6 +112,7 @@ class BoloService {
 
   Future<Response> contributeSessionCompleted() async {
     var url = ApiUrl.contributeSessionCompleteUrl;
+    var sessionId = await BoloService.sessionId;
     final body = jsonEncode({
       'sessionId': sessionId,
     });
@@ -125,6 +128,7 @@ class BoloService {
 
   Future<Response> validateSessionCompleted() async {
     var url = ApiUrl.validationSessionCompleteUrl;
+    var sessionId = await BoloService.sessionId;
 
     final body = jsonEncode({
       'sessionId': sessionId,
@@ -146,6 +150,8 @@ class BoloService {
     required String feedback,
     required int sequenceNumber,
   }) async {
+    var sessionId = await BoloService.sessionId;
+
     final body = jsonEncode({
       'sessionId': sessionId,
       'contributionId': contributionId,

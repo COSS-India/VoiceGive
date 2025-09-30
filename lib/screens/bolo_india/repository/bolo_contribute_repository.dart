@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bhashadaan/screens/bolo_india/models/bolo_contribute_sentence.dart';
-import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
-import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
+import 'package:VoiceGive/screens/bolo_india/models/bolo_contribute_sentence.dart';
+import 'package:VoiceGive/screens/bolo_india/models/session_completed_model.dart';
+import 'package:VoiceGive/screens/bolo_india/service/bolo_service.dart';
 
 import 'package:http/http.dart';
 

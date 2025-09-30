@@ -1,13 +1,13 @@
-import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/constants/helper.dart';
-import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/validation_submit_model.dart';
-import 'package:bhashadaan/screens/bolo_india/repository/bolo_validate_repository.dart';
+import 'package:VoiceGive/common_widgets/primary_button_widget.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/constants/helper.dart';
+import 'package:VoiceGive/screens/bolo_india/models/bolo_validate_model.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
+import 'package:VoiceGive/screens/bolo_india/models/validation_submit_model.dart';
+import 'package:VoiceGive/screens/bolo_india/repository/bolo_validate_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/widgets/audio_player_buttons.dart';
-import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_validation_screen/widgets/audio_player_buttons.dart';
+import 'package:VoiceGive/screens/congratulations_screen/congratulations_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -225,7 +225,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
       }
     } else {
       widget.onComplete();
-          await BoloValidateRepository().validateSessionCompleted();
+      await BoloValidateRepository().validateSessionCompleted();
       Future.delayed(const Duration(seconds: 3), () {
         if (mounted) {
           Navigator.push(context,

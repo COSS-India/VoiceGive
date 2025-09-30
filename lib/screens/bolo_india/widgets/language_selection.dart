@@ -1,11 +1,11 @@
-import 'package:bhashadaan/common_widgets/language_searchable_bottom_sheet/searchable_boottosheet_content.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
-import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
+import 'package:VoiceGive/common_widgets/language_searchable_bottom_sheet/searchable_boottosheet_content.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
+import 'package:VoiceGive/screens/bolo_india/service/bolo_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';  
+import 'package:google_fonts/google_fonts.dart';
 
 class LanguageSelection extends StatefulWidget {
   final String description;

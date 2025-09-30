@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
-import 'package:bhashadaan/config/app_config.dart';
+import 'package:VoiceGive/config/app_config.dart';
 import 'package:flutter/foundation.dart';
 
 class RecordingService {
@@ -13,7 +13,8 @@ class RecordingService {
   static AppConfig get _config => AppConfig.instance;
 
   /// Save recording to local storage
-  Future<String?> saveRecordingLocally(String tempFilePath, {
+  Future<String?> saveRecordingLocally(
+    String tempFilePath, {
     required String language,
     required String text,
     required int sentenceId,
@@ -21,7 +22,7 @@ class RecordingService {
     try {
       final documentsDir = await getApplicationDocumentsDirectory();
       final recordingsDir = Directory('${documentsDir.path}/recordings');
-      
+
       // Create recordings directory if it doesn't exist
       if (!await recordingsDir.exists()) {
         await recordingsDir.create(recursive: true);
@@ -54,7 +55,8 @@ class RecordingService {
   }
 
   /// Upload recording to server
-  Future<bool> uploadRecordingToServer(String filePath, {
+  Future<bool> uploadRecordingToServer(
+    String filePath, {
     required String language,
     required String text,
     required int sentenceId,
@@ -108,7 +110,8 @@ class RecordingService {
   }
 
   /// Save recording metadata to local file
-  Future<void> _saveRecordingMetadata(String filePath, Map<String, dynamic> metadata) async {
+  Future<void> _saveRecordingMetadata(
+      String filePath, Map<String, dynamic> metadata) async {
     try {
       final metadataFile = File('$filePath.meta');
       await metadataFile.writeAsString(metadata.toString());
@@ -137,7 +140,7 @@ class RecordingService {
     try {
       final documentsDir = await getApplicationDocumentsDirectory();
       final recordingsDir = Directory('${documentsDir.path}/recordings');
-      
+
       if (!await recordingsDir.exists()) {
         return [];
       }
@@ -166,14 +169,14 @@ class RecordingService {
     try {
       final file = File(filePath);
       final metadataFile = File('$filePath.meta');
-      
+
       if (await file.exists()) {
         await file.delete();
       }
       if (await metadataFile.exists()) {
         await metadataFile.delete();
       }
-      
+
       return true;
     } catch (e) {
       debugPrint('Error deleting recording: $e');
