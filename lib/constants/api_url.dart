@@ -16,4 +16,6 @@ class ApiUrl {
   static const String validationSessionCompleteUrl =
       '$baseUrl/validations/session-complete';
   static const String userRegisterUrl = '$baseUrl/users/register';
+  static const String ageGroupUrl = '$baseUrl/admin/data/age-groups';
+  static const String genderUrl = '$baseUrl/admin/data/genders';
 }

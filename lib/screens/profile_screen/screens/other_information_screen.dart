@@ -7,8 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../repository/profile_repository.dart';
+
 class OtherInformationScreen extends StatefulWidget {
-  const OtherInformationScreen({super.key});
+  final String firstName;
+  final String lastName;
+  final String ageGroup;
+  final String gender;
+  final String phoneNumber;
+  final String? email;
+  const OtherInformationScreen({super.key, required this.firstName, required this.lastName, required this.ageGroup, required this.gender, required this.phoneNumber, this.email});
 
   @override
   State<OtherInformationScreen> createState() => _OtherInformationScreenState();
@@ -369,7 +377,7 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           child: SizedBox(
                             width: 280.w,
                             child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_district == null) {
                                 setState(() => _showDistrictError = true);
                                 final ctx = _districtFieldKey.currentContext;
@@ -384,6 +392,16 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                 }
                                 return;
                               }
+                              dynamic userData = await ProfileRepository().registration(firstName: widget.firstName, lastName: widget.lastName, ageGroup: widget.ageGroup, gender: widget.gender, mobileNo: widget.phoneNumber, country: _country, state: _state, district: _districtController.text, email: widget.email, preferredLanguage: _preferredLanguage);
+                                  if(userData is String){
+                                    if (!mounted) return;
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                            content: Text(userData),
+                                      ),
+                                    );
+                                    return;
+                                  }
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                   builder: (_) => const BoloGetStarted(),

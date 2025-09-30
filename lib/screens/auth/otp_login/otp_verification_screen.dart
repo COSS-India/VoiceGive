@@ -1,4 +1,3 @@
-import 'package:bhashadaan/screens/auth/model/auth_model.dart';
 import 'package:bhashadaan/screens/profile_screen/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

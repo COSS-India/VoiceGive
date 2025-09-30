@@ -14,8 +14,8 @@ class LoginAuthService {
     final response = await http.post(
         Uri.parse(ApiUrl.sendOTPUrl),
         headers: {
-      'Content-Type': 'application/json', 
-    },
+          'Content-Type': 'application/json', 
+        },
         body: json.encode(body));
     Map convertedResponse = json.decode(response.body);
 
@@ -32,8 +32,8 @@ class LoginAuthService {
     final response = await http.post(
         Uri.parse(ApiUrl.resendOTPUrl),
         headers: {
-      'Content-Type': 'application/json', 
-    },
+          'Content-Type': 'application/json', 
+        },
         body: json.encode(body));
     Map convertedResponse = json.decode(response.body);
 
@@ -50,8 +50,8 @@ class LoginAuthService {
     final response = await http.post(
         Uri.parse(ApiUrl.verifyOTPUrl),
          headers: {
-      'Content-Type': 'application/json', 
-    },
+          'Content-Type': 'application/json', 
+        },
         body: json.encode(body));
     Map convertedResponse = json.decode(response.body);
 

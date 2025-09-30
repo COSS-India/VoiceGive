@@ -1,6 +1,8 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/profile_screen/model/age_group_model.dart';
+import 'package:bhashadaan/screens/profile_screen/repository/profile_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../model/gender_model.dart';
 import '../widgets/email_widget.dart';
 import '../widgets/name_widget.dart';
 
@@ -36,31 +39,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? _selectedAgeGroup;
   String? _selectedGender;
 
-  List<String> _ageGroups = [];
-  List<String> _genders = [];
+  List<AgeModel> _ageGroups = [];
+  List<GenderModel> _genders = [];
+  List<String> _ageList = [];
+  List<String> _genderList = [];
 
   @override
   void initState() {
     super.initState();
-  }
-
-  void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!;
-    _ageGroups = [
-      l10n.under18Years,
-      l10n.age18To24,
-      l10n.age25To34,
-      l10n.age35To44,
-      l10n.age45To54,
-      l10n.age55To64,
-      l10n.age65Plus,
-    ];
-    _genders = [
-      l10n.male,
-      l10n.female,
-      l10n.nonBinary,
-      l10n.preferNotToSay,
-    ];
+    fetchData();
   }
 
   @override
@@ -126,10 +113,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize localized strings if not already done
-    if (_ageGroups.isEmpty) {
-      _initializeLocalizedStrings();
-    }
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
@@ -209,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               controller: _ageController,
                               readOnly: true,
                               onTap: () => _pickFromList(
-                                items: _ageGroups,
+                                items: _ageList,
                                 defaultItem: _selectedAgeGroup,
                                 onPicked: (value) {
                                   setState(() {
@@ -268,7 +251,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               controller: _genderController,
                               readOnly: true,
                               onTap: () => _pickFromList(
-                                items: _genders,
+                                items: _genderList,
                                 defaultItem: _selectedGender,
                                 onPicked: (value) {
                                   setState(() {
@@ -348,7 +331,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: SizedBox(
                               width: 280.w,
                               child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 final valid =
                                     _formKey.currentState?.validate() ?? false;
                                 final selectionsValid =
@@ -358,8 +341,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 if (valid && selectionsValid) {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (_) =>
-                                          const OtherInformationScreen(),
+                                      builder: (_) => OtherInformationScreen(
+                                        firstName: _firstNameController.text,
+                                        lastName: _lastNameController.text,
+                                        ageGroup: getAgeGroupValue(_ageController.text),
+                                        gender: getGenderValue(_genderController.text),
+                                        phoneNumber: widget.phoneNumber ?? '',
+                                        email: _emailController.text.isNotEmpty
+                                            ? _emailController.text
+                                            : null,
+                                      ),
                                     ),
                                   );
                                 } else if (!selectionsValid) {
@@ -404,5 +395,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+  
+  Future<void> fetchData() async {
+    _ageGroups = await ProfileRepository().getAgeGroup();
+    _genders = await ProfileRepository().getGender();
+    _ageList = _ageGroups.map((e) => e.label).toList();
+    _genderList = _genders.map((e) => e.label).toList();
+
+    if(mounted) {
+      setState(() {});
+    }
+  }
+
+  String getAgeGroupValue(String label) {
+    return _ageGroups.firstWhere((element) => element.label == label).value;
+  }
+
+  String getGenderValue(String label) {
+    return _genders.firstWhere((element) => element.label == label).value;
   }
 }
