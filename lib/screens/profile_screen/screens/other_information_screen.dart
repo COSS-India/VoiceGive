@@ -50,6 +50,69 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
    List languagesList = await ProfileRepository().getLanguages();
   }
 
+  void _initializeLocalizedStrings() {
+    final l10n = AppLocalizations.of(context)!;
+    _countries = [l10n.india];
+    // Predefined list of Indian states and union territories for the dropdown
+    _states = [
+      'Andhra Pradesh',
+      'Arunachal Pradesh',
+      'Assam',
+      'Bihar',
+      'Chhattisgarh',
+      'Goa',
+      'Gujarat',
+      'Haryana',
+      'Himachal Pradesh',
+      'Jharkhand',
+      'Karnataka',
+      'Kerala',
+      'Madhya Pradesh',
+      'Maharashtra',
+      'Manipur',
+      'Meghalaya',
+      'Mizoram',
+      'Nagaland',
+      'Odisha',
+      'Punjab',
+      'Rajasthan',
+      'Sikkim',
+      'Tamil Nadu',
+      'Telangana',
+      'Tripura',
+      'Uttar Pradesh',
+      'Uttarakhand',
+      'West Bengal',
+      // Union Territories
+      'Andaman and Nicobar Islands',
+      'Chandigarh',
+      'Dadra and Nagar Haveli and Daman and Diu',
+      'Delhi',
+      'Jammu and Kashmir',
+      'Ladakh',
+      'Lakshadweep',
+      'Puducherry',
+    ];
+    _districts = [
+      l10n.pune,
+      l10n.mumbai,
+      l10n.nashik,
+      l10n.nagpur,
+      l10n.thane,
+      l10n.aurangabad,
+    ];
+    _languages = [
+      l10n.english,
+      l10n.hindi,
+      l10n.marathi,
+      l10n.gujarati,
+      l10n.kannada,
+      l10n.telugu,
+    ];
+    _country = _countries.first;
+    _state = _states.first;
+  }
+
   Future<void> _pickFromList({
     required List<String> items,
     required ValueChanged<String> onPicked,
@@ -82,6 +145,11 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
+     // Initialize localized strings if not already done
+    if (_countries.isEmpty) {
+      _initializeLocalizedStrings();
+    }
+
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
