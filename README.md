@@ -16,7 +16,9 @@ This document provides a unified guide for setting up your environment, configur
 
 ## 2. API Specification Document
 
-Ref Backend installation guide : https://github.com/COSS-India/VoiceGive/blob/dev_api_spec/backend/README.md
+Ref Backend installation guide : [https://github.com/COSS-India/VoiceGive/blob/dev_api_spec/backend/README.md](https://github.com/COSS-India/VoiceGive/blob/master/backend/README.md)
+
+API Contracts : https://github.com/COSS-India/VoiceGive/blob/master/contracts/voicegive_backend_api_contracts.yaml
 
 Swagger UI : http://43.205.235.156:9000/docs
 
