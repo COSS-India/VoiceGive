@@ -19,8 +19,6 @@ info:
     name: MIT
 
 servers:
-  - url: https://api.agridaan.gov.in/v1
-    description: Production server
   - url: http://localhost:9000
     description: Development server
 
@@ -34,11 +32,12 @@ tags:
   - name: System
     description: System checks, language list, and utilities
   - name: Contribution
-    description: BOLO India - Voice recording contributions
+    description: Voice recording contributions
   - name: Validation
     description: Audio-text validation
   - name: Certificate
     description: Certificate generation and download
+
 security:
   - BearerAuth: []
 
@@ -52,6 +51,7 @@ paths:
       description: |
         Send 6-digit OTP to user's mobile number for authentication.
         OTP is valid for 5 minutes (300 seconds).
+        
       security: []
       requestBody:
         required: true
@@ -141,7 +141,7 @@ paths:
                         example: "This number isn't registered with us."
                       supportEmail:
                         type: string
-                        example: "support-bhashadaan.dibd@gmail.com"
+                        example: "voicegive.ai4x@gmail.com"
                       contactMessage:
                         type: string
                         example: "Please contact admin to continue."
@@ -159,6 +159,7 @@ paths:
       summary: Resend OTP
       description: |
         Resend OTP if user didn't receive it. Can only be called after initial send-otp.
+        
       security: []
       requestBody:
         required: true
@@ -187,7 +188,6 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    example: true
                   message:
                     type: string
                     example: "OTP resent successfully"
@@ -214,6 +214,7 @@ paths:
       description: |
         Verify the 6-digit OTP and get JWT access token.
         Timer shows remaining time (02:32 format).
+
       security: []
       requestBody:
         required: true
@@ -313,8 +314,6 @@ paths:
       description: |
         User must accept all three policies before contributing or validating.
         All checkboxes must be checked to proceed.
-        
-        **Figma Reference:** Page 2, 21, 24 - "We Respect Your Privacy" modal
         
         **Required Documents:**
         1. Terms of Use / Contribution Terms
@@ -455,6 +454,10 @@ paths:
       description: |
         Complete profile after OTP verification. This is called for new users.
         All fields are mandatory.
+        
+        **Steps:**
+        1. Personal Information (Page 6-7): First Name, Last Name, Age Group, Gender, Phone, Email
+        2. Other Information (Page 8-9): Country, State, District, Preferred Language
       requestBody:
         required: true
         content:
@@ -529,7 +532,7 @@ paths:
                 preferredLanguageCode:
                   type: string
                   example: "mr"
-                  description: Preferred language code for contributions (dropdown)
+                  description: Preferred language for contributions (dropdown)
             examples:
               completeProfile:
                 value:
@@ -637,7 +640,7 @@ paths:
                   type: string
                 district:
                   type: string
-                preferredLanguage:
+                preferredLanguageCode:
                   type: string
       responses:
         '200':
@@ -698,8 +701,7 @@ paths:
       summary: Get country list
       description: |
         Get list of supported countries.
-        
-        **Figma Reference:** Page 8 - Country dropdown
+
       security: []
       responses:
         '200':
@@ -733,8 +735,7 @@ paths:
       summary: Get state list
       description: |
         Get list of states for a country.
-        
-        **Figma Reference:** Page 8 - State dropdown (Maharashtra)
+
       security: []
       parameters:
         - name: countryId
@@ -774,7 +775,6 @@ paths:
       description: |
         Get list of districts for a state.
         
-        **Figma Reference:** Page 8 - District dropdown (Amravati)
       security: []
       parameters:
         - name: stateId
@@ -814,7 +814,7 @@ paths:
       description: |
         Get list of languages available for contribution and validation.
         
-        **Figma Reference:** Page 12 - "Select the language for contribution" dropdown
+
       security: []
       responses:
         '200':
@@ -852,7 +852,6 @@ paths:
       description: |
         Returns a sample audio file to test user's speakers/headphones.
         
-        **Figma Reference:** Page 10 - "Please Test Your Speaker"
       responses:
         '200':
           description: Sample audio file
@@ -870,7 +869,6 @@ paths:
       description: |
         Upload a test recording to verify microphone setup and audio quality.
         
-        **Figma Reference:** Page 10 - "Please Test Your Microphone"
       requestBody:
         required: true
         content:
@@ -1141,7 +1139,7 @@ paths:
                   data:
                     $ref: '#/components/schemas/SystemConfig'
 
-  # ==================== BOLO India - Contributions ====================
+  # ==================== Contributions ====================
   /contributions/get-sentences:
     post:
       tags:
@@ -1150,6 +1148,7 @@ paths:
       description: |
         Get a batch of sentences to record in the selected language.
         Returns 5 sentences per session as shown in UI (1/5, 2/5, etc.)
+
       requestBody:
         required: true
         content:
@@ -1162,7 +1161,7 @@ paths:
                 languageCode:
                   type: string
                   example: "mr"
-                  description: Language code selected from dropdown
+                  description: languageCode selected from dropdown
                 count:
                   type: integer
                   default: 5
@@ -1186,9 +1185,9 @@ paths:
                         type: string
                         format: uuid
                         example: "session-123-abc"
-                      language:
+                      languageCode:
                         type: string
-                        example: "Marathi"
+                        example: "mr"
                       sentences:
                         type: array
                         minItems: 5
@@ -1227,6 +1226,7 @@ paths:
       description: |
         Upload audio recording for a sentence.
         User can re-record if not satisfied.
+        
       requestBody:
         required: true
         content:
@@ -1260,7 +1260,6 @@ paths:
                 languageCode:
                   type: string
                   example: "mr"
-                  description: Language code
                 sequenceNumber:
                   type: integer
                   example: 1
@@ -1287,10 +1286,10 @@ paths:
                       contributionId:
                         type: string
                         format: uuid
-                      audioUrl:
+                      audioContent:
                         type: string
-                        format: uri
-                        description: URL to play back the recording
+                        format: byte
+                        description: Base64 encoded audio content
                       duration:
                         type: number
                         format: float
@@ -1323,8 +1322,7 @@ paths:
       summary: Skip a sentence
       description: |
         Skip current sentence and get next one.
-        
-        **Figma Reference:** Page 12 - "Skip" button
+
       requestBody:
         required: true
         content:
@@ -1382,8 +1380,7 @@ paths:
       summary: Report issue with sentence
       description: |
         Report inappropriate, incorrect, or offensive sentence.
-        
-        **Figma Reference:** Page 12 - "Report" button
+
       requestBody:
         required: true
         content:
@@ -1431,7 +1428,6 @@ paths:
         Mark session as complete after recording all 5 sentences.
         Returns certificate eligibility status.
         
-        **Figma Reference:** Page 15 - Completion screen with "Contribute More" / "Validate" buttons
       requestBody:
         required: true
         content:
@@ -1501,6 +1497,7 @@ paths:
       description: |
         Get audio recordings that need validation (25 items per session).
         Returns audio-text pairs for validation.
+
       parameters:
         - name: languageCode
           in: query
@@ -1508,7 +1505,7 @@ paths:
           schema:
             type: string
             example: "mr"
-          description: Language code for validation
+          description: Language for validation
         - name: count
           in: query
           schema:
@@ -1531,7 +1528,7 @@ paths:
                       sessionId:
                         type: string
                         format: uuid
-                      language:
+                      languageCode:
                         type: string
                       validationItems:
                         type: array
@@ -1549,10 +1546,10 @@ paths:
                               type: string
                               example: "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली."
                               description: Text to compare with audio
-                            audioUrl:
+                            audioContent:
                               type: string
-                              format: uri
-                              description: Audio recording URL
+                              format: byte
+                              description: Base64 encoded audio content
                             duration:
                               type: number
                               format: float
@@ -1574,8 +1571,7 @@ paths:
       summary: Submit validation decision
       description: |
         Mark audio recording as Correct or Incorrect.
-        
-        **Figma Reference:** 
+
         - Page 16: "Correct" / "Incorrect" buttons
         - Page 17: Pause Recording
         - Page 18: Replay Recording
@@ -1656,7 +1652,6 @@ paths:
         Mark validation session as complete after validating all 25 recordings.
         Check certificate eligibility after completion.
         
-        **Figma Reference:** Validation completion flow
       requestBody:
         required: true
         content:
@@ -1723,10 +1718,9 @@ paths:
       summary: Check certificate eligibility
       description: |
         Check if user has met certificate requirements:
-        - 5 voice contributions (BOLO India)
+        - 5 voice contributions
         - 25 validations
-        
-        **Figma Reference:** Used throughout to show progress
+
       responses:
         '200':
           description: Eligibility status
@@ -1772,8 +1766,7 @@ paths:
       description: |
         Generate certificate after completing requirements (5 contributions + 25 validations).
         Certificate Title: "Agri Bhasha Samarthak"
-        
-        **Figma Reference:** Page 19 - Congratulations screen
+
       responses:
         '200':
           description: Certificate generated successfully
@@ -1856,7 +1849,6 @@ paths:
       description: |
         Download certificate as PDF (print-ready, includes name & achievement).
         
-        **Figma Reference:** Page 19 - "Download Certificate" button
       parameters:
         - name: certificateId
           in: path
@@ -1884,7 +1876,6 @@ paths:
       description: |
         Get certificate preview image.
         
-        **Figma Reference:** Page 19 - Certificate thumbnail shown in "Tap to preview your certificate"
       parameters:
         - name: certificateId
           in: path
@@ -2052,7 +2043,7 @@ components:
           properties:
             supportEmail:
               type: string
-              example: "support-bhashadaan.dibd@gmail.com"
+              example: "voicegive.ai4x@gmail.com"
               description: Support email address
             supportPhone:
               type: string
@@ -2104,7 +2095,7 @@ components:
             enableVoiceContributions:
               type: boolean
               example: true
-              description: Enable BOLO India voice contributions
+              description: Enable voice contributions
             enableAudioValidation:
               type: boolean
               example: true
@@ -2184,9 +2175,9 @@ components:
         district:
           type: string
           example: "Amravati"
-        preferredLanguage:
+        preferredLanguageCode:
           type: string
-          example: "Marathi"
+          example: "mr"
         contributionCount:
           type: integer
           example: 5
