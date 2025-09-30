@@ -79,6 +79,10 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
             return Container(
               padding: EdgeInsets.all(12).r,
               decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage("assets/images/contribute_bg.png"),
+                  fit: BoxFit.cover,
+                ),
                 color: AppColors.lightGreen3,
                 borderRadius: BorderRadius.circular(8).r,
                 boxShadow: [
@@ -115,7 +119,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                           AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
                     ),
                   ),
-                  SizedBox(height: 24.w),
+                  SizedBox(height: 40.w),
                   Padding(
                     padding: EdgeInsets.only(left: 32, right: 32).r,
                     child: Text(
