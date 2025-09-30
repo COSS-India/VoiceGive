@@ -39,6 +39,10 @@ class _BoloContentSectionState extends State<BoloContentSection> {
     return Container(
       padding: EdgeInsets.all(12).r,
       decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/contribute_bg.png"),
+            fit: BoxFit.cover,
+          ),
           color: AppColors.lightGreen3,
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [

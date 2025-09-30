@@ -145,16 +145,16 @@ class _RecordingButtonState extends State<RecordingButton>
         return ImageWidget(
             imageUrl: "assets/icons/microphone.png",
             height: 35.sp,
-            imageColor: Colors.white,
+            imageColor: AppColors.appBarBackground,
             width: 30.sp);
 
       case RecordingState.recording:
-        return Icon(Icons.stop, size: 40.sp, color: Colors.white);
+        return Icon(Icons.stop, size: 40.sp, color: AppColors.appBarBackground);
       case RecordingState.stopped:
         return ImageWidget(
             imageUrl: "assets/icons/microphone.png",
             height: 35.sp,
-            imageColor: Colors.white,
+            imageColor: AppColors.appBarBackground,
             width: 30.sp);
     }
   }

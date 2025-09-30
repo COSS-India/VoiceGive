@@ -1,9 +1,10 @@
-import 'package:bhashadaan/common_widgets/branding_alignment_widget.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../constants/app_colors.dart';
 
 class HomeFooterSection extends StatelessWidget {
   const HomeFooterSection({super.key});
@@ -16,7 +17,7 @@ class HomeFooterSection extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 16.w),
-          color: Colors.white,
+          color: AppColors.appBarBackground,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -39,25 +40,19 @@ class HomeFooterSection extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.digitalIndiaBhashiniDivision,
                 style: GoogleFonts.notoSans(
-                  color: Colors.white,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
+                  color: AppColors.appBarBackground,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              SizedBox(height: 12.w),
-              // Branding alignment
-              BrandingAlignmentWidget(
-                fontSize: 14.sp,
-                textColor: Colors.white,
               ),
               SizedBox(height: 12.w),
               // Address
               Text(
                 AppLocalizations.of(context)!.electronicsNiketanAddress,
                 style: GoogleFonts.notoSans(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.normal,
+                  color: AppColors.appBarBackground,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 16.w),
@@ -67,15 +62,15 @@ class HomeFooterSection extends StatelessWidget {
                   Text(
                     AppLocalizations.of(context)!.poweredBy,
                     style: GoogleFonts.notoSans(
-                      color: Colors.white,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.normal,
+                      color: AppColors.appBarBackground,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   SizedBox(width: 8.w),
                   ImageWidget(
                     imageUrl: 'assets/images/digital_india_logo.png',
-                    height: 40.w,
+                    height: 20.w,
                     width: 80.w,
                   ),
                 ],
@@ -85,27 +80,27 @@ class HomeFooterSection extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.digitalIndiaCorporation,
                 style: GoogleFonts.notoSans(
-                  color: Colors.white,
+                  color: AppColors.appBarBackground,
                   fontSize: 12.sp,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 4.w),
               Text(
                 AppLocalizations.of(context)!.ministryOfElectronicsIt,
                 style: GoogleFonts.notoSans(
-                  color: Colors.white,
+                  color: AppColors.appBarBackground,
                   fontSize: 12.sp,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 4.w),
               Text(
                 AppLocalizations.of(context)!.governmentOfIndia,
                 style: GoogleFonts.notoSans(
-                  color: Colors.white,
+                  color: AppColors.appBarBackground,
                   fontSize: 12.sp,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 80.w),
@@ -113,7 +108,7 @@ class HomeFooterSection extends StatelessWidget {
               Container(
                 height: 2.w,
                 width: double.infinity,
-                color: Colors.white,
+                color: AppColors.appBarBackground,
               ),
               SizedBox(height: 20.w),
               // Copyright notice
@@ -121,9 +116,9 @@ class HomeFooterSection extends StatelessWidget {
                 child: Text(
                   AppLocalizations.of(context)!.copyrightNotice,
                   style: GoogleFonts.notoSans(
-                    color: Colors.white,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
+                    color: AppColors.appBarBackground,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -135,7 +130,7 @@ class HomeFooterSection extends StatelessWidget {
   }
 
   Widget _buildLogo(String imagePath) {
-    return Container(
+    return SizedBox(
       height: 50.w,
       width: 60.w,
       child: ImageWidget(
