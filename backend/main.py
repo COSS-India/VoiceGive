@@ -253,30 +253,6 @@ async def refresh_token():
 @app.post("/users/register", response_model=Dict[str, Any], tags=["User Profile"])
 async def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db)):
     """Complete user registration"""
-<<<<<<< HEAD
-    user_id = str(uuid.uuid4())
-    user_profile = UserProfile(
-        userId=user_id,
-        firstName=request.firstName,
-        lastName=request.lastName,
-        mobileNo=f"+91{request.mobileNo}" if request.mobileNo else f"+91{config.mock_mobile}",
-        email=request.email,
-        ageGroup=request.ageGroup,
-        gender=request.gender,
-        country=request.country,
-        state=request.state,
-        district=request.district,
-        preferredLanguageCode=request.preferredLanguageCode
-    )
-    
-    mock_data["users"][user_id] = user_profile.dict()
-    
-    return {
-        "success": True,
-        "message": "Profile completed successfully",
-        "data": user_profile.dict()
-    }
-=======
     try:
         log_api_call(logger, "/users/register", "POST")
         
@@ -379,7 +355,6 @@ async def register_user(request: UserRegistrationRequest, db: Session = Depends(
     except Exception as e:
         log_error(logger, e, {"endpoint": "/users/register", "mobile": request.mobileNo})
         raise HTTPException(status_code=500, detail="Internal server error")
->>>>>>> 8d4874ac25a54189874786b535a02b9983336a64
 
 @app.get("/users/profile", response_model=Dict[str, Any], tags=["User Profile"])
 async def get_user_profile(db: Session = Depends(get_db)):

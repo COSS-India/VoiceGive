@@ -22,84 +22,137 @@
       "topic": "water_management"
     },
     {
-      "language": "Marathi",
-      "sentenceId": "marathi-004"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-005"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-006"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-007"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-008"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-009"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-010"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-011"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-012"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-013"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-014"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-015"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-016"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-017"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-018"
-    },
-    {
-      "language": "Marathi",
-      "sentenceId": "marathi-019"
-    },
-    {
+      "sentenceId": "marathi-004",
       "text": "नवीन वाक्य जोडले गेले आहे",
       "category": "agriculture",
       "difficulty": "medium",
-      "sentenceId": "marathi-020"
+      "topic": "general"
     },
     {
+      "sentenceId": "marathi-005",
       "text": "नवीन वाक्य जोडले गेले आहे",
       "category": "agriculture",
       "difficulty": "medium",
-      "sentenceId": "marathi-021"
+      "topic": "general"
     },
     {
-      "language": "Marathi",
-      "sentenceId": "marathi-022"
+      "sentenceId": "marathi-006",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-007",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-008",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-009",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-010",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-011",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-012",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-013",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-014",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-015",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-016",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-017",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-018",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-019",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-020",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-021",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
+    },
+    {
+      "sentenceId": "marathi-022",
+      "text": "नवीन वाक्य जोडले गेले आहे",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "general"
     }
   ],
   "Hindi": [
