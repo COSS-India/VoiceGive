@@ -1,4 +1,4 @@
-# AgriDaan FastAPI Backend - Production Ready
+# VoiceGive FastAPI Backend - Production Ready
 
 Complete FastAPI backend implementation with **enhanced logging**, **database integration**, and **zero hardcoded values**.
 
