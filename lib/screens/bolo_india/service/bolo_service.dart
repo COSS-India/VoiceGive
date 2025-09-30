@@ -3,10 +3,18 @@ import 'dart:io';
 
 import 'package:bhashadaan/constants/api_url.dart';
 import 'package:bhashadaan/constants/network_headers.dart';
+import 'package:bhashadaan/constants/storage_constants.dart';
 import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
+import 'package:bhashadaan/services/secure_storage_service.dart';
 import 'package:http/http.dart';
 
 class BoloService {
+  static final _storage = SecureStorageService.instance.storage;
+
+  static Future<String> get sessionId async {
+    return await _storage.read(key: StorageConstants.sessionId) ?? "";
+  }
+
   Future<Response> getContributionSentances(
       {required String language, int? count}) async {
     Map data = {
@@ -34,7 +42,7 @@ class BoloService {
     final audioBase64 = base64Encode(audioBytes);
 
     final body = jsonEncode({
-      'sessionId': "sessionId",
+      'sessionId': sessionId,
       'sentenceId': sentenceId,
       'duration': duration,
       'languageCode': languageCode,
@@ -63,7 +71,7 @@ class BoloService {
     required String comment,
   }) async {
     final body = jsonEncode({
-      'sessionId': "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      'sessionId': sessionId,
       'sentenceId': sentenceId,
       'reason': reason,
       'comment': comment,
@@ -102,7 +110,6 @@ class BoloService {
 
   Future<Response> contributeSessionCompleted() async {
     const url = ApiUrl.contributeSessionCompleteUrl;
-    String sessionId = "00b768ff-1937-4d94-9536-fd886bb47714";
     final body = jsonEncode({
       'sessionId': sessionId,
     });
@@ -120,7 +127,7 @@ class BoloService {
     const url = ApiUrl.validationSessionCompleteUrl;
 
     final body = jsonEncode({
-      'sessionId': "sessionId",
+      'sessionId': sessionId,
     });
 
     final response = await post(
@@ -140,7 +147,7 @@ class BoloService {
     required int sequenceNumber,
   }) async {
     final body = jsonEncode({
-      'sessionId': "sessionId",
+      'sessionId': sessionId,
       'contributionId': contributionId,
       'sentenceId': sentenceId,
       'decision': decision,
