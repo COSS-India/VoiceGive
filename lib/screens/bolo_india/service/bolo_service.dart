@@ -103,7 +103,7 @@ class BoloService {
 
   Future<Response> contributeSessionCompleted() async {
     const url = ApiUrl.contributeSessionCompleteUrl;
-    String sessionId = "sessionId";
+    String sessionId = "00b768ff-1937-4d94-9536-fd886bb47714";
     final body = jsonEncode({
       'sessionId': sessionId,
     });

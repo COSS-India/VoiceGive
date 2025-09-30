@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/widgets/bolo_validate_section.dart';
+import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
 import 'package:bhashadaan/screens/bolo_india/widgets/actions_section.dart';
 import 'package:bhashadaan/screens/bolo_india/widgets/bolo_headers_section.dart';
 import 'package:bhashadaan/screens/bolo_india/widgets/language_selection.dart';
@@ -22,6 +23,14 @@ class _BoloValidationScreenState extends State<BoloValidationScreen>
   late AnimationController _scaleController;
   late Animation<double> _scaleAnimation;
   bool isCompleted = false;
+  LanguageModel selectedLanguage = LanguageModel(
+      languageName: "Marathi",
+      nativeName: "मराठी",
+      isActive: true,
+      languageCode: "mr",
+      region: "India",
+      speakers: "");
+
   @override
   void initState() {
     super.initState();
@@ -77,10 +86,14 @@ class _BoloValidationScreenState extends State<BoloValidationScreen>
                         SizedBox(height: 16.w),
                         LanguageSelection(
                           description: "Select language for validation",
-                          onLanguageChanged: (value) {},
+                          onLanguageChanged: (value) {
+                            selectedLanguage = value;
+                            setState(() {});
+                          },
                         ),
                         SizedBox(height: 24.w),
                         BoloValidateSection(
+                          languageModel: selectedLanguage,
                           onComplete: () {
                             setState(() {
                               isCompleted = true;
@@ -93,11 +106,11 @@ class _BoloValidationScreenState extends State<BoloValidationScreen>
                 ],
               ),
             ),
-            isCompleted
-                ? Positioned(
-                    child: _buildConfetti(),
-                  )
-                : SizedBox()
+            // isCompleted
+            //     ? Positioned(
+            //         child: _buildConfetti(),
+            //       )
+            //     : SizedBox()
           ],
         ),
       ),

@@ -1,5 +1,8 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
+import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
+import 'package:bhashadaan/screens/bolo_india/repository/bolo_validate_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_validation_screen/widgets/audio_player_buttons.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
@@ -9,7 +12,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BoloValidateSection extends StatefulWidget {
   final Function() onComplete;
-  const BoloValidateSection({super.key, required this.onComplete});
+  final LanguageModel languageModel;
+  const BoloValidateSection(
+      {super.key, required this.onComplete, required this.languageModel});
 
   @override
   State<BoloValidateSection> createState() => _BoloValidateSectionState();
@@ -18,87 +23,125 @@ class BoloValidateSection extends StatefulWidget {
 class _BoloValidateSectionState extends State<BoloValidateSection> {
   ValueNotifier<bool> enableActionButtons = ValueNotifier<bool>(false);
 
-  List<String> recordedTexts = [
-    "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-    "माझ्या आईला तुझी भेट झाली होती.",
-    "आज हवामान खूप छान आहे.",
-    "आपण उद्या भेटू या.",
-    "मला पुस्तक वाचायला आवडते.",
-  ];
+  List<ValidationItem> recordedTexts = [];
 
   int currentIndex = 0;
+  late Future<ValidationQueueModel?> getValidationsQueue;
+
+  @override
+  void initState() {
+    getValidationsQueue = BoloValidateRepository().getValidationsQueue(
+        language: widget.languageModel.languageCode, count: 5);
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant BoloValidateSection oldWidget) {
+    // TODO: implement
+    if (oldWidget.languageModel.languageCode !=
+        widget.languageModel.languageCode) {
+      getValidationsQueue = BoloValidateRepository().getValidationsQueue(
+          language: widget.languageModel.languageCode, count: 5);
+      setState(() {});
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
-    double progress = (currentIndex + 1) / recordedTexts.length;
+    return FutureBuilder<ValidationQueueModel?>(
+        future: getValidationsQueue,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 150.0),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          } else if (!snapshot.hasData ||
+              snapshot.data == null ||
+              snapshot.data!.validationItems.isEmpty) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 150.0),
+              child: Center(
+                  child: Text('No data available for the selected language')),
+            );
+          }
+          if (snapshot.data != null) {
+            double progress =
+                (currentIndex + 1) / snapshot.data!.validationItems.length;
+            recordedTexts = snapshot.data!.validationItems;
 
-    return Container(
-      padding: EdgeInsets.all(12).r,
-      decoration: BoxDecoration(
-        color: AppColors.lightGreen3,
-        borderRadius: BorderRadius.circular(8).r,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Spacer(),
-              Text(
-                "${currentIndex + 1}/${recordedTexts.length}",
-                style: GoogleFonts.notoSans(
-                  fontSize: 12.sp,
-                  color: AppColors.darkGreen,
-                  fontWeight: FontWeight.w600,
-                ),
+            return Container(
+              padding: EdgeInsets.all(12).r,
+              decoration: BoxDecoration(
+                color: AppColors.lightGreen3,
+                borderRadius: BorderRadius.circular(8).r,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-            ],
-          ),
-          SizedBox(height: 12.w),
-          SizedBox(
-            height: 4.0,
-            child: LinearProgressIndicator(
-              value: progress,
-              backgroundColor: AppColors.lightGreen4,
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
-            ),
-          ),
-          SizedBox(height: 24.w),
-          Padding(
-            padding: EdgeInsets.only(left: 32, right: 32).r,
-            child: Text(
-              recordedTexts[currentIndex],
-              style: GoogleFonts.notoSans(
-                fontSize: 16.sp,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "${currentIndex + 1}/${recordedTexts.length}",
+                        style: GoogleFonts.notoSans(
+                          fontSize: 12.sp,
+                          color: AppColors.darkGreen,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12.w),
+                  SizedBox(
+                    height: 4.0,
+                    child: LinearProgressIndicator(
+                      value: progress,
+                      backgroundColor: AppColors.lightGreen4,
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+                    ),
+                  ),
+                  SizedBox(height: 24.w),
+                  Padding(
+                    padding: EdgeInsets.only(left: 32, right: 32).r,
+                    child: Text(
+                      recordedTexts[currentIndex].text,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 16.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 30.w),
+                  AudioPlayerButtons(
+                    audioUrl: recordedTexts[currentIndex].audioContent,
+                    playerStatus: (value) {
+                      if (value == AudioPlayerButtonState.completed ||
+                          value == AudioPlayerButtonState.replay) {
+                        enableActionButtons.value = true;
+                      }
+                    },
+                  ),
+                  SizedBox(height: 30.w),
+                  actionButtons(),
+                  SizedBox(height: 30.w),
+                ],
               ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(height: 30.w),
-          AudioPlayerButtons(
-            audioUrl: recordedTexts[currentIndex],
-            playerStatus: (value) {
-              if (value == AudioPlayerButtonState.completed ||
-                  value == AudioPlayerButtonState.replay) {
-                enableActionButtons.value = true;
-              }
-            },
-          ),
-          SizedBox(height: 30.w),
-          actionButtons(),
-          SizedBox(height: 30.w),
-        ],
-      ),
-    );
+            );
+          }
+          return SizedBox();
+        });
   }
 
   Widget actionButtons() {

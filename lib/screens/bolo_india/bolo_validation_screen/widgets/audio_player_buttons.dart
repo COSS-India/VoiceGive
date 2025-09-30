@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,8 +13,11 @@ class AudioPlayerButtons extends StatefulWidget {
   final String audioUrl;
   final Function(AudioPlayerButtonState?) playerStatus;
 
-  const AudioPlayerButtons(
-      {super.key, required this.playerStatus, required this.audioUrl});
+  const AudioPlayerButtons({
+    super.key,
+    required this.playerStatus,
+    required this.audioUrl,
+  });
 
   @override
   State<AudioPlayerButtons> createState() => _AudioPlayerButtonsState();
@@ -20,25 +25,60 @@ class AudioPlayerButtons extends StatefulWidget {
 
 class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
     with SingleTickerProviderStateMixin {
-  static const int audioDurationSeconds = 3;
+  late AudioPlayer _audioPlayer;
   AudioPlayerButtonState _state = AudioPlayerButtonState.idle;
   late AnimationController _controller;
-  Timer? _playbackTimer;
-  int _remainingSeconds = audioDurationSeconds;
+  Duration? _audioDuration;
+  Duration _position = Duration.zero;
+  StreamSubscription? _durationSub;
+  StreamSubscription? _positionSub;
+  StreamSubscription? _stateSub;
 
   @override
   void initState() {
     super.initState();
+    _audioPlayer = AudioPlayer();
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     );
+
+    _durationSub = _audioPlayer.onDurationChanged.listen((duration) {
+      setState(() {
+        _audioDuration = duration;
+      });
+    });
+
+    _positionSub = _audioPlayer.onPositionChanged.listen((pos) {
+      setState(() {
+        _position = pos;
+        if (_audioDuration != null && pos >= _audioDuration!) {
+          _controller.stop();
+          _state = AudioPlayerButtonState.replay;
+          widget.playerStatus.call(_state);
+        }
+      });
+    });
+
+    _stateSub = _audioPlayer.onPlayerStateChanged.listen((playerState) {
+      if (playerState == PlayerState.completed) {
+        setState(() {
+          _controller.stop();
+          _state = AudioPlayerButtonState.replay;
+        });
+        widget.playerStatus.call(_state);
+      }
+    });
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _playbackTimer?.cancel();
+    _audioPlayer.dispose();
+    _durationSub?.cancel();
+    _positionSub?.cancel();
+    _stateSub?.cancel();
     super.dispose();
   }
 
@@ -49,75 +89,67 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
       setState(() {
         _state = AudioPlayerButtonState.idle;
         _controller.reset();
-        _playbackTimer?.cancel();
-        _remainingSeconds = audioDurationSeconds;
+        _audioPlayer.stop();
+        _position = Duration.zero;
       });
     }
   }
 
-  void _startPlayback() {
-    _controller.repeat();
-    _remainingSeconds = audioDurationSeconds;
-    _playbackTimer?.cancel();
-    _playbackTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  Future<void> _startPlayback() async {
+    if (isMp3OrWavBase64(widget.audioUrl)) {
+      Uint8List audioBytes = base64Decode(widget.audioUrl);
+
+      await _audioPlayer.play(BytesSource(audioBytes));
+      _controller.repeat();
+    } else {
+      // Handle invalid audio data
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Invalid audio data')),
+      );
       setState(() {
-        _remainingSeconds--;
-        if (_remainingSeconds <= 0) {
-          timer.cancel();
-          _controller.stop();
-          _state = AudioPlayerButtonState.replay;
-          widget.playerStatus.call(_state);
-        }
+        _state = AudioPlayerButtonState.idle;
       });
-    });
+    }
   }
 
-  void _pausePlayback() {
+  Future<void> _pausePlayback() async {
+    await _audioPlayer.pause();
     _controller.stop();
-    _playbackTimer?.cancel();
   }
 
-  void _resumePlayback() {
+  Future<void> _resumePlayback() async {
+    await _audioPlayer.resume();
     _controller.repeat();
-    _playbackTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _remainingSeconds--;
-        if (_remainingSeconds <= 0) {
-          timer.cancel();
-          _controller.stop();
-          _state = AudioPlayerButtonState.replay;
-          widget.playerStatus.call(_state);
-        }
-      });
-    });
   }
 
-  void _toggleState() {
-    setState(() {
-      switch (_state) {
-        case AudioPlayerButtonState.idle:
-          _state = AudioPlayerButtonState.playing;
-          _startPlayback();
-          break;
-        case AudioPlayerButtonState.playing:
-          _state = AudioPlayerButtonState.paused;
-          _pausePlayback();
-          break;
-        case AudioPlayerButtonState.paused:
-          _state = AudioPlayerButtonState.playing;
-          _resumePlayback();
-          break;
-        case AudioPlayerButtonState.replay || AudioPlayerButtonState.completed:
-          _state = AudioPlayerButtonState.playing;
-          _startPlayback();
-          break;
-      }
-    });
+  Future<void> _toggleState() async {
+    switch (_state) {
+      case AudioPlayerButtonState.idle:
+        setState(() => _state = AudioPlayerButtonState.playing);
+        await _startPlayback();
+        break;
+      case AudioPlayerButtonState.playing:
+        setState(() => _state = AudioPlayerButtonState.paused);
+        await _pausePlayback();
+        break;
+      case AudioPlayerButtonState.paused:
+        setState(() => _state = AudioPlayerButtonState.playing);
+        await _resumePlayback();
+        break;
+      case AudioPlayerButtonState.replay:
+      case AudioPlayerButtonState.completed:
+        setState(() => _state = AudioPlayerButtonState.playing);
+        await _startPlayback();
+        break;
+    }
     widget.playerStatus.call(_state);
   }
 
   TextStyle get _textStyle => GoogleFonts.notoSans(
-      fontSize: 20.sp, fontWeight: FontWeight.w600, color: AppColors.darkGreen);
+        fontSize: 20.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.darkGreen,
+      );
 
   Widget _buildPulsingIndicator() {
     return SizedBox(
@@ -135,7 +167,6 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
                     final progress = (_controller.value + index / 3) % 1.0;
                     final scale = 1.0 + progress * 2.0;
                     final opacity = (1 - progress).clamp(0.0, 1.0);
-
                     return Transform.scale(
                       scale: scale,
                       child: Container(
@@ -186,7 +217,8 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
             backgroundColor: AppColors.lightGreen.withOpacity(0.9),
             child: Icon(icon, size: 40.sp, color: Colors.white));
         break;
-      case AudioPlayerButtonState.replay || AudioPlayerButtonState.completed:
+      case AudioPlayerButtonState.replay:
+      case AudioPlayerButtonState.completed:
         text = "Replay Recording";
         icon = Icons.replay;
         buttonContent = CircleAvatar(
@@ -212,5 +244,31 @@ class _AudioPlayerButtonsState extends State<AudioPlayerButtons>
   @override
   Widget build(BuildContext context) {
     return _buildContent();
+  }
+
+  bool isMp3OrWavBase64(String base64Str) {
+    Uint8List bytes;
+    try {
+      bytes = base64Decode(base64Str);
+    } catch (_) {
+      return false;
+    }
+
+    if (bytes.length < 4) return false;
+
+    // MP3 magic numbers
+    if ((bytes[0] == 255 && bytes[1] == 251) || // FF FB
+        (bytes[0] == 73 && bytes[1] == 68 && bytes[2] == 51)) {
+      // ID3
+      return true;
+    }
+
+    // WAV magic number
+    if (bytes[0] == 82 && bytes[1] == 73 && bytes[2] == 70 && bytes[3] == 70) {
+      // RIFF
+      return true;
+    }
+
+    return false;
   }
 }

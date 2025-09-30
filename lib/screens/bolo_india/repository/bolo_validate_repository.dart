@@ -22,7 +22,7 @@ class BoloValidateRepository {
         }
       }
     } catch (e) {
-      throw Exception('Failed to fetch validation queue: $e');
+      return null;
     }
     return null;
   }
