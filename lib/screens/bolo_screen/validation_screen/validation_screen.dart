@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/screens/bolo_screen/validation_screen/widgets/bolo_validate_section.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/actions_section.dart';
