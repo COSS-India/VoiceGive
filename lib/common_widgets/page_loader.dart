@@ -5,7 +5,6 @@ class PageLoader extends StatelessWidget {
   final double top;
   final double bottom;
   final double strokeWidth;
-  final bool isLoginPage;
   final bool isLightTheme;
 
   const PageLoader(
@@ -13,17 +12,15 @@ class PageLoader extends StatelessWidget {
       this.top = 0,
       this.bottom = 0,
       this.isLightTheme = true,
-      this.isLoginPage = false,
       this.strokeWidth = 4.0})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: isLoginPage ? AppColors.appBarBackground : Colors.transparent,
         margin: EdgeInsets.only(top: top, bottom: bottom),
         child: Center(
             child: CircularProgressIndicator(
-          color: isLightTheme ? AppColors.darkBlue : AppColors.appBarBackground,
+          color: isLightTheme ? AppColors.orange : AppColors.appBarBackground,
           strokeWidth: strokeWidth,
         )));
   }

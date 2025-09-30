@@ -403,14 +403,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                       ),
                                     );
-                                  } else if (!selectionsValid) {
-                                    // Do not change border color; just show inline message
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(AppLocalizations.of(
-                                                  context)!
-                                              .pleaseSelectAgeGroupAndGender)),
-                                    );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

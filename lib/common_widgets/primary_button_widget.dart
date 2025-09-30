@@ -17,20 +17,19 @@ class PrimaryButtonWidget extends StatelessWidget {
   final double? horizontalPadding;
   final FontWeight? fontWeight;
 
-  const PrimaryButtonWidget({
-    super.key,
-    required this.title,
-    this.prefix,
-    this.onTap,
-    this.decoration,
-    this.textColor,
-    this.textFontSize,
-    this.isLoading,
-    this.isLightTheme,
-    this.verticalPadding,
-    this.horizontalPadding,
-    this.fontWeight
-  });
+  const PrimaryButtonWidget(
+      {super.key,
+      required this.title,
+      this.prefix,
+      this.onTap,
+      this.decoration,
+      this.textColor,
+      this.textFontSize,
+      this.isLoading,
+      this.isLightTheme,
+      this.verticalPadding,
+      this.horizontalPadding,
+      this.fontWeight});
 
   @override
   Widget build(BuildContext context) {

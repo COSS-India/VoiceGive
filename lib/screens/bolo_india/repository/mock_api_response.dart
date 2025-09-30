@@ -6,51 +6,51 @@ class MockApiResponse {
     "sessionId": "session-123-abc",
     "language": "Marathi",
     "sentences": [
-      {
-        "sentenceId": "sent-12345",
-        "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-        "sequenceNumber": 1,
-        "metadata": {
-          "category": "string",
-          "difficulty": "string"
-        }
-      },
-      {
-        "sentenceId": "sent-12345",
-        "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-        "sequenceNumber": 1,
-        "metadata": {
-          "category": "string",
-          "difficulty": "string"
-        }
-      },
-      {
-        "sentenceId": "sent-12345",
-        "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-        "sequenceNumber": 1,
-        "metadata": {
-          "category": "string",
-          "difficulty": "string"
-        }
-      },
-      {
-        "sentenceId": "sent-12345",
-        "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-        "sequenceNumber": 1,
-        "metadata": {
-          "category": "string",
-          "difficulty": "string"
-        }
-      },
-      {
-        "sentenceId": "sent-12345",
-        "text": "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
-        "sequenceNumber": 1,
-        "metadata": {
-          "category": "string",
-          "difficulty": "string"
-        }
-      }
+     {
+    "sentenceId": "sent-001",
+    "text": "आपण उद्या सहलीसाठी निघणार आहोत.",
+    "sequenceNumber": 1,
+    "metadata": {
+      "category": "travel",
+      "difficulty": "easy"
+    }
+  },
+  {
+    "sentenceId": "sent-002",
+    "text": "पक्षी उडताना फार सुंदर दिसतात.",
+    "sequenceNumber": 2,
+    "metadata": {
+      "category": "nature",
+      "difficulty": "medium"
+    }
+  },
+  {
+    "sentenceId": "sent-003",
+    "text": "शाळेतील कार्यक्रम खूप छान होता.",
+    "sequenceNumber": 3,
+    "metadata": {
+      "category": "education",
+      "difficulty": "easy"
+    }
+  },
+  {
+    "sentenceId": "sent-004",
+    "text": "संगणकावर काम करताना लक्ष द्यावे.",
+    "sequenceNumber": 4,
+    "metadata": {
+      "category": "technology",
+      "difficulty": "medium"
+    }
+  },
+  {
+    "sentenceId": "sent-005",
+    "text": "आम्ही नवीन खेळ खेळलो.",
+    "sequenceNumber": 5,
+    "metadata": {
+      "category": "sports",
+      "difficulty": "easy"
+    }
+  }
     ],
     "totalCount": 5
   }

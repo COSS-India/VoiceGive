@@ -16,7 +16,14 @@ class OtherInformationScreen extends StatefulWidget {
   final String gender;
   final String phoneNumber;
   final String? email;
-  const OtherInformationScreen({super.key, required this.firstName, required this.lastName, required this.ageGroup, required this.gender, required this.phoneNumber, this.email});
+  const OtherInformationScreen(
+      {super.key,
+      required this.firstName,
+      required this.lastName,
+      required this.ageGroup,
+      required this.gender,
+      required this.phoneNumber,
+      this.email});
 
   @override
   State<OtherInformationScreen> createState() => _OtherInformationScreenState();
@@ -44,10 +51,10 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   Future<void> fetchData() async {
-   List countryList = await ProfileRepository().getCountries();
-  //  List stateList = await ProfileRepository().getState(_country);
-  //  List districtsList = await ProfileRepository().getDistrict(_state);
-   List languagesList = await ProfileRepository().getLanguages();
+    List countryList = await ProfileRepository().getCountries();
+    //  List stateList = await ProfileRepository().getState(_country);
+    //  List districtsList = await ProfileRepository().getDistrict(_state);
+    List languagesList = await ProfileRepository().getLanguages();
   }
 
   Future<void> _pickFromList({
@@ -317,55 +324,66 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           child: SizedBox(
                             width: 280.w,
                             child: ElevatedButton(
-                            onPressed: () async {
-                              if (_district == null) {
-                                setState(() => _showDistrictError = true);
-                                final ctx = _districtFieldKey.currentContext;
-                                if (ctx != null) {
-                                  Future.microtask(() =>
-                                      Scrollable.ensureVisible(
-                                        ctx,
-                                        duration:
-                                            const Duration(milliseconds: 250),
-                                        alignment: 0.1,
-                                      ));
-                                }
-                                return;
-                              }
-                              dynamic userData = await ProfileRepository().registration(firstName: widget.firstName, lastName: widget.lastName, ageGroup: widget.ageGroup, gender: widget.gender, mobileNo: widget.phoneNumber, country: _country, state: _state, district: _districtController.text, email: widget.email, preferredLanguage: _preferredLanguage);
-                                  if(userData is String){
-                                    if (!mounted) return;
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                            content: Text(userData),
-                                      ),
-                                    );
-                                    return;
+                              onPressed: () async {
+                                if (_district == null) {
+                                  setState(() => _showDistrictError = true);
+                                  final ctx = _districtFieldKey.currentContext;
+                                  if (ctx != null) {
+                                    Future.microtask(() =>
+                                        Scrollable.ensureVisible(
+                                          ctx,
+                                          duration:
+                                              const Duration(milliseconds: 250),
+                                          alignment: 0.1,
+                                        ));
                                   }
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (_) => const BoloGetStarted(),
+                                  return;
+                                }
+                                dynamic userData = await ProfileRepository()
+                                    .registration(
+                                        firstName: widget.firstName,
+                                        lastName: widget.lastName,
+                                        ageGroup: widget.ageGroup,
+                                        gender: widget.gender,
+                                        mobileNo: widget.phoneNumber,
+                                        country: _country,
+                                        state: _state,
+                                        district: _districtController.text,
+                                        email: widget.email,
+                                        preferredLanguage: _preferredLanguage);
+                                if (userData is String) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(userData),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (_) => const BoloGetStarted(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.orange,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.r),
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.r),
+                                padding: EdgeInsets.symmetric(vertical: 16.w),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 16.w),
-                            ),
-                            child: Text(
-                              AppLocalizations.of(context)!.saveAndContinue,
-                              style: GoogleFonts.notoSans(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
+                              child: Text(
+                                AppLocalizations.of(context)!.saveAndContinue,
+                                style: GoogleFonts.notoSans(
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
                       ],
                     ),
                   ),
