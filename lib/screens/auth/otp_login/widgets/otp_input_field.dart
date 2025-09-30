@@ -66,15 +66,15 @@ class _OtpInputFieldState extends State<OtpInputField> {
     }
   }
 
-  void _onPaste(String value) {
-    if (value.length == 6) {
-      for (int i = 0; i < 6; i++) {
-        _controllers[i].text = value[i];
-      }
-      _focusNodes[5].unfocus();
-      _updateOtp();
-    }
-  }
+  // void _onPaste(String value) {
+  //   if (value.length == 6) {
+  //     for (int i = 0; i < 6; i++) {
+  //       _controllers[i].text = value[i];
+  //     }
+  //     _focusNodes[5].unfocus();
+  //     _updateOtp();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -16,16 +16,10 @@ The UI is built on a Swagger API specification, making it adaptable for differen
 Before setting up the VoiceGive project, ensure you have the following software and tools installed:
 
 ### Required Software
-- **Flutter SDK** (3.6.0 or higher)
-- **Dart SDK** (included with Flutter)
-- **Android Studio** (latest stable version)
-- **Git** (for version control)
-- **Java Development Kit (JDK)** (version 11 or higher)
-
-### Optional but Recommended
-- **Visual Studio Code** with Flutter and Dart extensions
-- **Android Device** or **Android Emulator**
-- **iOS Device** and **Xcode** (for iOS development)
+- **Flutter 3.27.1 • channel [user-branch] • unknown source
+- **Framework • revision 17025dd882 (10 months ago) • 2024-12-17 03:23:09 +0900
+- **Engine • revision cb4b5fff73
+- **Tools • Dart 3.6.0 • DevTools 2.40.2
 
 ## System Requirements
 
@@ -107,7 +101,7 @@ flutter doctor
 ```
 
 Ensure all checks pass, especially:
-- ✅ Flutter (Channel stable, 3.6.0 or higher)
+- ✅ Flutter (Channel stable, Flutter 3.27.1)
 - ✅ Android toolchain - develop for Android devices
 - ✅ Android Studio (version 2022.1 or higher)
 - ✅ VS Code (optional but recommended)
@@ -136,8 +130,6 @@ Add the following content to `.env.development`:
 ```env
 # API Configuration
 API_BASE_URL=https://example.com
-API_ORIGIN_URL=https://example.com
-API_REFERER_URL=https://example.com/
 ```
 
 #### For Staging
@@ -150,8 +142,6 @@ Add the following content to `.env.staging`:
 ```env
 # API Configuration
 API_BASE_URL=https://staging.example.com
-API_ORIGIN_URL=https://staging.example.com
-API_REFERER_URL=https://staging.example.com/
 ```
 
 #### For Production
@@ -164,8 +154,6 @@ Add the following content to `.env.production`:
 ```env
 # API Configuration
 API_BASE_URL=https://production.example.com
-API_ORIGIN_URL=https://production.example.com
-API_REFERER_URL=https://production.example.com/
 ```
 
 ### 2. Verify Environment Configuration
@@ -187,8 +175,6 @@ Expected output should show:
 Ensure each environment file contains the following required variables that match `lib/config/app_config.dart`:
 
 - `API_BASE_URL` - The base URL for API endpoints
-- `API_ORIGIN_URL` - The origin URL for CORS headers
-- `API_REFERER_URL` - The referer URL for CORS headers  
 
 **Note**: Replace the placeholder bearer tokens with actual values for each environment.
 
@@ -217,6 +203,7 @@ flutter pub outdated
 ```bash
 flutter clean
 flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## Android Setup

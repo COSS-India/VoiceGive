@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/constants/helper.dart';
 import 'package:bhashadaan/screens/bolo_india/models/bolo_validate_model.dart';
 import 'package:bhashadaan/screens/bolo_india/models/language_model.dart';
-import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
 import 'package:bhashadaan/screens/bolo_india/models/validation_submit_model.dart';
 import 'package:bhashadaan/screens/bolo_india/repository/bolo_validate_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -83,7 +80,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
                 borderRadius: BorderRadius.circular(8).r,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.grey.withValues(alpha: 0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
                     offset: const Offset(0, 3),
@@ -224,7 +221,6 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
       }
     } else {
       widget.onComplete();
-      SessionCompletedModel? data =
           await BoloValidateRepository().validateSessionCompleted();
       Future.delayed(const Duration(seconds: 3), () {
         if (mounted) {
