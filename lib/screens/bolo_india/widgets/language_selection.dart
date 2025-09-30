@@ -20,13 +20,29 @@ class _LanguageSelectionState extends State<LanguageSelection> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          widget.description,
-          style: GoogleFonts.notoSans(
-              fontSize: 12.sp,
-              color: AppColors.darkGreen,
-              fontWeight: FontWeight.w500),
+        Padding(
+          padding: EdgeInsets.only(left: 12).r,
+          child: Expanded(
+            child: SizedBox(
+              height: 18.h,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  widget.description,
+                  maxLines: 1,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.notoSans(
+                      fontSize: 12.sp,
+                      height: 18 / 12,
+                      color: AppColors.darkGreen,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ),
         ),
         Spacer(),
         InkWell(

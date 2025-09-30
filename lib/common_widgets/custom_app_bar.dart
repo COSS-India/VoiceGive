@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'image_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -40,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'Bhasha',
+                  text: AppLocalizations.of(context)!.bhasha,
                   style: GoogleFonts.notoSans(
                     color: AppColors.darkBlue,
                     fontSize: 18.sp,
@@ -48,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 TextSpan(
-                  text: 'Daan',
+                  text: AppLocalizations.of(context)!.daan,
                   style: GoogleFonts.notoSans(
                     color: AppColors.saffron,
                     fontSize: 18.sp,
@@ -66,7 +67,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               end: Alignment.bottomRight,
             ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
             child: Text(
-              'AgriDaan',
+              AppLocalizations.of(context)!.agriDaan,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.sp,

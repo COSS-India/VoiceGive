@@ -16,7 +16,7 @@ class HowItWorksSection extends StatelessWidget {
           AppLocalizations.of(context)!.howItWorks,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
-            fontSize: 20.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -50,7 +50,7 @@ class HowItWorksSection extends StatelessWidget {
       required String iconPath}) {
     return Container(
       width: 120.w,
-      height: 156.w,
+      height: 160.w,
       padding: EdgeInsets.all(10).r,
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.lightGreen),
@@ -72,7 +72,7 @@ class HowItWorksSection extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.notoSans(
-              fontSize: 12.sp,
+              fontSize: 10.sp,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,

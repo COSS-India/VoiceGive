@@ -27,10 +27,11 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
   ];
 
   int currentIndex = 0;
+  static const int totalItems = 25;
 
   @override
   Widget build(BuildContext context) {
-    double progress = (currentIndex + 1) / recordedTexts.length;
+    double progress = (currentIndex + 1) / totalItems;
 
     return Container(
       padding: EdgeInsets.all(12).r,
@@ -52,7 +53,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
             children: [
               const Spacer(),
               Text(
-                "${currentIndex + 1}/${recordedTexts.length}",
+                "${currentIndex + 1}/$totalItems",
                 style: GoogleFonts.notoSans(
                   fontSize: 12.sp,
                   color: AppColors.darkGreen,
@@ -74,7 +75,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
             child: Text(
-              recordedTexts[currentIndex],
+              recordedTexts[currentIndex % recordedTexts.length],
               style: GoogleFonts.notoSans(
                 fontSize: 16.sp,
                 color: Colors.black,
@@ -85,7 +86,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
           ),
           SizedBox(height: 30.w),
           AudioPlayerButtons(
-            audioUrl: recordedTexts[currentIndex],
+            audioUrl: recordedTexts[currentIndex % recordedTexts.length],
             playerStatus: (value) {
               if (value == AudioPlayerButtonState.completed ||
                   value == AudioPlayerButtonState.replay) {
@@ -148,7 +149,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
 
   void onValidate(bool isCorrect) {
     enableActionButtons.value = false;
-    if (currentIndex < recordedTexts.length - 1) {
+    if (currentIndex < totalItems - 1) {
       setState(() {
         currentIndex++;
       });

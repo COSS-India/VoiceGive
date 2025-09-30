@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../constants/app_constants.dart';
 import '../model/gender_model.dart';
-import '../widgets/email_widget.dart';
 import '../widgets/name_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -95,8 +95,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) =>
-              OtpVerificationScreen(phoneNumber: widget.phoneNumber!, countryCode: widget.countryCode!),
+          builder: (_) => OtpVerificationScreen(
+              phoneNumber: widget.phoneNumber!,
+              countryCode: widget.countryCode!),
         ),
       );
     } else {
@@ -113,13 +114,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
           return;
         }
-      _navigateBackToOtp();},
+        _navigateBackToOtp();
+      },
       child: Scaffold(
         appBar: const CustomAppBar(),
         backgroundColor: Colors.white,
@@ -178,12 +179,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           SizedBox(height: 16.h),
                           // First name
-                          NameWidget(nameController: _firstNameController, helperText: AppLocalizations.of(context)!.firstName, emptyErrorMsg: AppLocalizations.of(context)!
-                        .firstNameMandatory,),
+                          NameWidget(
+                            nameController: _firstNameController,
+                            helperText: AppLocalizations.of(context)!.firstName,
+                            emptyErrorMsg: AppLocalizations.of(context)!
+                                .firstNameMandatory,
+                          ),
                           SizedBox(height: 16.h),
                           // Last name
-                          NameWidget(nameController: _lastNameController, helperText: AppLocalizations.of(context)!.lastName, emptyErrorMsg: AppLocalizations.of(context)!
-                        .lastNameMandatory,),
+                          NameWidget(
+                            nameController: _lastNameController,
+                            helperText: AppLocalizations.of(context)!.lastName,
+                            emptyErrorMsg:
+                                AppLocalizations.of(context)!.lastNameMandatory,
+                          ),
                           SizedBox(height: 16.h),
                           // Age group picker (read-only TextField with in-box label)
                           KeyedSubtree(
@@ -325,65 +334,110 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           SizedBox(height: 16.h),
                           // Email
-                          EmailWidget(emailController: _emailController),
+                          TextFormField(
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.emailId,
+                              labelStyle: GoogleFonts.notoSans(
+                                  color: AppColors.greys60, fontSize: 14.sp),
+                              enabledBorder: _outline(AppColors.darkGrey),
+                              focusedBorder: _outline(AppColors.darkGrey),
+                              errorBorder: _outline(AppColors.negativeLight),
+                              focusedErrorBorder:
+                                  _outline(AppColors.negativeLight),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12.w, vertical: 12.w),
+                            ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (String? value) {
+                              if (value != null && value.isNotEmpty) {
+                                String? matchedString = RegExpressions
+                                    .validEmail
+                                    .stringMatch(value);
+                                if (matchedString == null ||
+                                    matchedString.isEmpty ||
+                                    matchedString.length != value.length) {
+                                  return AppLocalizations.of(context)!
+                                      .enterValidEmail;
+                                }
+                                return null;
+                              } else {
+                                return null;
+                              }
+                            },
+                            style: GoogleFonts.notoSans(
+                                color: AppColors.greys87,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
                           SizedBox(height: 60.h),
                           Center(
                             child: SizedBox(
                               width: 280.w,
                               child: ElevatedButton(
-                              onPressed: () async {
-                                final valid =
-                                    _formKey.currentState?.validate() ?? false;
-                                final selectionsValid =
-                                    _ageController.text.isNotEmpty &&
-                                        _genderController.text.isNotEmpty;
-                                setState(() {});
-                                if (valid && selectionsValid) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (_) => OtherInformationScreen(
-                                        firstName: _firstNameController.text,
-                                        lastName: _lastNameController.text,
-                                        ageGroup: getAgeGroupValue(_ageController.text),
-                                        gender: getGenderValue(_genderController.text),
-                                        phoneNumber: widget.phoneNumber ?? '',
-                                        email: _emailController.text.isNotEmpty
-                                            ? _emailController.text
-                                            : null,
+                                onPressed: () async {
+                                  final valid =
+                                      _formKey.currentState?.validate() ??
+                                          false;
+                                  final selectionsValid =
+                                      _ageController.text.isNotEmpty &&
+                                          _genderController.text.isNotEmpty;
+                                  setState(() {});
+                                  if (valid && selectionsValid) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => OtherInformationScreen(
+                                          firstName: _firstNameController.text,
+                                          lastName: _lastNameController.text,
+                                          ageGroup: getAgeGroupValue(
+                                              _ageController.text),
+                                          gender: getGenderValue(
+                                              _genderController.text),
+                                          phoneNumber: widget.phoneNumber ?? '',
+                                          email:
+                                              _emailController.text.isNotEmpty
+                                                  ? _emailController.text
+                                                  : null,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                } else if (!selectionsValid) {
-                                  // Do not change border color; just show inline message
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(AppLocalizations.of(
-                                                context)!
-                                            .pleaseSelectAgeGroupAndGender)),
-                                  );
-                                }else{ScaffoldMessenger.of(context).showSnackBar(
+                                    );
+                                  } else if (!selectionsValid) {
+                                    // Do not change border color; just show inline message
+                                    ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content: Text(AppLocalizations.of(context)!.registrationSubmitError))
-                                    );}
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.orange,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6.r),
+                                          content: Text(AppLocalizations.of(
+                                                  context)!
+                                              .pleaseSelectAgeGroupAndGender)),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(AppLocalizations.of(
+                                                  context)!
+                                              .pleaseSelectAgeGroupAndGender)),
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.orange,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.r),
+                                  ),
+                                  padding: EdgeInsets.symmetric(vertical: 16.w),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 16.w),
-                              ),
-                              child: Text(
-                                AppLocalizations.of(context)!.saveAndContinue,
-                                style: GoogleFonts.notoSans(
-                                  color: Colors.white,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.normal,
+                                child: Text(
+                                  AppLocalizations.of(context)!.saveAndContinue,
+                                  style: GoogleFonts.notoSans(
+                                    color: Colors.white,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
                         ],
                       ),
                     ),
@@ -396,14 +450,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-  
+
   Future<void> fetchData() async {
     _ageGroups = await ProfileRepository().getAgeGroup();
     _genders = await ProfileRepository().getGender();
     _ageList = _ageGroups.map((e) => e.label).toList();
     _genderList = _genders.map((e) => e.label).toList();
 
-    if(mounted) {
+    if (mounted) {
       setState(() {});
     }
   }
