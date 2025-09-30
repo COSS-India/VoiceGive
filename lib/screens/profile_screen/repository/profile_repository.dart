@@ -3,21 +3,24 @@ import 'package:flutter/material.dart';
 
 import '../model/age_group_model.dart';
 import '../model/country_model.dart';
+import '../model/district_model.dart';
 import '../model/gender_model.dart';
+import '../model/language_model.dart';
+import '../model/state_model.dart';
 import '../model/user_model.dart';
 
 class ProfileRepository {
   
-    Future<UserModel?> registration({required String firstName, required String lastName, required String ageGroup, required String gender, required String mobileNo, String? email, required String country, required String state, required String district, String? preferredLanguage}) async {
+    Future<dynamic> registration({required String firstName, required String lastName, required String ageGroup, required String gender, required String mobileNo, String? email, required String country, required String state, required String district, String? preferredLanguage}) async {
     try{
       var response = await ProfileService.registration(firstName: firstName, lastName: lastName, ageGroup: ageGroup, gender: gender, mobileNo: mobileNo, email: email, country: country, state: state, district: district, preferredLanguage: preferredLanguage);
     if(response['data'] == null){
-      return null;
+      return response['detail']!=null && response['detail'].isNotEmpty? response['detail'].first['msg'] : 'Error occurred during registration';
     }
     return UserModel.fromJson(response['data']);
     }catch(e){
       debugPrint(e.toString());
-      return null;
+      return 'Error occurred during registration';
     }
 
   }
@@ -72,17 +75,16 @@ class ProfileRepository {
     }
   }
 
-  Future<List<dynamic>> getState(String countryId) async {
+  Future<List<StateModel>> getState(String countryId) async {
     try{
       var response = await ProfileService.getState(countryId);
-    if(response['data'] == null){
+    if(response['data'] == null&&response['data']['states']){
       return [];
     }
-    return response['data'];
-    // List<StateModel> stateList = (response['data'] as List)
-    // .map((e) => StateModel.fromJson(e))
-    // .toList();
-    // return stateList;
+    List<StateModel> stateList = (response['data']['states'] as List)
+    .map((e) => StateModel.fromJson(e))
+    .toList();
+    return stateList;
     }catch(e){
       debugPrint(e.toString());
       return [];
@@ -90,16 +92,16 @@ class ProfileRepository {
 
   }
 
-  Future<List<dynamic>> getDistrict(String stateId) async {
+  Future<List<DistrictModel>> getDistrict(String stateId) async {
     try{
       var response = await ProfileService.getDistrict(stateId);
     if(response['data'] == null){
       return [];
     }
-    // List<DistrictModel> districtList = (response['data'] as List)
-    // .map((e) => DistrictModel.fromJson(e))
-    // .toList();
-    return response['data'];
+    List<DistrictModel> districtList = (response['data']['districts'] as List)
+    .map((e) => DistrictModel.fromJson(e))
+    .toList();
+    return districtList;
     }catch(e){
       debugPrint(e.toString());
       return [];
@@ -107,16 +109,16 @@ class ProfileRepository {
 
   }
 
-  Future<List<dynamic>> getLanguages() async {
+  Future<List<LanguageModel>> getLanguages() async {
     try{
       var response = await ProfileService.getLanguages();
     if(response['data'] == null){
       return [];
     }
-    // List<DistrictModel> districtList = (response['data'] as List)
-    // .map((e) => DistrictModel.fromJson(e))
-    // .toList();
-    return response['data'];
+    List<LanguageModel> languageList = (response['data'] as List)
+    .map((e) => LanguageModel.fromJson(e))
+    .toList();
+    return languageList;
     }catch(e){
       debugPrint(e.toString());
       return [];

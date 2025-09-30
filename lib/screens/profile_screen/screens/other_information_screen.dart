@@ -1,12 +1,16 @@
 import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/screens/profile_screen/model/country_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_india/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../model/district_model.dart';
+import '../model/language_model.dart';
+import '../model/state_model.dart';
 import '../repository/profile_repository.dart';
 
 class OtherInformationScreen extends StatefulWidget {
@@ -43,6 +47,10 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   List<String> _states = [];
   List<String> _districts = [];
   List<String> _languages = [];
+  List<CountryModel> countryList = [];
+  List<StateModel> stateList = [];
+  List<LanguageModel> languagesList = [];
+  List<DistrictModel> districtList = [];
 
   @override
   void initState() {
@@ -51,10 +59,13 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   Future<void> fetchData() async {
-    List countryList = await ProfileRepository().getCountries();
-    //  List stateList = await ProfileRepository().getState(_country);
-    //  List districtsList = await ProfileRepository().getDistrict(_state);
-    List languagesList = await ProfileRepository().getLanguages();
+    countryList = await ProfileRepository().getCountries();
+    languagesList = await ProfileRepository().getLanguages();
+    _countries = countryList.map((e) => e.countryName).toList();
+    _languages = languagesList.map((e) => e.languageName).toList();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> _pickFromList({
@@ -150,10 +161,19 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         // Country
                         GestureDetector(
                           onTap: () => _pickFromList(
-                            items: _countries,
-                            defaultItem: _country,
-                            onPicked: (v) => setState(() => _country = v),
-                          ),
+                              items: _countries,
+                              defaultItem: _country,
+                              onPicked: (v) async {
+                                _country = v;
+                                String countryId = getCountryId(_country);
+                                stateList = await ProfileRepository()
+                                    .getState(countryId);
+                                _states =
+                                    stateList.map((e) => e.stateName).toList();
+                                if (mounted) {
+                                  setState(() {});
+                                }
+                              }),
                           child: InputDecorator(
                             decoration: InputDecoration(
                               label: RichText(
@@ -191,11 +211,24 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         SizedBox(height: 16.h),
                         // State
                         GestureDetector(
-                          onTap: () => _pickFromList(
-                            items: _states,
-                            defaultItem: _state,
-                            onPicked: (v) => setState(() => _state = v),
-                          ),
+                          onTap: _states.isEmpty
+                              ? null
+                              : () => _pickFromList(
+                                    items: _states,
+                                    defaultItem: _state,
+                                    onPicked: (v) async {
+                                      _state = v;
+                                      String stateId = getStateId(_state);
+                                      districtList = await ProfileRepository()
+                                          .getDistrict(stateId);
+                                      _districts = districtList
+                                          .map((e) => e.districtName)
+                                          .toList();
+                                      if (mounted) {
+                                        setState(() {});
+                                      }
+                                    },
+                                  ),
                           child: InputDecorator(
                             decoration: InputDecoration(
                               label: RichText(
@@ -394,5 +427,17 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
         ),
       ),
     );
+  }
+
+  String getCountryId(String countryName) {
+    return countryList
+        .firstWhere((element) => element.countryName == countryName)
+        .countryId;
+  }
+
+  String getStateId(String stateName) {
+    return stateList
+        .firstWhere((element) => element.stateName == stateName)
+        .stateId;
   }
 }
