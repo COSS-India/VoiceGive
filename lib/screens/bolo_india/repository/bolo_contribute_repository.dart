@@ -2,24 +2,30 @@ import 'dart:convert';
 
 import 'package:bhashadaan/screens/bolo_india/models/bolo_contribute_sentence.dart';
 import 'package:bhashadaan/screens/bolo_india/models/session_completed_model.dart';
+import 'package:bhashadaan/screens/bolo_india/repository/mock_api_response.dart';
 import 'package:bhashadaan/screens/bolo_india/service/bolo_service.dart';
+
 import 'package:http/http.dart';
 
-class BoloRepository {
+class BoloContributeRepository {
   BoloService boloService = BoloService();
+
   Future<BoloContributeSentence?> getContributionSentances(
       {required String language, int? count}) async {
     try {
-      Response response = await boloService.getContributionSentances(
-          language: language, count: count);
-      if (response.statusCode == 200) {
-        var content = jsonDecode(response.body);
-        var data = content['data'];
-        if (data != null) {
-          return BoloContributeSentence.fromJson(data);
-        }
-      } else {
-        throw Exception('Failed to load sentences');
+      // Response response = await boloService.getContributionSentances(
+      //     language: language, count: count);
+      //if (response.statusCode == 200) {
+      //  var content = jsonDecode(response.body);
+      var content = jsonDecode(MockApiResponse.contributeSentencesResponse);
+
+      var data = content['data'];
+      if (data != null) {
+        return BoloContributeSentence.fromJson(data);
+        ;
+        //   }
+        // } else {
+        //   throw Exception('Failed to load sentences');
       }
     } catch (e) {
       throw Exception('Failed to load sentences: $e');

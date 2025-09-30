@@ -144,16 +144,23 @@ class _RecordingButtonState extends State<RecordingButton>
       case RecordingState.idle:
         return ImageWidget(
             imageUrl: "assets/images/record.png",
-            height: 240,
+            height: 150,
             width: 240,
             boxFit: BoxFit.contain);
 
       case RecordingState.recording:
-        return Icon(Icons.stop, size: 64.sp, color: AppColors.appBarBackground);
+        return SizedBox(
+          height: 150,
+          child: CircleAvatar(
+              radius: 36.r,
+              backgroundColor: AppColors.lightGreen,
+              child:
+                  Icon(Icons.stop_rounded, size: 45.sp, color: Colors.white)),
+        );
       case RecordingState.stopped:
         return ImageWidget(
             imageUrl: "assets/images/record.png",
-            height: 240,
+            height: 150,
             width: 240,
             boxFit: BoxFit.contain);
     }
@@ -211,14 +218,14 @@ class _RecordingButtonState extends State<RecordingButton>
         SizedBox(height: 12.w),
         GestureDetector(
           onTap: _toggleState,
-          child: SizedBox(
-            width: 240,
-            height: 240,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (_state == RecordingState.recording)
-                  AnimatedBuilder(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (_state == RecordingState.recording)
+                SizedBox(
+                  height: 60.w,
+                  width: 60.w,
+                  child: AnimatedBuilder(
                     animation: _controller,
                     builder: (context, child) {
                       return Stack(
@@ -242,9 +249,9 @@ class _RecordingButtonState extends State<RecordingButton>
                       );
                     },
                   ),
-                _buildIcon(),
-              ],
-            ),
+                ),
+              _buildIcon(),
+            ],
           ),
         ),
       ],
