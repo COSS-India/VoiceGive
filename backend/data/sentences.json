@@ -169,6 +169,27 @@
       "category": "agriculture",
       "difficulty": "hard",
       "topic": "water_management"
+    },
+    {
+      "sentenceId": "hi-003",
+      "text": "जैविक खेती से मिट्टी की उर्वरता बढ़ती है और पर्यावरण भी सुरक्षित रहता है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "organic_farming"
+    },
+    {
+      "sentenceId": "hi-004",
+      "text": "फसल चक्र अपनाकर किसान अपनी आय बढ़ा सकते हैं और मिट्टी को भी स्वस्थ रख सकते हैं।",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "crop_rotation"
+    },
+    {
+      "sentenceId": "hi-005",
+      "text": "सही समय पर बीज बोना और फसल की देखभाल करना अच्छी पैदावार के लिए जरूरी है।",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "farming_practices"
     }
   ],
   "English": [
@@ -185,6 +206,27 @@
       "category": "agriculture",
       "difficulty": "easy",
       "topic": "water_management"
+    },
+    {
+      "sentenceId": "en-003",
+      "text": "Organic farming helps improve soil fertility while protecting the environment.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "organic_farming"
+    },
+    {
+      "sentenceId": "en-004",
+      "text": "Crop rotation helps farmers increase their income and maintain healthy soil.",
+      "category": "agriculture",
+      "difficulty": "easy",
+      "topic": "crop_rotation"
+    },
+    {
+      "sentenceId": "en-005",
+      "text": "Planting seeds at the right time and caring for crops is essential for good harvest.",
+      "category": "agriculture",
+      "difficulty": "medium",
+      "topic": "farming_practices"
     }
   ]
 }
