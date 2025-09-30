@@ -2,7 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
@@ -36,7 +36,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   }
 
   void _initializeGetStartedData() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     getStartedData = [
       GetStartedModel(
         title: l10n.checkYourSetup,
@@ -45,7 +45,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
           GetStartedInstruction(
             title: l10n.pleaseTestYourSpeaker,
             description: l10n.pleaseTestYourSpeakerDescription,
-            iconPath: "assets/icons/play_icon.png",
+            iconPath: "assets/icons/support_icon.png",
           ),
           GetStartedInstruction(
             title: l10n.pleaseTestYourMicrophone,
@@ -76,7 +76,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
           GetStartedInstruction(
             title: l10n.tapRecordToStart,
             description: l10n.tapRecordToStartDescription,
-            iconPath: "assets/icons/mic_icon.png",
+            iconPath: "assets/icons/play_icon.png",
           ),
         ],
       ),
@@ -89,11 +89,58 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
       backgroundColor: Colors.white,
       appBar: const CustomAppBar(),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0).r,
-          child: Column(
-            children: [
-              Expanded(
+        child: Column(
+          children: [
+            // BOLO India header with back button (full-bleed, edge-to-edge)
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(16).r,
+              decoration: BoxDecoration(color: AppColors.orange),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(
+                      Icons.arrow_circle_left_outlined,
+                      color: Colors.white,
+                      size: 36.sp,
+                    ),
+                  ),
+                  SizedBox(width: 24.w),
+                  ImageWidget(
+                    height: 40.w,
+                    width: 40.w,
+                    imageUrl: "assets/images/bolo_icon_white.svg",
+                  ),
+                  SizedBox(width: 8.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "BOLO India",
+                        style: GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        "Enrich your language by donating your voice.",
+                        style: GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0).r,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: getStartedData.length,
@@ -147,30 +194,66 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                   },
                 ),
               ),
-              SizedBox(height: 16.w),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  getStartedData.length,
-                  (i) => AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    margin: EdgeInsets.symmetric(horizontal: 4.w),
-                    width: _currentPage == i ? 16.w : 8.w,
-                    height: 8.w,
-                    decoration: BoxDecoration(
-                      color: _currentPage == i
-                          ? AppColors.darkGreen
-                          : AppColors.grey16,
-                      borderRadius: BorderRadius.circular(8.w),
+            ),
+            SizedBox(height: 8.w),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Row(
+                children: [
+                  // Indicators (left)
+                  Row(
+                    children: List.generate(
+                      getStartedData.length,
+                      (i) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 4.w),
+                        width: _currentPage == i ? 16.w : 8.w,
+                        height: 8.w,
+                        decoration: BoxDecoration(
+                          color: _currentPage == i
+                              ? AppColors.orange
+                              : AppColors.grey16,
+                          borderRadius: BorderRadius.circular(8.w),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Spacer(),
+                  // Skip button (right)
+                  SizedBox(
+                    width: 130.w,
+                    child: PrimaryButtonWidget(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8).r,
+                        border: Border.all(color: AppColors.grey),
+                      ),
+                      title: AppLocalizations.of(context)!.skip,
+                      textColor: AppColors.grey84,
+                      textFontSize: 16.sp,
+                      verticalPadding: 12.w,
+                      horizontalPadding: 22.w,
+                      onTap: () {
+                        if (_currentPage == 0) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        } else {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BoloContribute(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 24.w),
-              actionButtons(),
-              SizedBox(height: 16.w),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -189,7 +272,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context).skip,
+                  title: AppLocalizations.of(context)!.skip,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     Navigator.pushReplacement(
@@ -209,7 +292,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context).next,
+                  title: AppLocalizations.of(context)!.next,
                   textColor: Colors.white,
                   onTap: () {
                     _pageController.nextPage(
@@ -232,7 +315,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context).previous,
+                  title: AppLocalizations.of(context)!.previous,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     _pageController.previousPage(
@@ -251,7 +334,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: AppLocalizations.of(context).finish,
+                  title: AppLocalizations.of(context)!.finish,
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.pushReplacement(

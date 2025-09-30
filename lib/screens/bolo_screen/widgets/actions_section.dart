@@ -1,5 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,15 +21,15 @@ class ActionsSection extends StatelessWidget {
         children: [
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).quickTips,
+              title: AppLocalizations.of(context)!.quickTips,
               icon: Icons.lightbulb_outline),
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).report,
+              title: AppLocalizations.of(context)!.report,
               icon: Icons.report_outlined),
           actionButton(
               onTap: () {},
-              title: AppLocalizations.of(context).testSpeakers,
+              title: AppLocalizations.of(context)!.testSpeakers,
               icon: Icons.volume_up_outlined),
         ],
       ),

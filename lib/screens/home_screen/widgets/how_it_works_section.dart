@@ -1,5 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +13,7 @@ class HowItWorksSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context).howItWorks,
+          AppLocalizations.of(context)!.howItWorks,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -25,16 +25,18 @@ class HowItWorksSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             cardWidget(
-                title: AppLocalizations.of(context).contribute,
-                description: AppLocalizations.of(context).speakClearlyAndRecord,
+                title: AppLocalizations.of(context)!.contribute,
+                description:
+                    AppLocalizations.of(context)!.speakClearlyAndRecord,
                 iconPath: 'assets/icons/contribute_icon.png'),
             cardWidget(
-                title: AppLocalizations.of(context).validate,
-                description: AppLocalizations.of(context).listenAndValidate,
+                title: AppLocalizations.of(context)!.validate,
+                description: AppLocalizations.of(context)!.listenAndValidate,
                 iconPath: 'assets/icons/validate_icon.png'),
             cardWidget(
-                title: AppLocalizations.of(context).earnCertificate,
-                description: AppLocalizations.of(context).earnCertificateDescription,
+                title: AppLocalizations.of(context)!.earnCertificate,
+                description:
+                    AppLocalizations.of(context)!.earnCertificateDescription,
                 iconPath: 'assets/icons/certificate_icon.png')
           ],
         ),

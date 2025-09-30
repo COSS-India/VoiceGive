@@ -8,7 +8,7 @@ import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_scre
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoloContentSection extends StatefulWidget {
   const BoloContentSection({
@@ -156,7 +156,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           SizedBox(
             width: 120.w,
             child: PrimaryButtonWidget(
-              title: AppLocalizations.of(context).skip,
+              title: AppLocalizations.of(context)!.skip,
               textFontSize: 16.sp,
               onTap: () => onSkip(),
               textColor: AppColors.orange,
@@ -174,7 +174,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
                 return SizedBox(
                   width: 120.w,
                   child: PrimaryButtonWidget(
-                    title: AppLocalizations.of(context).submit,
+                    title: AppLocalizations.of(context)!.submit,
                     textFontSize: 16.sp,
                     onTap: () => onSubmit(value),
                     textColor: Colors.white,
@@ -195,7 +195,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
   void onSkip() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context).skippedSuccessfully)),
+      SnackBar(content: Text(AppLocalizations.of(context)!.skippedSuccessfully)),
     );
     moveToNext();
   }

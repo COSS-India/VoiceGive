@@ -1,8 +1,7 @@
 import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
-import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,28 +16,24 @@ class HomeHeaderSection extends StatefulWidget {
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
   void _showConsentModal(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ValidationScreen()),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return InformedConsentModal(
+          onApprove: () {
+            Navigator.of(context).pop(); // Close the modal
+            Navigator.pushNamed(
+              context,
+              AppRoutes.otpVerification,
+            );
+          },
+          onDeny: () {
+            Navigator.of(context).pop(); // Close the modal
+          },
+        );
+      },
     );
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (BuildContext context) {
-    //     return InformedConsentModal(
-    //       onApprove: () {
-    //         Navigator.of(context).pop(); // Close the modal
-    //         Navigator.pushNamed(
-    //           context,
-    //           AppRoutes.otpVerification,
-    //         );
-    //       },
-    //       onDeny: () {
-    //         Navigator.of(context).pop(); // Close the modal
-    //       },
-    //     );
-    //   },
-    // );
   }
 
   @override
@@ -59,7 +54,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                AppLocalizations.of(context).empowerIndiasLinguisticDiversity,
+                AppLocalizations.of(context)!.empowerIndiasLinguisticDiversity,
                 style: GoogleFonts.notoSans(
                     color: AppColors.darkBlue,
                     fontSize: 20.sp,
@@ -76,7 +71,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           ),
           SizedBox(height: 12.w),
           Text(
-            AppLocalizations.of(context).joinTheMovementDescription,
+            AppLocalizations.of(context)!.joinTheMovementDescription,
             style: GoogleFonts.notoSans(
                 color: Colors.black,
                 fontSize: 14.sp,
@@ -92,7 +87,7 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
               ),
             ),
             child: Text(
-              AppLocalizations.of(context).letsGetStarted,
+              AppLocalizations.of(context)!.letsGetStarted,
               style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 16.sp,

@@ -1,6 +1,6 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_screen/validation_screen/widgets/audio_player_buttons.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +111,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
               SizedBox(
                 width: 120.w,
                 child: PrimaryButtonWidget(
-                  title: AppLocalizations.of(context).incorrect,
+                  title: AppLocalizations.of(context)!.incorrect,
                   textFontSize: 16.sp,
                   onTap: value ? () => onValidate(false) : null,
                   textColor: value ? AppColors.orange : AppColors.grey24,
@@ -128,7 +128,7 @@ class _BoloValidateSectionState extends State<BoloValidateSection> {
               SizedBox(
                 width: 120.w,
                 child: PrimaryButtonWidget(
-                  title: AppLocalizations.of(context).correct,
+                  title: AppLocalizations.of(context)!.correct,
                   textFontSize: 16.sp,
                   onTap: value ? () => onValidate(true) : null,
                   textColor: Colors.white,
