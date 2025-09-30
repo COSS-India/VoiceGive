@@ -1,26 +1,28 @@
-class ApiUrl {
-  static const String baseUrl = 'http://43.205.235.156:9000';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  static const String getSentancesForRecordingUrl =
+class ApiUrl {
+  static final String baseUrl = dotenv.env['API_BASE_URL'] ?? '';
+
+  static final String getSentancesForRecordingUrl =
       '$baseUrl/contributions/get-sentences';
-  static const String sumbitAudioUrl = '$baseUrl/contributions/record';
-  static const String reportIssueUrl = '$baseUrl/contributions/report';
-  static const String contributeSessionCompleteUrl =
+  static final String sumbitAudioUrl = '$baseUrl/contributions/record';
+  static final String reportIssueUrl = '$baseUrl/contributions/report';
+  static final String contributeSessionCompleteUrl =
       '$baseUrl/contributions/session-complete';
-  static const String sendOTPUrl = '$baseUrl/auth/send-otp';
-  static const String resendOTPUrl = '$baseUrl/auth/resend-otp';
-  static const String verifyOTPUrl = '$baseUrl/auth/verify-otp';
-  static const String skipContributionUrl = '$baseUrl/v1/contributions/skip';
-  static const String getValidationsQueUrl = '$baseUrl/validations/get-queue';
-  static const String submitValidationUrl = '$baseUrl/validations/submit';
-  static const String validationSessionCompleteUrl =
+  static final String sendOTPUrl = '$baseUrl/auth/send-otp';
+  static final String resendOTPUrl = '$baseUrl/auth/resend-otp';
+  static final String verifyOTPUrl = '$baseUrl/auth/verify-otp';
+  static final String skipContributionUrl = '$baseUrl/v1/contributions/skip';
+  static final String getValidationsQueUrl = '$baseUrl/validations/get-queue';
+  static final String submitValidationUrl = '$baseUrl/validations/submit';
+  static final String validationSessionCompleteUrl =
       '$baseUrl/validations/session-complete';
-  static const String getLanguages = '$baseUrl/admin/data/languages';
-  static const String userRegisterUrl = '$baseUrl/users/register';
-  static const String ageGroupUrl = '$baseUrl/admin/data/age-groups';
-  static const String genderUrl = '$baseUrl/admin/data/genders';
-  static const String countryUrl = '$baseUrl/admin/data/countries';
-  static const String stateUrl = '$baseUrl/admin/data/states/';
-  static const String districtUrl = '$baseUrl/admin/data/districts/';
-  static const String languageUrl = '$baseUrl/admin/data/languages';
+  static final String getLanguages = '$baseUrl/admin/data/languages';
+  static final String userRegisterUrl = '$baseUrl/users/register';
+  static final String ageGroupUrl = '$baseUrl/admin/data/age-groups';
+  static final String genderUrl = '$baseUrl/admin/data/genders';
+  static final String countryUrl = '$baseUrl/admin/data/countries';
+  static final String stateUrl = '$baseUrl/admin/data/states/';
+  static final String districtUrl = '$baseUrl/admin/data/districts/';
+  static final String languageUrl = '$baseUrl/admin/data/languages';
 }

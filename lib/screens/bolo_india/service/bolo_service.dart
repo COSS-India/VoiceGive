@@ -91,7 +91,7 @@ class BoloService {
     required String reportType,
     required String description,
   }) async {
-    const url = ApiUrl.reportIssueUrl;
+    var url = ApiUrl.reportIssueUrl;
 
     final body = jsonEncode({
       'sentenceId': sentenceId,
@@ -109,7 +109,7 @@ class BoloService {
   }
 
   Future<Response> contributeSessionCompleted() async {
-    const url = ApiUrl.contributeSessionCompleteUrl;
+    var url = ApiUrl.contributeSessionCompleteUrl;
     final body = jsonEncode({
       'sessionId': sessionId,
     });
@@ -124,7 +124,7 @@ class BoloService {
   }
 
   Future<Response> validateSessionCompleted() async {
-    const url = ApiUrl.validationSessionCompleteUrl;
+    var url = ApiUrl.validationSessionCompleteUrl;
 
     final body = jsonEncode({
       'sessionId': sessionId,
