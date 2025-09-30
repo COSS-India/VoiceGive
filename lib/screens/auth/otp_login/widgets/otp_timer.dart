@@ -70,7 +70,7 @@ class _OtpTimerState extends State<OtpTimer> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // if (!_canResend) ...[
+        if (!_canResend) ...[
           Text(
             _formatTime(_seconds),
             style: GoogleFonts.notoSans(
@@ -80,7 +80,7 @@ class _OtpTimerState extends State<OtpTimer> {
             ),
           ),
           SizedBox(height: 16.h),
-        // ],
+        ],
         // if (_canResend) ...[
         //   GestureDetector(
         //     onTap: () {
