@@ -1,8 +1,8 @@
-# Bhashadaan Project Setup Guide
+# VoiceGive Project Setup Guide
 
 ## Project Overview
 
-Bhashadaan is a Flutter-based UI application designed for language data collection and crowdsourcing initiatives. This project provides a complete, customizable user interface that can be adopted by organizations, government agencies, and developers to build their own language data collection applications with features like voice recording, text validation, and multi-language support.
+VoiceGive is a Flutter-based UI application designed for language data collection and crowdsourcing initiatives. This project provides a complete, customizable user interface that can be adopted by organizations, government agencies, and developers to build their own language data collection applications with features like voice recording, text validation, and multi-language support.
 
 The UI is built on a Swagger API specification, making it adaptable for different implementations. Adopters can:
 
@@ -13,7 +13,7 @@ The UI is built on a Swagger API specification, making it adaptable for differen
 
 ## Prerequisites
 
-Before setting up the Bhashadaan project, ensure you have the following software and tools installed:
+Before setting up the VoiceGive project, ensure you have the following software and tools installed:
 
 ### Required Software
 - **Flutter SDK** (3.6.0 or higher)
@@ -97,7 +97,7 @@ Before setting up the Bhashadaan project, ensure you have the following software
 
 ```bash
 git clone <repository-url>
-cd Bhashadaan
+cd VoiceGive
 ```
 
 ### 2. Verify Flutter Installation
@@ -411,7 +411,7 @@ flutter doctor --android-licenses
 ### Key Directories
 
 ```
-Bhashadaan/
+VoiceGive/
 ├── android/                 # Android-specific configuration
 ├── ios/                     # iOS-specific configuration
 ├── lib/                     # Main Dart code
