@@ -1,5 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +26,8 @@ class HowItWorksSection extends StatelessWidget {
           children: [
             cardWidget(
                 title: AppLocalizations.of(context)!.contribute,
-                description: AppLocalizations.of(context)!.speakClearlyAndRecord,
+                description:
+                    AppLocalizations.of(context)!.speakClearlyAndRecord,
                 iconPath: 'assets/icons/contribute_icon.png'),
             cardWidget(
                 title: AppLocalizations.of(context)!.validate,
@@ -34,7 +35,8 @@ class HowItWorksSection extends StatelessWidget {
                 iconPath: 'assets/icons/validate_icon.png'),
             cardWidget(
                 title: AppLocalizations.of(context)!.earnCertificate,
-                description: AppLocalizations.of(context)!.earnCertificateDescription,
+                description:
+                    AppLocalizations.of(context)!.earnCertificateDescription,
                 iconPath: 'assets/icons/certificate_icon.png')
           ],
         ),

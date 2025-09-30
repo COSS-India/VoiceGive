@@ -1,5 +1,5 @@
 import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,7 +130,7 @@ class HomeFooterSection extends StatelessWidget {
   }
 
   Widget _buildLogo(String imagePath) {
-    return Container(
+    return SizedBox(
       height: 50.w,
       width: 60.w,
       child: ImageWidget(

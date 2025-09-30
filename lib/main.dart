@@ -3,7 +3,7 @@ import 'package:bhashadaan/constants/app_theme.dart';
 import 'package:bhashadaan/screens/splash_screen/splash_screen.dart';
 import 'package:bhashadaan/util/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bhashadaan/config/app_config.dart';
 import 'package:bhashadaan/services/auth_manager.dart';

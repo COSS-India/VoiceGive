@@ -3,27 +3,20 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
+import 'package:bhashadaan/screens/bolo_screen/validation_screen/validation_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
-import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class CongratulationsScreen extends StatefulWidget {
-  final String recordedText;
-  final String selectedLanguage;
-  final int currentIndex;
-  final int totalItems;
-
   const CongratulationsScreen({
     super.key,
-    required this.recordedText,
-    required this.selectedLanguage,
-    required this.currentIndex,
-    required this.totalItems,
   });
 
   @override
@@ -68,8 +61,12 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _navigateBackToHome,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+      _navigateBackToHome();},
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(),
@@ -102,7 +99,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "BOLO India",
+                          AppLocalizations.of(context)!.boloIndia,
                           style: GoogleFonts.notoSans(
                             color: Colors.white,
                             fontSize: 20.sp,
@@ -110,7 +107,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                           ),
                         ),
                         Text(
-                          "Enrich your language by donating your voice.",
+                          AppLocalizations.of(context)!.enrichYourLanguageByDonatingVoice,
                           style: GoogleFonts.notoSans(
                             color: Colors.white,
                             fontSize: 10.sp,
@@ -126,6 +123,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               Padding(
                 padding: const EdgeInsets.all(16.0).r,
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     // Congratulations Section
                     _buildCongratulationsSection(),
@@ -166,13 +164,13 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               ImageWidget(
                 height: 120.w,
                 width: 120.w,
-                imageUrl: "assets/images/bolo_logo.png",
+                imageUrl: 'assets/images/bolo_logo.png',
                 boxFit: BoxFit.contain,
               ),
               SizedBox(height: 24.w),
               // Congratulations Text
               Text(
-                "Congratulations!",
+                '${AppLocalizations.of(context)!.congratulations}!',
                 style: GoogleFonts.notoSans(
                   fontSize: 28.sp,
                   color: Colors.black,
@@ -191,9 +189,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                     height: 1.4,
                   ),
                   children: [
-                    const TextSpan(text: "You've contributed "),
+                    const TextSpan(text: "You've "),
                     TextSpan(
-                      text: "5 sentences",
+                      text: "contributed 5 sentences",
                       style: GoogleFonts.notoSans(
                         color: AppColors.darkGreen,
                         fontWeight: FontWeight.w700,
@@ -226,8 +224,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
       child: Container(
         width: double.infinity,
         height: 200.w,
+        padding: EdgeInsets.symmetric(vertical: 12).r,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.lightGreen3,
           borderRadius: BorderRadius.circular(12).r,
           border: Border.all(color: Colors.grey.shade300, width: 1),
           boxShadow: [
@@ -242,33 +241,12 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
         child: Column(
           children: [
             // Certificate Header
-            Container(
-              padding: EdgeInsets.all(12).r,
-              decoration: BoxDecoration(
-                color: AppColors.lightGreen3,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12).r,
-                  topRight: Radius.circular(12).r,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.visibility,
-                    color: AppColors.darkGreen,
-                    size: 16.sp,
-                  ),
-                  SizedBox(width: 8.w),
-                  Text(
-                    "Tap to preview your certificate",
-                    style: GoogleFonts.notoSans(
-                      color: AppColors.darkGreen,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            Text(
+              AppLocalizations.of(context)!.tapToPreviewCertificate,
+              style: GoogleFonts.notoSans(
+                color: AppColors.greys,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500
               ),
             ),
             // Certificate Preview Content (Blurred)
@@ -285,203 +263,11 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
                         border:
                             Border.all(color: AppColors.darkGreen, width: 2),
                       ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Government Ministry Header
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("🏛️",
-                                          style: TextStyle(fontSize: 12.sp)),
-                                      Text(
-                                        "इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय",
-                                        style: GoogleFonts.notoSans(
-                                          fontSize: 6.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                      Text(
-                                        "MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY",
-                                        style: GoogleFonts.notoSans(
-                                          fontSize: 4.sp,
-                                          color: Colors.grey[600],
-                                        ),
-                                      ),
-                                      Text(
-                                        "Digital India",
-                                        style: GoogleFonts.notoSans(
-                                          fontSize: 5.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.orange,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(6).r,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.lightGreen3,
-                                    borderRadius: BorderRadius.circular(4).r,
-                                    border: Border.all(
-                                        color: AppColors.darkGreen, width: 1),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text("🌿",
-                                          style: TextStyle(fontSize: 8.sp)),
-                                      Text(
-                                        "BHASHINI",
-                                        style: GoogleFonts.notoSans(
-                                          fontSize: 6.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppColors.darkGreen,
-                                        ),
-                                      ),
-                                      Text(
-                                        "भाषिणी",
-                                        style: GoogleFonts.notoSans(
-                                          fontSize: 4.sp,
-                                          color: AppColors.orange,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 12.w),
-                            // Certificate Title
-                            Text(
-                              "CERTIFICATE",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black87,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "OF APPRECIATION",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 8.sp,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.orange,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 8.w),
-                            Text(
-                              "PROUDLY PRESENTED TO",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 6.sp,
-                                color: Colors.black87,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 6.w),
-                            Text(
-                              "Animesh Patil",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black87,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 6.w),
-                            // Golden line with circles
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: Container(
-                                        height: 1.5, color: Colors.amber[600])),
-                                Container(
-                                  width: 6.w,
-                                  height: 6.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber[600],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                SizedBox(width: 6.w),
-                                Container(
-                                  width: 6.w,
-                                  height: 6.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber[600],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                SizedBox(width: 6.w),
-                                Expanded(
-                                    child: Container(
-                                        height: 1.5, color: Colors.amber[600])),
-                              ],
-                            ),
-                            SizedBox(height: 6.w),
-                            Text(
-                              "Recognized as a Agri Bhasha Samarthak",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 6.sp,
-                                color: Colors.black87,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 8.w),
-                            Column(
-                              children: [
-                                Text(
-                                  "For contributing to",
-                                  style: GoogleFonts.notoSans(
-                                    fontSize: 4.sp,
-                                    color: Colors.grey[600],
-                                    height: 1.2,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(height: 4.w),
-                                BrandingAlignmentWidget(
-                                  fontSize: 4.sp,
-                                  textColor: Colors.grey[600],
-                                ),
-                                SizedBox(height: 4.w),
-                                Text(
-                                  "strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.",
-                                  style: GoogleFonts.notoSans(
-                                    fontSize: 4.sp,
-                                    color: Colors.grey[600],
-                                    height: 1.2,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 12.w),
-                            Text(
-                              "CEO, BHASHINI",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 6.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Container(
-                              width: 40.w,
-                              height: 1.5,
-                              color: Colors.amber[600],
-                              margin: EdgeInsets.only(top: 3.w),
-                            ),
-                          ],
+                      child: ClipRRect(
+          borderRadius: BorderRadius.circular(8).r,
+                        child: Image.asset(
+                          'assets/images/certificate.jpg',
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
@@ -497,61 +283,58 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
 
   Widget _buildDownloadButton() {
     return SizedBox(
-      width: double.infinity,
       height: 48.w,
-      child: PrimaryButtonWidget(
-        title: AppLocalizations.of(context)!.downloadCertificate,
-        textFontSize: 16.sp,
-        onTap: () {
-          // Download certificate as PDF
-          // _downloadCertificate();
-        },
-        textColor: Colors.white,
-        decoration: BoxDecoration(
-          color: AppColors.darkGreen,
-          borderRadius: BorderRadius.circular(8).r,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.darkGreen.withValues(alpha: 0.3),
-              spreadRadius: 2,
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+      child: IntrinsicWidth(
+        child: PrimaryButtonWidget(
+          title: AppLocalizations.of(context)!.downloadCertificate,
+          textFontSize: 16.sp,
+          horizontalPadding: 32.r,
+          fontWeight: FontWeight.w600,
+          onTap: () {
+            // Download certificate as PDF
+            // _downloadCertificate();
+          },
+          textColor: AppColors.appBarBackground,
+          decoration: BoxDecoration(
+            color: AppColors.darkGreen,
+            borderRadius: BorderRadius.circular(8).r,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.darkGreen.withValues(alpha: 0.3),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildCertificateDetails() {
-    return Container(
-      padding: EdgeInsets.all(12).r,
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(8).r,
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Column(
-        children: [
-          Text(
-            "PDF (print-ready, includes your name & achievement)",
-            style: GoogleFonts.notoSans(
-              fontSize: 12.sp,
-              color: Colors.grey[600],
-            ),
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          "PDF (print-ready, includes your name & achievement)",
+          style: GoogleFonts.notoSans(
+            fontSize: 10.sp,
+            fontWeight: FontWeight.w400,
+            color: AppColors.disabledTextGrey
           ),
-          SizedBox(height: 4.w),
-          Text(
-            "Issued on: 17 Sep 2025. Certificate ID: DIC-20250917-0123",
-            style: GoogleFonts.notoSans(
-              fontSize: 10.sp,
-              color: Colors.grey[500],
-            ),
-            textAlign: TextAlign.center,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 2.w),
+        Text(
+          "Issued on: 17 Sep 2025. Certificate ID: DIC-20250917-0123",
+          style: GoogleFonts.notoSans(
+            fontSize: 10.sp,
+            fontWeight: FontWeight.w400,
+            color: AppColors.disabledTextGrey
           ),
-        ],
-      ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
@@ -565,20 +348,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               title: AppLocalizations.of(context)!.validateMore,
               textFontSize: 14.sp,
               onTap: () {
-                // Navigate to play recording screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => PlayRecordingScreen(
-                      recordedText: widget.recordedText,
-                      selectedLanguage: widget.selectedLanguage,
-                      currentIndex: widget.currentIndex,
-                      totalItems: widget.totalItems,
-                      sentenceId: null,
-                      audioUrl: null,
-                      contributionId: null,
-                    ),
-                  ),
+                  MaterialPageRoute(builder: (context) => ValidationScreen()),
                 );
               },
               textColor: AppColors.orange,
@@ -598,12 +370,9 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
               title: AppLocalizations.of(context)!.contributeMore,
               textFontSize: 14.sp,
               onTap: () {
-                // Navigate to Bolo screen for new recording
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => BoloScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => BoloContribute()),
                 );
               },
               textColor: Colors.white,
@@ -939,270 +708,4 @@ class _CongratulationsScreenState extends State<CongratulationsScreen>
       ),
     );
   }
-
-  // void _downloadCertificate() {
-  //   // Create a simple HTML certificate and trigger download
-  //   final certificateHtml = '''
-  //   <!DOCTYPE html>
-  //   <html>
-  //   <head>
-  //       <title>Certificate of Appreciation - Animesh Patil</title>
-  //       <style>
-  //           body {
-  //               font-family: Arial, sans-serif;
-  //               margin: 0;
-  //               padding: 40px;`
-  //               background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  //           }
-  //           .certificate {
-  //               background: white;
-  //               padding: 60px;
-  //               border: 3px solid #2E7D32;
-  //               border-radius: 15px;
-  //               box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  //               text-align: center;
-  //               max-width: 800px;
-  //               margin: 0 auto;
-  //           }
-  //           .header {
-  //               display: flex;
-  //               justify-content: space-between;
-  //               align-items: center;
-  //               margin-bottom: 40px;
-  //           }
-  //           .ministry {
-  //               text-align: left;
-  //           }
-  //           .government-emblem {
-  //               font-size: 24px;
-  //               margin-bottom: 8px;
-  //           }
-  //           .ministry h3 {
-  //               margin: 0;
-  //               color: #333;
-  //               font-size: 14px;
-  //           }
-  //           .ministry p {
-  //               margin: 5px 0;
-  //               color: #666;
-  //               font-size: 12px;
-  //           }
-  //           .digital-india {
-  //               color: #FF6B35;
-  //               font-weight: bold;
-  //               font-size: 16px;
-  //           }
-  //           .bhashini-logo {
-  //               background: #E8F5E8;
-  //               padding: 15px;
-  //               border-radius: 10px;
-  //               border: 2px solid #2E7D32;
-  //               text-align: center;
-  //           }
-  //           .bhashini-icon {
-  //               font-size: 20px;
-  //               margin-bottom: 5px;
-  //           }
-  //           .bhashini-logo h2 {
-  //               margin: 0;
-  //               color: #2E7D32;
-  //               font-size: 18px;
-  //           }
-  //           .bhashini-logo p {
-  //               margin: 5px 0 0 0;
-  //               color: #FF6B35;
-  //               font-size: 14px;
-  //           }
-  //           .title {
-  //               margin: 40px 0;
-  //           }
-  //           .title h1 {
-  //               font-size: 36px;
-  //               margin: 0;
-  //               color: #333;
-  //               letter-spacing: 2px;
-  //           }
-  //           .title h2 {
-  //               font-size: 24px;
-  //               margin: 10px 0 0 0;
-  //               color: #FF6B35;
-  //           }
-  //           .presented {
-  //               font-size: 16px;
-  //               color: #333;
-  //               margin: 30px 0;
-  //           }
-  //           .name {
-  //               font-size: 32px;
-  //               font-weight: bold;
-  //               color: #333;
-  //               margin: 20px 0;
-  //               letter-spacing: 3px;
-  //           }
-  //           .line {
-  //               display: flex;
-  //               align-items: center;
-  //               margin: 30px 0;
-  //           }
-  //           .line div {
-  //               flex: 1;
-  //               height: 3px;
-  //               background: #FFD700;
-  //           }
-  //           .line span {
-  //               width: 15px;
-  //               height: 15px;
-  //               background: #FFD700;
-  //               border-radius: 50%;
-  //               margin: 0 20px;
-  //           }
-  //           .recognition {
-  //               font-size: 16px;
-  //               color: #333;
-  //               margin: 20px 0;
-  //           }
-  //           .recognition strong {
-  //               color: #2E7D32;
-  //           }
-  //           .description {
-  //               font-size: 14px;
-  //               color: #555;
-  //               line-height: 1.6;
-  //               margin: 30px 0;
-  //               text-align: center;
-  //           }
-  //           .signature {
-  //               margin-top: 50px;
-  //           }
-  //           .signature p {
-  //               font-size: 16px;
-  //               font-weight: bold;
-  //               color: #333;
-  //               margin: 0;
-  //           }
-  //           .signature-line {
-  //               width: 150px;
-  //               height: 3px;
-  //               background: #FFD700;
-  //               margin: 10px auto;
-  //           }
-  //           .decorative-lines {
-  //               position: absolute;
-  //               bottom: 0;
-  //               left: 0;
-  //               right: 0;
-  //               height: 60px;
-  //               overflow: hidden;
-  //               pointer-events: none;
-  //           }
-  //           .wave-left {
-  //               position: absolute;
-  //               bottom: 0;
-  //               left: 0;
-  //               width: 100px;
-  //               height: 60px;
-  //               background: linear-gradient(45deg, #FF6B35, #FF8C42);
-  //               border-radius: 0 0 0 50px;
-  //               opacity: 0.3;
-  //           }
-  //           .wave-right {
-  //               position: absolute;
-  //               bottom: 0;
-  //               right: 0;
-  //               width: 100px;
-  //               height: 60px;
-  //               background: linear-gradient(135deg, #4CAF50, #66BB6A);
-  //               border-radius: 0 0 50px 0;
-  //               opacity: 0.3;
-  //           }
-  //       </style>
-  //   </head>
-  //   <body>
-  //       <div class="certificate">
-  //           <div class="header">
-  //               <div class="ministry">
-  //                   <div class="government-emblem">🏛️</div>
-  //                   <h3>इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय</h3>
-  //                   <p>MINISTRY OF ELECTRONICS AND INFORMATION TECHNOLOGY</p>
-  //                   <p class="digital-india">Digital India</p>
-  //               </div>
-  //               <div class="bhashini-logo">
-  //                   <div class="bhashini-icon">🌿</div>
-  //                   <h2>BHASHINI</h2>
-  //                   <p>भाषिणी</p>
-  //               </div>
-  //           </div>
-
-  //           <div class="title">
-  //               <h1>CERTIFICATE</h1>
-  //               <h2>OF APPRECIATION</h2>
-  //           </div>
-
-  //           <div class="presented">PROUDLY PRESENTED TO</div>
-
-  //           <div class="name">Animesh Patil</div>
-
-  //           <div class="line">
-  //               <div></div>
-  //               <span></span>
-  //               <div></div>
-  //           </div>
-
-  //           <div class="recognition">
-  //               Recognized as a <strong>Agri Bhasha Samarthak</strong>
-  //           </div>
-
-  //           <div class="description">
-  //               For contributing to AgriDaan under BhashaDaan by BHASHINI, strengthening agricultural knowledge in Indian languages and advancing the vision of an inclusive, self-reliant Bharat.
-  //           </div>
-
-  //           <div class="signature">
-  //               <p>CEO, BHASHINI</p>
-  //               <div class="signature-line"></div>
-  //           </div>
-
-  //           <!-- Decorative Lines -->
-  //           <div class="decorative-lines">
-  //               <div class="wave-left"></div>
-  //               <div class="wave-right"></div>
-  //           </div>
-  //       </div>
-  //   </body>
-  //   </html>
-  //   ''';
-
-  //   try {
-  //     // Create blob and trigger download
-  //     final blob = html.Blob([certificateHtml], 'text/html');
-  //     final url = html.Url.createObjectUrlFromBlob(blob);
-  //     final anchor = html.AnchorElement(href: url)
-  //       ..setAttribute('download', 'Certificate_Animesh_Patil.html')
-  //       ..click();
-  //     html.Url.revokeObjectUrl(url);
-
-  //     // Show success message
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(
-  //           "Certificate downloaded successfully!",
-  //           style: GoogleFonts.notoSans(),
-  //         ),
-  //         backgroundColor: AppColors.darkGreen,
-  //         duration: const Duration(seconds: 3),
-  //       ),
-  //     );
-  //   } catch (e) {
-  //     // Show error message
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(
-  //           "Error downloading certificate: $e",
-  //           style: GoogleFonts.notoSans(),
-  //         ),
-  //         backgroundColor: Colors.red,
-  //         duration: const Duration(seconds: 3),
-  //       ),
-  //     );
-  //   }
-  // }
 }

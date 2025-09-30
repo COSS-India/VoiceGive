@@ -1,12 +1,11 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
 /// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+class AppLocalizationsEn {
+  AppLocalizationsEn([String locale = 'en']);
 
   @override
   String get bhashadaan => 'Bhashadaan';
@@ -43,11 +42,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mStaticValidate => 'Validate';
-
-  @override
-  String get mStaticSelectLanguage => 'Select the language for contribution:';
-
-  @override
   String get mStaticSearch => 'Search';
 
   @override
@@ -226,11 +220,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search => 'Search';
-
-  @override
-  String get selectLanguage => 'Select the language for contribution:';
-
-  @override
   String get noResultsFound => 'No results found';
 
   @override
@@ -630,8 +619,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get loginIntoYourBhashaDaanAccount =>
       'Login into your\nBhashaDaan Account';
-
-  @override
   String get enterYour => 'Enter your ';
 
   @override
@@ -706,14 +693,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewProfile => 'View Profile';
+  String get errorTitle => 'OOPS!';
+  String get errorSubtitle => 'There’s a connection error right now';
+  String get errorDesc =>
+      'We are sorry for the inconvenience \n    Please come back after a while.';
+  String get errorButton => 'GO BACK';
+  String get tapToPreviewCertificate => 'Tap to preview your certificate';
+  String get congratulations => 'Congratulations';
 
-  @override
-  String get errorDesc => 'Something went wrong. Please try again.';
-
-  @override
-  String get errorSubtitle =>
-      'We encountered an error while processing your request.';
-
-  @override
-  String get errorButton => 'Try Again';
 }

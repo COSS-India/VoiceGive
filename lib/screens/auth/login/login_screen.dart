@@ -1,3 +1,4 @@
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../../common_widgets/custom_app_bar.dart';
 import '../../../constants/app_colors.dart';
-import '../../bolo_screen/bolo_screen.dart';
 import '../../home_screen/home_screen.dart';
 import '../otp_login/widgets/gradient_header.dart';
 import 'widgets/captcha_widget.dart';
@@ -14,7 +14,7 @@ import '../signup/signup_screen.dart';
 import '../../../models/auth/login_request.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../services/auth_service.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Navigate to Bolo screen
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const BoloScreen()),
+              MaterialPageRoute(builder: (context) => const BoloContribute()),
             );
           } else {
             debugPrint('❌ Login failed: ${authProvider.errorMessage}');
@@ -318,7 +318,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: _forgotPassword,
                                   child: Text(
-                                    AppLocalizations.of(context)!.forgotPassword,
+                                    AppLocalizations.of(context)!
+                                        .forgotPassword,
                                     style: GoogleFonts.notoSans(
                                       color: AppColors.darkBlue,
                                       fontSize: 14.sp,

@@ -2,13 +2,11 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
-import 'package:bhashadaan/screens/play_recording_screen/play_recording_screen.dart';
-import 'package:bhashadaan/screens/pause_recording_screen/pause_recording_screen.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_contribute/bolo_contribute.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ValidationScreen extends StatefulWidget {
   final String recordedText;
@@ -462,7 +460,7 @@ class _ValidationScreenState extends State<ValidationScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BoloScreen(),
+                  builder: (context) => BoloContribute(),
                 ),
               );
             },

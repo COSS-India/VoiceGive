@@ -15,6 +15,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final bool? isLightTheme;
   final double? verticalPadding;
   final double? horizontalPadding;
+  final FontWeight? fontWeight;
 
   const PrimaryButtonWidget({
     super.key,
@@ -28,6 +29,7 @@ class PrimaryButtonWidget extends StatelessWidget {
     this.isLightTheme,
     this.verticalPadding,
     this.horizontalPadding,
+    this.fontWeight
   });
 
   @override
@@ -89,9 +91,9 @@ class PrimaryButtonWidget extends StatelessWidget {
             ),
           Text(
             title,
-            style: GoogleFonts.lato(
+            style: GoogleFonts.notoSans(
               color: textColor ?? AppColors.grey40,
-              fontWeight: FontWeight.w700,
+              fontWeight: fontWeight ?? FontWeight.w700,
               fontSize: textFontSize ?? 12.0.sp,
             ),
             maxLines: 1,

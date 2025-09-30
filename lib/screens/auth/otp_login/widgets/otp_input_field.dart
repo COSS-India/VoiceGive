@@ -22,7 +22,8 @@ class OtpInputField extends StatefulWidget {
 }
 
 class _OtpInputFieldState extends State<OtpInputField> {
-  final List<TextEditingController> _controllers = List.generate(6, (index) => TextEditingController());
+  final List<TextEditingController> _controllers =
+      List.generate(6, (index) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
   String _otp = '';
 
@@ -58,7 +59,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
     for (var controller in _controllers) {
       newOtp += controller.text;
     }
-    
+
     if (newOtp != _otp) {
       _otp = newOtp;
       widget.onChanged(_otp);
@@ -116,6 +117,8 @@ class _OtpInputFieldState extends State<OtpInputField> {
                     counterText: '',
                     contentPadding: EdgeInsets.zero,
                     isDense: true,
+                    focusedBorder:
+                        OutlineInputBorder(borderSide: BorderSide.none),
                   ),
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,

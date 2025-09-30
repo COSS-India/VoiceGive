@@ -2,9 +2,8 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/congratulations_screen/congratulations_screen.dart';
-import 'package:bhashadaan/screens/replay_recording_screen/replay_recording_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -480,12 +479,7 @@ class _ReplaySuccessScreenState extends State<ReplaySuccessScreen>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CongratulationsScreen(
-                      recordedText: widget.recordedText,
-                      selectedLanguage: widget.selectedLanguage,
-                      currentIndex: widget.currentIndex,
-                      totalItems: widget.totalItems,
-                    ),
+                    builder: (context) => CongratulationsScreen(),
                   ),
                 );
               },
