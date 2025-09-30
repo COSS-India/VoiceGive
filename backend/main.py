@@ -215,61 +215,161 @@ async def refresh_token():
 # ==================== User Profile Endpoints ====================
 
 @app.post("/users/register", response_model=Dict[str, Any], tags=["User Profile"])
-async def register_user(request: UserRegistrationRequest):
+async def register_user(request: UserRegistrationRequest, db: Session = Depends(get_db)):
     """Complete user registration"""
-    user_id = str(uuid.uuid4())
-    user_profile = UserProfile(
-        userId=user_id,
-        firstName=request.firstName,
-        lastName=request.lastName,
-        mobileNo=f"+91{request.mobileNo}" if request.mobileNo else f"+91{config.mock_mobile}",
-        email=request.email,
-        ageGroup=request.ageGroup,
-        gender=request.gender,
-        country=request.country,
-        state=request.state,
-        district=request.district,
-        preferredLanguage=request.preferredLanguage
-    )
-    
-    mock_data["users"][user_id] = user_profile.dict()
-    
-    return {
-        "success": True,
-        "message": "Profile completed successfully",
-        "data": user_profile.dict()
-    }
+    try:
+        log_api_call(logger, "/users/register", "POST")
+        
+        # Check if user already exists
+        existing_user = get_user_by_mobile(db, request.mobileNo)
+        if existing_user:
+            # Update existing user
+            existing_user.first_name = request.firstName
+            existing_user.last_name = request.lastName
+            existing_user.email = request.email
+            existing_user.age_group = request.ageGroup
+            existing_user.gender = request.gender
+            existing_user.country = request.country
+            existing_user.state = request.state
+            existing_user.district = request.district
+            existing_user.preferred_language = request.preferredLanguage
+            existing_user.updated_at = datetime.utcnow()
+            db.commit()
+            
+            log_authentication(logger, "user_updated", existing_user.id, request.mobileNo)
+            
+            # Calculate counts from relationships
+            contribution_count = len(existing_user.contributions) if existing_user.contributions else 0
+            validation_count = len(existing_user.validations) if existing_user.validations else 0
+            certificate_earned = len(existing_user.certificates) > 0 if existing_user.certificates else False
+            certificate_id = existing_user.certificates[0].certificate_id if existing_user.certificates else None
+            
+            return {
+                "success": True,
+                "message": "Profile updated successfully",
+                "data": {
+                    "userId": existing_user.id,
+                    "firstName": existing_user.first_name,
+                    "lastName": existing_user.last_name,
+                    "mobileNo": f"+91{existing_user.mobile_no}",
+                    "email": existing_user.email,
+                    "ageGroup": existing_user.age_group,
+                    "gender": existing_user.gender,
+                    "country": existing_user.country,
+                    "state": existing_user.state,
+                    "district": existing_user.district,
+                    "preferredLanguage": existing_user.preferred_language,
+                    "contributionCount": contribution_count,
+                    "validationCount": validation_count,
+                    "certificateEarned": certificate_earned,
+                    "certificateId": certificate_id,
+                    "consentGiven": existing_user.consent_given,
+                    "consentTimestamp": existing_user.consent_timestamp.isoformat() + "Z" if existing_user.consent_timestamp else None,
+                    "createdAt": existing_user.created_at.isoformat() + "Z",
+                    "updatedAt": existing_user.updated_at.isoformat() + "Z"
+                }
+            }
+        else:
+            # Create new user
+            new_user = User(
+                mobile_no=request.mobileNo,
+                first_name=request.firstName,
+                last_name=request.lastName,
+                email=request.email,
+                age_group=request.ageGroup,
+                gender=request.gender,
+                country=request.country,
+                state=request.state,
+                district=request.district,
+                preferred_language=request.preferredLanguage,
+                consent_given=False,
+                consent_timestamp=None
+            )
+            db.add(new_user)
+            db.commit()
+            db.refresh(new_user)
+            
+            log_authentication(logger, "user_created", new_user.id, request.mobileNo)
+            
+            return {
+                "success": True,
+                "message": "Profile completed successfully",
+                "data": {
+                    "userId": new_user.id,
+                    "firstName": new_user.first_name,
+                    "lastName": new_user.last_name,
+                    "mobileNo": f"+91{new_user.mobile_no}",
+                    "email": new_user.email,
+                    "ageGroup": new_user.age_group,
+                    "gender": new_user.gender,
+                    "country": new_user.country,
+                    "state": new_user.state,
+                    "district": new_user.district,
+                    "preferredLanguage": new_user.preferred_language,
+                    "contributionCount": 0,
+                    "validationCount": 0,
+                    "certificateEarned": False,
+                    "certificateId": None,
+                    "consentGiven": new_user.consent_given,
+                    "consentTimestamp": new_user.consent_timestamp.isoformat() + "Z" if new_user.consent_timestamp else None,
+                    "createdAt": new_user.created_at.isoformat() + "Z",
+                    "updatedAt": new_user.updated_at.isoformat() + "Z"
+                }
+            }
+    except Exception as e:
+        log_error(logger, e, {"endpoint": "/users/register", "mobile": request.mobileNo})
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/users/profile", response_model=Dict[str, Any], tags=["User Profile"])
-async def get_user_profile():
+async def get_user_profile(db: Session = Depends(get_db)):
     """Get current user profile"""
-    # Mock user profile
-    user_profile = {
-        "userId": str(uuid.uuid4()),
-        "firstName": config.mock_first_name,
-        "lastName": config.mock_last_name,
-        "mobileNo": f"+91{config.mock_mobile}",
-        "email": config.mock_email,
-        "ageGroup": "26-30 years",
-        "gender": "Female",
-        "country": "India",
-        "state": config.mock_state,
-        "district": config.mock_district,
-        "preferredLanguage": config.mock_language,
-        "contributionCount": 5,
-        "validationCount": 25,
-        "certificateEarned": True,
-        "certificateId": config.mock_certificate_id,
-        "consentGiven": True,
-        "consentTimestamp": "2025-01-17T10:30:00Z",
-        "createdAt": "2025-01-17T10:30:00Z",
-        "updatedAt": "2025-01-17T10:30:00Z"
-    }
-    
-    return {
-        "success": True,
-        "data": user_profile
-    }
+    try:
+        log_api_call(logger, "/users/profile", "GET")
+        
+        # Get the first user from database (for demo purposes)
+        # In production, this would use authentication to get the current user
+        user = db.query(User).first()
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="No users found")
+        
+        # Calculate counts from relationships
+        contribution_count = len(user.contributions) if user.contributions else 0
+        validation_count = len(user.validations) if user.validations else 0
+        certificate_earned = len(user.certificates) > 0 if user.certificates else False
+        certificate_id = user.certificates[0].certificate_id if user.certificates else None
+        
+        user_profile = {
+            "userId": user.id,
+            "firstName": user.first_name,
+            "lastName": user.last_name,
+            "mobileNo": f"+91{user.mobile_no}",
+            "email": user.email,
+            "ageGroup": user.age_group,
+            "gender": user.gender,
+            "country": user.country,
+            "state": user.state,
+            "district": user.district,
+            "preferredLanguage": user.preferred_language,
+            "contributionCount": contribution_count,
+            "validationCount": validation_count,
+            "certificateEarned": certificate_earned,
+            "certificateId": certificate_id,
+            "consentGiven": user.consent_given,
+            "consentTimestamp": user.consent_timestamp.isoformat() + "Z" if user.consent_timestamp else None,
+            "createdAt": user.created_at.isoformat() + "Z",
+            "updatedAt": user.updated_at.isoformat() + "Z"
+        }
+        
+        log_authentication(logger, "profile_accessed", user.id, user.mobile_no)
+        
+        return {
+            "success": True,
+            "data": user_profile
+        }
+    except Exception as e:
+        log_error(logger, e, {"endpoint": "/users/profile"})
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.put("/users/profile", response_model=Dict[str, Any], tags=["User Profile"])
 async def update_user_profile(request: UserRegistrationRequest):
