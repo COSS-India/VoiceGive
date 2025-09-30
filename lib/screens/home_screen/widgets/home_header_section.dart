@@ -16,8 +16,8 @@ class HomeHeaderSection extends StatefulWidget {
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
   void _showConsentModal(BuildContext context) {
-    // Navigator.push(context,
-    //     MaterialPageRoute(builder: (context) => BoloValidationScreen()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => BoloContribute()));
     showDialog(
       context: context,
       barrierDismissible: false,

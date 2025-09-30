@@ -215,7 +215,7 @@ class _RecordingButtonState extends State<RecordingButton>
     return Column(
       children: [
         _buildText(),
-        SizedBox(height: 12.w),
+        SizedBox(height: 30.w),
         GestureDetector(
           onTap: _toggleState,
           child: Stack(

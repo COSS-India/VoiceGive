@@ -110,7 +110,8 @@ class BoloContributeRepository {
       Response response = await boloService.contributeSessionCompleted();
       if (response.statusCode == 200) {
         var content = jsonDecode(response.body);
-        return SessionCompletedData.fromJson(content);
+
+        return SessionCompletedData.fromJson(content['data']);
       }
     } catch (e) {
       return null;
