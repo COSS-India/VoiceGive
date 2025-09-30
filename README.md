@@ -14,9 +14,10 @@ This document provides a unified guide for setting up your environment, configur
 - `.env.production` (production)
 - `.env.example` (template)
 
-# API Specification Document
+## 2. API Specification Document
 
 Ref Backend installation guide : https://github.com/COSS-India/VoiceGive/blob/dev_api_spec/backend/README.md
+
 Swagger UI : http://43.205.235.156:9000/docs
 
 ## Code Structure
@@ -82,9 +83,15 @@ String env = AppConfig.instance.environment;
 bool isProduction = AppConfig.instance.isProduction;
 ```
 
+
+## 3. Project Setup Guide
+https://github.com/COSS-India/VoiceGive/blob/master/documentation/project_setup_instalation_guide.md
+
+## 4. Testing Tracker
+https://github.com/COSS-India/VoiceGive/blob/master/documentation/testing_tracker.md
 ---
 
-## 2. Authentication System
+## 5. Authentication System
 
 ### Features
 - Secure login (email/password, captcha)
@@ -124,7 +131,7 @@ if (success) {
 
 ---
 
-## 3. Best Practices & Security
+## 6. Best Practices & Security
 - **Never commit sensitive tokens** or production API keys to version control.
 - Use environment-specific tokens and endpoints.
 - Use `.env.local` for local development secrets.
@@ -134,7 +141,7 @@ if (success) {
 
 ---
 
-## 4. Troubleshooting
+## 7. Troubleshooting
 - **Missing environment file:** Ensure `.env` exists in the project root.
 - **Missing variables:** Check all required variables are defined.
 - **Build errors:** Run `flutter pub get` after adding dependencies.
@@ -143,6 +150,6 @@ if (success) {
 
 ---
 
-## 5. Support
+## 8. Support
 - For more details, see code comments and the `AppConfig`, `AuthManager`, and `AuthProvider` classes.
 - Contact the development team for further help.
