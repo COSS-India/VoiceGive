@@ -3,6 +3,8 @@ import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/widgets/bottom
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../constants/app_colors.dart';
+
 class SearchableBottomSheetContent extends StatefulWidget {
   final List<String> items;
   final Function(String) onItemSelected;
@@ -130,29 +132,44 @@ class _SearchableBottomSheetContentState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 0.7.sh,
-      padding: const EdgeInsets.all(16).r,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (_shouldShowSearch) ...[
-            BottomSheetSearchField(
-              controller: _searchController,
-              onChanged: _onSearchChanged,
-              parentContext: widget.parentContext ?? context,
-            ),
-            SizedBox(height: 8.w),
-          ],
-          Flexible(
-              child: ItemsList(
-            filteredItems: _filteredItems,
-            isLoading: _isLoading,
-            scrollController: _scrollController,
-            onItemSelected: widget.onItemSelected,
-          )),
-        ],
-      ),
+    return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                icon: Icon(Icons.close,
+                                    color: AppColors.darkGreen),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+        Container(
+          height: 0.7.sh,
+          padding: const EdgeInsets.all(16).r,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_shouldShowSearch) ...[
+                BottomSheetSearchField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  parentContext: widget.parentContext ?? context,
+                ),
+                SizedBox(height: 8.w),
+              ],
+              Flexible(
+                  child: ItemsList(
+                filteredItems: _filteredItems,
+                isLoading: _isLoading,
+                scrollController: _scrollController,
+                onItemSelected: widget.onItemSelected,
+              )),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
