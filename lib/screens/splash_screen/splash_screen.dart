@@ -1,6 +1,7 @@
-import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../constants/app_routes.dart';
 
 class CustomSplashScreen extends StatefulWidget {
   const CustomSplashScreen({super.key});
@@ -12,7 +13,6 @@ class CustomSplashScreen extends StatefulWidget {
 class _CustomSplashScreenState extends State<CustomSplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  // bool _isLottieLoaded = false;
 
   @override
   void initState() {
@@ -22,8 +22,8 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        Navigator.of(context).pushReplacementNamed(
+          AppRoutes.home,
         );
       }
     });
@@ -39,28 +39,16 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // if (!_isLottieLoaded)
-          //   Container(
-          //     color: Colors.white,
-          //   ),
-          Center(
-            child: Lottie.asset(
-              'assets/animations/bhashadaan_splash_screen.json',
-              controller: _controller,
-              fit: BoxFit.fill,
-              onLoaded: (composition) {
-                // setState(() {
-                //   _isLottieLoaded = true;
-                // });
-                _controller.duration = composition.duration;
-                _controller.forward();
-              },
-            ),
-          ),
-        ],
+      body: Lottie.asset(
+        'assets/animations/bhashadaan_splash_screen.json',
+        controller: _controller,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+        onLoaded: (composition) {
+          _controller.duration = composition.duration;
+          _controller.forward();
+        },
       ),
     );
   }

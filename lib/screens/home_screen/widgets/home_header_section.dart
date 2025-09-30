@@ -1,13 +1,41 @@
+import 'package:bhashadaan/common_widgets/consent_modal.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeHeaderSection extends StatelessWidget {
+import '../../../constants/app_routes.dart';
+
+class HomeHeaderSection extends StatefulWidget {
   const HomeHeaderSection({super.key});
+
+  @override
+  State<HomeHeaderSection> createState() => _HomeHeaderSectionState();
+}
+
+class _HomeHeaderSectionState extends State<HomeHeaderSection> {
+  void _showConsentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return InformedConsentModal(
+          onApprove: () {
+            Navigator.of(context).pop(); // Close the modal
+            Navigator.pushNamed(
+              context,
+              AppRoutes.otpVerification,
+            );
+          },
+          onDeny: () {
+            Navigator.of(context).pop(); // Close the modal
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +55,7 @@ class HomeHeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "Empower India's \nLinguistic Diversity",
+                AppLocalizations.of(context).empowerIndiasLinguisticDiversity,
                 style: GoogleFonts.notoSans(
                     color: AppColors.darkBlue,
                     fontSize: 20.sp,
@@ -44,7 +72,7 @@ class HomeHeaderSection extends StatelessWidget {
           ),
           SizedBox(height: 12.w),
           Text(
-            "Join the movement to enhance language understanding and accessiblity for all 22 official languages in India",
+            AppLocalizations.of(context).joinTheMovementDescription,
             style: GoogleFonts.notoSans(
                 color: Colors.black,
                 fontSize: 14.sp,
@@ -52,10 +80,7 @@ class HomeHeaderSection extends StatelessWidget {
           ),
           SizedBox(height: 12.w),
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BoloGetStarted()));
-            },
+            onPressed: () => _showConsentModal(context),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.orange,
               shape: RoundedRectangleBorder(
@@ -63,7 +88,7 @@ class HomeHeaderSection extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Let’s Get Started",
+              AppLocalizations.of(context).letsGetStarted,
               style: GoogleFonts.notoSans(
                   color: Colors.white,
                   fontSize: 16.sp,

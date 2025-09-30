@@ -2,8 +2,9 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:bhashadaan/models/get_started_model.dart';
-import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/widgets/get_started_item.dart';
+import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/get_started_item.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,142 +21,155 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<GetStartedModel> getStartedData = [
-    GetStartedModel(
-      title: "Check Your Setup",
-      illustrationImageUrl: "assets/images/bolo_illustration1.png",
-      instructions: [
-        GetStartedInstruction(
-          title: "Please Test Your Speaker",
-          description:
-              "Play the sample audio and confirm you can hear it clearly before starting the task",
-          icon: Icons.headphones,
-        ),
-        GetStartedInstruction(
-          title: "Please Test Your Microphone",
-          description:
-              "Speak a few words to check if your voice is being recorded properly and without distortion",
-          icon: Icons.mic,
-        ),
-        GetStartedInstruction(
-          title: "No background noise",
-          description:
-              "Choose a quiet environment. Avoid background sounds like fans, traffic, or other voices while recording.",
-          icon: Icons.volume_off,
-        ),
-      ],
-    ),
-    GetStartedModel(
-      title: "Speak Naturally",
-      illustrationImageUrl: "assets/images/bolo_illustration2.png",
-      instructions: [
-        GetStartedInstruction(
-          title: "Record exactly as shown",
-          description:
-              "Speak clearly, exactly following the text displayed, so your contribution is accurate and usable",
-          icon: Icons.record_voice_over,
-        ),
-        GetStartedInstruction(
-          title: "Don’t record Punctuations",
-          description:
-              "Read only the words shown on screen. Do not say commas, full stops, or other punctuation marks.",
-          icon: Icons.text_fields,
-        ),
-        GetStartedInstruction(
-          title: "Tap record to start",
-          description:
-              "Press the record button once you are ready, and speak clearly and naturally.",
-          icon: Icons.mic_none,
-        ),
-      ],
-    ),
-  ];
+  List<GetStartedModel> getStartedData = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initializeGetStartedData();
+  }
+
+  void _initializeGetStartedData() {
+    final l10n = AppLocalizations.of(context);
+    getStartedData = [
+      GetStartedModel(
+        title: l10n.checkYourSetup,
+        illustrationImageUrl: "assets/images/bolo_illustration1.png",
+        instructions: [
+          GetStartedInstruction(
+            title: l10n.pleaseTestYourSpeaker,
+            description: l10n.pleaseTestYourSpeakerDescription,
+            iconPath: "assets/icons/play_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.pleaseTestYourMicrophone,
+            description: l10n.pleaseTestYourMicrophoneDescription,
+            iconPath: "assets/icons/mic_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.noBackgroundNoise,
+            description: l10n.noBackgroundNoiseDescription,
+            iconPath: "assets/icons/sound_off_icon.png",
+          ),
+        ],
+      ),
+      GetStartedModel(
+        title: l10n.speakNaturally,
+        illustrationImageUrl: "assets/images/bolo_illustration2.png",
+        instructions: [
+          GetStartedInstruction(
+            title: l10n.recordExactlyAsShown,
+            description: l10n.recordExactlyAsShownDescription,
+            iconPath: "assets/icons/record_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.dontRecordPunctuations,
+            description: l10n.dontRecordPunctuationsDescription,
+            iconPath: "assets/icons/punctuation_icon.png",
+          ),
+          GetStartedInstruction(
+            title: l10n.tapRecordToStart,
+            description: l10n.tapRecordToStartDescription,
+            iconPath: "assets/icons/mic_icon.png",
+          ),
+        ],
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0).r,
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: getStartedData.length,
-                onPageChanged: (i) => setState(() => _currentPage = i),
-                itemBuilder: (context, index) {
-                  final data = getStartedData[index];
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text(
-                          data.title,
-                          style: GoogleFonts.notoSans(
-                            fontSize: 28.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.darkGreen,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0).r,
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: getStartedData.length,
+                  onPageChanged: (i) => setState(() => _currentPage = i),
+                  itemBuilder: (context, index) {
+                    final data = getStartedData[index];
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            data.title,
+                            style: GoogleFonts.notoSans(
+                              fontSize: 28.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.darkGreen,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 16.w),
-                        ImageWidget(
-                          imageUrl: data.illustrationImageUrl,
-                          height: 220.w,
-                          width: 220.w,
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 24.0).r,
-                          child: Column(
-                            children: [
-                              for (int i = 0;
-                                  i < data.instructions.length;
-                                  i++) ...[
-                                GetStartedItem(
-                                  icon: data.instructions[i].icon,
-                                  title: data.instructions[i].title,
-                                  description: data.instructions[i].description,
-                                ),
-                                if (i < data.instructions.length - 1)
-                                  Divider(
-                                    color: AppColors.grey08,
-                                    height: 30.w,
+                          SizedBox(height: 16.w),
+                          ImageWidget(
+                            imageUrl: data.illustrationImageUrl,
+                            height: 220.w,
+                            width: 220.w,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0).r,
+                            child: Column(
+                              children: [
+                                for (int i = 0;
+                                    i < data.instructions.length;
+                                    i++) ...[
+                                  GetStartedItem(
+                                    iconPath: data.instructions[i].iconPath,
+                                    title: data.instructions[i].title,
+                                    description:
+                                        data.instructions[i].description,
                                   ),
+                                  if (i < data.instructions.length - 1)
+                                    Divider(
+                                      color: AppColors.grey08,
+                                      height: 30.w,
+                                    ),
+                                ],
                               ],
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-            SizedBox(height: 16.w),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                getStartedData.length,
-                (i) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: EdgeInsets.symmetric(horizontal: 4.w),
-                  width: _currentPage == i ? 16.w : 8.w,
-                  height: 8.w,
-                  decoration: BoxDecoration(
-                    color: _currentPage == i
-                        ? AppColors.darkGreen
-                        : AppColors.grey16,
-                    borderRadius: BorderRadius.circular(8.w),
+              SizedBox(height: 16.w),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  getStartedData.length,
+                  (i) => AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: EdgeInsets.symmetric(horizontal: 4.w),
+                    width: _currentPage == i ? 16.w : 8.w,
+                    height: 8.w,
+                    decoration: BoxDecoration(
+                      color: _currentPage == i
+                          ? AppColors.darkGreen
+                          : AppColors.grey16,
+                      borderRadius: BorderRadius.circular(8.w),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 24.w),
-            actionButtons(),
-            SizedBox(height: 16.w),
-          ],
+              SizedBox(height: 24.w),
+              actionButtons(),
+              SizedBox(height: 16.w),
+            ],
+          ),
         ),
       ),
     );
@@ -174,13 +188,13 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Skip",
+                  title: AppLocalizations.of(context).skip,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BoloScreen(),
+                          builder: (context) => const BoloScreen(),
                         ));
                   },
                 ),
@@ -194,7 +208,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Next",
+                  title: AppLocalizations.of(context).next,
                   textColor: Colors.white,
                   onTap: () {
                     _pageController.nextPage(
@@ -217,7 +231,7 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8).r,
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Previous",
+                  title: AppLocalizations.of(context).previous,
                   textColor: AppColors.darkGreen,
                   onTap: () {
                     _pageController.previousPage(
@@ -236,14 +250,14 @@ class _BoloGetStartedState extends State<BoloGetStarted> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.darkGreen),
                   ),
-                  title: "Finish",
+                  title: AppLocalizations.of(context).finish,
                   textColor: Colors.white,
                   onTap: () {
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BoloScreen(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BoloScreen()),
+                    );
                   },
                 ),
               ),

@@ -1,15 +1,16 @@
+import 'package:bhashadaan/common_widgets/image_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GetStartedItem extends StatelessWidget {
-  final IconData icon;
+  final String iconPath;
   final String title;
   final String description;
 
   const GetStartedItem({
-    required this.icon,
+    required this.iconPath,
     required this.title,
     required this.description,
   });
@@ -20,7 +21,12 @@ class GetStartedItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, size: 28.sp, color: AppColors.darkGreen),
+            ImageWidget(
+              imageUrl: iconPath,
+              height: 28.w,
+              width: 28.w,
+              boxFit: BoxFit.contain,
+            ),
             SizedBox(width: 12.w),
             Expanded(
               child: Text(

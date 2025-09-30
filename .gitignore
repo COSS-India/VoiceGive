@@ -1,3 +1,11 @@
+# =============================================================================
+# IMPORTANT SECURITY NOTICE:
+# DO NOT COMMIT .env FILES TO GIT!
+# .env files contain sensitive configuration data (API keys, secrets, etc.)
+# and should NEVER be pushed to version control.
+# Only commit .env.example files as templates for other developers.
+# =============================================================================
+
 # Miscellaneous
 *.class
 *.log
@@ -35,7 +43,6 @@ pubspec.lock
 android/app/src/main/res/build/ios/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -58,3 +65,90 @@ ios/build/ios/XCBuildData/PIFCache/
 
 # Local files
 *.jks
+
+# Environment files (exclude sensitive data but keep templates)
+.env
+.env.development
+.env.staging
+.env.production
+.env.example
+.env.local
+.env.production.local
+.env.staging.local
+.env.development.local
+
+# IMPORTANT: Do NOT include .env files when pushing to git!
+# .env files contain sensitive configuration data and should not be committed to version control.
+# .env.example files are also ignored to prevent accidental commits of example configurations.
+# Keep .env files for configuration but exclude sensitive local overrides
+# .env files are now tracked for configuration but sensitive data should be in .env.local files
+
+# Backend-specific ignores
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Logs
+logs/
+*.log
+
+# Uploads and user data
+uploads/
+media/
+static/media/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

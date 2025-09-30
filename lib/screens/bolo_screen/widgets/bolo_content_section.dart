@@ -1,12 +1,29 @@
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:bhashadaan/screens/bolo_screen/widgets/recording_icon.dart';
+import 'package:bhashadaan/screens/validation_screen/validation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 class BoloContentSection extends StatefulWidget {
-  const BoloContentSection({super.key});
+  final String selectedLanguage;
+  final int currentIndex;
+  final int totalItems;
+  final String recordedText;
+  final int sentenceId;
+  final VoidCallback onLanguageChanged;
+
+  const BoloContentSection({
+    super.key,
+    required this.selectedLanguage,
+    required this.currentIndex,
+    required this.totalItems,
+    required this.recordedText,
+    required this.sentenceId,
+    required this.onLanguageChanged,
+  });
 
   @override
   State<BoloContentSection> createState() => _BoloContentSectionState();
@@ -22,7 +39,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           borderRadius: BorderRadius.circular(8).r,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -34,7 +51,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             children: [
               Spacer(),
               Text(
-                "1/5",
+                "${widget.currentIndex}/${widget.totalItems}",
                 style: GoogleFonts.notoSans(
                     fontSize: 12.sp,
                     color: AppColors.darkGreen,
@@ -55,7 +72,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           Padding(
             padding: EdgeInsets.only(left: 32, right: 32).r,
             child: Text(
-              "तुम्ही मला नेहमीच किल्ल्यांबाबत सांगता तशी त्या मार्गदर्शकाने आम्हांला किल्ल्याबाबत खूप छान माहिती पुरवली.",
+              widget.recordedText,
               style: GoogleFonts.notoSans(
                   fontSize: 16.sp,
                   color: Colors.black,
@@ -64,7 +81,11 @@ class _BoloContentSectionState extends State<BoloContentSection> {
             ),
           ),
           SizedBox(height: 50.w),
-          RecordingButton(),
+          RecordingButton(
+            language: widget.selectedLanguage,
+            text: widget.recordedText,
+            sentenceId: widget.sentenceId,
+          ),
           SizedBox(height: 50.w),
           actionButtons(),
           SizedBox(height: 50.w),
@@ -81,9 +102,17 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Skip",
+            title: AppLocalizations.of(context).skip,
             textFontSize: 16.sp,
-            onTap: () {},
+            onTap: () {
+              // Handle skip without API call
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content:
+                        Text(AppLocalizations.of(context).skippedSuccessfully)),
+              );
+            },
             textColor: AppColors.orange,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -97,9 +126,30 @@ class _BoloContentSectionState extends State<BoloContentSection> {
           height: 40.w,
           width: 120.w,
           child: PrimaryButtonWidget(
-            title: "Submit",
+            title: AppLocalizations.of(context).submit,
             textFontSize: 16.sp,
-            onTap: () {},
+            onTap: () {
+              debugPrint("Submit button tapped!");
+              debugPrint("Recorded text: ${widget.recordedText}");
+              debugPrint("Selected language: ${widget.selectedLanguage}");
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ValidationScreen(
+                    recordedText: widget.recordedText,
+                    selectedLanguage: widget.selectedLanguage,
+                    currentIndex: widget.currentIndex,
+                    totalItems: widget.totalItems,
+                    sentenceId: widget.sentenceId,
+                  ),
+                ),
+              ).then((_) {
+                debugPrint("ValidationScreen navigation completed");
+              }).catchError((error) {
+                debugPrint("ValidationScreen navigation error: $error");
+              });
+            },
             textColor: Colors.white,
             decoration: BoxDecoration(
               color: AppColors.orange,

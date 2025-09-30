@@ -1,5 +1,6 @@
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,14 +13,14 @@ class LanguageSelection extends StatefulWidget {
 }
 
 class _LanguageSelectionState extends State<LanguageSelection> {
-  String selectedLanguage = "English";
+  String selectedLanguage = "Marathi";
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          "Select the language for contribution",
+          AppLocalizations.of(context).selectLanguageForContribution,
           style: GoogleFonts.notoSans(
               fontSize: 12.sp,
               color: AppColors.darkGreen,
@@ -33,18 +34,17 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                 builder: (context) {
                   return SearchableBottomSheetContent(
                     items: [
-                      "English",
-                      "Hindi",
-                      "Kannada",
-                      "Tamil",
-                      "Telugu",
-                      "Malayalam",
-                      "Bengali",
-                      "Marathi",
-                      "Gujarati",
-                      "Punjabi",
-                      "Odia",
-                      "Assamese",
+                      AppLocalizations.of(context).english,
+                      AppLocalizations.of(context).hindi,
+                      AppLocalizations.of(context).kannada,
+                      AppLocalizations.of(context).tamil,
+                      AppLocalizations.of(context).telugu,
+                      AppLocalizations.of(context).bengali,
+                      AppLocalizations.of(context).marathi,
+                      AppLocalizations.of(context).gujarati,
+                      AppLocalizations.of(context).punjabi,
+                      AppLocalizations.of(context).odia,
+                      AppLocalizations.of(context).assamese,
                     ],
                     onItemSelected: (value) {
                       selectedLanguage = value;

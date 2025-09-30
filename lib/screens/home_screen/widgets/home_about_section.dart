@@ -1,4 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +18,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "What is AgriDaan?",
+          AppLocalizations.of(context).whatIsAgriDaan,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -26,7 +27,7 @@ class _HomeAboutSectionState extends State<HomeAboutSection> {
         ),
         SizedBox(height: 16.w),
         Text(
-          "Agridaan is an initiative to crowdsource agriculture-related knowledge from citizens across India as part of Project BHASHINI. It calls upon people to contribute local terms, practices, and insights to build an open repository of agricultural data, helping to digitally enrich and preserve India’s diverse farming heritage.",
+          AppLocalizations.of(context).agriDaanDescription,
           style: GoogleFonts.notoSans(
             color: Colors.black,
             fontSize: 14.sp,

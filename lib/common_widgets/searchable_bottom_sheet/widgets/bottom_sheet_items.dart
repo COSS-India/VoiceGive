@@ -2,7 +2,7 @@ import 'package:bhashadaan/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 
 class ItemsList extends StatelessWidget {
   final ValueNotifier<List<String>> filteredItems;
@@ -11,6 +11,7 @@ class ItemsList extends StatelessWidget {
   final Function(String) onItemSelected;
 
   const ItemsList({
+    super.key, 
     required this.filteredItems,
     required this.isLoading,
     required this.scrollController,
@@ -25,7 +26,7 @@ class ItemsList extends StatelessWidget {
         if (filtered.isEmpty && !isLoading) {
           return Center(
             child: Text(
-              AppLocalizations.of(context)!.mStaticNoSearchResultFound,
+              AppLocalizations.of(context).mStaticNoSearchResultFound,
               style: GoogleFonts.lato(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w400,
@@ -54,7 +55,7 @@ class ItemsList extends StatelessWidget {
               title: Text(filtered[index]),
               onTap: () {
                 onItemSelected(filtered[index]);
-                Navigator.pop(context);
+                // Do not pop here; parent handles closing to avoid popping main route
               },
             );
           },

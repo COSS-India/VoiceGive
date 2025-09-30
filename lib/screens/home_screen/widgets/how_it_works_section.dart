@@ -1,4 +1,5 @@
 import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:bhashadaan/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,7 @@ class HowItWorksSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "How it Works",
+          AppLocalizations.of(context).howItWorks,
           style: GoogleFonts.notoSans(
             color: AppColors.darkGreen,
             fontSize: 20.sp,
@@ -24,19 +25,17 @@ class HowItWorksSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             cardWidget(
-                title: "Contribute",
-                description: "Speak clearly and record the displayed sentence",
-                icon: Icons.touch_app_outlined),
+                title: AppLocalizations.of(context).contribute,
+                description: AppLocalizations.of(context).speakClearlyAndRecord,
+                iconPath: 'assets/icons/contribute_icon.png'),
             cardWidget(
-                title: "Validate",
-                description:
-                    "Listen carefully and confirm if the recording matches the text",
-                icon: Icons.check_circle_outline),
+                title: AppLocalizations.of(context).validate,
+                description: AppLocalizations.of(context).listenAndValidate,
+                iconPath: 'assets/icons/validate_icon.png'),
             cardWidget(
-                title: "Earn ertificate",
-                description:
-                    "Earn your certificate after completing 5 contributions and 25 validations.",
-                icon: Icons.badge_sharp)
+                title: AppLocalizations.of(context).earnCertificate,
+                description: AppLocalizations.of(context).earnCertificateDescription,
+                iconPath: 'assets/icons/certificate_icon.png')
           ],
         ),
       ],
@@ -46,7 +45,7 @@ class HowItWorksSection extends StatelessWidget {
   Widget cardWidget(
       {required String title,
       required String description,
-      required IconData icon}) {
+      required String iconPath}) {
     return Container(
       width: 120.w,
       height: 156.w,
@@ -62,12 +61,12 @@ class HowItWorksSection extends StatelessWidget {
           CircleAvatar(
               radius: 30.r,
               backgroundColor: AppColors.darkGreen,
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 30.sp,
+              child: Image.asset(
+                iconPath,
+                width: 50.w,
+                height: 50.w,
               )),
-          SizedBox(height: 6.w),
+          SizedBox(height: 4.w),
           Text(
             title,
             style: GoogleFonts.notoSans(
@@ -76,7 +75,7 @@ class HowItWorksSection extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 4.w),
+          SizedBox(height: 2.w),
           Text(
             description,
             style: GoogleFonts.notoSans(
