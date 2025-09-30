@@ -1,6 +1,6 @@
 # VoiceGive
 
-A new Flutter project.
+VoiceGive is a Flutter-based UI application designed for language data collection and crowdsourcing initiatives. This project provides a complete, customizable user interface that can be adopted by organizations, government agencies, and developers to build their own language data collection applications with features like voice recording, text validation, and multi-language support.
 
 ## Getting Started
 
