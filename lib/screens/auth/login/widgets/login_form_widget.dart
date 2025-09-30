@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../../models/auth/login_request.dart';
 import '../../../../providers/auth_provider.dart';
 import '../../../../services/auth_service.dart';
-import '../../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Login form widget with authentication integration
 class LoginFormWidget extends StatefulWidget {
@@ -167,8 +167,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         _captchaImageUrl!,
                         height: 100,
                         errorBuilder: (context, error, stackTrace) {
-                          return Text(
-                              AppLocalizations.of(context)!.failedToLoadCaptcha);
+                          return Text(AppLocalizations.of(context)!
+                              .failedToLoadCaptcha);
                         },
                       ),
                       const SizedBox(height: 8),

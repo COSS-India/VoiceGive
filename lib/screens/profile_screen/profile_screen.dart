@@ -2,7 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
 import 'package:bhashadaan/screens/home_screen/home_screen.dart';
 import 'package:bhashadaan/screens/profile_screen/other_information_screen.dart';
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _initializeLocalizedStrings() {
-    final l10n = AppLocalizations.of(context)!!;
+    final l10n = AppLocalizations.of(context)!;
     _ageGroups = [
       l10n.under18Years,
       l10n.age18To24,
@@ -223,7 +223,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   horizontal: 12.w, vertical: 12.w),
                             ),
                             validator: (v) => (v == null || v.trim().isEmpty)
-                                ? AppLocalizations.of(context)!.firstNameRequired
+                                ? AppLocalizations.of(context)!
+                                    .firstNameRequired
                                 : null,
                             style: GoogleFonts.notoSans(
                                 color: AppColors.greys87,
@@ -247,8 +248,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text:
-                                          AppLocalizations.of(context)!.lastName,
+                                      text: AppLocalizations.of(context)!
+                                          .lastName,
                                       style: GoogleFonts.notoSans(
                                         color: AppColors.greys60,
                                         fontSize: 14.sp,
@@ -370,7 +371,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fontSize: 14.sp),
                                     ),
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.gender,
+                                      text:
+                                          AppLocalizations.of(context)!.gender,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp),

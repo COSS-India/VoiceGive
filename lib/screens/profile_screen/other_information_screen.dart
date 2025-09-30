@@ -2,7 +2,7 @@ import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
 import 'package:bhashadaan/common_widgets/primary_button_widget.dart';
 import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
 import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bhashadaan/screens/bolo_screen/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -300,8 +300,8 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                                           color: AppColors.negativeLight,
                                           fontSize: 14.sp)),
                                   TextSpan(
-                                      text:
-                                          AppLocalizations.of(context)!.district,
+                                      text: AppLocalizations.of(context)!
+                                          .district,
                                       style: GoogleFonts.notoSans(
                                           color: AppColors.greys60,
                                           fontSize: 14.sp)),
@@ -369,7 +369,8 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: PrimaryButtonWidget(
-                            title: AppLocalizations.of(context)!.saveAndContinue,
+                            title:
+                                AppLocalizations.of(context)!.saveAndContinue,
                             textColor: Colors.white,
                             decoration: BoxDecoration(
                               color: AppColors.orange,

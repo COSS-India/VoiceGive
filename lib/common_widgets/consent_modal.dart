@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_colors.dart';
-import '../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InformedConsentModal extends StatefulWidget {
   final VoidCallback onApprove;
@@ -131,7 +131,7 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "By clicking \"${AppLocalizations.of(context).iAgree}\", you confirm that:",
+                        "By clicking \"${AppLocalizations.of(context)!.iAgree}\", you confirm that:",
                         style: GoogleFonts.notoSans(
                           color: Colors.black,
                           fontSize: 16.sp,
@@ -165,11 +165,11 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
                       ),
                       SizedBox(height: 12.w),
 
-                      _buildNumberedItem(
-                        "5.",
-                        "You have read, understood, and accepted the following governing documents on the BhashaDaan portal:",
-                      ),
-                      SizedBox(height: 16.w),
+                        _buildNumberedItem(
+                          "5.",
+                          "You have read, understood, and accepted the following governing documents on the BhashaDaan mobile app:",
+                        ),
+                        SizedBox(height: 16.w),
 
                       // Checkboxes for documents
                       _buildCheckboxItem(
