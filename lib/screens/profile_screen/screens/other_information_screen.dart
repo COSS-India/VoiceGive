@@ -100,10 +100,12 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context);
-        return false;
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+        Navigator.of(context).pop();
       },
       child: Scaffold(
         appBar: const CustomAppBar(),

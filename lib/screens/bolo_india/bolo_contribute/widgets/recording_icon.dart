@@ -18,14 +18,18 @@ enum RecordingState { idle, recording, stopped }
 class RecordingButton extends StatefulWidget {
   final Function(File?) getRecordedFile;
   final Function(bool?) isRecording;
+  final File? recordedFile;
+  final int recordIndex;
   const RecordingButton({
     super.key,
     required this.getRecordedFile,
     required this.isRecording,
+    this.recordedFile,
+    required this.recordIndex
   });
 
   @override
-  _RecordingButtonState createState() => _RecordingButtonState();
+  State<RecordingButton> createState() => _RecordingButtonState();
 }
 
 class _RecordingButtonState extends State<RecordingButton>
@@ -42,6 +46,17 @@ class _RecordingButtonState extends State<RecordingButton>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant RecordingButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.recordedFile != oldWidget.recordedFile || widget.recordIndex != oldWidget.recordIndex) {
+      setState(() {
+        recordedFilePath = widget.recordedFile?.path;
+        _state = recordedFilePath != null ? RecordingState.stopped : RecordingState.idle;
+      });
+    }
   }
 
   @override
