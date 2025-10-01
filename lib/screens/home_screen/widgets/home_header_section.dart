@@ -17,26 +17,26 @@ class HomeHeaderSection extends StatefulWidget {
 
 class _HomeHeaderSectionState extends State<HomeHeaderSection> {
   void _showConsentModal(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => BoloContribute()));
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (BuildContext context) {
-    //     return InformedConsentModal(
-    //       onApprove: () {
-    //         Navigator.of(context).pop(); // Close the modal
-    //         Navigator.pushNamed(
-    //           context,
-    //           AppRoutes.otpVerification,
-    //         );
-    //       },
-    //       onDeny: () {
-    //         Navigator.of(context).pop(); // Close the modal
-    //       },
-    //     );
-    //   },
-    // );
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => BoloContribute()));
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return InformedConsentModal(
+          onApprove: () {
+            Navigator.of(context).pop(); // Close the modal
+            Navigator.pushNamed(
+              context,
+              AppRoutes.otpVerification,
+            );
+          },
+          onDeny: () {
+            Navigator.of(context).pop(); // Close the modal
+          },
+        );
+      },
+    );
   }
 
   @override
