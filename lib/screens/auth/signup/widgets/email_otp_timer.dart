@@ -91,13 +91,13 @@ class _EmailOtpTimerState extends State<EmailOtpTimer> {
     });
   }
 
-  void _resetTimer() {
-    setState(() {
-      _seconds = widget.initialSeconds;
-      _canResend = false;
-    });
-    _startOtpTimer();
-  }
+  // void _resetTimer() {
+  //   setState(() {
+  //     _seconds = widget.initialSeconds;
+  //     _canResend = false;
+  //   });
+  //   _startOtpTimer();
+  // }
 
   String _formatTime(int seconds) {
     int minutes = seconds ~/ 60;

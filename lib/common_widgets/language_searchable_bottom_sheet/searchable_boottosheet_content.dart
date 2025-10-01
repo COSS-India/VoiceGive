@@ -1,20 +1,19 @@
-import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/widgets/bottom_field_search_field.dart';
-import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/widgets/bottom_sheet_items.dart';
+import 'package:VoiceGive/common_widgets/language_searchable_bottom_sheet/widgets/bottom_field_search_field.dart';
+import 'package:VoiceGive/common_widgets/language_searchable_bottom_sheet/widgets/bottom_sheet_items.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../constants/app_colors.dart';
-
-class SearchableBottomSheetContent extends StatefulWidget {
-  final List<String> items;
-  final Function(String) onItemSelected;
-  final String? defaultItem;
-  final Future<List<String>> Function(String)? onFetchMore;
+class LanguageSearchableBottomSheetContent extends StatefulWidget {
+  final List<LanguageModel> items;
+  final Function(LanguageModel) onItemSelected;
+  final LanguageModel? defaultItem;
+  final Future<List<LanguageModel>> Function(String)? onFetchMore;
   final bool hasMore;
   final String initialQuery;
   final BuildContext? parentContext;
 
-  const SearchableBottomSheetContent({
+  const LanguageSearchableBottomSheetContent({
     required this.items,
     required this.onItemSelected,
     required this.hasMore,
@@ -26,19 +25,19 @@ class SearchableBottomSheetContent extends StatefulWidget {
   });
 
   @override
-  State<SearchableBottomSheetContent> createState() =>
+  State<LanguageSearchableBottomSheetContent> createState() =>
       _SearchableBottomSheetContentState();
 }
 
 class _SearchableBottomSheetContentState
-    extends State<SearchableBottomSheetContent> {
+    extends State<LanguageSearchableBottomSheetContent> {
   late final ScrollController _scrollController = ScrollController();
   late final TextEditingController _searchController =
       TextEditingController(text: widget.initialQuery);
-  late final ValueNotifier<List<String>> _filteredItems =
+  late final ValueNotifier<List<LanguageModel>> _filteredItems =
       ValueNotifier(_getProcessedItems(widget.items));
 
-  List<String> _allItems = [];
+  List<LanguageModel> _allItems = [];
   bool _isLoading = false;
   bool _hasMore = true;
   String _currentQuery = '';
@@ -63,10 +62,12 @@ class _SearchableBottomSheetContentState
     super.dispose();
   }
 
-  List<String> _getProcessedItems(List<String> items) {
-    if (widget.defaultItem?.isNotEmpty == true) {
-      final itemsWithoutDefault =
-          items.where((item) => item != widget.defaultItem).toList();
+  List<LanguageModel> _getProcessedItems(List<LanguageModel> items) {
+    if (widget.defaultItem != null) {
+      final itemsWithoutDefault = items
+          .where(
+              (item) => item.languageCode != widget.defaultItem!.languageCode)
+          .toList();
       return [...itemsWithoutDefault, widget.defaultItem!];
     }
     return items;
@@ -121,7 +122,10 @@ class _SearchableBottomSheetContentState
   void _performLocalSearch(String query) {
     final lowerQuery = query.toLowerCase();
     final filtered = widget.items
-        .where((item) => item.toLowerCase().contains(lowerQuery))
+        .where((item) =>
+            item.languageName.toLowerCase().contains(lowerQuery) ||
+            item.nativeName.toLowerCase().contains(lowerQuery) ||
+            item.languageCode.toLowerCase().contains(lowerQuery))
         .toList();
 
     _filteredItems.value = _getProcessedItems(filtered);
@@ -132,43 +136,30 @@ class _SearchableBottomSheetContentState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Align(
-          alignment: Alignment.centerRight,
-          child: IconButton(
-            icon: Icon(Icons.close, color: AppColors.darkGreen),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+    return Container(
+      height: 0.7.sh,
+      padding: EdgeInsets.all(16).r,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (_shouldShowSearch) ...[
+            BottomSheetSearchField(
+              controller: _searchController,
+              onChanged: _onSearchChanged,
+              parentContext: widget.parentContext ?? context,
+            ),
+            SizedBox(height: 8.w),
+          ],
+          Flexible(
+            child: ItemsList(
+              filteredItems: _filteredItems,
+              isLoading: _isLoading,
+              scrollController: _scrollController,
+              onItemSelected: widget.onItemSelected,
+            ),
           ),
-        ),
-        Container(
-          height: 0.7.sh,
-          padding: const EdgeInsets.all(16).r,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (_shouldShowSearch) ...[
-                BottomSheetSearchField(
-                  controller: _searchController,
-                  onChanged: _onSearchChanged,
-                  parentContext: widget.parentContext ?? context,
-                ),
-                SizedBox(height: 8.w),
-              ],
-              Flexible(
-                  child: ItemsList(
-                filteredItems: _filteredItems,
-                isLoading: _isLoading,
-                scrollController: _scrollController,
-                onItemSelected: widget.onItemSelected,
-              )),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

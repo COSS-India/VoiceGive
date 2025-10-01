@@ -1,12 +1,12 @@
-import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/profile_screen/model/age_group_model.dart';
-import 'package:bhashadaan/screens/profile_screen/repository/profile_repository.dart';
+import 'package:VoiceGive/common_widgets/custom_app_bar.dart';
+import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/profile_screen/model/age_group_model.dart';
+import 'package:VoiceGive/screens/profile_screen/repository/profile_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:bhashadaan/screens/auth/otp_login/otp_verification_screen.dart';
-import 'package:bhashadaan/screens/home_screen/home_screen.dart';
-import 'package:bhashadaan/screens/profile_screen/screens/other_information_screen.dart';
+import 'package:VoiceGive/screens/auth/otp_login/otp_verification_screen.dart';
+import 'package:VoiceGive/screens/home_screen/home_screen.dart';
+import 'package:VoiceGive/screens/profile_screen/screens/other_information_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -402,14 +402,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   : null,
                                         ),
                                       ),
-                                    );
-                                  } else if (!selectionsValid) {
-                                    // Do not change border color; just show inline message
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(AppLocalizations.of(
-                                                  context)!
-                                              .pleaseSelectAgeGroupAndGender)),
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(

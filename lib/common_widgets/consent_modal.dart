@@ -1,3 +1,7 @@
+import 'package:VoiceGive/common_widgets/page_loader.dart';
+import 'package:VoiceGive/constants/helper.dart';
+import 'package:VoiceGive/models/auth/consent_response.dart';
+import 'package:VoiceGive/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,9 +26,33 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
   bool _termsAccepted = false;
   bool _privacyAccepted = false;
   bool _copyrightAccepted = false;
+  final ValueNotifier<bool> isAcceptingConsent = ValueNotifier<bool>(false);
 
   bool get _allAccepted =>
       _termsAccepted && _privacyAccepted && _copyrightAccepted;
+
+  Future<void> _acceptConsent() async {
+    try {
+      isAcceptingConsent.value = true;
+      ConsentResponse? response = await AuthService.acceptConsent(
+          termsAccepted: true, privacyAccepted: true, copyrightAccepted: true);
+      if (response.success) {
+        widget.onApprove();
+      } else {
+        Helper.showSnackBarMessage(
+            context: context,
+            bgColor: AppColors.negativeLight,
+            text: response.message ?? AppLocalizations.of(context)!.errorDesc);
+      }
+      isAcceptingConsent.value = false;
+    } catch (e) {
+      isAcceptingConsent.value = false;
+      Helper.showSnackBarMessage(
+          context: context,
+          bgColor: AppColors.negativeLight,
+          text: AppLocalizations.of(context)!.errorDesc);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,42 +233,60 @@ class _InformedConsentModalState extends State<InformedConsentModal> {
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: _allAccepted ? widget.onApprove : null,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 14.w),
-                        decoration: BoxDecoration(
-                          color: _allAccepted
-                              ? AppColors.orange
-                              : AppColors.lightGrey,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.check,
-                              color: _allAccepted
-                                  ? Colors.white
-                                  : AppColors.grey84,
-                              size: 18.w,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              AppLocalizations.of(context)!.iAgree,
-                              style: GoogleFonts.notoSans(
-                                color: _allAccepted
-                                    ? Colors.white
-                                    : AppColors.grey84,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
+                      child: ValueListenableBuilder(
+                          valueListenable: isAcceptingConsent,
+                          builder: (BuildContext context, bool loading,
+                              Widget? child) {
+                            return GestureDetector(
+                              onTap: () {
+                                if (_allAccepted && !loading) _acceptConsent();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 14.w),
+                                decoration: BoxDecoration(
+                                  color: _allAccepted
+                                      ? AppColors.orange
+                                      : AppColors.lightGrey,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    if (loading)
+                                      SizedBox(
+                                        width: 18.w,
+                                        height: 18.w,
+                                        child: PageLoader(
+                                          strokeWidth: 2,
+                                          isLightTheme: false,
+                                        ),
+                                      ),
+                                    if (!loading) ...[
+                                      Icon(
+                                        Icons.check,
+                                        color: _allAccepted
+                                            ? Colors.white
+                                            : AppColors.grey84,
+                                        size: 18.w,
+                                      ),
+                                      SizedBox(width: 8.w),
+                                      Text(
+                                        AppLocalizations.of(context)!.iAgree,
+                                        style: GoogleFonts.notoSans(
+                                          color: _allAccepted
+                                              ? Colors.white
+                                              : AppColors.grey84,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                            );
+                          })),
                   SizedBox(width: 20.h),
                   Expanded(
                     child: GestureDetector(

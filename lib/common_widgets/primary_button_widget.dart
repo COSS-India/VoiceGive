@@ -1,5 +1,5 @@
-import 'package:bhashadaan/common_widgets/page_loader.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/common_widgets/page_loader.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,20 +17,19 @@ class PrimaryButtonWidget extends StatelessWidget {
   final double? horizontalPadding;
   final FontWeight? fontWeight;
 
-  const PrimaryButtonWidget({
-    super.key,
-    required this.title,
-    this.prefix,
-    this.onTap,
-    this.decoration,
-    this.textColor,
-    this.textFontSize,
-    this.isLoading,
-    this.isLightTheme,
-    this.verticalPadding,
-    this.horizontalPadding,
-    this.fontWeight
-  });
+  const PrimaryButtonWidget(
+      {super.key,
+      required this.title,
+      this.prefix,
+      this.onTap,
+      this.decoration,
+      this.textColor,
+      this.textFontSize,
+      this.isLoading,
+      this.isLightTheme,
+      this.verticalPadding,
+      this.horizontalPadding,
+      this.fontWeight});
 
   @override
   Widget build(BuildContext context) {

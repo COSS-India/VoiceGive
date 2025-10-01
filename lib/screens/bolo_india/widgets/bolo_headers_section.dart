@@ -1,6 +1,6 @@
-import 'package:bhashadaan/common_widgets/image_widget.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/home_screen/home_screen.dart';
+import 'package:VoiceGive/common_widgets/image_widget.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

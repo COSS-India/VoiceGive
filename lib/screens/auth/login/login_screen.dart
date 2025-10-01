@@ -1,4 +1,4 @@
-import 'package:bhashadaan/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -200,11 +200,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) {
-          return;
-        }
-      _navigateBackToHome();},
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            return;
+          }
+          _navigateBackToHome();
+        },
         child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,

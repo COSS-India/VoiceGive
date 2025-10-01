@@ -1,14 +1,15 @@
 import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/bolo_india/models/language_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ItemsList extends StatelessWidget {
-  final ValueNotifier<List<String>> filteredItems;
+  final ValueNotifier<List<LanguageModel>> filteredItems;
   final bool isLoading;
   final ScrollController scrollController;
-  final Function(String) onItemSelected;
+  final Function(LanguageModel) onItemSelected;
 
   const ItemsList({
     super.key,
@@ -20,7 +21,7 @@ class ItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<String>>(
+    return ValueListenableBuilder<List<LanguageModel>>(
       valueListenable: filteredItems,
       builder: (context, filtered, _) {
         if (filtered.isEmpty && !isLoading) {
@@ -52,7 +53,7 @@ class ItemsList extends StatelessWidget {
             return ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -2),
-              title: Text(filtered[index]),
+              title: Text(filtered[index].languageName),
               onTap: () {
                 onItemSelected(filtered[index]);
                 // Do not pop here; parent handles closing to avoid popping main route

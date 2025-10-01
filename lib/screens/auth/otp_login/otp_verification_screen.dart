@@ -1,4 +1,4 @@
-import 'package:bhashadaan/screens/profile_screen/screens/profile_screen.dart';
+import 'package:VoiceGive/screens/profile_screen/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,11 +16,8 @@ class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
   final String countryCode;
 
-  const OtpVerificationScreen({
-    super.key,
-    required this.phoneNumber,
-    required this.countryCode
-  });
+  const OtpVerificationScreen(
+      {super.key, required this.phoneNumber, required this.countryCode});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -97,7 +94,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Future<void> _verifyOtp() async {
     if (_otp.length == 6) {
       _isLoading.value = true;
-      dynamic userAuthData = await LoginAuthRepository().verifyOtp(otp: _otp, mobileNo: widget.phoneNumber);
+      dynamic userAuthData = await LoginAuthRepository()
+          .verifyOtp(otp: _otp, mobileNo: widget.phoneNumber);
       _isLoading.value = false;
       // Navigate to Profile Screen
       if (userAuthData is String) {
@@ -109,16 +107,16 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           ),
         );
         return;
-      }
-      else{Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProfileScreen(
-            phoneNumber: widget.phoneNumber,
-            countryCode: widget.countryCode
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(
+                phoneNumber: widget.phoneNumber,
+                countryCode: widget.countryCode),
           ),
-        ),
-      );}
+        );
+      }
     } else {
       setState(() {
         _errorText = AppLocalizations.of(context)!.invalidOtp;
@@ -127,26 +125,27 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   Future<void> _resendOtp() async {
-    final String? response = await LoginAuthRepository().resendOtp(mobileNo: widget.phoneNumber, countryCode: widget.countryCode);
+    final String? response = await LoginAuthRepository().resendOtp(
+        mobileNo: widget.phoneNumber, countryCode: widget.countryCode);
 
-  if (!mounted) return;
+    if (!mounted) return;
 
-  if (response != null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
-        backgroundColor: AppColors.lightGreen,
-      ),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Error occurred while resending OTP'),
-      ),
-    );
+    if (response != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text(AppLocalizations.of(context)!.otpSentSuccessfullyMessage),
+          backgroundColor: AppColors.lightGreen,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error occurred while resending OTP'),
+        ),
+      );
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:bhashadaan/common_widgets/audio_player/widgets/audio_player_skeleton.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/common_widgets/audio_player/widgets/audio_player_skeleton.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_audio/just_audio.dart';
@@ -48,7 +48,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
 
     try {
       debugPrint('Initializing audio player with file: ${widget.filePath}');
-      
+
       // Handle different file path types (blob URLs for web, file paths for mobile)
       if (kIsWeb || widget.filePath.startsWith('blob:')) {
         // For web blob URLs
@@ -74,7 +74,7 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
       // Get duration after file is loaded
       final duration = _player.duration;
       debugPrint('Audio duration: $duration');
-      
+
       setState(() {
         _duration = duration ?? Duration.zero;
         _isLoading = false;
@@ -98,7 +98,8 @@ class _CustomAudioPlayerState extends State<CustomAudioPlayer> {
       // Listen to player state changes
       _player.playerStateStream.listen((state) {
         if (mounted) {
-          debugPrint('Player state: ${state.processingState}, playing: ${state.playing}');
+          debugPrint(
+              'Player state: ${state.processingState}, playing: ${state.playing}');
           if (state.processingState == ProcessingState.completed) {
             setState(() {
               _isPlaying = false;

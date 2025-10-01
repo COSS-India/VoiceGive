@@ -1,9 +1,9 @@
-import 'package:bhashadaan/common_widgets/custom_app_bar.dart';
-import 'package:bhashadaan/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
-import 'package:bhashadaan/constants/app_colors.dart';
-import 'package:bhashadaan/screens/profile_screen/model/country_model.dart';
+import 'package:VoiceGive/common_widgets/custom_app_bar.dart';
+import 'package:VoiceGive/common_widgets/searchable_bottom_sheet/searchable_boottosheet_content.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
+import 'package:VoiceGive/screens/profile_screen/model/country_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:bhashadaan/screens/bolo_india/bolo_get_started/bolo_get_started.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_get_started/bolo_get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +20,14 @@ class OtherInformationScreen extends StatefulWidget {
   final String gender;
   final String phoneNumber;
   final String? email;
-  const OtherInformationScreen({super.key, required this.firstName, required this.lastName, required this.ageGroup, required this.gender, required this.phoneNumber, this.email});
+  const OtherInformationScreen(
+      {super.key,
+      required this.firstName,
+      required this.lastName,
+      required this.ageGroup,
+      required this.gender,
+      required this.phoneNumber,
+      this.email});
 
   @override
   State<OtherInformationScreen> createState() => _OtherInformationScreenState();
@@ -52,17 +59,14 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   Future<void> fetchData() async {
-   countryList = await ProfileRepository().getCountries();
-   languagesList = await ProfileRepository().getLanguages();
-   _countries = countryList.map((e) => e.countryName).toList();
-   _languages = languagesList.map((e) => e.languageName).toList();
-   if(mounted){
-    setState(() {
-    });
-   }
+    countryList = await ProfileRepository().getCountries();
+    languagesList = await ProfileRepository().getLanguages();
+    _countries = countryList.map((e) => e.countryName).toList();
+    _languages = languagesList.map((e) => e.languageName).toList();
+    if (mounted) {
+      setState(() {});
+    }
   }
-
-  
 
   Future<void> _pickFromList({
     required List<String> items,
@@ -157,17 +161,19 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         // Country
                         GestureDetector(
                           onTap: () => _pickFromList(
-                            items: _countries,
-                            defaultItem: _country,
-                            onPicked: (v)  async { _country = v;
-                              String countryId = getCountryId(_country);
-                              stateList = await ProfileRepository().getState(countryId);
-                              _states = stateList.map((e) => e.stateName).toList();
-                              if(mounted){
-                                setState(() {});
-                              }
-                            }
-                          ),
+                              items: _countries,
+                              defaultItem: _country,
+                              onPicked: (v) async {
+                                _country = v;
+                                String countryId = getCountryId(_country);
+                                stateList = await ProfileRepository()
+                                    .getState(countryId);
+                                _states =
+                                    stateList.map((e) => e.stateName).toList();
+                                if (mounted) {
+                                  setState(() {});
+                                }
+                              }),
                           child: InputDecorator(
                             decoration: InputDecoration(
                               label: RichText(
@@ -205,18 +211,24 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                         SizedBox(height: 16.h),
                         // State
                         GestureDetector(
-                          onTap: _states.isEmpty?null:() => _pickFromList(
-                            items: _states,
-                            defaultItem: _state,
-                            onPicked: (v) async { _state = v;
-                             String stateId = getStateId(_state);
-                              districtList = await ProfileRepository().getDistrict(stateId);
-                              _districts = districtList.map((e) => e.districtName).toList();
-                              if(mounted){
-                                setState(() {});
-                              }
-                            },
-                          ),
+                          onTap: _states.isEmpty
+                              ? null
+                              : () => _pickFromList(
+                                    items: _states,
+                                    defaultItem: _state,
+                                    onPicked: (v) async {
+                                      _state = v;
+                                      String stateId = getStateId(_state);
+                                      districtList = await ProfileRepository()
+                                          .getDistrict(stateId);
+                                      _districts = districtList
+                                          .map((e) => e.districtName)
+                                          .toList();
+                                      if (mounted) {
+                                        setState(() {});
+                                      }
+                                    },
+                                  ),
                           child: InputDecorator(
                             decoration: InputDecoration(
                               label: RichText(
@@ -345,55 +357,66 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
                           child: SizedBox(
                             width: 280.w,
                             child: ElevatedButton(
-                            onPressed: () async {
-                              if (_district == null) {
-                                setState(() => _showDistrictError = true);
-                                final ctx = _districtFieldKey.currentContext;
-                                if (ctx != null) {
-                                  Future.microtask(() =>
-                                      Scrollable.ensureVisible(
-                                        ctx,
-                                        duration:
-                                            const Duration(milliseconds: 250),
-                                        alignment: 0.1,
-                                      ));
-                                }
-                                return;
-                              }
-                              dynamic userData = await ProfileRepository().registration(firstName: widget.firstName, lastName: widget.lastName, ageGroup: widget.ageGroup, gender: widget.gender, mobileNo: widget.phoneNumber, country: _country, state: _state, district: _districtController.text, email: widget.email, preferredLanguage: _preferredLanguage);
-                                  if(userData is String){
-                                    if (!mounted) return;
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                            content: Text(userData),
-                                      ),
-                                    );
-                                    return;
+                              onPressed: () async {
+                                if (_district == null) {
+                                  setState(() => _showDistrictError = true);
+                                  final ctx = _districtFieldKey.currentContext;
+                                  if (ctx != null) {
+                                    Future.microtask(() =>
+                                        Scrollable.ensureVisible(
+                                          ctx,
+                                          duration:
+                                              const Duration(milliseconds: 250),
+                                          alignment: 0.1,
+                                        ));
                                   }
-                              else{Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (_) => const BoloGetStarted(),
+                                  return;
+                                }
+                                dynamic userData = await ProfileRepository()
+                                    .registration(
+                                        firstName: widget.firstName,
+                                        lastName: widget.lastName,
+                                        ageGroup: widget.ageGroup,
+                                        gender: widget.gender,
+                                        mobileNo: widget.phoneNumber,
+                                        country: _country,
+                                        state: _state,
+                                        district: _districtController.text,
+                                        email: widget.email,
+                                        preferredLanguage: _preferredLanguage);
+                                if (userData is String) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(userData),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (_) => const BoloGetStarted(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.orange,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.r),
                                 ),
-                              );}
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.r),
+                                padding: EdgeInsets.symmetric(vertical: 16.w),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 16.w),
-                            ),
-                            child: Text(
-                              AppLocalizations.of(context)!.saveAndContinue,
-                              style: GoogleFonts.notoSans(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
+                              child: Text(
+                                AppLocalizations.of(context)!.saveAndContinue,
+                                style: GoogleFonts.notoSans(
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
                       ],
                     ),
                   ),
@@ -407,10 +430,14 @@ class _OtherInformationScreenState extends State<OtherInformationScreen> {
   }
 
   String getCountryId(String countryName) {
-    return countryList.firstWhere((element) => element.countryName == countryName).countryId;
+    return countryList
+        .firstWhere((element) => element.countryName == countryName)
+        .countryId;
   }
 
   String getStateId(String stateName) {
-    return stateList.firstWhere((element) => element.stateName == stateName).stateId;
+    return stateList
+        .firstWhere((element) => element.stateName == stateName)
+        .stateId;
   }
 }

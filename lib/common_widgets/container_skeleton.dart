@@ -1,6 +1,5 @@
-import 'package:bhashadaan/constants/app_colors.dart';
+import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-
 
 class ContainerSkeleton extends StatefulWidget {
   final double height;
