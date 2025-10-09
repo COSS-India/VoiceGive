@@ -2,6 +2,7 @@ import 'package:VoiceGive/common_widgets/consent_modal.dart';
 import 'package:VoiceGive/common_widgets/image_widget.dart';
 import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:VoiceGive/constants/app_routes.dart';
+import 'package:VoiceGive/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
