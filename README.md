@@ -70,6 +70,13 @@ ENVIRONMENT=development
 - Never commit sensitive tokens to version control.
 - Use `.env.local` for local overrides (auto-ignored by git).
 
+**Steps to run the app:**
+- flutter clean
+- flutter pub get
+- flutter pub run build_runner build --delete-conflicting-outputs
+- flutter run
+
+
 **Switch Environment:**
 ```
 flutter run --dart-define=ENVIRONMENT=development
