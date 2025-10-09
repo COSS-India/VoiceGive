@@ -7,6 +7,13 @@ This document provides a unified guide for setting up your environment, configur
 
 ## 1. Environment Setup
 
+### Flutter Version
+Flutter 3.27.1 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 17025dd882 (10 months ago) • 2024-12-17 03:23:09 +0900
+Engine • revision cb4b5fff73
+Tools • Dart 3.6.0 • DevTools 2.40.2
+
+
 ### Environment Files
 - `.env` (default/development)
 - `.env.development` (development)
@@ -59,10 +66,16 @@ ENVIRONMENT=development
 ```
 
 **Instructions:**
-- Update `API_BEARER_TOKEN` in each file for the correct environment.
 - Verify API URLs for each environment.
 - Never commit sensitive tokens to version control.
 - Use `.env.local` for local overrides (auto-ignored by git).
+
+**Steps to run the app:**
+- flutter clean
+- flutter pub get
+- flutter pub run build_runner build --delete-conflicting-outputs
+- flutter run
+
 
 **Switch Environment:**
 ```
@@ -74,45 +87,13 @@ flutter run --dart-define=ENVIRONMENT=production
 **Access in Code:**
 ```dart
 String baseUrl = AppConfig.instance.apiBaseUrl;
-String token = AppConfig.instance.apiBearerToken;
 String env = AppConfig.instance.environment;
 bool isProduction = AppConfig.instance.isProduction;
 ```
 
 ---
 
-## 2. Authentication System
 
-### Features
-- Secure login (email/password, captcha)
-- JWT token management (secure storage)
-- State management for authentication
-- Automatic token injection in API calls
-
-### Core Components
-- **Models:** `lib/models/auth/`
-- **Services:** `lib/services/`
-- **State Management:** `lib/providers/`
-- **UI:** `lib/screens/auth/login/widgets/`
-
-### API Endpoints
-- **Login:** `POST {API_BASE_URL}/login-user`
-- **Captcha:** `GET {API_BASE_URL}/get-secure-cap`
-
-### Usage Example
-```dart
-final authProvider = Provider.of<AuthProvider>(context, listen: false);
-final loginRequest = LoginRequest(
-	email: 'user@example.com',
-	password: 'password123',
-	secureId: 'captcha_secure_id',
-	captchaText: 'CAPTCHA',
-);
-final success = await authProvider.login(loginRequest);
-if (success) {
-	Navigator.pushReplacementNamed(context, '/home');
-}
-```
 
 ### Token Management
 - Tokens are stored securely using `flutter_secure_storage`.
@@ -121,7 +102,7 @@ if (success) {
 
 ---
 
-## 3. Best Practices & Security
+## 2. Best Practices & Security
 - **Never commit sensitive tokens** or production API keys to version control.
 - Use environment-specific tokens and endpoints.
 - Use `.env.local` for local development secrets.
@@ -131,7 +112,7 @@ if (success) {
 
 ---
 
-## 4. Troubleshooting
+## 3. Troubleshooting
 - **Missing environment file:** Ensure `.env` exists in the project root.
 - **Missing variables:** Check all required variables are defined.
 - **Build errors:** Run `flutter pub get` after adding dependencies.
@@ -140,6 +121,6 @@ if (success) {
 
 ---
 
-## 5. Support
+## 4. Support
 - For more details, see code comments and the `AppConfig`, `AuthManager`, and `AuthProvider` classes.
 - Contact the development team for further help.

@@ -67,10 +67,7 @@ ios/build/ios/XCBuildData/PIFCache/
 *.jks
 
 # Environment files (exclude sensitive data but keep templates)
-.env
-.env.development
-.env.staging
-.env.production
+
 .env.example
 .env.local
 .env.production.local
