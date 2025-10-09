@@ -15,9 +15,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+typedef IntCallback = void Function(int value);
 class BoloContentSection extends StatefulWidget {
   final LanguageModel language;
-  const BoloContentSection({super.key, required this.language});
+  final IntCallback indexUpdate;
+  final int currentIndex;
+  const BoloContentSection({super.key, required this.language, required this.indexUpdate, required this.currentIndex});
 
   @override
   State<BoloContentSection> createState() => _BoloContentSectionState();
@@ -33,6 +36,8 @@ class _BoloContentSectionState extends State<BoloContentSection> {
 
   File? recordedFile;
   int currentIndex = 0;
+
+  List<File?> recordedFiles = [];
 
   @override
   void initState() {
@@ -50,8 +55,16 @@ class _BoloContentSectionState extends State<BoloContentSection> {
       recordedFile = null;
       boloContributeFuture = BoloContributeRepository()
           .getContributionSentances(language: widget.language.languageCode);
-      setState(() {});
     }
+    if(currentIndex != widget.currentIndex){
+      currentIndex = widget.currentIndex;
+    }
+    if(recordedFiles.isNotEmpty && recordedFiles.length > currentIndex + 1){
+      recordedFiles.removeLast();
+    }
+    if(mounted){
+      setState(() {});
+      }
   }
 
   @override
@@ -419,8 +432,10 @@ class _BoloContentSectionState extends State<BoloContentSection> {
 
     submitLoading.value = true;
     enableSkip.value = false;
+    bool isSubmitted = false;
 
-    bool isSubmitted = await BoloContributeRepository().submitContributeAudio(
+    if(recordedFile!=null){
+      isSubmitted = await BoloContributeRepository().submitContributeAudio(
       duration: 10,
       sentenceId: currentSentence.sentenceId,
       sequenceNumber: currentSentence.sequenceNumber,
@@ -428,6 +443,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
       languageCode: widget.language.languageCode,
     );
 
+    }
     if (isSubmitted) {
       enableSubmit.value = true;
       recordedFile = null;
@@ -454,9 +470,7 @@ class _BoloContentSectionState extends State<BoloContentSection> {
     List<Sentence> contributeSentences =
         (await boloContributeFuture)?.sentences ?? [];
     if (currentIndex < contributeSentences.length - 1) {
-      setState(() {
-        currentIndex++;
-      });
+      widget.indexUpdate(currentIndex + 1);
     } else {
       Navigator.push(
         context,

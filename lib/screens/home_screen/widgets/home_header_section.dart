@@ -2,11 +2,13 @@ import 'package:VoiceGive/common_widgets/consent_modal.dart';
 import 'package:VoiceGive/common_widgets/image_widget.dart';
 import 'package:VoiceGive/constants/app_colors.dart';
 import 'package:VoiceGive/constants/app_routes.dart';
-import 'package:VoiceGive/screens/bolo_india/bolo_contribute/bolo_contribute.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../bolo_india/bolo_get_started/bolo_get_started.dart';
+import '../../bolo_india/service/bolo_service.dart';
 
 class HomeHeaderSection extends StatefulWidget {
   const HomeHeaderSection({super.key});
@@ -119,7 +121,19 @@ class _HomeHeaderSectionState extends State<HomeHeaderSection> {
           Align(
             alignment: Alignment.centerLeft,
             child: ElevatedButton(
-              onPressed: () => _showConsentModal(context),
+              onPressed: () async {
+                String sessionId = await BoloService.sessionId;
+                if(sessionId.isNotEmpty){
+                  Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const BoloGetStarted(),
+                                  ),
+                                );
+                }
+                else{
+                  _showConsentModal(context);
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.orange,
                 shape: RoundedRectangleBorder(

@@ -23,11 +23,11 @@ class RecordingButton extends StatefulWidget {
     super.key,
     required this.text,
     required this.getRecordedFile,
-    required this.isRecording,
+    required this.isRecording
   });
 
   @override
-  _RecordingButtonState createState() => _RecordingButtonState();
+  State<RecordingButton> createState() => _RecordingButtonState();
 }
 
 class _RecordingButtonState extends State<RecordingButton>
