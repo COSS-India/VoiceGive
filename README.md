@@ -14,6 +14,12 @@ Engine • revision cb4b5fff73
 Tools • Dart 3.6.0 • DevTools 2.40.2
 
 
+### Java Version
+java 17.0.13 2024-10-15 LTS
+Java(TM) SE Runtime Environment (build 17.0.13+10-LTS-268)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.13+10-LTS-268, mixed mode, sharing)
+
+
 ### Environment Files
 - `.env.development` (development)
 - `.env.staging` (staging)
