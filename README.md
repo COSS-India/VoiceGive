@@ -1,6 +1,6 @@
 # AI4I – Contribute
 
-AI4I – Contribute is an open-source application designed to make it easy for people to help build multilingual datasets across Indian languages. The app enables users to contribute speech and text data through simple, guided tasks. It currently supports four contribution modules:
+AI4I – Contribute is an open-source specs along with a reference application designed to make it easy for people to help build multilingual datasets across Indian languages. The app enables users to contribute speech and text data through simple, guided tasks. It currently supports four contribution modules:
 
 - **BOLO** - Voice narration and validation
 - **SUNO** – Speech transcription and validation  
